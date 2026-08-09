@@ -1,176 +1,259 @@
+<!-- Netlify HTML/JavaScript Code (index.html) -->
 <!DOCTYPE html>
 <html lang="hi">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Access</title>
-
+    <title>Contact Form - WhatsApp & Google Sheet</title>
     <script src="https://cdn.tailwindcss.com"></script>
 
+    <!-- =========================================================
+         ONLY DESIGN / ANIMATION CSS
+         JAVASCRIPT BELOW IS YOUR ORIGINAL JAVASCRIPT
+    ========================================================== -->
     <style>
         * {
             box-sizing: border-box;
         }
 
         body {
-            margin: 0;
-            min-height: 100vh;
             overflow-x: hidden;
-            font-family: Arial, Helvetica, sans-serif;
-            background: #020617;
-        }
-
-        /* Animated background */
-        .background {
-            position: fixed;
-            inset: 0;
-            overflow: hidden;
-            z-index: -1;
             background:
-                radial-gradient(circle at 20% 20%, rgba(16,185,129,.18), transparent 30%),
-                radial-gradient(circle at 80% 80%, rgba(59,130,246,.18), transparent 30%),
-                #020617;
+                radial-gradient(circle at 10% 10%, rgba(16,185,129,0.18), transparent 30%),
+                radial-gradient(circle at 90% 90%, rgba(59,130,246,0.16), transparent 30%),
+                linear-gradient(135deg, #020617 0%, #071b1c 50%, #020617 100%);
         }
 
-        .circle {
-            position: absolute;
+        /* Moving background lights */
+        body::before,
+        body::after {
+            content: "";
+            position: fixed;
+            width: 280px;
+            height: 280px;
             border-radius: 50%;
-            filter: blur(70px);
-            opacity: .35;
-            animation: move 8s infinite ease-in-out;
+            filter: blur(90px);
+            pointer-events: none;
+            z-index: -1;
+            animation: floatingLight 8s ease-in-out infinite;
         }
 
-        .circle.one {
-            width: 220px;
-            height: 220px;
-            background: #10b981;
-            top: -80px;
-            left: -70px;
+        body::before {
+            background: rgba(16,185,129,0.22);
+            top: -100px;
+            left: -100px;
         }
 
-        .circle.two {
-            width: 250px;
-            height: 250px;
-            background: #2563eb;
+        body::after {
+            background: rgba(59,130,246,0.18);
             right: -100px;
-            bottom: -80px;
-            animation-delay: -3s;
+            bottom: -100px;
+            animation-delay: -4s;
         }
 
-        .circle.three {
-            width: 150px;
-            height: 150px;
-            background: #8b5cf6;
-            left: 45%;
-            top: 35%;
-            animation-delay: -5s;
-        }
-
-        @keyframes move {
+        @keyframes floatingLight {
             0%, 100% {
                 transform: translate(0, 0) scale(1);
             }
-
             50% {
-                transform: translate(25px, -25px) scale(1.12);
+                transform: translate(30px, -20px) scale(1.12);
             }
         }
 
-        /* Card animation */
-        .main-card {
-            animation: cardAppear .7s ease-out;
+        /* Main card */
+        .premium-card {
+            position: relative;
+            overflow: hidden;
+            background: rgba(15, 23, 42, 0.78);
+            backdrop-filter: blur(22px);
+            -webkit-backdrop-filter: blur(22px);
+            border: 1px solid rgba(255,255,255,0.10);
+            box-shadow:
+                0 30px 80px rgba(0,0,0,0.50),
+                inset 0 1px 0 rgba(255,255,255,0.05);
+            animation: cardAppear 0.75s ease-out;
+        }
+
+        .premium-card::before {
+            content: "";
+            position: absolute;
+            width: 180px;
+            height: 180px;
+            border-radius: 50%;
+            background: rgba(16,185,129,0.10);
+            filter: blur(45px);
+            top: -90px;
+            right: -70px;
+            pointer-events: none;
         }
 
         @keyframes cardAppear {
             from {
                 opacity: 0;
-                transform: translateY(30px) scale(.96);
+                transform: translateY(25px) scale(0.96);
             }
-
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        /* Icon */
-        .access-icon {
-            animation: iconFloat 3s infinite ease-in-out;
+        /* Top icon */
+        .top-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto;
+            border-radius: 22px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #10b981, #047857);
+            box-shadow:
+                0 15px 35px rgba(16,185,129,0.28),
+                inset 0 1px 0 rgba(255,255,255,0.25);
+            animation: iconFloat 3s ease-in-out infinite;
         }
 
         @keyframes iconFloat {
             0%, 100% {
                 transform: translateY(0);
             }
-
             50% {
                 transform: translateY(-6px);
             }
         }
 
-        /* Input animation */
-        .input-box {
-            transition: .25s ease;
+        /* Live badge */
+        .live-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            padding: 6px 11px;
+            border-radius: 999px;
+            background: rgba(16,185,129,0.08);
+            border: 1px solid rgba(16,185,129,0.20);
+            color: #34d399;
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
         }
 
-        .input-box:focus {
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #34d399;
+            animation: livePulse 1.5s infinite;
+        }
+
+        @keyframes livePulse {
+            0% {
+                box-shadow: 0 0 0 0 rgba(52,211,153,0.7);
+            }
+            70% {
+                box-shadow: 0 0 0 7px rgba(52,211,153,0);
+            }
+            100% {
+                box-shadow: 0 0 0 0 rgba(52,211,153,0);
+            }
+        }
+
+        /* Inputs */
+        .premium-input {
+            transition: all 0.25s ease;
+        }
+
+        .premium-input:hover {
+            border-color: rgba(100,116,139,0.8);
+        }
+
+        .premium-input:focus {
             transform: translateY(-2px);
+            border-color: #10b981 !important;
+            box-shadow:
+                0 0 0 4px rgba(16,185,129,0.10),
+                0 10px 30px rgba(0,0,0,0.18);
         }
 
-        /* Button shine animation */
-        .submit-button {
+        /* Submit button */
+        .premium-button {
             position: relative;
             overflow: hidden;
-            transition: all .25s ease;
+            background: linear-gradient(135deg, #10b981, #059669);
+            box-shadow:
+                0 12px 30px rgba(16,185,129,0.22),
+                inset 0 1px 0 rgba(255,255,255,0.18);
+            transition: all 0.25s ease;
         }
 
-        .submit-button::before {
+        .premium-button::before {
             content: "";
             position: absolute;
             top: 0;
-            left: -120%;
-            width: 80%;
+            left: -130%;
+            width: 70%;
             height: 100%;
-            background: rgba(255,255,255,.20);
-            transform: skewX(-25deg);
-            animation: shine 3.5s infinite;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255,255,255,0.30),
+                transparent
+            );
+            transform: skewX(-20deg);
+            animation: buttonShine 3.5s infinite;
         }
 
-        @keyframes shine {
+        @keyframes buttonShine {
             0% {
-                left: -120%;
+                left: -130%;
             }
-
             35%, 100% {
-                left: 140%;
+                left: 150%;
             }
         }
 
-        .submit-button:hover {
+        .premium-button:hover {
             transform: translateY(-2px);
-            box-shadow: 0 15px 35px rgba(16,185,129,.35);
+            box-shadow:
+                0 17px 40px rgba(16,185,129,0.32),
+                inset 0 1px 0 rgba(255,255,255,0.18);
         }
 
-        .submit-button:active {
-            transform: scale(.98);
+        .premium-button:active {
+            transform: translateY(0) scale(0.99);
         }
 
-        /* Live badge */
-        .live-dot {
-            animation: pulse 1.5s infinite;
+        .premium-button:disabled {
+            cursor: not-allowed;
+            transform: none;
+            opacity: 0.75;
         }
 
-        @keyframes pulse {
-            0% {
-                box-shadow: 0 0 0 0 rgba(16,185,129,.7);
+        /* Bottom information */
+        .bottom-info {
+            border-top: 1px solid rgba(255,255,255,0.06);
+        }
+
+        .info-item {
+            color: #64748b;
+            font-size: 11px;
+        }
+
+        .info-check {
+            color: #34d399;
+            margin-right: 3px;
+        }
+
+        @media (max-width: 480px) {
+            .premium-card {
+                border-radius: 25px;
+                padding: 24px !important;
             }
 
-            70% {
-                box-shadow: 0 0 0 8px rgba(16,185,129,0);
-            }
-
-            100% {
-                box-shadow: 0 0 0 0 rgba(16,185,129,0);
+            .top-icon {
+                width: 62px;
+                height: 62px;
+                border-radius: 19px;
             }
         }
     </style>
@@ -178,273 +261,176 @@
 
 <body class="text-slate-100 min-h-screen flex items-center justify-center p-4">
 
-    <!-- Animated Background -->
-    <div class="background">
-        <div class="circle one"></div>
-        <div class="circle two"></div>
-        <div class="circle three"></div>
-    </div>
+    <!-- =========================================================
+         ONLY DESIGN CHANGED
+    ========================================================== -->
 
-    <!-- MAIN CARD -->
-    <div class="main-card max-w-md w-full">
+    <div class="premium-card max-w-md w-full rounded-[28px] p-8">
 
-        <div class="bg-slate-900/75 backdrop-blur-2xl rounded-[28px]
-                    shadow-2xl p-7 sm:p-8
-                    border border-white/10">
+        <!-- Header -->
+        <div class="text-center mb-7">
 
-            <!-- Header -->
-            <div class="text-center mb-7">
+            <div class="top-icon mb-5">
+                <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="32"
+                    height="32"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="white"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round">
 
-                <!-- Icon -->
-                <div class="access-icon mx-auto mb-5
-                            w-16 h-16 rounded-2xl
-                            flex items-center justify-center
-                            bg-gradient-to-br from-emerald-400 to-emerald-700
-                            shadow-lg shadow-emerald-500/30">
+                    <path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"/>
+                    <path d="M9 12l2 2 4-4"/>
 
-                    <svg xmlns="http://www.w3.org/2000/svg"
-                         width="30"
-                         height="30"
-                         viewBox="0 0 24 24"
-                         fill="none"
-                         stroke="white"
-                         stroke-width="2"
-                         stroke-linecap="round"
-                         stroke-linejoin="round">
-
-                        <path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"/>
-                        <path d="M9 12l2 2 4-4"/>
-
-                    </svg>
-                </div>
-
-                <!-- Live Badge -->
-                <div class="inline-flex items-center gap-2
-                            px-3 py-1.5 rounded-full
-                            bg-emerald-500/10
-                            border border-emerald-500/20
-                            text-emerald-400 text-xs font-bold mb-3">
-
-                    <span class="live-dot w-2 h-2 rounded-full bg-emerald-400"></span>
-
-                    LIVE ACCESS
-
-                </div>
-
-                <h1 class="text-3xl font-extrabold text-white tracking-tight">
-                    Get Access
-                </h1>
-
-                <p class="text-sm text-slate-400 mt-2">
-                    Your all companies franchise link
-                </p>
-
+                </svg>
             </div>
 
-
-            <!-- ORIGINAL FORM -->
-            <form id="whatsappForm" class="space-y-5">
-
-                <!-- Name -->
-                <div>
-
-                    <label class="block text-sm font-medium text-slate-300 mb-2">
-                        पूरा नाम
-                        <span class="text-slate-500">
-                            (Full Name)
-                        </span>
-                    </label>
-
-                    <input
-                        type="text"
-                        id="name"
-                        required
-                        placeholder="अपना नाम दर्ज करें"
-
-                        class="input-box w-full px-4 py-3.5
-                               bg-slate-950/70
-                               border border-slate-700/70
-                               rounded-2xl
-                               focus:outline-none
-                               focus:ring-2
-                               focus:ring-emerald-500/40
-                               focus:border-emerald-500
-                               text-slate-100
-                               placeholder:text-slate-600
-                               transition">
-
-                </div>
-
-
-                <!-- Mobile -->
-                <div>
-
-                    <label class="block text-sm font-medium text-slate-300 mb-2">
-                        मोबाइल नंबर
-                        <span class="text-slate-500">
-                            (Mobile Number)
-                        </span>
-                    </label>
-
-                    <input
-                        type="tel"
-                        id="mobile"
-                        required
-                        placeholder="10 अंकों का मोबाइल नंबर"
-
-                        class="input-box w-full px-4 py-3.5
-                               bg-slate-950/70
-                               border border-slate-700/70
-                               rounded-2xl
-                               focus:outline-none
-                               focus:ring-2
-                               focus:ring-emerald-500/40
-                               focus:border-emerald-500
-                               text-slate-100
-                               placeholder:text-slate-600
-                               transition">
-
-                </div>
-
-
-                <!-- ORIGINAL SUBMIT BUTTON -->
-                <button
-                    type="submit"
-                    id="submitBtn"
-
-                    class="submit-button w-full py-4
-                           bg-gradient-to-r
-                           from-emerald-600
-                           to-emerald-500
-                           hover:from-emerald-500
-                           hover:to-emerald-400
-                           text-white
-                           font-bold
-                           rounded-2xl
-                           shadow-lg
-                           shadow-emerald-900/30
-                           transition
-                           flex items-center justify-center
-                           space-x-2">
-
-                    <span id="btnText">
-                        Submit
-                    </span>
-
-                    <span
-                        id="loader"
-                        class="hidden animate-spin
-                               rounded-full h-5 w-5
-                               border-2
-                               border-white/30
-                               border-b-white">
-                    </span>
-
-                </button>
-
-            </form>
-
-
-            <!-- ORIGINAL STATUS -->
-            <div
-                id="statusMessage"
-                class="mt-4 text-center text-sm hidden">
+            <div class="live-badge mb-3">
+                <span class="live-dot"></span>
+                LIVE ACCESS
             </div>
 
+            <h1 class="text-3xl font-extrabold text-white tracking-tight">
+                Get Access
+            </h1>
 
-            <!-- Bottom Features -->
-            <div class="mt-7 pt-5 border-t border-white/5">
-
-                <div class="flex justify-center gap-5
-                            text-xs text-slate-500">
-
-                    <span>✓ Secure</span>
-                    <span>✓ Quick Access</span>
-                    <span>✓ WhatsApp</span>
-
-                </div>
-
-            </div>
-
-            <p class="text-center text-[11px] text-slate-600 mt-5">
-                Live Campaign Access • 2026
+            <p class="text-sm text-slate-400 mt-2">
+                Your all companies franchise link
             </p>
+
+        </div>
+
+
+        <!-- =====================================================
+             SAME FORM IDs — FUNCTIONALITY UNCHANGED
+        ====================================================== -->
+
+        <form id="whatsappForm" class="space-y-5">
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    पूरा नाम
+                    <span class="text-slate-500">(Full Name)</span>
+                </label>
+
+                <input
+                    type="text"
+                    id="name"
+                    required
+                    placeholder="अपना नाम दर्ज करें"
+                    class="premium-input w-full px-4 py-3.5 bg-slate-950/70 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-100 placeholder:text-slate-600">
+
+            </div>
+
+
+            <div>
+
+                <label class="block text-sm font-medium text-slate-300 mb-2">
+                    मोबाइल नंबर
+                    <span class="text-slate-500">(Mobile Number)</span>
+                </label>
+
+                <input
+                    type="tel"
+                    id="mobile"
+                    required
+                    placeholder="10 अंकों का मोबाइल नंबर"
+                    class="premium-input w-full px-4 py-3.5 bg-slate-950/70 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-100 placeholder:text-slate-600">
+
+            </div>
+
+
+            <!-- SAME BUTTON IDs -->
+            <button
+                type="submit"
+                id="submitBtn"
+                class="premium-button w-full py-4 text-white font-semibold rounded-2xl transition duration-200 flex items-center justify-center space-x-2">
+
+                <span id="btnText">Submit</span>
+
+                <span
+                    id="loader"
+                    class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white">
+                </span>
+
+            </button>
+
+        </form>
+
+
+        <!-- SAME STATUS ID -->
+        <div id="statusMessage" class="mt-4 text-center text-sm hidden"></div>
+
+
+        <!-- Extra visual design only -->
+        <div class="bottom-info mt-7 pt-5">
+
+            <div class="flex items-center justify-center gap-4">
+
+                <span class="info-item">
+                    <span class="info-check">✓</span>Secure
+                </span>
+
+                <span class="info-item">
+                    <span class="info-check">✓</span>Fast Access
+                </span>
+
+                <span class="info-item">
+                    <span class="info-check">✓</span>WhatsApp
+                </span>
+
+            </div>
 
         </div>
 
     </div>
 
 
-    <!-- =========================================================
-         YOUR ORIGINAL JAVASCRIPT
-         DO NOT CHANGE
-    ========================================================== -->
-
     <script>
-
         // ⚠️ YAHAN APNA ASLI APPS SCRIPT WEB APP URL DAALO (Code.gs deploy karne ke baad jo URL milega)
         // Ye URL ".../exec" pe end hona chahiye, "YOUR_ID" jaisa placeholder nahi
-
         const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbza1BVVjZeD8LCTNB0YBVoP1dp5rpPSej0nNDkegZlT0tknueOVbT2NmGBxVfePV95VHQ/exec";
-
         const WHATSAPP_NUMBER = "919428327349";
 
         document.getElementById('whatsappForm').addEventListener('submit', async function(e) {
-
             e.preventDefault();
-
             const name = document.getElementById('name').value.trim();
             const mobile = document.getElementById('mobile').value.trim();
-
             const submitBtn = document.getElementById('submitBtn');
             const btnText = document.getElementById('btnText');
             const loader = document.getElementById('loader');
             const statusMessage = document.getElementById('statusMessage');
 
             // Basic validation
-
             if (!/^\d{10}$/.test(mobile)) {
-
-                statusMessage.textContent = "⚠️ कृपया सही 10 अंकों का मोबाइल नंबर डालें.";
-
-                statusMessage.className =
-                    "mt-4 text-center text-sm text-red-400 font-medium";
-
+                statusMessage.textContent = "⚠️ कृपया सही 10 अंकों का मोबाइल नंबर डालें।";
+                statusMessage.className = "mt-4 text-center text-sm text-red-400 font-medium";
                 statusMessage.classList.remove('hidden');
-
                 return;
             }
 
             submitBtn.disabled = true;
-
             btnText.textContent = "डेटा सेव हो रहा है...";
-
             loader.classList.remove('hidden');
-
             statusMessage.classList.add('hidden');
 
             try {
-
+                // no-cors mode me response padh nahi sakte, lekin agar URL sahi hai aur
+                // doPost() Apps Script me maujood hai to request server tak pahunch jaati hai
+                // aur sheet me row add ho jaati hai (chahe yahan JS ko success/fail pata na chale).
                 await fetch(GOOGLE_SCRIPT_URL, {
-
                     method: 'POST',
-
                     mode: 'no-cors',
-
-                    headers: {
-                        'Content-Type': 'text/plain;charset=utf-8'
-                    },
-
+                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
                     body: JSON.stringify({ name, mobile })
-
                 });
 
-                statusMessage.textContent =
-                    "✓ डेटा सफलतापूर्वक Google Sheet में सेव हो गया! WhatsApp खुल रहा है...";
-
-                statusMessage.className =
-                    "mt-4 text-center text-sm text-emerald-400 font-medium";
-
+                statusMessage.textContent = "✓ डेटा सफलतापूर्वक Google Sheet में सेव हो गया! WhatsApp खुल रहा है...";
+                statusMessage.className = "mt-4 text-center text-sm text-emerald-400 font-medium";
                 statusMessage.classList.remove('hidden');
 
                 const customWhatsappText =
@@ -479,27 +465,19 @@ https://nthdegree382028.o18a.com/c?o=21999075&m=29111&a=770443&sub_aff_id={repla
 
 9.*Choice*
 https://choiceindia.com/register?refercode=QzAwNTAyNDM=&source=Q0hPSUNFX0NPTk5FQ1Q=&subref=NzcwMDgy
+
 User Details:
 Name: ${name}
 Mobile: ${mobile}`;
 
                 setTimeout(() => {
-
-                    window.location.href =
-                        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
-
+                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
                 }, 1200);
 
             } catch (error) {
-
                 console.error(error);
-
-                statusMessage.textContent =
-                    "⚠️ WhatsApp पर रीडायरेक्ट किया जा रहा है...";
-
-                statusMessage.className =
-                    "mt-4 text-center text-sm text-amber-400 font-medium";
-
+                statusMessage.textContent = "⚠️ WhatsApp पर रीडायरेक्ट किया जा रहा है...";
+                statusMessage.className = "mt-4 text-center text-sm text-amber-400 font-medium";
                 statusMessage.classList.remove('hidden');
 
                 const customWhatsappText =
@@ -534,31 +512,19 @@ https://nthdegree382028.o18a.com/c?o=21999075&m=29111&a=770443&sub_aff_id={repla
 
 9.*Choice*
 https://choiceindia.com/register?refercode=QzAwNTAyNDM=&source=Q0hPSUNFX0NPTk5FQ1Q=&subref=NzcwMDgy
-
 User Details:
 Name: ${name}
 Mobile: ${mobile}`;
 
                 setTimeout(() => {
-
-                    window.location.href =
-                        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
-
+                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
                 }, 1500);
-
             } finally {
-
                 submitBtn.disabled = false;
-
                 btnText.textContent = "सबमिट करें & WhatsApp पर जाएँ";
-
                 loader.classList.add('hidden');
-
             }
-
         });
-
     </script>
-
 </body>
 </html>
