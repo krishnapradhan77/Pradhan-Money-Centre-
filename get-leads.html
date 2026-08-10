@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>Get Leads</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #0f172a;
+      color: white;
+      padding: 20px;
+    }
+
+    .box {
+      width: 100%;
+      max-width: 430px;
+      background: #1e293b;
+      padding: 30px;
+      border-radius: 18px;
+      box-shadow: 0 15px 40px rgba(0,0,0,.35);
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #cbd5e1;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #475569;
+      border-radius: 10px;
+      background: #0f172a;
+      color: white;
+      font-size: 16px;
+      margin-bottom: 18px;
+      outline: none;
+    }
+
+    input:focus {
+      border-color: #22c55e;
+    }
+
+    button {
+      width: 100%;
+      padding: 15px;
+      border: none;
+      border-radius: 10px;
+      background: #22c55e;
+      color: white;
+      font-size: 17px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:disabled {
+      background: #64748b;
+      cursor: not-allowed;
+    }
+
+    #message {
+      margin-top: 20px;
+      text-align: center;
+      line-height: 1.5;
+    }
+
+    .success {
+      color: #4ade80;
+    }
+
+    .error {
+      color: #f87171;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="box">
+
+    <h1>Get Leads</h1>
+
+    <div class="subtitle">
+      Enter your Owner ID and WhatsApp number
+    </div>
+
+    <label for="ownerId">Owner ID</label>
+
+    <input
+      type="text"
+      id="ownerId"
+      placeholder="Enter Owner ID"
+      autocomplete="off"
+    >
+
+    <label for="whatsapp">WhatsApp Number</label>
+
+    <input
+      type="tel"
+      id="whatsapp"
+      placeholder="Enter WhatsApp Number"
+      inputmode="numeric"
+      autocomplete="off"
+    >
+
+    <button id="getLeadsBtn" onclick="getLeads()">
+      Get Leads
+    </button>
+
+    <div id="message"></div>
+
+  </div>
+
+<script>
+
+const API_URL =
+"https://script.google.com/macros/s/AKfycbza8f2VfJroQ_wFCPqTiWZ6jeJ-zGLtM1xWN78NcPVdCHvAgJ1SisCBsi18PnRTeoop9Q/exec";
+
+
+async function getLeads() {
+
+  const ownerId =
+    document.getElementById("ownerId").value.trim();
+
+  const whatsapp =
+    document.getElementById("whatsapp").value.trim();
+
+  const button =
+    document.getElementById("getLeadsBtn");
+
+  const message =
+    document.getElementById("message");
+
+
+  message.className = "";
+  message.innerHTML = "";
+
+
+  if (!ownerId) {
+
+    message.className = "error";
+    message.innerHTML = "Please enter Owner ID.";
+
+    return;
+  }
+
+
+  if (!whatsapp) {
+
+    message.className = "error";
+    message.innerHTML = "Please enter WhatsApp number.";
+
+    return;
+  }
+
+
+  if (!/^[0-9]{10}$/.test(whatsapp)) {
+
+    message.className = "error";
+    message.innerHTML =
+      "Please enter a valid 10-digit WhatsApp number.";
+
+    return;
+  }
+
+
+  button.disabled = true;
+  button.innerText = "Processing...";
+
+
+  try {
+
+    const url =
+      API_URL +
+      "?action=getLeads" +
+      "&ownerId=" +
+      encodeURIComponent(ownerId) +
+      "&whatsapp=" +
+      encodeURIComponent(whatsapp);
+
+
+    const response =
+      await fetch(url);
+
+
+    const data =
+      await response.json();
+
+
+    if (!data.success) {
+
+      message.className = "error";
+
+      message.innerHTML =
+        data.message || "No leads available.";
+
+      button.disabled = false;
+      button.innerText = "Get Leads";
+
+      return;
+    }
+
+
+    message.className = "success";
+
+    message.innerHTML =
+      "20 Leads ready! Redirecting to WhatsApp...";
+
+
+    if (data.whatsappUrl) {
+
+      setTimeout(() => {
+
+        window.location.href =
+          data.whatsappUrl;
+
+      }, 1000);
+
+    }
+
+
+  } catch (error) {
+
+    console.error(error);
+
+    message.className = "error";
+
+    message.innerHTML =
+      "Something went wrong. Please try again.";
+
+    button.disabled = false;
+    button.innerText = "Get Leads";
+
+  }
+
+}
+
+</script>
+
+</body>
+</html>
