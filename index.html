@@ -1,16 +1,18 @@
-<!-- Netlify HTML/JavaScript Code (index.html) -->
 <!DOCTYPE html>
 <html lang="hi">
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact Form - WhatsApp & Google Sheet</title>
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>Get Access</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
 
-    <!-- =========================================================
-         ONLY DESIGN / ANIMATION CSS
-         JAVASCRIPT BELOW IS YOUR ORIGINAL JAVASCRIPT
-    ========================================================== -->
     <style>
         * {
             box-sizing: border-box;
@@ -24,7 +26,6 @@
                 linear-gradient(135deg, #020617 0%, #071b1c 50%, #020617 100%);
         }
 
-        /* Moving background lights */
         body::before,
         body::after {
             content: "";
@@ -55,12 +56,12 @@
             0%, 100% {
                 transform: translate(0, 0) scale(1);
             }
+
             50% {
                 transform: translate(30px, -20px) scale(1.12);
             }
         }
 
-        /* Main card */
         .premium-card {
             position: relative;
             overflow: hidden;
@@ -92,13 +93,13 @@
                 opacity: 0;
                 transform: translateY(25px) scale(0.96);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0) scale(1);
             }
         }
 
-        /* Top icon */
         .top-icon {
             width: 70px;
             height: 70px;
@@ -118,12 +119,12 @@
             0%, 100% {
                 transform: translateY(0);
             }
+
             50% {
                 transform: translateY(-6px);
             }
         }
 
-        /* Live badge */
         .live-badge {
             display: inline-flex;
             align-items: center;
@@ -150,15 +151,16 @@
             0% {
                 box-shadow: 0 0 0 0 rgba(52,211,153,0.7);
             }
+
             70% {
                 box-shadow: 0 0 0 7px rgba(52,211,153,0);
             }
+
             100% {
                 box-shadow: 0 0 0 0 rgba(52,211,153,0);
             }
         }
 
-        /* Inputs */
         .premium-input {
             transition: all 0.25s ease;
         }
@@ -175,7 +177,6 @@
                 0 10px 30px rgba(0,0,0,0.18);
         }
 
-        /* Submit button */
         .premium-button {
             position: relative;
             overflow: hidden;
@@ -207,6 +208,7 @@
             0% {
                 left: -130%;
             }
+
             35%, 100% {
                 left: 150%;
             }
@@ -229,7 +231,6 @@
             opacity: 0.75;
         }
 
-        /* Bottom information */
         .bottom-info {
             border-top: 1px solid rgba(255,255,255,0.06);
         }
@@ -259,271 +260,550 @@
     </style>
 </head>
 
+
 <body class="text-slate-100 min-h-screen flex items-center justify-center p-4">
 
-    <!-- =========================================================
-         ONLY DESIGN CHANGED
-    ========================================================== -->
 
-    <div class="premium-card max-w-md w-full rounded-[28px] p-8">
+<div class="premium-card max-w-md w-full rounded-[28px] p-8">
 
-        <!-- Header -->
-        <div class="text-center mb-7">
 
-            <div class="top-icon mb-5">
-                <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="32"
-                    height="32"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="white"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round">
+    <div class="text-center mb-7">
 
-                    <path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"/>
-                    <path d="M9 12l2 2 4-4"/>
+        <div class="top-icon mb-5">
 
-                </svg>
-            </div>
+            <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="32"
+                height="32"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="white"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+            >
 
-            <div class="live-badge mb-3">
-                <span class="live-dot"></span>
-                LIVE ACCESS
-            </div>
+                <path d="M12 2l7 4v6c0 5-3 8-7 10-4-2-7-5-7-10V6l7-4z"/>
 
-            <h1 class="text-3xl font-extrabold text-white tracking-tight">
-                Get Access
-            </h1>
+                <path d="M9 12l2 2 4-4"/>
 
-            <p class="text-sm text-slate-400 mt-2">
-                Your all companies franchise link
-            </p>
+            </svg>
 
         </div>
 
 
-        <!-- =====================================================
-             SAME FORM IDs — FUNCTIONALITY UNCHANGED
-        ====================================================== -->
+        <div class="live-badge mb-3">
 
-        <form id="whatsappForm" class="space-y-5">
+            <span class="live-dot"></span>
 
-            <div>
+            LIVE ACCESS
 
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    पूरा नाम
-                    <span class="text-slate-500">(Full Name)</span>
-                </label>
-
-                <input
-                    type="text"
-                    id="name"
-                    required
-                    placeholder="अपना नाम दर्ज करें"
-                    class="premium-input w-full px-4 py-3.5 bg-slate-950/70 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-100 placeholder:text-slate-600">
-
-            </div>
+        </div>
 
 
-            <div>
-
-                <label class="block text-sm font-medium text-slate-300 mb-2">
-                    मोबाइल नंबर
-                    <span class="text-slate-500">(Mobile Number)</span>
-                </label>
-
-                <input
-                    type="tel"
-                    id="mobile"
-                    required
-                    placeholder="10 अंकों का मोबाइल नंबर"
-                    class="premium-input w-full px-4 py-3.5 bg-slate-950/70 border border-slate-700 rounded-2xl focus:outline-none focus:ring-2 focus:ring-emerald-500 text-slate-100 placeholder:text-slate-600">
-
-            </div>
+        <h1 class="text-3xl font-extrabold text-white tracking-tight">
+            Get Access
+        </h1>
 
 
-            <!-- SAME BUTTON IDs -->
-            <button
-                type="submit"
-                id="submitBtn"
-                class="premium-button w-full py-4 text-white font-semibold rounded-2xl transition duration-200 flex items-center justify-center space-x-2">
+        <p class="text-sm text-slate-400 mt-2">
+            Your all companies franchise link
+        </p>
 
-                <span id="btnText">Submit</span>
+    </div>
 
-                <span
-                    id="loader"
-                    class="hidden animate-spin rounded-full h-5 w-5 border-b-2 border-white">
+
+    <form id="whatsappForm" class="space-y-5">
+
+
+        <div>
+
+            <label class="block text-sm font-medium text-slate-300 mb-2">
+
+                पूरा नाम
+
+                <span class="text-slate-500">
+                    (Full Name)
                 </span>
 
-            </button>
-
-        </form>
+            </label>
 
 
-        <!-- SAME STATUS ID -->
-        <div id="statusMessage" class="mt-4 text-center text-sm hidden"></div>
+            <input
+                type="text"
+                id="name"
+                required
+                autocomplete="name"
+                placeholder="अपना नाम दर्ज करें"
+                class="
+                    premium-input
+                    w-full
+                    px-4
+                    py-3.5
+                    bg-slate-950/70
+                    border
+                    border-slate-700
+                    rounded-2xl
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-emerald-500
+                    text-slate-100
+                    placeholder:text-slate-600
+                "
+            >
+
+        </div>
 
 
-        <!-- Extra visual design only -->
-        <div class="bottom-info mt-7 pt-5">
+        <div>
 
-            <div class="flex items-center justify-center gap-4">
+            <label class="block text-sm font-medium text-slate-300 mb-2">
 
-                <span class="info-item">
-                    <span class="info-check">✓</span>Secure
+                मोबाइल नंबर
+
+                <span class="text-slate-500">
+                    (Mobile Number)
                 </span>
 
-                <span class="info-item">
-                    <span class="info-check">✓</span>Fast Access
-                </span>
+            </label>
 
-                <span class="info-item">
-                    <span class="info-check">✓</span>WhatsApp
-                </span>
 
-            </div>
+            <input
+                type="tel"
+                id="mobile"
+                required
+                inputmode="numeric"
+                maxlength="10"
+                autocomplete="tel"
+                placeholder="10 अंकों का मोबाइल नंबर"
+                class="
+                    premium-input
+                    w-full
+                    px-4
+                    py-3.5
+                    bg-slate-950/70
+                    border
+                    border-slate-700
+                    rounded-2xl
+                    focus:outline-none
+                    focus:ring-2
+                    focus:ring-emerald-500
+                    text-slate-100
+                    placeholder:text-slate-600
+                "
+            >
+
+        </div>
+
+
+        <button
+            type="submit"
+            id="submitBtn"
+            class="
+                premium-button
+                w-full
+                py-4
+                text-white
+                font-semibold
+                rounded-2xl
+                transition
+                duration-200
+                flex
+                items-center
+                justify-center
+                space-x-2
+            "
+        >
+
+            <span id="btnText">
+                Submit
+            </span>
+
+            <span
+                id="loader"
+                class="
+                    hidden
+                    animate-spin
+                    rounded-full
+                    h-5
+                    w-5
+                    border-b-2
+                    border-white
+                "
+            ></span>
+
+        </button>
+
+    </form>
+
+
+    <div
+        id="statusMessage"
+        class="mt-4 text-center text-sm hidden"
+    ></div>
+
+
+    <div class="bottom-info mt-7 pt-5">
+
+        <div class="flex items-center justify-center gap-4">
+
+            <span class="info-item">
+                <span class="info-check">✓</span>
+                Secure
+            </span>
+
+            <span class="info-item">
+                <span class="info-check">✓</span>
+                Fast Access
+            </span>
+
+            <span class="info-item">
+                <span class="info-check">✓</span>
+                WhatsApp
+            </span>
 
         </div>
 
     </div>
 
+</div>
 
-    <script>
-        // ⚠️ YAHAN APNA ASLI APPS SCRIPT WEB APP URL DAALO (Code.gs deploy karne ke baad jo URL milega)
-        // Ye URL ".../exec" pe end hona chahiye, "YOUR_ID" jaisa placeholder nahi
-        const GOOGLE_SCRIPT_URL = "https://script.google.com/macros/s/AKfycbza1BVVjZeD8LCTNB0YBVoP1dp5rpPSej0nNDkegZlT0tknueOVbT2NmGBxVfePV95VHQ/exec";
-        const WHATSAPP_NUMBER = "919428327349";
 
-        document.getElementById('whatsappForm').addEventListener('submit', async function(e) {
-            e.preventDefault();
-            const name = document.getElementById('name').value.trim();
-            const mobile = document.getElementById('mobile').value.trim();
-            const submitBtn = document.getElementById('submitBtn');
-            const btnText = document.getElementById('btnText');
-            const loader = document.getElementById('loader');
-            const statusMessage = document.getElementById('statusMessage');
+<script>
 
-            // Basic validation
-            if (!/^\d{10}$/.test(mobile)) {
-                statusMessage.textContent = "⚠️ कृपया सही 10 अंकों का मोबाइल नंबर डालें।";
-                statusMessage.className = "mt-4 text-center text-sm text-red-400 font-medium";
-                statusMessage.classList.remove('hidden');
-                return;
-            }
 
-            submitBtn.disabled = true;
-            btnText.textContent = "डेटा सेव हो रहा है...";
-            loader.classList.remove('hidden');
-            statusMessage.classList.add('hidden');
+/* =========================================================
+   GOOGLE APPS SCRIPT URL
+   आपके द्वारा दिया गया URL
+========================================================= */
 
-            try {
-                // no-cors mode me response padh nahi sakte, lekin agar URL sahi hai aur
-                // doPost() Apps Script me maujood hai to request server tak pahunch jaati hai
-                // aur sheet me row add ho jaati hai (chahe yahan JS ko success/fail pata na chale).
-                await fetch(GOOGLE_SCRIPT_URL, {
-                    method: 'POST',
-                    mode: 'no-cors',
-                    headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-                    body: JSON.stringify({ name, mobile })
-                });
+const GOOGLE_SCRIPT_URL =
+"https://script.google.com/macros/s/AKfycbza1BVVjZeD8LCTNB0YBVoP1dp5rpPSej0nNDkegZlT0tknueOVbT2NmGBxVfePV95VHQ/exec";
 
-                statusMessage.textContent = "✓ डेटा सफलतापूर्वक Google Sheet में सेव हो गया! WhatsApp खुल रहा है...";
-                statusMessage.className = "mt-4 text-center text-sm text-emerald-400 font-medium";
-                statusMessage.classList.remove('hidden');
 
-                const customWhatsappText =
-`August  Month Live Campaign 
+/* =========================================================
+   WHATSAPP NUMBER
+========================================================= */
 
-1.*Angel one*
+const WHATSAPP_NUMBER =
+"919428327349";
+
+
+/* =========================================================
+   ELEMENTS
+========================================================= */
+
+const form =
+document.getElementById("whatsappForm");
+
+const nameInput =
+document.getElementById("name");
+
+const mobileInput =
+document.getElementById("mobile");
+
+const submitBtn =
+document.getElementById("submitBtn");
+
+const btnText =
+document.getElementById("btnText");
+
+const loader =
+document.getElementById("loader");
+
+
+/* =========================================================
+   MOBILE NUMBER
+========================================================= */
+
+mobileInput.addEventListener(
+    "input",
+    function() {
+
+        this.value =
+            this.value
+            .replace(/\D/g, "")
+            .slice(0, 10);
+
+    }
+);
+
+
+/* =========================================================
+   WHATSAPP MESSAGE
+========================================================= */
+
+function createWhatsappMessage(
+    name,
+    mobile
+) {
+
+    return `August Month Live Campaign
+
+1. *Angel one*
 https://a.aonelink.in/ANGOne/NesCqGH?utm_source=youtube&utm_medium=ajay&utm_campaign=ajay
 
-
-2.*Motilal*
+2. *Motilal*
 https://form.responsebee.com/form-1786444004965
 
-
-3.*Upstox app*
+3. *Upstox app*
 https://uprisemedia.org/formlie?form_id=FB1A95CD&pub_id=165
 
-4.*Hdfc sky*
+4. *Hdfc sky*
 https://uprisemedia.org/formlie?form_id=CEE4EF9E&pub_id=165
 
-
-5.*Stocko*
+5. *Stocko*
 https://uprisemedia.org/formlie?form_id=2441C271&pub_id=165
 
-6.*Airtel payment bank*
+6. *Airtel payment bank*
 https://uprisemedia.org/formlie?form_id=E98C306D&pub_id=165
 
-7.*Groww*
+7. *Groww*
 https://uprisemedia.org/formlie?form_id=CE409177&pub_id=165
 
-8.*Bajaj Dt*
+8. *Bajaj Dt*
 https://form.responsebee.com/form-1786443767955
 
-9.*Choice*
-*Choice Broking 770082 Link* --- https://form.responsebee.com/form-1786444201481
+9. *Choice*
+*Choice Broking 770082 Link*
+https://form.responsebee.com/form-1786444201481
+
 User Details:
 Name: ${name}
 Mobile: ${mobile}`;
 
-                setTimeout(() => {
-                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
-                }, 1200);
-
-            } catch (error) {
-                console.error(error);
-                statusMessage.textContent = "⚠️ WhatsApp पर रीडायरेक्ट किया जा रहा है...";
-                statusMessage.className = "mt-4 text-center text-sm text-amber-400 font-medium";
-                statusMessage.classList.remove('hidden');
-
-                const customWhatsappText =
-`August  Month Live Campaign 
-
-1.*Angel one*
-https://a.aonelink.in/ANGOne/NesCqGH?utm_source=youtube&utm_medium=ajay&utm_campaign=ajay
+}
 
 
-2.*Motilal*
-https://raghuvanshtechnologies.o18.click/c?o=21979987&m=7226&a=770082&sub_aff_id={replace_it}
+/* =========================================================
+   GOOGLE SHEET SAVE
+========================================================= */
 
+function saveToGoogleSheet(
+    name,
+    mobile
+) {
 
-3.*Upstox app*
-https://uprisemedia.org/formlie?form_id=FB1A95CD&pub_id=165
-
-4.*Hdfc sky*
-https://uprisemedia.org/formlie?form_id=CEE4EF9E&pub_id=165
-
-
-5.*Stocko*
-https://uprisemedia.org/formlie?form_id=2441C271&pub_id=165
-
-6.*Airtel payment bank*
-https://uprisemedia.org/formlie?form_id=E98C306D&pub_id=165
-
-7.*Groww*
-https://uprisemedia.org/formlie?form_id=CE409177&pub_id=165
-
-8.*Bajaj Dt*
-https://nthdegree382028.o18a.com/c?o=21999075&m=29111&a=770443&sub_aff_id={replace_it}
-
-9.*Choice*
-https://choiceindia.com/register?refercode=QzAwNTAyNDM=&source=Q0hPSUNFX0NPTk5FQ1Q=&subref=NzcwMDgy
-User Details:
-Name: ${name}
-Mobile: ${mobile}`;
-
-                setTimeout(() => {
-                    window.location.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(customWhatsappText)}`;
-                }, 1500);
-            } finally {
-                submitBtn.disabled = false;
-                btnText.textContent = "सबमिट करें & WhatsApp पर जाएँ";
-                loader.classList.add('hidden');
-            }
+    const data =
+        JSON.stringify({
+            name: name,
+            mobile: mobile
         });
-    </script>
+
+
+    try {
+
+        const blob =
+            new Blob(
+                [data],
+                {
+                    type:
+                        "text/plain;charset=utf-8"
+                }
+            );
+
+
+        const sent =
+            navigator.sendBeacon(
+                GOOGLE_SCRIPT_URL,
+                blob
+            );
+
+
+        if (sent) {
+
+            console.log(
+                "Google Sheet request sent."
+            );
+
+            return;
+
+        }
+
+    } catch (error) {
+
+        console.log(
+            "sendBeacon failed:",
+            error
+        );
+
+    }
+
+
+    /* Fallback */
+
+    fetch(
+        GOOGLE_SCRIPT_URL,
+        {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+                "Content-Type":
+                    "text/plain;charset=utf-8"
+            },
+            body: data,
+            keepalive: true
+        }
+    )
+    .catch(
+        error =>
+            console.log(
+                "Background save error:",
+                error
+            )
+    );
+
+}
+
+
+/* =========================================================
+   OPEN WHATSAPP
+========================================================= */
+
+function openWhatsApp(message) {
+
+    const encodedMessage =
+        encodeURIComponent(message);
+
+
+    const nativeWhatsApp =
+        `whatsapp://send?phone=${WHATSAPP_NUMBER}&text=${encodedMessage}`;
+
+
+    const webWhatsApp =
+        `https://wa.me/${WHATSAPP_NUMBER}?text=${encodedMessage}`;
+
+
+    /* First try native WhatsApp */
+
+    window.location.href =
+        nativeWhatsApp;
+
+
+    /*
+       Fallback if native app does not open.
+    */
+
+    setTimeout(
+        function() {
+
+            window.location.href =
+                webWhatsApp;
+
+        },
+        700
+    );
+
+}
+
+
+/* =========================================================
+   FORM SUBMIT
+========================================================= */
+
+form.addEventListener(
+    "submit",
+    function(e) {
+
+        e.preventDefault();
+
+
+        const name =
+            nameInput.value.trim();
+
+
+        const mobile =
+            mobileInput.value.trim();
+
+
+        /* NAME */
+
+        if (!name) {
+
+            alert(
+                "कृपया अपना नाम डालें।"
+            );
+
+            return;
+
+        }
+
+
+        /* MOBILE */
+
+        if (!/^\d{10}$/.test(mobile)) {
+
+            alert(
+                "कृपया सही 10 अंकों का मोबाइल नंबर डालें।"
+            );
+
+            return;
+
+        }
+
+
+        /* BUTTON */
+
+        submitBtn.disabled =
+            true;
+
+        btnText.textContent =
+            "WhatsApp खुल रहा है...";
+
+        loader.classList.remove(
+            "hidden"
+        );
+
+
+        /* SAVE */
+
+        saveToGoogleSheet(
+            name,
+            mobile
+        );
+
+
+        /* MESSAGE */
+
+        const message =
+            createWhatsappMessage(
+                name,
+                mobile
+            );
+
+
+        /* WHATSAPP */
+
+        openWhatsApp(
+            message
+        );
+
+
+        /* RESET */
+
+        setTimeout(
+            function() {
+
+                submitBtn.disabled =
+                    false;
+
+                btnText.textContent =
+                    "सबमिट करें & WhatsApp पर जाएँ";
+
+                loader.classList.add(
+                    "hidden"
+                );
+
+            },
+            2000
+        );
+
+    }
+);
+
+</script>
+
+
 </body>
+
 </html>
