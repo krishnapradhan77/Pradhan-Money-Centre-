@@ -1,1 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Client Claim Portal</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f4f7fb;
+      color: #111827;
+    }
+
+    .container {
+      width: min(94%, 620px);
+      margin: 0 auto;
+      padding: 30px 0 50px;
+    }
+
+    .card {
+      background: #ffffff;
+      border-radius: 18px;
+      padding: 24px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+    }
+
+    h1 {
+      margin: 0 0 8px;
+      text-align: center;
+      font-size: 27px;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: #6b7280;
+      margin-bottom: 25px;
+    }
+
+    label {
+      display: block;
+      font-weight: 700;
+      margin: 15px 0 8px;
+    }
+
+    select,
+    input {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #d1d5db;
+      border-radius: 10px;
+      font-size: 16px;
+      outline: none;
+    }
+
+    select:focus,
+    input:focus {
+      border-color: #2563eb;
+    }
+
+    button {
+      width: 100%;
+      border: 0;
+      border-radius: 10px;
+      padding: 14px;
+      margin-top: 15px;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+    }
+
+    button:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    .result {
+      margin-top: 22px;
+      padding: 18px;
+      border-radius: 12px;
+      background: #f8fafc;
+      display: none;
+    }
+
+    .matched-value {
+      font-size: 20px;
+      font-weight: 800;
+      padding: 12px;
+      border-radius: 10px;
+      background: #dcfce7;
+      color: #166534;
+      word-break: break-word;
+    }
+
+    .message {
+      margin-top: 14px;
+      padding: 12px;
+      border-radius: 9px;
+      display: none;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .loading {
+      text-align: center;
+      color: #6b7280;
+      margin-top: 15px;
+      display: none;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="container">
+
+  <div class="card">
+
+    <h1>Client Claim Portal</h1>
+
+    <div class="subtitle">
+      Select Company and Search your Number / Client Code
+    </div>
+
+    <!-- Company -->
+    <label for="company">
+      Select Company
+    </label>
+
+    <select id="company">
+      <option value="">
+        Loading Companies...
+      </option>
+    </select>
+
+
+    <!-- Search -->
+    <label for="search">
+      Number / Client Code
+    </label>
+
+    <input
+      id="search"
+      type="text"
+      placeholder="Enter Number or Client Code"
+      autocomplete="off"
+    >
+
+    <button id="searchBtn">
+      Search
+    </button>
+
+    <div id="loading" class="loading">
+      Searching...
+    </div>
+
+
+    <!-- Result -->
+    <div id="result" class="result">
+
+      <div class="matched-value" id="matchedValue"></div>
+
+      <label for="name">
+        Name
+      </label>
+
+      <input
+        id="name"
+        type="text"
+        placeholder="Enter your name"
+        maxlength="100"
+      >
+
+      <label for="mobile">
+        Mobile Number
+      </label>
+
+      <input
+        id="mobile"
+        type="tel"
+        placeholder="Enter your mobile number"
+        maxlength="15"
+      >
+
+      <button id="claimBtn">
+        Submit Claim
+      </button>
+
+    </div>
+
+
+    <div id="message" class="message"></div>
+
+  </div>
+
+</div>
+
+
+<script>
+
+/*
+|--------------------------------------------------------------------------
+| IMPORTANT
+|--------------------------------------------------------------------------
+| अपना Google Apps Script Web App URL यहाँ डालें।
+*/
+
+const API_URL =
+  "https://script.google.com/macros/s/AKfycbyMWZGRcZDANWU7MfD3zxF06PnwMOf2o5djm_4x7L9aAkufEq_CUoYTQyjprnVysQoY/exec";
+
+
+const companySelect =
+  document.getElementById("company");
+
+const searchInput =
+  document.getElementById("search");
+
+const searchBtn =
+  document.getElementById("searchBtn");
+
+const claimBtn =
+  document.getElementById("claimBtn");
+
+const resultBox =
+  document.getElementById("result");
+
+const matchedValue =
+  document.getElementById("matchedValue");
+
+const loading =
+  document.getElementById("loading");
+
+const message =
+  document.getElementById("message");
+
+const nameInput =
+  document.getElementById("name");
+
+const mobileInput =
+  document.getElementById("mobile");
+
+
+let currentMatch = "";
+
+
+/*
+|--------------------------------------------------------------------------
+| JSONP Request
+|--------------------------------------------------------------------------
+*/
+
+function jsonp(params) {
+
+  return new Promise((resolve, reject) => {
+
+    const callbackName =
+      "jsonp_" +
+      Date.now() +
+      "_" +
+      Math.floor(Math.random() * 100000);
+
+    const script =
+      document.createElement("script");
+
+    const query =
+      new URLSearchParams({
+        ...params,
+        callback: callbackName
+      });
+
+    script.src =
+      API_URL + "?" + query.toString();
+
+    const timeout =
+      setTimeout(() => {
+
+        cleanup();
+
+        reject(
+          new Error("Request timeout")
+        );
+
+      }, 20000);
+
+
+    window[callbackName] =
+      function(data) {
+
+        clearTimeout(timeout);
+
+        cleanup();
+
+        resolve(data);
+      };
+
+
+    script.onerror =
+      function() {
+
+        clearTimeout(timeout);
+
+        cleanup();
+
+        reject(
+          new Error("Network error")
+        );
+      };
+
+
+    function cleanup() {
+
+      delete window[callbackName];
+
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+    }
+
+
+    document.body.appendChild(script);
+
+  });
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Message
+|--------------------------------------------------------------------------
+*/
+
+function showMessage(text, type) {
+
+  message.textContent = text;
+
+  message.className =
+    "message " + type;
+
+  message.style.display = "block";
+}
+
+
+function clearMessage() {
+
+  message.style.display = "none";
+  message.textContent = "";
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Load Companies
+|--------------------------------------------------------------------------
+*/
+
+async function loadCompanies() {
+
+  try {
+
+    const data =
+      await jsonp({
+        action: "companies"
+      });
+
+
+    if (!data.success) {
+      throw new Error(
+        "Unable to load companies."
+      );
+    }
+
+
+    companySelect.innerHTML =
+      '<option value="">Select Company</option>';
+
+
+    data.companies.forEach(company => {
+
+      const option =
+        document.createElement("option");
+
+      option.value = company;
+      option.textContent = company;
+
+      companySelect.appendChild(option);
+
+    });
+
+  } catch (error) {
+
+    companySelect.innerHTML =
+      '<option value="">Unable to load</option>';
+
+    showMessage(
+      "Company list load नहीं हो पाई।",
+      "error"
+    );
+  }
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Search
+|--------------------------------------------------------------------------
+*/
+
+searchBtn.addEventListener(
+  "click",
+  searchClient
+);
+
+
+searchInput.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (event.key === "Enter") {
+      searchClient();
+    }
+
+  }
+);
+
+
+async function searchClient() {
+
+  clearMessage();
+
+  resultBox.style.display = "none";
+
+  currentMatch = "";
+
+
+  const company =
+    companySelect.value.trim();
+
+  const query =
+    searchInput.value.trim();
+
+
+  if (!company) {
+
+    showMessage(
+      "पहले Company Select करें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!query) {
+
+    showMessage(
+      "Number या Client Code डालें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  searchBtn.disabled = true;
+
+  loading.style.display = "block";
+
+
+  try {
+
+    const data =
+      await jsonp({
+        action: "search",
+        company: company,
+        query: query
+      });
+
+
+    if (
+      data.success &&
+      data.found
+    ) {
+
+      currentMatch =
+        data.value;
+
+      matchedValue.textContent =
+        data.value;
+
+      resultBox.style.display =
+        "block";
+
+      nameInput.value = "";
+      mobileInput.value = "";
+
+    } else {
+
+      showMessage(
+        "No Result Found",
+        "error"
+      );
+    }
+
+
+  } catch (error) {
+
+    showMessage(
+      "Network problem. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    searchBtn.disabled = false;
+
+    loading.style.display = "none";
+  }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Claim
+|--------------------------------------------------------------------------
+*/
+
+claimBtn.addEventListener(
+  "click",
+  submitClaim
+);
+
+
+async function submitClaim() {
+
+  clearMessage();
+
+
+  const company =
+    companySelect.value.trim();
+
+  const name =
+    nameInput.value.trim();
+
+  const mobile =
+    mobileInput.value.trim();
+
+
+  if (!currentMatch) {
+
+    showMessage(
+      "पहले अपना Number / Client Code Search करें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!name) {
+
+    showMessage(
+      "अपना Name डालें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  if (!mobile) {
+
+    showMessage(
+      "अपना Mobile Number डालें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  claimBtn.disabled = true;
+
+
+  try {
+
+    const data =
+      await jsonp({
+        action: "claim",
+        company: company,
+        query: currentMatch,
+        name: name,
+        mobile: mobile
+      });
+
+
+    if (data.alreadyClaimed) {
+
+      showMessage(
+        "Already Claimed",
+        "error"
+      );
+
+      return;
+    }
+
+
+    if (data.success) {
+
+      showMessage(
+        "Claim Submitted Successfully",
+        "success"
+      );
+
+      nameInput.value = "";
+      mobileInput.value = "";
+
+    } else {
+
+      showMessage(
+        data.message ||
+        "Claim submit नहीं हुआ।",
+        "error"
+      );
+    }
+
+
+  } catch (error) {
+
+    showMessage(
+      "Network problem. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    claimBtn.disabled = false;
+  }
+
+}
+
+
+/*
+|--------------------------------------------------------------------------
+| Start
+|--------------------------------------------------------------------------
+*/
+
+loadCompanies();
+
+</script>
+
+</body>
+</html>
