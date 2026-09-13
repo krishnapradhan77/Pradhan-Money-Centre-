@@ -8,672 +8,1062 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="description"
+    content="Client Claim Portal"
+  >
+
   <title>Client Claim Portal</title>
 
   <style>
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
+
     * {
       box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f4f7fb;
-      color: #111827;
+      min-height: 100vh;
+      font-family:
+        Arial,
+        Helvetica,
+        sans-serif;
+
+      background:
+        radial-gradient(
+          circle at 10% 10%,
+          rgba(37, 99, 235, 0.18),
+          transparent 30%
+        ),
+        radial-gradient(
+          circle at 90% 90%,
+          rgba(5, 150, 105, 0.15),
+          transparent 30%
+        ),
+        linear-gradient(
+          135deg,
+          #eff6ff 0%,
+          #f8fafc 50%,
+          #ecfdf5 100%
+        );
+
+      color: #0f172a;
     }
 
-    .container {
-      width: min(94%, 620px);
-      margin: 0 auto;
-      padding: 30px 0 50px;
+    button,
+    input,
+    select {
+      font-family: inherit;
     }
+
+    button {
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    /* =========================================================
+       PAGE
+    ========================================================= */
+
+    .page-wrapper {
+      width: 100%;
+      min-height: 100vh;
+      padding: 35px 15px 55px;
+    }
+
+    .main-container {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* =========================================================
+       BRAND
+    ========================================================= */
+
+    .brand-section {
+      text-align: center;
+      margin-bottom: 25px;
+    }
+
+    .brand-icon {
+      width: 78px;
+      height: 78px;
+
+      margin: 0 auto 16px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 24px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #0f766e
+        );
+
+      color: #ffffff;
+
+      font-size: 38px;
+      font-weight: 900;
+
+      box-shadow:
+        0 15px 35px
+        rgba(37, 99, 235, 0.25);
+    }
+
+    .brand-title {
+      font-size: 33px;
+      line-height: 1.2;
+      font-weight: 900;
+      color: #0f172a;
+    }
+
+    .brand-subtitle {
+      max-width: 580px;
+      margin: 11px auto 0;
+
+      color: #64748b;
+
+      font-size: 15px;
+      line-height: 1.65;
+    }
+
+    /* =========================================================
+       CARD
+    ========================================================= */
 
     .card {
-      background: #ffffff;
-      border-radius: 18px;
-      padding: 24px;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.08);
+      width: 100%;
+
+      padding: 30px;
+
+      background:
+        rgba(255, 255, 255, 0.96);
+
+      border:
+        1px solid
+        rgba(226, 232, 240, 0.9);
+
+      border-radius: 26px;
+
+      box-shadow:
+        0 25px 70px
+        rgba(15, 23, 42, 0.11);
+
+      backdrop-filter: blur(15px);
     }
 
-    h1 {
-      margin: 0 0 8px;
-      text-align: center;
-      font-size: 27px;
+    /* =========================================================
+       SECTION HEADING
+    ========================================================= */
+
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 11px;
+
+      margin-bottom: 23px;
+
+      color: #0f172a;
+
+      font-size: 21px;
+      font-weight: 900;
     }
 
-    .subtitle {
-      text-align: center;
-      color: #6b7280;
-      margin-bottom: 25px;
+    .section-number {
+      width: 34px;
+      height: 34px;
+
+      flex-shrink: 0;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      border-radius: 10px;
+
+      background: #dbeafe;
+      color: #1d4ed8;
+
+      font-size: 15px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       FORM
+    ========================================================= */
+
+    .form-group {
+      margin-bottom: 19px;
     }
 
     label {
       display: block;
-      font-weight: 700;
-      margin: 15px 0 8px;
+
+      margin-bottom: 8px;
+
+      color: #334155;
+
+      font-size: 14px;
+      font-weight: 800;
+    }
+
+    .required {
+      color: #dc2626;
     }
 
     select,
     input {
       width: 100%;
-      padding: 14px;
-      border: 1px solid #d1d5db;
-      border-radius: 10px;
-      font-size: 16px;
+      min-height: 53px;
+
+      padding:
+        14px 15px;
+
+      border:
+        1px solid
+        #cbd5e1;
+
+      border-radius: 13px;
+
       outline: none;
+
+      background: #ffffff;
+      color: #0f172a;
+
+      font-size: 16px;
+
+      transition:
+        border-color 0.2s ease,
+        box-shadow 0.2s ease,
+        background 0.2s ease,
+        transform 0.2s ease;
+    }
+
+    select {
+      cursor: pointer;
     }
 
     select:focus,
     input:focus {
       border-color: #2563eb;
+
+      box-shadow:
+        0 0 0 4px
+        rgba(37, 99, 235, 0.12);
+
+      background: #f8fbff;
     }
 
-    button {
+    input::placeholder {
+      color: #94a3b8;
+    }
+
+    /* =========================================================
+       BUTTONS
+    ========================================================= */
+
+    .search-button,
+    .claim-button {
       width: 100%;
-      border: 0;
-      border-radius: 10px;
-      padding: 14px;
-      margin-top: 15px;
+      min-height: 55px;
+
+      border: none;
+      border-radius: 13px;
+
+      padding: 14px 18px;
+
+      margin-top: 4px;
+
       font-size: 16px;
-      font-weight: 700;
+      font-weight: 900;
+
       cursor: pointer;
-      background: #2563eb;
-      color: white;
+
+      color: #ffffff;
+
+      transition:
+        transform 0.2s ease,
+        box-shadow 0.2s ease,
+        opacity 0.2s ease;
     }
 
-    button:disabled {
+    .search-button {
+      background:
+        linear-gradient(
+          135deg,
+          #2563eb,
+          #1d4ed8
+        );
+
+      box-shadow:
+        0 11px 24px
+        rgba(37, 99, 235, 0.22);
+    }
+
+    .claim-button {
+      background:
+        linear-gradient(
+          135deg,
+          #059669,
+          #047857
+        );
+
+      box-shadow:
+        0 11px 24px
+        rgba(5, 150, 105, 0.22);
+    }
+
+    .search-button:hover,
+    .claim-button:hover {
+      transform: translateY(-2px);
+    }
+
+    .search-button:active,
+    .claim-button:active {
+      transform: translateY(0);
+    }
+
+    .search-button:disabled,
+    .claim-button:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+      transform: none;
     }
 
-    .result {
-      margin-top: 22px;
-      padding: 18px;
-      border-radius: 12px;
-      background: #f8fafc;
+    .button-icon {
+      margin-right: 7px;
+    }
+
+    /* =========================================================
+       LOADING
+    ========================================================= */
+
+    .loading {
       display: none;
+
+      margin-top: 17px;
+
+      text-align: center;
+
+      color: #64748b;
+
+      font-size: 14px;
+      font-weight: 700;
+    }
+
+    .loading-spinner {
+      display: inline-block;
+
+      width: 18px;
+      height: 18px;
+
+      margin-right: 8px;
+
+      vertical-align: middle;
+
+      border:
+        3px solid
+        #dbeafe;
+
+      border-top-color:
+        #2563eb;
+
+      border-radius: 50%;
+
+      animation:
+        spin 0.8s
+        linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+    /* =========================================================
+       RESULT BOX
+    ========================================================= */
+
+    .result-box {
+      display: none;
+
+      margin-top: 26px;
+
+      padding: 23px;
+
+      border:
+        1px solid
+        #bbf7d0;
+
+      border-radius: 19px;
+
+      background:
+        linear-gradient(
+          135deg,
+          #f0fdf4,
+          #ecfdf5
+        );
+
+      animation:
+        resultAppear
+        0.25s ease;
+    }
+
+    @keyframes resultAppear {
+      from {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .result-title {
+      margin-bottom: 12px;
+
+      color: #166534;
+
+      font-size: 16px;
+      font-weight: 900;
     }
 
     .matched-value {
-      font-size: 20px;
-      font-weight: 800;
-      padding: 12px;
-      border-radius: 10px;
+      width: 100%;
+
+      padding: 16px;
+
+      border:
+        1px solid
+        #86efac;
+
+      border-radius: 13px;
+
       background: #dcfce7;
+
       color: #166534;
+
+      font-size: 21px;
+      font-weight: 900;
+
+      text-align: center;
+
       word-break: break-word;
+      overflow-wrap: anywhere;
     }
+
+    /* =========================================================
+       CLAIM SECTION
+    ========================================================= */
+
+    .claim-section {
+      margin-top: 23px;
+
+      padding-top: 21px;
+
+      border-top:
+        1px solid
+        #bbf7d0;
+    }
+
+    .claim-heading {
+      margin-bottom: 17px;
+
+      color: #14532d;
+
+      font-size: 19px;
+      font-weight: 900;
+    }
+
+    /* =========================================================
+       MESSAGE
+    ========================================================= */
 
     .message {
-      margin-top: 14px;
-      padding: 12px;
-      border-radius: 9px;
       display: none;
+
+      margin-top: 19px;
+
+      padding: 15px 17px;
+
+      border-radius: 12px;
+
+      font-size: 14px;
+      font-weight: 800;
+
+      line-height: 1.55;
+
+      word-break: break-word;
+
+      animation:
+        messageAppear
+        0.2s ease;
     }
 
-    .success {
+    @keyframes messageAppear {
+      from {
+        opacity: 0;
+        transform: translateY(-4px);
+      }
+
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .message.success {
+      display: block;
+
       background: #dcfce7;
+
+      border:
+        1px solid
+        #86efac;
+
       color: #166534;
     }
 
-    .error {
+    .message.error {
+      display: block;
+
       background: #fee2e2;
+
+      border:
+        1px solid
+        #fca5a5;
+
       color: #991b1b;
     }
 
-    .loading {
-      text-align: center;
-      color: #6b7280;
-      margin-top: 15px;
-      display: none;
+    .message.info {
+      display: block;
+
+      background: #dbeafe;
+
+      border:
+        1px solid
+        #93c5fd;
+
+      color: #1e40af;
     }
 
-    .hidden {
-      display: none !important;
+    /* =========================================================
+       SECURITY NOTE
+    ========================================================= */
+
+    .security-note {
+      display: flex;
+      align-items: flex-start;
+      gap: 9px;
+
+      margin-top: 20px;
+
+      padding: 14px;
+
+      border-radius: 12px;
+
+      background: #f8fafc;
+
+      color: #64748b;
+
+      font-size: 12px;
+
+      line-height: 1.55;
     }
+
+    .security-icon {
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    .footer-note {
+      margin-top: 21px;
+
+      text-align: center;
+
+      color: #64748b;
+
+      font-size: 12px;
+
+      line-height: 1.6;
+    }
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 600px) {
+
+      .page-wrapper {
+        padding:
+          20px
+          11px
+          35px;
+      }
+
+      .brand-icon {
+        width: 67px;
+        height: 67px;
+
+        border-radius: 20px;
+
+        font-size: 31px;
+      }
+
+      .brand-title {
+        font-size: 27px;
+      }
+
+      .brand-subtitle {
+        font-size: 14px;
+      }
+
+      .card {
+        padding:
+          21px
+          17px;
+
+        border-radius: 20px;
+      }
+
+      .section-heading {
+        font-size: 18px;
+      }
+
+      .section-number {
+        width: 31px;
+        height: 31px;
+      }
+
+      select,
+      input {
+        min-height: 51px;
+        font-size: 16px;
+      }
+
+      .matched-value {
+        font-size: 18px;
+      }
+
+      .result-box {
+        padding: 18px;
+      }
+
+      .claim-heading {
+        font-size: 17px;
+      }
+
+    }
+
+    /* =========================================================
+       SMALL MOBILE
+    ========================================================= */
+
+    @media (max-width: 380px) {
+
+      .brand-title {
+        font-size: 24px;
+      }
+
+      .card {
+        padding:
+          18px
+          14px;
+      }
+
+      .search-button,
+      .claim-button {
+        font-size: 15px;
+      }
+
+    }
+
   </style>
 </head>
 
 <body>
 
-<div class="container">
+  <!-- =========================================================
+       PAGE WRAPPER
+  ========================================================= -->
 
-  <div class="card">
+  <div class="page-wrapper">
 
-    <h1>Client Claim Portal</h1>
+    <main class="main-container">
 
-    <div class="subtitle">
-      Select Company and Search your Number / Client Code
-    </div>
+      <!-- =====================================================
+           BRAND
+      ===================================================== -->
 
-    <!-- Company -->
-    <label for="company">
-      Select Company
-    </label>
+      <section class="brand-section">
 
-    <select id="company">
-      <option value="">
-        Loading Companies...
-      </option>
-    </select>
+        <div class="brand-icon">
+          ✓
+        </div>
 
+        <h1 class="brand-title">
+          Client Claim Portal
+        </h1>
 
-    <!-- Search -->
-    <label for="search">
-      Number / Client Code
-    </label>
+        <p class="brand-subtitle">
+          Select your company, search your number or client
+          code, and submit your claim securely.
+        </p>
 
-    <input
-      id="search"
-      type="text"
-      placeholder="Enter Number or Client Code"
-      autocomplete="off"
-    >
-
-    <button id="searchBtn">
-      Search
-    </button>
-
-    <div id="loading" class="loading">
-      Searching...
-    </div>
+      </section>
 
 
-    <!-- Result -->
-    <div id="result" class="result">
+      <!-- =====================================================
+           MAIN CARD
+      ===================================================== -->
 
-      <div class="matched-value" id="matchedValue"></div>
+      <section class="card">
 
-      <label for="name">
-        Name
-      </label>
+        <!-- ===================================================
+             SEARCH SECTION
+        =================================================== -->
 
-      <input
-        id="name"
-        type="text"
-        placeholder="Enter your name"
-        maxlength="100"
-      >
+        <h2 class="section-heading">
 
-      <label for="mobile">
-        Mobile Number
-      </label>
+          <span class="section-number">
+            1
+          </span>
 
-      <input
-        id="mobile"
-        type="tel"
-        placeholder="Enter your mobile number"
-        maxlength="15"
-      >
+          <span>
+            Search Your Details
+          </span>
 
-      <button id="claimBtn">
-        Submit Claim
-      </button>
-
-    </div>
+        </h2>
 
 
-    <div id="message" class="message"></div>
+        <!-- ===================================================
+             COMPANY
+        =================================================== -->
+
+        <div class="form-group">
+
+          <label for="company">
+            Select Company
+            <span class="required">*</span>
+          </label>
+
+          <select id="company">
+
+            <option value="">
+              Loading Companies...
+            </option>
+
+          </select>
+
+        </div>
+
+
+        <!-- ===================================================
+             SEARCH INPUT
+        =================================================== -->
+
+        <div class="form-group">
+
+          <label for="search">
+            Number / Client Code
+            <span class="required">*</span>
+          </label>
+
+          <input
+            id="search"
+            type="text"
+            placeholder="Enter Number or Client Code"
+            autocomplete="off"
+            maxlength="100"
+          >
+
+        </div>
+
+
+        <!-- ===================================================
+             SEARCH BUTTON
+        =================================================== -->
+
+        <button
+          type="button"
+          id="searchBtn"
+          class="search-button"
+        >
+
+          <span class="button-icon">
+            🔍
+          </span>
+
+          Search Details
+
+        </button>
+
+
+        <!-- ===================================================
+             SEARCH LOADING
+        =================================================== -->
+
+        <div
+          id="loading"
+          class="loading"
+          aria-live="polite"
+        >
+
+          <span class="loading-spinner"></span>
+
+          Searching, please wait...
+
+        </div>
+
+
+        <!-- ===================================================
+             RESULT
+        =================================================== -->
+
+        <div
+          id="result"
+          class="result-box"
+        >
+
+          <h3 class="result-title">
+            Matching Number / Client Code Found
+          </h3>
+
+
+          <div
+            id="matchedValue"
+            class="matched-value"
+          ></div>
+
+
+          <!-- ===============================================
+               CLAIM
+          ================================================ -->
+
+          <div class="claim-section">
+
+            <h3 class="claim-heading">
+              2. Submit Your Claim
+            </h3>
+
+
+            <!-- =============================================
+                 NAME
+            ============================================== -->
+
+            <div class="form-group">
+
+              <label for="name">
+                Full Name
+                <span class="required">*</span>
+              </label>
+
+              <input
+                id="name"
+                type="text"
+                placeholder="Enter your full name"
+                maxlength="100"
+                autocomplete="name"
+              >
+
+            </div>
+
+
+            <!-- =============================================
+                 MOBILE
+            ============================================== -->
+
+            <div class="form-group">
+
+              <label for="mobile">
+                Mobile Number
+                <span class="required">*</span>
+              </label>
+
+              <input
+                id="mobile"
+                type="tel"
+                placeholder="Enter your mobile number"
+                maxlength="15"
+                inputmode="numeric"
+                autocomplete="tel"
+              >
+
+            </div>
+
+
+            <!-- =============================================
+                 CLAIM BUTTON
+            ============================================== -->
+
+            <button
+              type="button"
+              id="claimBtn"
+              class="claim-button"
+            >
+
+              <span class="button-icon">
+                ✓
+              </span>
+
+              Submit Claim
+
+            </button>
+
+          </div>
+
+        </div>
+
+
+        <!-- ===================================================
+             MESSAGE
+        =================================================== -->
+
+        <div
+          id="message"
+          class="message"
+          aria-live="polite"
+        ></div>
+
+
+        <!-- ===================================================
+             SECURITY NOTE
+        =================================================== -->
+
+        <div class="security-note">
+
+          <span class="security-icon">
+            🔒
+          </span>
+
+          <span>
+            Please enter correct details. Your claim information
+            will be processed through the connected claim system.
+          </span>
+
+        </div>
+
+      </section>
+
+
+      <!-- =====================================================
+           FOOTER
+      ===================================================== -->
+
+      <p class="footer-note">
+        © 2026 Client Claim Portal. All rights reserved.
+      </p>
+
+    </main>
 
   </div>
 
-</div>
 
+  <!-- =========================================================
+       JAVASCRIPT
+  ========================================================= -->
 
-<script>
+  <script>
 
-/*
-|--------------------------------------------------------------------------
-| IMPORTANT
-|--------------------------------------------------------------------------
-| अपना Google Apps Script Web App URL यहाँ डालें।
-*/
+    /* =========================================================
+       GOOGLE APPS SCRIPT WEB APP URL
+    ========================================================= */
 
-const API_URL =
-  "https://script.google.com/macros/s/AKfycbyMWZGRcZDANWU7MfD3zxF06PnwMOf2o5djm_4x7L9aAkufEq_CUoYTQyjprnVysQoY/exec";
+    const API_URL =
+      "https://script.google.com/macros/s/AKfycbyMWZGRcZDANWU7MfD3zxF06PnwMOf2o5djm_4x7L9aAkufEq_CUoYTQyjprnVysQoY/exec";
 
 
-const companySelect =
-  document.getElementById("company");
+    /* =========================================================
+       DOM ELEMENTS
+    ========================================================= */
 
-const searchInput =
-  document.getElementById("search");
+    const companySelect =
+      document.getElementById("company");
 
-const searchBtn =
-  document.getElementById("searchBtn");
+    const searchInput =
+      document.getElementById("search");
 
-const claimBtn =
-  document.getElementById("claimBtn");
+    const searchBtn =
+      document.getElementById("searchBtn");
 
-const resultBox =
-  document.getElementById("result");
+    const claimBtn =
+      document.getElementById("claimBtn");
 
-const matchedValue =
-  document.getElementById("matchedValue");
+    const resultBox =
+      document.getElementById("result");
 
-const loading =
-  document.getElementById("loading");
+    const matchedValue =
+      document.getElementById("matchedValue");
 
-const message =
-  document.getElementById("message");
+    const loading =
+      document.getElementById("loading");
 
-const nameInput =
-  document.getElementById("name");
+    const message =
+      document.getElementById("message");
 
-const mobileInput =
-  document.getElementById("mobile");
+    const nameInput =
+      document.getElementById("name");
 
+    const mobileInput =
+      document.getElementById("mobile");
 
-let currentMatch = "";
 
+    /* =========================================================
+       CURRENT MATCH
+    ========================================================= */
 
-/*
-|--------------------------------------------------------------------------
-| JSONP Request
-|--------------------------------------------------------------------------
-*/
+    let currentMatch = "";
 
-function jsonp(params) {
+    let currentCompany = "";
 
-  return new Promise((resolve, reject) => {
 
-    const callbackName =
-      "jsonp_" +
-      Date.now() +
-      "_" +
-      Math.floor(Math.random() * 100000);
+    /* =========================================================
+       JSONP REQUEST
+    ========================================================= */
 
-    const script =
-      document.createElement("script");
+    function jsonp(params) {
 
-    const query =
-      new URLSearchParams({
-        ...params,
-        callback: callbackName
-      });
+      return new Promise(
+        function(resolve, reject) {
 
-    script.src =
-      API_URL + "?" + query.toString();
+          const callbackName =
+            "jsonp_" +
+            Date.now() +
+            "_" +
+            Math.floor(
+              Math.random() * 100000
+            );
 
-    const timeout =
-      setTimeout(() => {
 
-        cleanup();
+          const script =
+            document.createElement("script");
 
-        reject(
-          new Error("Request timeout")
-        );
 
-      }, 20000);
+          const query =
+            new URLSearchParams({
+              ...params,
+              callback: callbackName
+            });
 
 
-    window[callbackName] =
-      function(data) {
-
-        clearTimeout(timeout);
-
-        cleanup();
-
-        resolve(data);
-      };
-
-
-    script.onerror =
-      function() {
-
-        clearTimeout(timeout);
-
-        cleanup();
-
-        reject(
-          new Error("Network error")
-        );
-      };
-
-
-    function cleanup() {
-
-      delete window[callbackName];
-
-      if (script.parentNode) {
-        script.parentNode.removeChild(script);
-      }
-    }
-
-
-    document.body.appendChild(script);
-
-  });
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Message
-|--------------------------------------------------------------------------
-*/
-
-function showMessage(text, type) {
-
-  message.textContent = text;
-
-  message.className =
-    "message " + type;
-
-  message.style.display = "block";
-}
-
-
-function clearMessage() {
-
-  message.style.display = "none";
-  message.textContent = "";
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Load Companies
-|--------------------------------------------------------------------------
-*/
-
-async function loadCompanies() {
-
-  try {
-
-    const data =
-      await jsonp({
-        action: "companies"
-      });
-
-
-    if (!data.success) {
-      throw new Error(
-        "Unable to load companies."
-      );
-    }
-
-
-    companySelect.innerHTML =
-      '<option value="">Select Company</option>';
-
-
-    data.companies.forEach(company => {
-
-      const option =
-        document.createElement("option");
-
-      option.value = company;
-      option.textContent = company;
-
-      companySelect.appendChild(option);
-
-    });
-
-  } catch (error) {
-
-    companySelect.innerHTML =
-      '<option value="">Unable to load</option>';
-
-    showMessage(
-      "Company list load नहीं हो पाई।",
-      "error"
-    );
-  }
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Search
-|--------------------------------------------------------------------------
-*/
-
-searchBtn.addEventListener(
-  "click",
-  searchClient
-);
-
-
-searchInput.addEventListener(
-  "keydown",
-  function(event) {
-
-    if (event.key === "Enter") {
-      searchClient();
-    }
-
-  }
-);
-
-
-async function searchClient() {
-
-  clearMessage();
-
-  resultBox.style.display = "none";
-
-  currentMatch = "";
-
-
-  const company =
-    companySelect.value.trim();
-
-  const query =
-    searchInput.value.trim();
-
-
-  if (!company) {
-
-    showMessage(
-      "पहले Company Select करें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!query) {
-
-    showMessage(
-      "Number या Client Code डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  searchBtn.disabled = true;
-
-  loading.style.display = "block";
-
-
-  try {
-
-    const data =
-      await jsonp({
-        action: "search",
-        company: company,
-        query: query
-      });
-
-
-    if (
-      data.success &&
-      data.found
-    ) {
-
-      currentMatch =
-        data.value;
-
-      matchedValue.textContent =
-        data.value;
-
-      resultBox.style.display =
-        "block";
-
-      nameInput.value = "";
-      mobileInput.value = "";
-
-    } else {
-
-      showMessage(
-        "No Result Found",
-        "error"
-      );
-    }
-
-
-  } catch (error) {
-
-    showMessage(
-      "Network problem. Please try again.",
-      "error"
-    );
-
-  } finally {
-
-    searchBtn.disabled = false;
-
-    loading.style.display = "none";
-  }
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Claim
-|--------------------------------------------------------------------------
-*/
-
-claimBtn.addEventListener(
-  "click",
-  submitClaim
-);
-
-
-async function submitClaim() {
-
-  clearMessage();
-
-
-  const company =
-    companySelect.value.trim();
-
-  const name =
-    nameInput.value.trim();
-
-  const mobile =
-    mobileInput.value.trim();
-
-
-  if (!currentMatch) {
-
-    showMessage(
-      "पहले अपना Number / Client Code Search करें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!name) {
-
-    showMessage(
-      "अपना Name डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  if (!mobile) {
-
-    showMessage(
-      "अपना Mobile Number डालें।",
-      "error"
-    );
-
-    return;
-  }
-
-
-  claimBtn.disabled = true;
-
-
-  try {
-
-    const data =
-      await jsonp({
-        action: "claim",
-        company: company,
-        query: currentMatch,
-        name: name,
-        mobile: mobile
-      });
-
-
-    if (data.alreadyClaimed) {
-
-      showMessage(
-        "Already Claimed",
-        "error"
-      );
-
-      return;
-    }
-
-
-    if (data.success) {
-
-      showMessage(
-        "Claim Submitted Successfully",
-        "success"
-      );
-
-      nameInput.value = "";
-      mobileInput.value = "";
-
-    } else {
-
-      showMessage(
-        data.message ||
-        "Claim submit नहीं हुआ।",
-        "error"
-      );
-    }
-
-
-  } catch (error) {
-
-    showMessage(
-      "Network problem. Please try again.",
-      "error"
-    );
-
-  } finally {
-
-    claimBtn.disabled = false;
-  }
-
-}
-
-
-/*
-|--------------------------------------------------------------------------
-| Start
-|--------------------------------------------------------------------------
-*/
-
-loadCompanies();
-
-</script>
-
-</body>
-</html>
+   
