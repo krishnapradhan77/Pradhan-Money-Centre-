@@ -1,1068 +1,4265 @@
 <!DOCTYPE html>
+
 <html lang="en">
+
+
+
 <head>
-  <meta charset="UTF-8">
-
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
-
-  <meta
-    name="description"
-    content="Client Claim Portal"
-  >
-
-  <title>Client Claim Portal</title>
-
-  <style>
-    /* =========================================================
-       GLOBAL
-    ========================================================= */
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      min-height: 100vh;
-
-      font-family:
-        Arial,
-        Helvetica,
-        sans-serif;
-
-      background:
-        radial-gradient(
-          circle at 10% 10%,
-          rgba(37, 99, 235, 0.18),
-          transparent 30%
-        ),
-        radial-gradient(
-          circle at 90% 90%,
-          rgba(5, 150, 105, 0.15),
-          transparent 30%
-        ),
-        linear-gradient(
-          135deg,
-          #eff6ff 0%,
-          #f8fafc 50%,
-          #ecfdf5 100%
-        );
-
-      color: #0f172a;
-    }
-
-    button,
-    input,
-    select {
-      font-family: inherit;
-    }
-
-    button {
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    /* =========================================================
-       PAGE
-    ========================================================= */
-
-    .page-wrapper {
-      width: 100%;
-      min-height: 100vh;
-      padding: 35px 15px 55px;
-    }
-
-    .main-container {
-      width: 100%;
-      max-width: 700px;
-      margin: 0 auto;
-    }
-
-    /* =========================================================
-       BRAND
-    ========================================================= */
-
-    .brand-section {
-      text-align: center;
-      margin-bottom: 25px;
-    }
-
-    .brand-icon {
-      width: 78px;
-      height: 78px;
-
-      margin: 0 auto 16px;
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      border-radius: 24px;
 
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #0f766e
-        );
 
-      color: #ffffff;
+<meta charset="UTF-8">
 
-      font-size: 38px;
-      font-weight: 900;
 
-      box-shadow:
-        0 15px 35px
-        rgba(37, 99, 235, 0.25);
-    }
 
-    .brand-title {
-      font-size: 33px;
-      line-height: 1.2;
-      font-weight: 900;
-      color: #0f172a;
-    }
+<meta
 
-    .brand-subtitle {
-      max-width: 580px;
-      margin: 11px auto 0;
+  name="viewport"
 
-      color: #64748b;
+  content="width=device-width, initial-scale=1.0"
 
-      font-size: 15px;
-      line-height: 1.65;
-    }
+>
 
-    /* =========================================================
-       CARD
-    ========================================================= */
 
-    .card {
-      width: 100%;
 
-      padding: 30px;
+<title>Client Claim Portal</title>
 
-      background:
-        rgba(255, 255, 255, 0.96);
 
-      border:
-        1px solid
-        rgba(226, 232, 240, 0.9);
 
-      border-radius: 26px;
+<style>
 
-      box-shadow:
-        0 25px 70px
-        rgba(15, 23, 42, 0.11);
 
-      backdrop-filter: blur(15px);
-    }
 
-    /* =========================================================
-       SECTION HEADING
-    ========================================================= */
+* {
 
-    .section-heading {
-      display: flex;
-      align-items: center;
-      gap: 11px;
+  box-sizing: border-box;
 
-      margin-bottom: 23px;
+}
 
-      color: #0f172a;
 
-      font-size: 21px;
-      font-weight: 900;
-    }
 
-    .section-number {
-      width: 34px;
-      height: 34px;
+body {
 
-      flex-shrink: 0;
 
-      display: flex;
-      align-items: center;
-      justify-content: center;
 
-      border-radius: 10px;
+  margin: 0;
 
-      background: #dbeafe;
-      color: #1d4ed8;
 
-      font-size: 15px;
-      font-weight: 900;
-    }
 
-    /* =========================================================
-       FORM
-    ========================================================= */
+  min-height: 100vh;
 
-    .form-group {
-      margin-bottom: 19px;
-    }
 
-    label {
-      display: block;
 
-      margin-bottom: 8px;
+  font-family:
 
-      color: #334155;
+    Inter,
 
-      font-size: 14px;
-      font-weight: 800;
-    }
+    -apple-system,
 
-    .required {
-      color: #dc2626;
-    }
+    BlinkMacSystemFont,
 
-    select,
-    input {
-      width: 100%;
-      min-height: 53px;
+    "Segoe UI",
 
-      padding:
-        14px 15px;
+    sans-serif;
 
-      border:
-        1px solid
-        #cbd5e1;
 
-      border-radius: 13px;
 
-      outline: none;
+  background:
 
-      background: #ffffff;
-      color: #0f172a;
+    linear-gradient(
 
-      font-size: 16px;
+      135deg,
 
-      transition:
-        border-color 0.2s ease,
-        box-shadow 0.2s ease,
-        background 0.2s ease,
-        transform 0.2s ease;
-    }
+      #eaf6ff 0%,
 
-    select {
-      cursor: pointer;
-    }
+      #f5fffb 50%,
 
-    select:focus,
-    input:focus {
-      border-color: #2563eb;
+      #e9fff4 100%
 
-      box-shadow:
-        0 0 0 4px
-        rgba(37, 99, 235, 0.12);
+    );
 
-      background: #f8fbff;
-    }
 
-    input::placeholder {
-      color: #94a3b8;
-    }
 
-    /* =========================================================
-       BUTTONS
-    ========================================================= */
+  color: #172033;
 
-    .search-button,
-    .claim-button {
-      width: 100%;
-      min-height: 55px;
 
-      border: none;
-      border-radius: 13px;
 
-      padding: 14px 18px;
+  display: flex;
 
-      margin-top: 4px;
 
-      font-size: 16px;
-      font-weight: 900;
 
-      cursor: pointer;
+  justify-content: center;
 
-      color: #ffffff;
 
-      transition:
-        transform 0.2s ease,
-        box-shadow 0.2s ease,
-        opacity 0.2s ease;
-    }
 
-    .search-button {
-      background:
-        linear-gradient(
-          135deg,
-          #2563eb,
-          #1d4ed8
-        );
+  align-items: center;
 
-      box-shadow:
-        0 11px 24px
-        rgba(37, 99, 235, 0.22);
-    }
 
-    .claim-button {
-      background:
-        linear-gradient(
-          135deg,
-          #059669,
-          #047857
-        );
 
-      box-shadow:
-        0 11px 24px
-        rgba(5, 150, 105, 0.22);
-    }
+  padding: 20px;
 
-    .search-button:hover,
-    .claim-button:hover {
-      transform: translateY(-2px);
-    }
 
-    .search-button:active,
-    .claim-button:active {
-      transform: translateY(0);
-    }
 
-    .search-button:disabled,
-    .claim-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
+}
 
-    .button-icon {
-      margin-right: 7px;
-    }
 
-    /* =========================================================
-       LOADING
-    ========================================================= */
 
-    .loading {
-      display: none;
 
-      margin-top: 17px;
 
-      text-align: center;
+.container {
 
-      color: #64748b;
 
-      font-size: 14px;
-      font-weight: 700;
-    }
 
-    .loading-spinner {
-      display: inline-block;
+  width: 100%;
 
-      width: 18px;
-      height: 18px;
 
-      margin-right: 8px;
 
-      vertical-align: middle;
+  max-width: 520px;
 
-      border:
-        3px solid
-        #dbeafe;
 
-      border-top-color:
-        #2563eb;
 
-      border-radius: 50%;
+}
 
-      animation:
-        spin 0.8s
-        linear infinite;
-    }
 
-    @keyframes spin {
-      to {
-        transform: rotate(360deg);
-      }
-    }
 
-    /* =========================================================
-       RESULT BOX
-    ========================================================= */
 
-    .result-box {
-      display: none;
 
-      margin-top: 26px;
+.header {
 
-      padding: 23px;
 
-      border:
-        1px solid
-        #bbf7d0;
 
-      border-radius: 19px;
+  text-align: center;
 
-      background:
-        linear-gradient(
-          135deg,
-          #f0fdf4,
-          #ecfdf5
-        );
 
-      animation:
-        resultAppear
-        0.25s ease;
-    }
 
-    @keyframes resultAppear {
-      from {
-        opacity: 0;
-        transform: translateY(8px);
-      }
+  margin-bottom: 20px;
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
-    .result-title {
-      margin-bottom: 12px;
 
-      color: #166534;
+}
 
-      font-size: 16px;
-      font-weight: 900;
-    }
 
-    .matched-value {
-      width: 100%;
 
-      padding: 16px;
 
-      border:
-        1px solid
-        #86efac;
 
-      border-radius: 13px;
+.logo {
 
-      background: #dcfce7;
 
-      color: #166534;
 
-      font-size: 21px;
-      font-weight: 900;
+  width: 58px;
 
-      text-align: center;
 
-      word-break: break-word;
-      overflow-wrap: anywhere;
-    }
 
-    /* =========================================================
-       CLAIM SECTION
-    ========================================================= */
+  height: 58px;
 
-    .claim-section {
-      margin-top: 23px;
 
-      padding-top: 21px;
 
-      border-top:
-        1px solid
-        #bbf7d0;
-    }
+  margin: auto;
 
-    .claim-heading {
-      margin-bottom: 17px;
 
-      color: #14532d;
 
-      font-size: 19px;
-      font-weight: 900;
-    }
+  border-radius: 18px;
 
-    /* =========================================================
-       MESSAGE
-    ========================================================= */
 
-    .message {
-      display: none;
 
-      margin-top: 19px;
+  display: flex;
 
-      padding: 15px 17px;
 
-      border-radius: 12px;
 
-      font-size: 14px;
-      font-weight: 800;
+  align-items: center;
 
-      line-height: 1.55;
 
-      word-break: break-word;
 
-      animation:
-        messageAppear
-        0.2s ease;
-    }
+  justify-content: center;
 
-    @keyframes messageAppear {
-      from {
-        opacity: 0;
-        transform: translateY(-4px);
-      }
 
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
 
-    .message.success {
-      display: block;
+  font-size: 28px;
 
-      background: #dcfce7;
 
-      border:
-        1px solid
-        #86efac;
 
-      color: #166534;
-    }
+  font-weight: 800;
 
-    .message.error {
-      display: block;
 
-      background: #fee2e2;
 
-      border:
-        1px solid
-        #fca5a5;
+  color: white;
 
-      color: #991b1b;
-    }
 
-    .message.info {
-      display: block;
 
-      background: #dbeafe;
+  background:
 
-      border:
-        1px solid
-        #93c5fd;
+    linear-gradient(
 
-      color: #1e40af;
-    }
+      135deg,
 
-    /* =========================================================
-       SECURITY NOTE
-    ========================================================= */
+      #087fdb,
 
-    .security-note {
-      display: flex;
-      align-items: flex-start;
-      gap: 9px;
+      #0abf7a
 
-      margin-top: 20px;
+    );
 
-      padding: 14px;
 
-      border-radius: 12px;
 
-      background: #f8fafc;
+  box-shadow:
 
-      color: #64748b;
+    0 12px 30px
 
-      font-size: 12px;
+    rgba(0, 130, 190, 0.22);
 
-      line-height: 1.55;
-    }
 
-    .security-icon {
-      flex-shrink: 0;
-      font-size: 16px;
-    }
 
-    /* =========================================================
-       FOOTER
-    ========================================================= */
+}
 
-    .footer-note {
-      margin-top: 21px;
 
-      text-align: center;
 
-      color: #64748b;
 
-      font-size: 12px;
 
-      line-height: 1.6;
-    }
+.header h1 {
 
-    /* =========================================================
-       MOBILE
-    ========================================================= */
 
-    @media (max-width: 600px) {
 
-      .page-wrapper {
-        padding:
-          20px
-          11px
-          35px;
-      }
+  margin:
 
-      .brand-icon {
-        width: 67px;
-        height: 67px;
+    14px 0 7px;
 
-        border-radius: 20px;
 
-        font-size: 31px;
-      }
 
-      .brand-title {
-        font-size: 27px;
-      }
+  font-size: 28px;
 
-      .brand-subtitle {
-        font-size: 14px;
-      }
 
-      .card {
-        padding:
-          21px
-          17px;
 
-        border-radius: 20px;
-      }
+  font-weight: 800;
 
-      .section-heading {
-        font-size: 18px;
-      }
 
-      .section-number {
-        width: 31px;
-        height: 31px;
-      }
 
-      select,
-      input {
-        min-height: 51px;
-        font-size: 16px;
-      }
+}
 
-      .matched-value {
-        font-size: 18px;
-      }
 
-      .result-box {
-        padding: 18px;
-      }
 
-      .claim-heading {
-        font-size: 17px;
-      }
-    }
 
-    /* =========================================================
-       SMALL MOBILE
-    ========================================================= */
 
-    @media (max-width: 380px) {
+.header p {
 
-      .brand-title {
-        font-size: 24px;
-      }
 
-      .card {
-        padding:
-          18px
-          14px;
-      }
 
-      .search-button,
-      .claim-button {
-        font-size: 15px;
-      }
-    }
+  margin: 0;
 
-  </style>
+
+
+  color: #64748b;
+
+
+
+  font-size: 14px;
+
+
+
+  line-height: 1.6;
+
+
+
+}
+
+
+
+
+
+.card {
+
+
+
+  background: rgba(255,255,255,0.96);
+
+
+
+  border: 1px solid
+
+    rgba(255,255,255,0.8);
+
+
+
+  border-radius: 24px;
+
+
+
+  padding: 26px;
+
+
+
+  box-shadow:
+
+    0 20px 60px
+
+    rgba(31, 71, 98, 0.13);
+
+
+
+}
+
+
+
+
+
+.steps {
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  margin-bottom: 25px;
+
+
+
+}
+
+
+
+
+
+.step {
+
+
+
+  width: 34px;
+
+
+
+  height: 34px;
+
+
+
+  border-radius: 50%;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: center;
+
+
+
+  font-size: 13px;
+
+
+
+  font-weight: 700;
+
+
+
+  background: #e8eef5;
+
+
+
+  color: #64748b;
+
+
+
+  flex-shrink: 0;
+
+
+
+}
+
+
+
+
+
+.step.active {
+
+
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #087fdb,
+
+      #0abf7a
+
+    );
+
+
+
+  color: white;
+
+
+
+  box-shadow:
+
+    0 7px 18px
+
+    rgba(0, 130, 190, 0.25);
+
+
+
+}
+
+
+
+
+
+.step.done {
+
+
+
+  background: #0abf7a;
+
+
+
+  color: white;
+
+
+
+}
+
+
+
+
+
+.line {
+
+
+
+  height: 3px;
+
+
+
+  flex: 1;
+
+
+
+  margin: 0 8px;
+
+
+
+  background: #e5ebf1;
+
+
+
+  border-radius: 5px;
+
+
+
+}
+
+
+
+
+
+.line.active {
+
+
+
+  background: #0abf7a;
+
+
+
+}
+
+
+
+
+
+.section {
+
+
+
+  display: none;
+
+
+
+}
+
+
+
+
+
+.section.active {
+
+
+
+  display: block;
+
+
+
+  animation:
+
+    fadeIn .3s ease;
+
+
+
+}
+
+
+
+
+
+@keyframes fadeIn {
+
+
+
+  from {
+
+
+
+    opacity: 0;
+
+
+
+    transform: translateY(8px);
+
+
+
+  }
+
+
+
+  to {
+
+
+
+    opacity: 1;
+
+
+
+    transform: translateY(0);
+
+
+
+  }
+
+
+
+}
+
+
+
+
+
+.section-title {
+
+
+
+  margin-bottom: 5px;
+
+
+
+  font-size: 20px;
+
+
+
+  font-weight: 750;
+
+
+
+}
+
+
+
+
+
+.section-subtitle {
+
+
+
+  margin-bottom: 20px;
+
+
+
+  color: #718096;
+
+
+
+  font-size: 13px;
+
+
+
+  line-height: 1.5;
+
+
+
+}
+
+
+
+
+
+label {
+
+
+
+  display: block;
+
+
+
+  margin-bottom: 8px;
+
+
+
+  font-size: 13px;
+
+
+
+  font-weight: 700;
+
+
+
+  color: #334155;
+
+
+
+}
+
+
+
+
+
+input,
+
+select {
+
+
+
+  width: 100%;
+
+
+
+  height: 52px;
+
+
+
+  padding: 0 15px;
+
+
+
+  border: 1px solid #dbe4ec;
+
+
+
+  border-radius: 13px;
+
+
+
+  background: #fbfdff;
+
+
+
+  color: #172033;
+
+
+
+  font-size: 15px;
+
+
+
+  outline: none;
+
+
+
+  transition: .2s;
+
+
+
+}
+
+
+
+
+
+input:focus,
+
+select:focus {
+
+
+
+  border-color: #1596df;
+
+
+
+  background: white;
+
+
+
+  box-shadow:
+
+    0 0 0 4px
+
+    rgba(21,150,223,.09);
+
+
+
+}
+
+
+
+
+
+.field {
+
+
+
+  margin-bottom: 17px;
+
+
+
+}
+
+
+
+
+
+.btn {
+
+
+
+  width: 100%;
+
+
+
+  height: 52px;
+
+
+
+  border: none;
+
+
+
+  border-radius: 13px;
+
+
+
+  cursor: pointer;
+
+
+
+  font-size: 15px;
+
+
+
+  font-weight: 750;
+
+
+
+  color: white;
+
+
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #087fdb,
+
+      #08ad78
+
+    );
+
+
+
+  box-shadow:
+
+    0 10px 22px
+
+    rgba(0, 130, 190, .20);
+
+
+
+  transition: .2s;
+
+
+
+}
+
+
+
+
+
+.btn:hover {
+
+
+
+  transform: translateY(-1px);
+
+
+
+  box-shadow:
+
+    0 13px 26px
+
+    rgba(0, 130, 190, .25);
+
+
+
+}
+
+
+
+
+
+.btn:disabled {
+
+
+
+  opacity: .6;
+
+
+
+  cursor: not-allowed;
+
+
+
+  transform: none;
+
+
+
+}
+
+
+
+
+
+.btn.secondary {
+
+
+
+  margin-top: 10px;
+
+
+
+  color: #334155;
+
+
+
+  background: #eef4f8;
+
+
+
+  box-shadow: none;
+
+
+
+}
+
+
+
+
+
+.search-box {
+
+
+
+  position: relative;
+
+
+
+}
+
+
+
+
+
+.search-box input {
+
+
+
+  padding-right: 55px;
+
+
+
+}
+
+
+
+
+
+.search-icon {
+
+
+
+  position: absolute;
+
+
+
+  right: 17px;
+
+
+
+  top: 50%;
+
+
+
+  transform: translateY(-50%);
+
+
+
+  color: #7b8b9c;
+
+
+
+  font-size: 20px;
+
+
+
+}
+
+
+
+
+
+.result {
+
+
+
+  display: none;
+
+
+
+  margin-top: 20px;
+
+
+
+  padding: 17px;
+
+
+
+  border-radius: 15px;
+
+
+
+  background:
+
+    linear-gradient(
+
+      135deg,
+
+      #effbf6,
+
+      #f4fbff
+
+    );
+
+
+
+  border: 1px solid #cdeee0;
+
+
+
+}
+
+
+
+
+
+.result.show {
+
+
+
+  display: block;
+
+
+
+  animation: fadeIn .3s ease;
+
+
+
+}
+
+
+
+
+
+.result-label {
+
+
+
+  color: #64748b;
+
+
+
+  font-size: 12px;
+
+
+
+  margin-bottom: 5px;
+
+
+
+}
+
+
+
+
+
+.result-value {
+
+
+
+  font-size: 18px;
+
+
+
+  font-weight: 800;
+
+
+
+  word-break: break-word;
+
+
+
+  color: #087f66;
+
+
+
+}
+
+
+
+
+
+.success-box {
+
+
+
+  display: none;
+
+
+
+  text-align: center;
+
+
+
+  padding: 20px 5px;
+
+
+
+}
+
+
+
+
+
+.success-icon {
+
+
+
+  width: 65px;
+
+
+
+  height: 65px;
+
+
+
+  margin: 0 auto 15px;
+
+
+
+  border-radius: 50%;
+
+
+
+  display: flex;
+
+
+
+  align-items: center;
+
+
+
+  justify-content: center;
+
+
+
+  font-size: 30px;
+
+
+
+  background: #dff8ec;
+
+
+
+  color: #0a9b65;
+
+
+
+}
+
+
+
+
+
+.success-box h2 {
+
+
+
+  margin: 0 0 8px;
+
+
+
+  font-size: 23px;
+
+
+
+}
+
+
+
+
+
+.success-box p {
+
+
+
+  margin: 0;
+
+
+
+  color: #64748b;
+
+
+
+  font-size: 14px;
+
+
+
+  line-height: 1.6;
+
+
+
+}
+
+
+
+
+
+.message {
+
+
+
+  display: none;
+
+
+
+  margin-top: 15px;
+
+
+
+  padding: 12px 14px;
+
+
+
+  border-radius: 11px;
+
+
+
+  font-size: 13px;
+
+
+
+  line-height: 1.5;
+
+
+
+}
+
+
+
+
+
+.message.show {
+
+
+
+  display: block;
+
+
+
+}
+
+
+
+
+
+.message.error {
+
+
+
+  background: #fff0f0;
+
+
+
+  color: #b42318;
+
+
+
+  border: 1px solid #ffd4d1;
+
+
+
+}
+
+
+
+
+
+.message.success {
+
+
+
+  background: #edfff6;
+
+
+
+  color: #087f58;
+
+
+
+  border: 1px solid #c7f1dc;
+
+
+
+}
+
+
+
+
+
+.loading {
+
+
+
+  display: none;
+
+
+
+  text-align: center;
+
+
+
+  margin-top: 14px;
+
+
+
+  color: #64748b;
+
+
+
+  font-size: 13px;
+
+
+
+}
+
+
+
+
+
+.spinner {
+
+
+
+  display: inline-block;
+
+
+
+  width: 17px;
+
+
+
+  height: 17px;
+
+
+
+  margin-right: 7px;
+
+
+
+  vertical-align: middle;
+
+
+
+  border: 2px solid #d8e5ed;
+
+
+
+  border-top-color: #087fdb;
+
+
+
+  border-radius: 50%;
+
+
+
+  animation: spin .7s linear infinite;
+
+
+
+}
+
+
+
+
+
+@keyframes spin {
+
+
+
+  to {
+
+    transform: rotate(360deg);
+
+  }
+
+
+
+}
+
+
+
+
+
+.security {
+
+
+
+  margin-top: 18px;
+
+
+
+  padding: 13px;
+
+
+
+  border-radius: 12px;
+
+
+
+  background: #f7fafc;
+
+
+
+  color: #718096;
+
+
+
+  font-size: 11px;
+
+
+
+  line-height: 1.5;
+
+
+
+  text-align: center;
+
+
+
+}
+
+
+
+
+
+.footer {
+
+
+
+  text-align: center;
+
+
+
+  margin-top: 18px;
+
+
+
+  color: #94a3b8;
+
+
+
+  font-size: 11px;
+
+
+
+}
+
+
+
+
+
+.company-badge {
+
+
+
+  display: inline-flex;
+
+
+
+  align-items: center;
+
+
+
+  gap: 7px;
+
+
+
+  padding: 7px 11px;
+
+
+
+  margin-bottom: 17px;
+
+
+
+  border-radius: 50px;
+
+
+
+  background: #edf8ff;
+
+
+
+  color: #087fdb;
+
+
+
+  font-size: 12px;
+
+
+
+  font-weight: 700;
+
+
+
+}
+
+
+
+
+
+.company-dot {
+
+
+
+  width: 7px;
+
+
+
+  height: 7px;
+
+
+
+  border-radius: 50%;
+
+
+
+  background: #0abf7a;
+
+
+
+}
+
+
+
+
+
+.claim-card {
+
+
+
+  margin-top: 20px;
+
+
+
+  padding: 18px;
+
+
+
+  border-radius: 17px;
+
+
+
+  background: #fbfdff;
+
+
+
+  border: 1px solid #e5edf3;
+
+
+
+}
+
+
+
+
+
+.claim-card-title {
+
+
+
+  font-size: 15px;
+
+
+
+  font-weight: 800;
+
+
+
+  margin-bottom: 15px;
+
+
+
+}
+
+
+
+
+
+@media (max-width: 480px) {
+
+
+
+  body {
+
+
+
+    padding: 12px;
+
+
+
+    align-items: flex-start;
+
+
+
+    padding-top: 25px;
+
+
+
+  }
+
+
+
+  .card {
+
+
+
+    padding: 20px;
+
+
+
+    border-radius: 20px;
+
+
+
+  }
+
+
+
+  .header h1 {
+
+
+
+    font-size: 24px;
+
+
+
+  }
+
+
+
+}
+
+
+
+</style>
+
+
+
 </head>
+
+
+
+
 
 <body>
 
-  <!-- =========================================================
-       PAGE WRAPPER
-  ========================================================= -->
 
-  <div class="page-wrapper">
 
-    <main class="main-container">
+<div class="container">
 
-      <!-- =====================================================
-           BRAND
-      ===================================================== -->
 
-      <section class="brand-section">
 
-        <div class="brand-icon">
-          ✓
-        </div>
 
-        <h1 class="brand-title">
-          Client Claim Portal
-        </h1>
 
-        <p class="brand-subtitle">
-          Select your company, search your number or client
-          code, and submit your claim securely.
-        </p>
+  <!-- HEADER -->
 
-      </section>
 
 
-      <!-- =====================================================
-           MAIN CARD
-      ===================================================== -->
+  <div class="header">
 
-      <section class="card">
 
-        <!-- ===================================================
-             SEARCH SECTION
-        =================================================== -->
 
-        <h2 class="section-heading">
+    <div class="logo">✓</div>
 
-          <span class="section-number">
-            1
-          </span>
 
-          <span>
-            Search Your Details
-          </span>
 
-        </h2>
+    <h1>Client Claim Portal</h1>
 
 
-        <!-- ===================================================
-             COMPANY
-        =================================================== -->
 
-        <div class="form-group">
+    <p>
 
-          <label for="company">
-            Select Company
-            <span class="required">*</span>
-          </label>
+      Select your company, search your number or
 
-          <select id="company">
+      client code, and submit your claim securely.
 
-            <option value="">
-              Loading Companies...
-            </option>
+    </p>
 
-          </select>
 
-        </div>
-
-
-        <!-- ===================================================
-             SEARCH INPUT
-        =================================================== -->
-
-        <div class="form-group">
-
-          <label for="search">
-            Number / Client Code
-            <span class="required">*</span>
-          </label>
-
-          <input
-            id="search"
-            type="text"
-            placeholder="Enter Number or Client Code"
-            autocomplete="off"
-            maxlength="100"
-          >
-
-        </div>
-
-
-        <!-- ===================================================
-             SEARCH BUTTON
-        =================================================== -->
-
-        <button
-          type="button"
-          id="searchBtn"
-          class="search-button"
-        >
-
-          <span class="button-icon">
-            🔍
-          </span>
-
-          Search Details
-
-        </button>
-
-
-        <!-- ===================================================
-             SEARCH LOADING
-        =================================================== -->
-
-        <div
-          id="loading"
-          class="loading"
-          aria-live="polite"
-        >
-
-          <span class="loading-spinner"></span>
-
-          Searching, please wait...
-
-        </div>
-
-
-        <!-- ===================================================
-             RESULT
-        =================================================== -->
-
-        <div
-          id="result"
-          class="result-box"
-        >
-
-          <h3 class="result-title">
-            Matching Number / Client Code Found
-          </h3>
-
-
-          <div
-            id="matchedValue"
-            class="matched-value"
-          ></div>
-
-
-          <!-- ===============================================
-               CLAIM
-          ================================================ -->
-
-          <div class="claim-section">
-
-            <h3 class="claim-heading">
-              2. Submit Your Claim
-            </h3>
-
-
-            <!-- =============================================
-                 NAME
-            ============================================== -->
-
-            <div class="form-group">
-
-              <label for="name">
-                Full Name
-                <span class="required">*</span>
-              </label>
-
-              <input
-                id="name"
-                type="text"
-                placeholder="Enter your full name"
-                maxlength="100"
-                autocomplete="name"
-              >
-
-            </div>
-
-
-            <!-- =============================================
-                 MOBILE
-            ============================================== -->
-
-            <div class="form-group">
-
-              <label for="mobile">
-                Mobile Number
-                <span class="required">*</span>
-              </label>
-
-              <input
-                id="mobile"
-                type="tel"
-                placeholder="Enter your mobile number"
-                maxlength="15"
-                inputmode="numeric"
-                autocomplete="tel"
-              >
-
-            </div>
-
-
-            <!-- =============================================
-                 CLAIM BUTTON
-            ============================================== -->
-
-            <button
-              type="button"
-              id="claimBtn"
-              class="claim-button"
-            >
-
-              <span class="button-icon">
-                ✓
-              </span>
-
-              Submit Claim
-
-            </button>
-
-          </div>
-
-        </div>
-
-
-        <!-- ===================================================
-             MESSAGE
-        =================================================== -->
-
-        <div
-          id="message"
-          class="message"
-          aria-live="polite"
-        ></div>
-
-
-        <!-- ===================================================
-             SECURITY NOTE
-        =================================================== -->
-
-        <div class="security-note">
-
-          <span class="security-icon">
-            🔒
-          </span>
-
-          <span>
-            Please enter correct details. Your claim information
-            will be processed through the connected claim system.
-          </span>
-
-        </div>
-
-      </section>
-
-
-      <!-- =====================================================
-           FOOTER
-      ===================================================== -->
-
-      <p class="footer-note">
-        © 2026 Client Claim Portal. All rights reserved.
-      </p>
-
-    </main>
 
   </div>
 
 
-  <!-- =========================================================
-       JAVASCRIPT
-  ========================================================= -->
-
-  <script>
-
-    /* =========================================================
-       GOOGLE APPS SCRIPT WEB APP URL
-    ========================================================= */
-
-    const API_URL =
-      "https://script.google.com/macros/s/AKfycbzxwfDyWGIWC7Q4f9XvOTLNOu5--URUFKXtjivdTGwD-QvU8Ho70OcbrOvHzse6gv_F/exec";
 
 
-    /* =========================================================
-       DOM ELEMENTS
-    ========================================================= */
 
-    const companySelect =
-      document.getElementById("company");
-
-    const searchInput =
-      document.getElementById("search");
-
-    const searchBtn =
-      document.getElementById("searchBtn");
-
-    const claimBtn =
-      document.getElementById("claimBtn");
-
-    const resultBox =
-      document.getElementById("result");
-
-    const matchedValue =
-      document.getElementById("matchedValue");
-
-    const loading =
-      document.getElementById("loading");
-
-    const message =
-      document.getElementById("message");
-
-    const nameInput =
-      document.getElementById("name");
-
-    const mobileInput =
-      document.getElementById("mobile");
+  <!-- MAIN CARD -->
 
 
-    /* =========================================================
-       CURRENT MATCH
-    ========================================================= */
 
-    let currentMatch = "";
-
-    let currentCompany = "";
+  <div class="card">
 
 
-    /* =========================================================
-       JSONP REQUEST
-    ========================================================= */
-
-    function jsonp(params) {
-
-      return new Promise(
-        function(resolve, reject) {
-
-          const callbackName =
-            "jsonp_" +
-            Date.now() +
-            "_" +
-            Math.floor(
-              Math.random() * 100000
-            );
 
 
-          const script =
-            document.createElement("script");
+
+    <!-- STEPS -->
 
 
-          const query =
-            new URLSearchParams({
-              ...params,
-              callback: callbackName
-            });
+
+    <div class="steps">
 
 
-    
+
+      <div
+
+        id="step1"
+
+        class="step active"
+
+      >
+
+        1
+
+      </div>
+
+
+
+      <div
+
+        id="line1"
+
+        class="line"
+
+      ></div>
+
+
+
+      <div
+
+        id="step2"
+
+        class="step"
+
+      >
+
+        2
+
+      </div>
+
+
+
+      <div
+
+        id="line2"
+
+        class="line"
+
+      ></div>
+
+
+
+      <div
+
+        id="step3"
+
+        class="step"
+
+      >
+
+        3
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =================================================
+
+         STEP 1
+
+         ================================================= -->
+
+
+
+    <div
+
+      id="section1"
+
+      class="section active"
+
+    >
+
+
+
+      <div class="section-title">
+
+        Select Company
+
+      </div>
+
+
+
+      <div class="section-subtitle">
+
+        First select the company associated with
+
+        your client number or code.
+
+      </div>
+
+
+
+
+
+      <div class="field">
+
+
+
+        <label for="company">
+
+          Company
+
+        </label>
+
+
+
+        <select id="company">
+
+
+
+          <option value="">
+
+            Loading companies...
+
+          </option>
+
+
+
+        </select>
+
+
+
+      </div>
+
+
+
+
+
+      <button
+
+        id="continueBtn"
+
+        class="btn"
+
+        disabled
+
+        onclick="goToSearch()"
+
+      >
+
+        Continue →
+
+      </button>
+
+
+
+
+
+      <div
+
+        id="companyLoading"
+
+        class="loading"
+
+      >
+
+
+
+        <span class="spinner"></span>
+
+
+
+        Loading companies...
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =================================================
+
+         STEP 2
+
+         ================================================= -->
+
+
+
+    <div
+
+      id="section2"
+
+      class="section"
+
+    >
+
+
+
+      <div
+
+        id="companyBadge"
+
+        class="company-badge"
+
+      >
+
+
+
+        <span class="company-dot"></span>
+
+
+
+        <span id="selectedCompanyText"></span>
+
+
+
+      </div>
+
+
+
+
+
+      <div class="section-title">
+
+        Search Client Code
+
+      </div>
+
+
+
+      <div class="section-subtitle">
+
+        Enter your number or client code exactly
+
+        as registered with the selected company.
+
+      </div>
+
+
+
+
+
+      <div class="field">
+
+
+
+        <label for="search">
+
+          Number / Client Code
+
+        </label>
+
+
+
+        <div class="search-box">
+
+
+
+          <input
+
+            id="search"
+
+            type="text"
+
+            autocomplete="off"
+
+            placeholder="Enter number or client code"
+
+          >
+
+
+
+          <span class="search-icon">
+
+            🔍
+
+          </span>
+
+
+
+        </div>
+
+
+
+      </div>
+
+
+
+
+
+      <button
+
+        id="searchBtn"
+
+        class="btn"
+
+        onclick="searchClient()"
+
+      >
+
+        Search Client Code
+
+      </button>
+
+
+
+
+
+      <div
+
+        id="searchLoading"
+
+        class="loading"
+
+      >
+
+
+
+        <span class="spinner"></span>
+
+
+
+        Searching...
+
+
+
+      </div>
+
+
+
+
+
+      <div
+
+        id="result"
+
+        class="result"
+
+      >
+
+
+
+        <div class="result-label">
+
+          Client Code Found
+
+        </div>
+
+
+
+        <div
+
+          id="resultValue"
+
+          class="result-value"
+
+        ></div>
+
+
+
+      </div>
+
+
+
+
+
+      <div
+
+        id="searchMessage"
+
+        class="message"
+
+      ></div>
+
+
+
+
+
+      <button
+
+        class="btn secondary"
+
+        onclick="backToCompany()"
+
+      >
+
+        ← Change Company
+
+      </button>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =================================================
+
+         STEP 3
+
+         ================================================= -->
+
+
+
+    <div
+
+      id="section3"
+
+      class="section"
+
+    >
+
+
+
+      <div
+
+        id="claimCompanyBadge"
+
+        class="company-badge"
+
+      >
+
+
+
+        <span class="company-dot"></span>
+
+
+
+        <span id="claimCompanyText"></span>
+
+
+
+      </div>
+
+
+
+
+
+      <div class="section-title">
+
+        Claim Client Code
+
+      </div>
+
+
+
+      <div class="section-subtitle">
+
+        Your client code has been found. Enter your
+
+        details below to submit the claim.
+
+      </div>
+
+
+
+
+
+      <div class="result show">
+
+
+
+        <div class="result-label">
+
+          Client Code
+
+        </div>
+
+
+
+        <div
+
+          id="claimCode"
+
+          class="result-value"
+
+        ></div>
+
+
+
+      </div>
+
+
+
+
+
+      <div class="claim-card">
+
+
+
+        <div class="claim-card-title">
+
+          Claim Details
+
+        </div>
+
+
+
+
+
+        <div class="field">
+
+
+
+          <label for="name">
+
+            Full Name
+
+          </label>
+
+
+
+          <input
+
+            id="name"
+
+            type="text"
+
+            maxlength="100"
+
+            autocomplete="name"
+
+            placeholder="Enter your full name"
+
+          >
+
+
+
+        </div>
+
+
+
+
+
+        <div class="field">
+
+
+
+          <label for="mobile">
+
+            Mobile Number
+
+          </label>
+
+
+
+          <input
+
+            id="mobile"
+
+            type="tel"
+
+            maxlength="15"
+
+            inputmode="numeric"
+
+            autocomplete="tel"
+
+            placeholder="Enter mobile number"
+
+          >
+
+
+
+        </div>
+
+
+
+
+
+        <button
+
+          id="claimBtn"
+
+          class="btn"
+
+          onclick="submitClaim()"
+
+        >
+
+          Submit Claim
+
+        </button>
+
+
+
+
+
+        <div
+
+          id="claimLoading"
+
+          class="loading"
+
+        >
+
+
+
+          <span class="spinner"></span>
+
+
+
+          Submitting claim...
+
+
+
+        </div>
+
+
+
+
+
+        <div
+
+          id="claimMessage"
+
+          class="message"
+
+        ></div>
+
+
+
+      </div>
+
+
+
+
+
+      <button
+
+        class="btn secondary"
+
+        onclick="backToSearch()"
+
+      >
+
+        ← Search Again
+
+      </button>
+
+
+
+
+
+      <div class="security">
+
+
+
+        🔒 Your information is submitted securely
+
+        and processed through the claim portal.
+
+
+
+      </div>
+
+
+
+    </div>
+
+
+
+
+
+    <!-- =================================================
+
+         SUCCESS
+
+         ================================================= -->
+
+
+
+    <div
+
+      id="successBox"
+
+      class="success-box"
+
+    >
+
+
+
+      <div class="success-icon">
+
+        ✓
+
+      </div>
+
+
+
+      <h2>
+
+        Claim Submitted Successfully
+
+      </h2>
+
+
+
+      <p>
+
+        Your claim for the client code has been
+
+        submitted successfully.
+
+      </p>
+
+
+
+      <button
+
+        class="btn"
+
+        style="margin-top:20px"
+
+        onclick="startAgain()"
+
+      >
+
+        Submit Another Claim
+
+      </button>
+
+
+
+    </div>
+
+
+
+
+
+  </div>
+
+
+
+
+
+  <div class="footer">
+
+
+
+    Secure Client Claim Portal
+
+
+
+  </div>
+
+
+
+
+
+</div>
+
+
+
+
+
+<script>
+
+
+
+
+
+/* =========================================================
+
+   API URL
+
+   ========================================================= */
+
+
+
+const API_URL =
+
+  "https://script.google.com/macros/s/AKfycbz_4UyPHcnfoINTv29vDCwQzBioTUah2QgnSd-j5IaHrREBkzNHUsJCpOGBGhSFpck/exec";
+
+
+
+
+
+/* =========================================================
+
+   STATE
+
+   ========================================================= */
+
+
+
+let currentMatch = "";
+
+
+
+let currentCompany = "";
+
+
+
+
+
+/* =========================================================
+
+   JSONP
+
+   ========================================================= */
+
+
+
+function jsonp(params) {
+
+
+
+  return new Promise(function(resolve, reject) {
+
+
+
+    const callbackName =
+
+      "jsonp_" +
+
+      Date.now() +
+
+      "_" +
+
+      Math.floor(Math.random() * 100000);
+
+
+
+
+
+    const script =
+
+      document.createElement("script");
+
+
+
+
+
+    const url =
+
+      new URL(API_URL);
+
+
+
+
+
+    Object.keys(params).forEach(function(key) {
+
+
+
+      url.searchParams.set(
+
+        key,
+
+        params[key]
+
+      );
+
+
+
+    });
+
+
+
+
+
+    url.searchParams.set(
+
+      "callback",
+
+      callbackName
+
+    );
+
+
+
+
+
+    let finished = false;
+
+
+
+
+
+    const cleanup = function() {
+
+
+
+      try {
+
+
+
+        delete window[callbackName];
+
+
+
+      } catch (e) {
+
+
+
+        window[callbackName] = undefined;
+
+
+
+      }
+
+
+
+      if (script.parentNode) {
+
+
+
+        script.parentNode.removeChild(script);
+
+
+
+      }
+
+
+
+    };
+
+
+
+
+
+    window[callbackName] =
+
+      function(data) {
+
+
+
+        if (finished) return;
+
+
+
+        finished = true;
+
+
+
+        cleanup();
+
+
+
+        resolve(data);
+
+
+
+      };
+
+
+
+
+
+    script.onerror =
+
+      function() {
+
+
+
+        if (finished) return;
+
+
+
+        finished = true;
+
+
+
+        cleanup();
+
+
+
+        reject(
+
+          new Error("Network error")
+
+        );
+
+
+
+      };
+
+
+
+
+
+    document.body.appendChild(script);
+
+
+
+
+
+    setTimeout(function() {
+
+
+
+      if (finished) return;
+
+
+
+      finished = true;
+
+
+
+      cleanup();
+
+
+
+      reject(
+
+        new Error("Request timeout")
+
+      );
+
+
+
+    }, 20000);
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   ELEMENTS
+
+   ========================================================= */
+
+
+
+const company =
+
+  document.getElementById("company");
+
+
+
+const continueBtn =
+
+  document.getElementById("continueBtn");
+
+
+
+const searchInput =
+
+  document.getElementById("search");
+
+
+
+const nameInput =
+
+  document.getElementById("name");
+
+
+
+const mobileInput =
+
+  document.getElementById("mobile");
+
+
+
+
+
+/* =========================================================
+
+   LOAD COMPANIES
+
+   ========================================================= */
+
+
+
+function loadCompanies() {
+
+
+
+  const loading =
+
+    document.getElementById("companyLoading");
+
+
+
+
+
+  loading.style.display = "block";
+
+
+
+
+
+  jsonp({
+
+    action: "companies"
+
+  })
+
+
+
+  .then(function(data) {
+
+
+
+    company.innerHTML =
+
+      '<option value="">Select a company</option>';
+
+
+
+
+
+    if (
+
+      !data ||
+
+      !data.success ||
+
+      !Array.isArray(data.companies)
+
+    ) {
+
+
+
+      company.innerHTML =
+
+        '<option value="">Unable to load companies</option>';
+
+
+
+      return;
+
+
+
+    }
+
+
+
+
+
+    data.companies.forEach(function(name) {
+
+
+
+      const option =
+
+        document.createElement("option");
+
+
+
+      option.value = name;
+
+
+
+      option.textContent = name;
+
+
+
+      company.appendChild(option);
+
+
+
+    });
+
+
+
+  })
+
+
+
+  .catch(function(error) {
+
+
+
+    console.error(error);
+
+
+
+    company.innerHTML =
+
+      '<option value="">Unable to load companies</option>';
+
+
+
+  })
+
+
+
+  .finally(function() {
+
+
+
+    loading.style.display = "none";
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   COMPANY CHANGE
+
+   ========================================================= */
+
+
+
+company.addEventListener(
+
+  "change",
+
+  function() {
+
+
+
+    continueBtn.disabled =
+
+      !company.value;
+
+
+
+  }
+
+);
+
+
+
+
+
+/* =========================================================
+
+   STEP 1 → STEP 2
+
+   ========================================================= */
+
+
+
+function goToSearch() {
+
+
+
+  if (!company.value) return;
+
+
+
+
+
+  currentCompany =
+
+    company.value;
+
+
+
+
+
+  document.getElementById(
+
+    "selectedCompanyText"
+
+  ).textContent =
+
+    currentCompany;
+
+
+
+
+
+  showSection(2);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   SEARCH CLIENT
+
+   ========================================================= */
+
+
+
+function searchClient() {
+
+
+
+  const query =
+
+    searchInput.value.trim();
+
+
+
+
+
+  hideMessage("searchMessage");
+
+
+
+
+
+  document.getElementById(
+
+    "result"
+
+  ).classList.remove("show");
+
+
+
+
+
+  if (!currentCompany) {
+
+
+
+    showMessage(
+
+      "searchMessage",
+
+      "Please select a company first.",
+
+      "error"
+
+    );
+
+
+
+    return;
+
+
+
+  }
+
+
+
+
+
+  if (!query) {
+
+
+
+    showMessage(
+
+      "searchMessage",
+
+      "Please enter a number or client code.",
+
+      "error"
+
+    );
+
+
+
+    searchInput.focus();
+
+
+
+    return;
+
+
+
+  }
+
+
+
+
+
+  setSearchLoading(true);
+
+
+
+
+
+  jsonp({
+
+
+
+    action: "search",
+
+
+
+    company: currentCompany,
+
+
+
+    query: query
+
+
+
+  })
+
+
+
+  .then(function(data) {
+
+
+
+    if (
+
+      data &&
+
+      data.success &&
+
+      data.found
+
+    ) {
+
+
+
+      currentMatch =
+
+        data.value;
+
+
+
+
+
+      document.getElementById(
+
+        "resultValue"
+
+      ).textContent =
+
+        data.value;
+
+
+
+
+
+      document.getElementById(
+
+        "result"
+
+      ).classList.add("show");
+
+
+
+
+
+      setTimeout(function() {
+
+
+
+        goToClaim();
+
+
+
+      }, 450);
+
+
+
+
+
+    } else {
+
+
+
+      currentMatch = "";
+
+
+
+
+
+      showMessage(
+
+        "searchMessage",
+
+        "No matching client code found. Please check your entry and try again.",
+
+        "error"
+
+      );
+
+
+
+    }
+
+
+
+  })
+
+
+
+  .catch(function(error) {
+
+
+
+    console.error(error);
+
+
+
+    showMessage(
+
+      "searchMessage",
+
+      "Unable to connect to the server. Please try again.",
+
+      "error"
+
+    );
+
+
+
+  })
+
+
+
+  .finally(function() {
+
+
+
+    setSearchLoading(false);
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   STEP 2 → STEP 3
+
+   ========================================================= */
+
+
+
+function goToClaim() {
+
+
+
+  if (!currentMatch) return;
+
+
+
+
+
+  document.getElementById(
+
+    "claimCompanyText"
+
+  ).textContent =
+
+    currentCompany;
+
+
+
+
+
+  document.getElementById(
+
+    "claimCode"
+
+  ).textContent =
+
+    currentMatch;
+
+
+
+
+
+  showSection(3);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   SUBMIT CLAIM
+
+   ========================================================= */
+
+
+
+function submitClaim() {
+
+
+
+  const name =
+
+    nameInput.value.trim();
+
+
+
+
+
+  const mobile =
+
+    mobileInput.value
+
+      .replace(/[^\d]/g, "");
+
+
+
+
+
+  hideMessage("claimMessage");
+
+
+
+
+
+  if (!currentCompany || !currentMatch) {
+
+
+
+    showMessage(
+
+      "claimMessage",
+
+      "Please search and select a valid client code first.",
+
+      "error"
+
+    );
+
+
+
+    return;
+
+
+
+  }
+
+
+
+
+
+  if (!name) {
+
+
+
+    showMessage(
+
+      "claimMessage",
+
+      "Please enter your full name.",
+
+      "error"
+
+    );
+
+
+
+    nameInput.focus();
+
+
+
+    return;
+
+
+
+  }
+
+
+
+
+
+  if (mobile.length < 7 ||
+
+      mobile.length > 15) {
+
+
+
+    showMessage(
+
+      "claimMessage",
+
+      "Please enter a valid mobile number.",
+
+      "error"
+
+    );
+
+
+
+    mobileInput.focus();
+
+
+
+    return;
+
+
+
+  }
+
+
+
+
+
+  setClaimLoading(true);
+
+
+
+
+
+  jsonp({
+
+
+
+    action: "claim",
+
+
+
+    company: currentCompany,
+
+
+
+    query: currentMatch,
+
+
+
+    name: name,
+
+
+
+    mobile: mobile
+
+
+
+  })
+
+
+
+  .then(function(data) {
+
+
+
+    if (
+
+      data &&
+
+      data.success &&
+
+      data.claimed
+
+    ) {
+
+
+
+      showSuccess();
+
+
+
+      return;
+
+
+
+    }
+
+
+
+
+
+    if (
+
+      data &&
+
+      data.alreadyClaimed
+
+    ) {
+
+
+
+      showMessage(
+
+        "claimMessage",
+
+        "Already Claimed — this mobile number has already claimed this client code.",
+
+        "error"
+
+      );
+
+
+
+      return;
+
+
+
+    }
+
+
+
+
+
+    if (
+
+      data &&
+
+      data.limitReached
+
+    ) {
+
+
+
+      showMessage(
+
+        "claimMessage",
+
+        "This client code has reached the maximum claim limit.",
+
+        "error"
+
+      );
+
+
+
+      return;
+
+
+
+    }
+
+
+
+
+
+    showMessage(
+
+      "claimMessage",
+
+      data && data.message
+
+        ? data.message
+
+        : "Claim could not be submitted.",
+
+      "error"
+
+    );
+
+
+
+  })
+
+
+
+  .catch(function(error) {
+
+
+
+    console.error(error);
+
+
+
+    showMessage(
+
+      "claimMessage",
+
+      "Unable to connect to the server. Please try again.",
+
+      "error"
+
+    );
+
+
+
+  })
+
+
+
+  .finally(function() {
+
+
+
+    setClaimLoading(false);
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   BACK TO COMPANY
+
+   ========================================================= */
+
+
+
+function backToCompany() {
+
+
+
+  currentMatch = "";
+
+
+
+  currentCompany = "";
+
+
+
+  searchInput.value = "";
+
+
+
+  document.getElementById(
+
+    "result"
+
+  ).classList.remove("show");
+
+
+
+  company.value = "";
+
+
+
+  continueBtn.disabled = true;
+
+
+
+  hideMessage("searchMessage");
+
+
+
+  showSection(1);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   BACK TO SEARCH
+
+   ========================================================= */
+
+
+
+function backToSearch() {
+
+
+
+  currentMatch = "";
+
+
+
+  nameInput.value = "";
+
+
+
+  mobileInput.value = "";
+
+
+
+  hideMessage("claimMessage");
+
+
+
+  showSection(2);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   START AGAIN
+
+   ========================================================= */
+
+
+
+function startAgain() {
+
+
+
+  currentMatch = "";
+
+
+
+  currentCompany = "";
+
+
+
+  company.value = "";
+
+
+
+  searchInput.value = "";
+
+
+
+  nameInput.value = "";
+
+
+
+  mobileInput.value = "";
+
+
+
+  continueBtn.disabled = true;
+
+
+
+  hideMessage("searchMessage");
+
+
+
+  hideMessage("claimMessage");
+
+
+
+
+
+  document.getElementById(
+
+    "successBox"
+
+  ).style.display = "none";
+
+
+
+
+
+  document.getElementById(
+
+    "section1"
+
+  ).classList.add("active");
+
+
+
+
+
+  updateSteps(1);
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   SHOW SECTION
+
+   ========================================================= */
+
+
+
+function showSection(number) {
+
+
+
+  document
+
+    .querySelectorAll(".section")
+
+    .forEach(function(section) {
+
+
+
+      section.classList.remove("active");
+
+
+
+    });
+
+
+
+
+
+  document.getElementById(
+
+    "section" + number
+
+  ).classList.add("active");
+
+
+
+
+
+  document.getElementById(
+
+    "successBox"
+
+  ).style.display = "none";
+
+
+
+
+
+  updateSteps(number);
+
+
+
+
+
+  window.scrollTo({
+
+
+
+    top: 0,
+
+
+
+    behavior: "smooth"
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   UPDATE STEPS
+
+   ========================================================= */
+
+
+
+function updateSteps(active) {
+
+
+
+  const steps = [
+
+
+
+    document.getElementById("step1"),
+
+
+
+    document.getElementById("step2"),
+
+
+
+    document.getElementById("step3")
+
+
+
+  ];
+
+
+
+
+
+  const lines = [
+
+
+
+    document.getElementById("line1"),
+
+
+
+    document.getElementById("line2")
+
+
+
+  ];
+
+
+
+
+
+  steps.forEach(function(step, index) {
+
+
+
+    step.classList.remove(
+
+      "active",
+
+      "done"
+
+    );
+
+
+
+
+
+    const stepNumber =
+
+      index + 1;
+
+
+
+
+
+    if (stepNumber < active) {
+
+
+
+      step.classList.add("done");
+
+
+
+      step.textContent = "✓";
+
+
+
+    } else if (
+
+      stepNumber === active
+
+    ) {
+
+
+
+      step.classList.add("active");
+
+
+
+      step.textContent =
+
+        stepNumber;
+
+
+
+    } else {
+
+
+
+      step.textContent =
+
+        stepNumber;
+
+
+
+    }
+
+
+
+  });
+
+
+
+
+
+  lines.forEach(function(line, index) {
+
+
+
+    line.classList.toggle(
+
+      "active",
+
+      index + 1 < active
+
+    );
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   SUCCESS
+
+   ========================================================= */
+
+
+
+function showSuccess() {
+
+
+
+  document
+
+    .querySelectorAll(".section")
+
+    .forEach(function(section) {
+
+
+
+      section.classList.remove("active");
+
+
+
+    });
+
+
+
+
+
+  document.getElementById(
+
+    "successBox"
+
+  ).style.display = "block";
+
+
+
+
+
+  updateSteps(4);
+
+
+
+
+
+  window.scrollTo({
+
+
+
+    top: 0,
+
+
+
+    behavior: "smooth"
+
+
+
+  });
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   SEARCH LOADING
+
+   ========================================================= */
+
+
+
+function setSearchLoading(isLoading) {
+
+
+
+  document.getElementById(
+
+    "searchLoading"
+
+  ).style.display =
+
+    isLoading ? "block" : "none";
+
+
+
+
+
+  document.getElementById(
+
+    "searchBtn"
+
+  ).disabled =
+
+    isLoading;
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   CLAIM LOADING
+
+   ========================================================= */
+
+
+
+function setClaimLoading(isLoading) {
+
+
+
+  document.getElementById(
+
+    "claimLoading"
+
+  ).style.display =
+
+    isLoading ? "block" : "none";
+
+
+
+
+
+  document.getElementById(
+
+    "claimBtn"
+
+  ).disabled =
+
+    isLoading;
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   MESSAGE
+
+   ========================================================= */
+
+
+
+function showMessage(
+
+  elementId,
+
+  text,
+
+  type
+
+) {
+
+
+
+  const element =
+
+    document.getElementById(elementId);
+
+
+
+
+
+  element.textContent = text;
+
+
+
+  element.className =
+
+    "message show " + type;
+
+
+
+}
+
+
+
+
+
+function hideMessage(elementId) {
+
+
+
+  const element =
+
+    document.getElementById(elementId);
+
+
+
+  element.className =
+
+    "message";
+
+
+
+  element.textContent = "";
+
+
+
+}
+
+
+
+
+
+/* =========================================================
+
+   ENTER KEY
+
+   ========================================================= */
+
+
+
+searchInput.addEventListener(
+
+  "keydown",
+
+  function(event) {
+
+
+
+    if (event.key === "Enter") {
+
+
+
+      searchClient();
+
+
+
+    }
+
+
+
+  }
+
+);
+
+
+
+
+
+mobileInput.addEventListener(
+
+  "input",
+
+  function() {
+
+
+
+    this.value =
+
+      this.value.replace(/[^\d]/g, "");
+
+
+
+  }
+
+);
+
+
+
+
+
+/* =========================================================
+
+   LOAD
+
+   ========================================================= */
+
+
+
+loadCompanies();
+
+
+
+</script>
+
+
+
+</body>
+
+
+
+</html>
