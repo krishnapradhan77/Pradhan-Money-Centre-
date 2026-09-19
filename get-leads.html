@@ -1143,7 +1143,14 @@ let currentCompany = "";
 /* =========================================================
    SAVED COMPANY KEY
 
-   Browser mein selected company save rahegi.
+   Selected company browser ke localStorage mein
+   permanently save rahegi.
+
+   Iska matlab:
+   - Claim ke baad company rahegi
+   - Submit Another Claim ke baad company rahegi
+   - Page refresh ke baad company rahegi
+   - Browser reopen karne ke baad bhi company rahegi
 ========================================================= */
 
 const SAVED_COMPANY_KEY =
@@ -1152,9 +1159,6 @@ const SAVED_COMPANY_KEY =
 
 /* =========================================================
    JSONP REQUEST
-
-   Google Apps Script cross-origin request ke liye
-   JSONP use kiya gaya hai.
 ========================================================= */
 
 function jsonp(params) {
@@ -1182,14 +1186,23 @@ function jsonp(params) {
         function() {
 
           try {
+
             delete window[callbackName];
+
           } catch (e) {
+
             window[callbackName] =
               undefined;
+
           }
 
+
           if (script.parentNode) {
-            script.parentNode.removeChild(script);
+
+            script.parentNode.removeChild(
+              script
+            );
+
           }
 
         };
@@ -1285,12 +1298,10 @@ function jsonp(params) {
 /* =========================================================
    LOAD COMPANIES
 
-   Google Sheet ke saare tab automatically
+   Google Sheet ke saare tabs automatically
    dropdown mein load honge.
 
-   IMPORTANT:
-   Previously selected company browser se
-   automatically restore hogi.
+   Saved company automatically restore hogi.
 ========================================================= */
 
 async function loadCompanies() {
@@ -1323,8 +1334,8 @@ async function loadCompanies() {
 
 
     /*
-      Extra spaces remove.
-      Duplicate company names remove.
+      Company names clean karo.
+      Blank aur duplicate names remove karo.
     */
 
     const companies =
@@ -1359,11 +1370,14 @@ async function loadCompanies() {
         const option =
           document.createElement("option");
 
+
         option.value =
           company;
 
+
         option.textContent =
           company;
+
 
         companySelect.appendChild(
           option
@@ -1386,14 +1400,11 @@ async function loadCompanies() {
 
 
     /* =====================================================
-       RESTORE PREVIOUSLY SELECTED COMPANY
-
-       Agar browser mein company saved hai
-       aur Google Sheet mein abhi bhi woh company
-       available hai, to automatically select hogi.
+       RESTORE SAVED COMPANY
     ===================================================== */
 
     let savedCompany = "";
+
 
     try {
 
@@ -1414,6 +1425,11 @@ async function loadCompanies() {
     }
 
 
+    /*
+      Agar saved company abhi bhi Sheet mein available hai,
+      to automatically select karo.
+    */
+
     if (
       savedCompany &&
       companies.includes(savedCompany)
@@ -1422,15 +1438,19 @@ async function loadCompanies() {
       companySelect.value =
         savedCompany;
 
+
       currentCompany =
         savedCompany;
 
-    } else if (savedCompany) {
+    }
 
-      /*
-        Agar saved company Google Sheet se delete/rename
-        ho gayi hai to purani saved value remove kar do.
-      */
+
+    /*
+      Agar saved company ab Sheet mein nahi hai,
+      to saved value clear karo.
+    */
+
+    else if (savedCompany) {
 
       try {
 
@@ -1447,7 +1467,9 @@ async function loadCompanies() {
 
       }
 
-      currentCompany = "";
+
+      currentCompany =
+        "";
 
     }
 
@@ -1460,7 +1482,9 @@ async function loadCompanies() {
     );
 
 
-    companySelect.disabled = true;
+    companySelect.disabled =
+      true;
+
 
     companySelect.innerHTML =
       '<option value="">Unable to load companies</option>';
@@ -1479,12 +1503,13 @@ async function loadCompanies() {
 /* =========================================================
    COMPANY CHANGE
 
-   User jab manually company change karega,
-   wahi company permanently selected preference
-   ke roop mein browser mein save hogi.
+   IMPORTANT:
 
-   Agar Select Company choose kiya gaya,
-   saved company remove ho jayegi.
+   User manually company change karega tabhi
+   selected company ki preference change hogi.
+
+   Agar same company selected hai aur claim complete
+   hota hai, to company change nahi hogi.
 ========================================================= */
 
 companySelect.addEventListener(
@@ -1495,7 +1520,7 @@ companySelect.addEventListener(
       companySelect.value.trim();
 
 
-    /* SAVE / CLEAR SELECTED COMPANY */
+    /* SAVE SELECTED COMPANY */
 
     try {
 
@@ -1506,7 +1531,14 @@ companySelect.addEventListener(
           currentCompany
         );
 
-      } else {
+      }
+
+      else {
+
+        /*
+          User ne "Select Company" choose kiya.
+          Is case mein saved company remove hogi.
+        */
 
         localStorage.removeItem(
           SAVED_COMPANY_KEY
@@ -1524,11 +1556,19 @@ companySelect.addEventListener(
     }
 
 
-    currentMatch = "";
+    /*
+      Company change hone par current search
+      result clear karo.
+    */
 
-    searchInput.value = "";
+    currentMatch =
+      "";
 
-    matchedValue.textContent = "";
+    searchInput.value =
+      "";
+
+    matchedValue.textContent =
+      "";
 
     resultBox.classList.remove(
       "show"
@@ -1605,7 +1645,8 @@ async function searchClient() {
   }
 
 
-  currentMatch = "";
+  currentMatch =
+    "";
 
 
   resultBox.classList.remove(
@@ -1619,7 +1660,8 @@ async function searchClient() {
     "none";
 
 
-  searchBtn.disabled = true;
+  searchBtn.disabled =
+    true;
 
   loading.style.display =
     "block";
@@ -1630,7 +1672,8 @@ async function searchClient() {
     const data =
       await jsonp({
 
-        action: "search",
+        action:
+          "search",
 
         company:
           company,
@@ -1671,6 +1714,7 @@ async function searchClient() {
       resultBox.style.display =
         "block";
 
+
       resultBox.classList.add(
         "show"
       );
@@ -1684,9 +1728,11 @@ async function searchClient() {
         "block";
 
 
-      nameInput.value = "";
+      nameInput.value =
+        "";
 
-      mobileInput.value = "";
+      mobileInput.value =
+        "";
 
 
       setTimeout(
@@ -1699,7 +1745,9 @@ async function searchClient() {
       );
 
 
-    } else {
+    }
+
+    else {
 
       showMessage(
         "No Result Found",
@@ -1709,7 +1757,9 @@ async function searchClient() {
     }
 
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(
       "Search error:",
@@ -1722,10 +1772,12 @@ async function searchClient() {
       "error"
     );
 
+  }
 
-  } finally {
+  finally {
 
-    searchBtn.disabled = false;
+    searchBtn.disabled =
+      false;
 
     loading.style.display =
       "none";
@@ -1929,7 +1981,8 @@ async function submitClaim() {
 
   /* DISABLE */
 
-  claimBtn.disabled = true;
+  claimBtn.disabled =
+    true;
 
 
   const originalButtonHTML =
@@ -1994,48 +2047,66 @@ async function submitClaim() {
 
 
       /*
-        SUCCESS STEP OPEN KARO.
-
         IMPORTANT:
-        Company ko reset nahi kiya ja raha.
-        Isliye selected company selected hi rahegi.
+
+        Company ko kahin bhi reset nahi kiya ja raha.
+
+        Current selected company DOM mein selected rahegi.
+        Aur localStorage mein bhi saved rahegi.
       */
+
 
       document
         .getElementById("section1")
-        .classList.remove("active");
+        .classList.remove(
+          "active"
+        );
 
 
       document
         .getElementById("section2")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       document
         .getElementById("step1")
-        .classList.remove("active");
+        .classList.remove(
+          "active"
+        );
+
 
       document
         .getElementById("step1")
-        .classList.add("done");
+        .classList.add(
+          "done"
+        );
 
 
       document
         .getElementById("line1")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       document
         .getElementById("step2")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       setTimeout(
         function() {
 
           window.scrollTo({
+
             top: 0,
+
             behavior: "smooth"
+
           });
 
         },
@@ -2050,17 +2121,24 @@ async function submitClaim() {
     /* SERVER ERROR */
 
     showMessage(
+
       (
         data &&
         data.message
       )
+
         ? data.message
+
         : "Claim submit nahi hua. Please try again.",
+
       "error"
+
     );
 
 
-  } catch (error) {
+  }
+
+  catch (error) {
 
     console.error(
       "Claim error:",
@@ -2073,10 +2151,12 @@ async function submitClaim() {
       "error"
     );
 
+  }
 
-  } finally {
+  finally {
 
-    claimBtn.disabled = false;
+    claimBtn.disabled =
+      false;
 
     claimBtn.innerHTML =
       originalButtonHTML;
@@ -2090,41 +2170,85 @@ async function submitClaim() {
    RESET PORTAL
 
    IMPORTANT:
-   Company ko reset nahi karna hai.
 
-   User ne jo company select ki hai,
-   woh Submit Another Claim ke baad bhi
-   selected rahegi.
+   YAHAN COMPANY KO RESET NAHI KIYA JA RAHA.
+
+   Submit Another Claim dabane ke baad:
+
+   - Company same rahegi
+   - Search box clear hoga
+   - Name clear hoga
+   - Mobile clear hoga
+   - New claim ke liye page ready hoga
 ========================================================= */
 
 function resetPortal() {
 
-  currentMatch = "";
+  currentMatch =
+    "";
+
 
   /*
     IMPORTANT:
-    currentCompany ko empty nahi karna.
-    companySelect.value ko bhi empty nahi karna.
 
-    Isliye selected company same rahegi.
+    Current company ko dobara read karo.
+
+    Isse selected company wahi rahegi.
   */
 
   currentCompany =
     companySelect.value.trim();
 
 
-  searchInput.value = "";
+  /*
+    Safety:
 
-  nameInput.value = "";
+    Agar kisi reason se DOM value blank hai,
+    to localStorage se saved company restore karo.
+  */
 
-  mobileInput.value = "";
+  if (!currentCompany) {
+
+    try {
+
+      currentCompany =
+        (
+          localStorage.getItem(
+            SAVED_COMPANY_KEY
+          ) || ""
+        ).trim();
+
+    } catch (storageError) {
+
+      console.warn(
+        "Unable to read saved company:",
+        storageError
+      );
+
+    }
+
+  }
 
 
-  matchedValue.textContent = "";
+  /* CLEAR SEARCH / CLAIM FIELDS */
+
+  searchInput.value =
+    "";
+
+  nameInput.value =
+    "";
+
+  mobileInput.value =
+    "";
+
+
+  matchedValue.textContent =
+    "";
 
 
   resultBox.style.display =
     "none";
+
 
   resultBox.classList.remove(
     "show"
@@ -2139,40 +2263,57 @@ function resetPortal() {
 
 
   /*
-    Step 2 -> Step 1
+    STEP 2 -> STEP 1
   */
 
   document
     .getElementById("section2")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById("section1")
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById("step1")
-    .classList.remove("done");
+    .classList.remove(
+      "done"
+    );
+
 
   document
     .getElementById("step1")
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById("line1")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById("step2")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   /*
-    Company selected hi rahegi.
+    ========================================================
+    MOST IMPORTANT PART
+
+    Company ko same rakho.
+    ========================================================
   */
 
   if (currentCompany) {
@@ -2180,12 +2321,40 @@ function resetPortal() {
     companySelect.value =
       currentCompany;
 
+
+    /*
+      Ensure localStorage mein bhi company saved rahe.
+    */
+
+    try {
+
+      localStorage.setItem(
+        SAVED_COMPANY_KEY,
+        currentCompany
+      );
+
+    } catch (storageError) {
+
+      console.warn(
+        "Unable to save company:",
+        storageError
+      );
+
+    }
+
   }
 
 
+  /*
+    Page top par le jao.
+  */
+
   window.scrollTo({
+
     top: 0,
+
     behavior: "smooth"
+
   });
 
 }
@@ -2237,6 +2406,7 @@ document.addEventListener(
 
   }
 );
+
 
 </script>
 
