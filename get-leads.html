@@ -18,11 +18,18 @@
       box-sizing: border-box;
     }
 
+    html {
+      width: 100%;
+      min-height: 100%;
+    }
+
     body {
 
       margin: 0;
 
       min-height: 100vh;
+
+      width: 100%;
 
       font-family:
         Inter,
@@ -45,34 +52,50 @@
 
       justify-content: center;
 
-      align-items: center;
+      align-items: flex-start;
 
-      padding: 20px;
+      padding:
+        28px
+        16px
+        25px;
     }
+
+
+    /* =====================================================
+       MAIN CONTAINER
+    ===================================================== */
 
     .container {
 
       width: 100%;
 
-      max-width: 520px;
+      max-width: 760px;
+
+      margin: 0 auto;
     }
+
+
+    /* =====================================================
+       HEADER
+    ===================================================== */
 
     .header {
 
       text-align: center;
 
-      margin-bottom: 20px;
+      margin-bottom: 28px;
     }
+
 
     .logo {
 
-      width: 58px;
+      width: 72px;
 
-      height: 58px;
+      height: 72px;
 
-      margin: auto;
+      margin: 0 auto;
 
-      border-radius: 18px;
+      border-radius: 22px;
 
       display: flex;
 
@@ -80,7 +103,7 @@
 
       justify-content: center;
 
-      font-size: 28px;
+      font-size: 42px;
 
       font-weight: 800;
 
@@ -89,51 +112,76 @@
       background:
         linear-gradient(
           135deg,
-          #087fdb,
-          #0abf7a
+          #1265d8,
+          #168f9f
         );
 
       box-shadow:
-        0 12px 30px
-        rgba(0, 130, 190, 0.22);
+        0 15px 35px
+        rgba(0, 110, 190, 0.25);
     }
+
 
     .header h1 {
 
       margin:
-        14px 0 7px;
+        18px 0 8px;
 
-      font-size: 28px;
+      font-size: 38px;
+
+      line-height: 1.15;
 
       font-weight: 800;
+
+      color: #111827;
     }
+
 
     .header p {
 
-      margin: 0;
+      margin: 0 auto;
 
-      color: #64748b;
+      max-width: 650px;
 
-      font-size: 14px;
+      color: #66758a;
 
-      line-height: 1.6;
+      font-size: 18px;
+
+      line-height: 1.55;
     }
+
+
+    /* =====================================================
+       MAIN CARD
+    ===================================================== */
 
     .card {
 
-      background: rgba(255,255,255,0.96);
+      width: 100%;
 
-      border: 1px solid
-        rgba(255,255,255,0.8);
+      background:
+        rgba(255,255,255,0.96);
 
-      border-radius: 24px;
+      border:
+        1px solid
+        rgba(255,255,255,0.9);
 
-      padding: 26px;
+      border-radius: 28px;
+
+      padding:
+        34px;
 
       box-shadow:
-        0 20px 60px
-        rgba(31, 71, 98, 0.13);
+        0 25px 70px
+        rgba(31, 71, 98, 0.15);
     }
+
+
+    /* =====================================================
+       STEP INDICATOR
+       Starting interface screenshot mein sirf STEP 1
+       visible hai.
+    ===================================================== */
 
     .steps {
 
@@ -141,16 +189,17 @@
 
       align-items: center;
 
-      margin-bottom: 25px;
+      margin-bottom: 30px;
     }
+
 
     .step {
 
-      width: 34px;
+      width: 48px;
 
-      height: 34px;
+      height: 48px;
 
-      border-radius: 50%;
+      border-radius: 14px;
 
       display: flex;
 
@@ -158,39 +207,41 @@
 
       justify-content: center;
 
-      font-size: 13px;
+      font-size: 18px;
 
-      font-weight: 700;
+      font-weight: 800;
 
-      background: #e8eef5;
+      background:
+        #dcecff;
 
-      color: #64748b;
+      color:
+        #1457b8;
 
       flex-shrink: 0;
     }
 
+
     .step.active {
 
       background:
-        linear-gradient(
-          135deg,
-          #087fdb,
-          #0abf7a
-        );
+        #dcecff;
 
-      color: white;
+      color:
+        #1457b8;
 
       box-shadow:
-        0 7px 18px
-        rgba(0, 130, 190, 0.25);
+        none;
     }
+
 
     .step.done {
 
-      background: #0abf7a;
+      background:
+        #0abf7a;
 
       color: white;
     }
+
 
     .line {
 
@@ -198,22 +249,47 @@
 
       flex: 1;
 
-      margin: 0 8px;
+      margin:
+        0 10px;
 
-      background: #e5ebf1;
+      background:
+        #e5ebf1;
 
       border-radius: 5px;
     }
 
+
     .line.active {
 
-      background: #0abf7a;
+      background:
+        #0abf7a;
     }
+
+
+    /*
+      Initial screenshot ke exactly similar starting view
+      ke liye Step 2 / Step 3 indicators hide hain.
+      Functionality phir bhi internally same rahegi.
+    */
+
+    #step2,
+    #step3,
+    #line1,
+    #line2 {
+
+      display: none;
+    }
+
+
+    /* =====================================================
+       SECTIONS
+    ===================================================== */
 
     .section {
 
       display: none;
     }
+
 
     .section.active {
 
@@ -223,194 +299,288 @@
         fadeIn .3s ease;
     }
 
+
     @keyframes fadeIn {
 
       from {
 
         opacity: 0;
 
-        transform: translateY(8px);
+        transform:
+          translateY(8px);
       }
 
       to {
 
         opacity: 1;
 
-        transform: translateY(0);
+        transform:
+          translateY(0);
       }
     }
 
+
+    /* =====================================================
+       SECTION TITLE
+    ===================================================== */
+
     .section-title {
 
-      margin-bottom: 5px;
+      margin-bottom: 7px;
 
-      font-size: 20px;
+      font-size: 26px;
 
-      font-weight: 750;
+      line-height: 1.25;
+
+      font-weight: 800;
+
+      color:
+        #14213d;
     }
+
 
     .section-subtitle {
 
-      margin-bottom: 20px;
+      margin-bottom: 27px;
 
-      color: #718096;
+      color:
+        #718096;
 
-      font-size: 13px;
+      font-size: 16px;
 
-      line-height: 1.5;
+      line-height: 1.55;
     }
+
+
+    /* =====================================================
+       LABELS
+    ===================================================== */
 
     label {
 
       display: block;
 
-      margin-bottom: 8px;
+      margin-bottom: 10px;
 
-      font-size: 13px;
+      font-size: 17px;
 
-      font-weight: 700;
+      font-weight: 750;
 
-      color: #334155;
+      color:
+        #334155;
     }
+
+
+    /* =====================================================
+       FIELDS
+    ===================================================== */
 
     input,
     select {
 
       width: 100%;
 
-      height: 52px;
+      height: 62px;
 
-      padding: 0 15px;
+      padding:
+        0 18px;
 
-      border: 1px solid #dbe4ec;
+      border:
+        1px solid
+        #d4dde6;
 
-      border-radius: 13px;
+      border-radius: 15px;
 
-      background: #fbfdff;
+      background:
+        #fbfdff;
 
-      color: #172033;
+      color:
+        #172033;
 
-      font-size: 15px;
+      font-size: 18px;
 
       outline: none;
 
-      transition: .2s;
+      transition:
+        .2s;
     }
+
+
+    input::placeholder {
+
+      color:
+        #9aa8b8;
+    }
+
+
+    select {
+
+      appearance: auto;
+
+      cursor: pointer;
+    }
+
 
     input:focus,
     select:focus {
 
-      border-color: #1596df;
+      border-color:
+        #2774d8;
 
-      background: white;
+      background:
+        white;
 
       box-shadow:
         0 0 0 4px
-        rgba(21,150,223,.09);
+        rgba(39,116,216,.10);
     }
+
 
     .field {
 
-      margin-bottom: 17px;
+      margin-bottom: 22px;
     }
 
-    .btn {
 
-      width: 100%;
-
-      height: 52px;
-
-      border: none;
-
-      border-radius: 13px;
-
-      cursor: pointer;
-
-      font-size: 15px;
-
-      font-weight: 750;
-
-      color: white;
-
-      background:
-        linear-gradient(
-          135deg,
-          #087fdb,
-          #08ad78
-        );
-
-      box-shadow:
-        0 10px 22px
-        rgba(0, 130, 190, .20);
-
-      transition: .2s;
-    }
-
-    .btn:hover {
-
-      transform: translateY(-1px);
-
-      box-shadow:
-        0 13px 26px
-        rgba(0, 130, 190, .25);
-    }
-
-    .btn:disabled {
-
-      opacity: .6;
-
-      cursor: not-allowed;
-
-      transform: none;
-    }
-
-    .btn.secondary {
-
-      margin-top: 10px;
-
-      color: #334155;
-
-      background: #eef4f8;
-
-      box-shadow: none;
-    }
+    /* =====================================================
+       SEARCH BOX
+    ===================================================== */
 
     .search-box {
 
       position: relative;
     }
 
+
     .search-box input {
 
-      padding-right: 55px;
+      padding-right:
+        58px;
     }
+
 
     .search-icon {
 
       position: absolute;
 
-      right: 17px;
+      right: 18px;
 
       top: 50%;
 
-      transform: translateY(-50%);
+      transform:
+        translateY(-50%);
 
-      color: #7b8b9c;
+      color:
+        #7b8b9c;
 
-      font-size: 20px;
+      font-size: 22px;
 
       pointer-events: none;
     }
+
+
+    /* =====================================================
+       BUTTON
+    ===================================================== */
+
+    .btn {
+
+      width: 100%;
+
+      min-height: 62px;
+
+      border: none;
+
+      border-radius: 15px;
+
+      cursor: pointer;
+
+      font-size: 19px;
+
+      font-weight: 800;
+
+      color:
+        white;
+
+      background:
+        linear-gradient(
+          135deg,
+          #2864df,
+          #2459d4
+        );
+
+      box-shadow:
+        0 12px 25px
+        rgba(36, 89, 212, .25);
+
+      transition:
+        .2s;
+    }
+
+
+    .btn:hover {
+
+      transform:
+        translateY(-1px);
+
+      box-shadow:
+        0 15px 30px
+        rgba(36, 89, 212, .30);
+    }
+
+
+    .btn:active {
+
+      transform:
+        translateY(0);
+    }
+
+
+    .btn:disabled {
+
+      opacity:
+        .6;
+
+      cursor:
+        not-allowed;
+
+      transform:
+        none;
+    }
+
+
+    .btn.secondary {
+
+      margin-top:
+        18px;
+
+      color:
+        #334155;
+
+      background:
+        #eef4f8;
+
+      box-shadow:
+        none;
+    }
+
+
+    /* =====================================================
+       RESULT
+    ===================================================== */
 
     .result {
 
       display: none;
 
-      margin-top: 20px;
+      margin-top:
+        22px;
 
-      padding: 17px;
+      padding:
+        18px;
 
-      border-radius: 15px;
+      border-radius:
+        15px;
 
       background:
         linear-gradient(
@@ -419,301 +589,693 @@
           #f4fbff
         );
 
-      border: 1px solid #cdeee0;
+      border:
+        1px solid
+        #cdeee0;
     }
+
 
     .result.show {
 
       display: block;
 
-      animation: fadeIn .3s ease;
+      animation:
+        fadeIn .3s ease;
     }
+
 
     .result-label {
 
-      color: #64748b;
+      color:
+        #64748b;
 
-      font-size: 12px;
+      font-size:
+        13px;
 
-      margin-bottom: 5px;
+      margin-bottom:
+        6px;
     }
+
 
     .result-value {
 
-      font-size: 18px;
+      font-size:
+        19px;
 
-      font-weight: 800;
+      font-weight:
+        800;
 
-      word-break: break-word;
+      word-break:
+        break-word;
 
-      color: #087f66;
+      color:
+        #087f66;
     }
+
+
+    /* =====================================================
+       CLAIM CARD
+    ===================================================== */
+
+    .claim-card {
+
+      margin-top:
+        22px;
+
+      padding:
+        20px;
+
+      border-radius:
+        17px;
+
+      background:
+        #fbfdff;
+
+      border:
+        1px solid
+        #e5edf3;
+    }
+
+
+    .claim-card-title {
+
+      font-size:
+        17px;
+
+      font-weight:
+        800;
+
+      margin-bottom:
+        16px;
+    }
+
+
+    /* =====================================================
+       COMPANY BADGE
+    ===================================================== */
+
+    .company-badge {
+
+      display:
+        inline-flex;
+
+      align-items:
+        center;
+
+      gap:
+        7px;
+
+      padding:
+        7px 11px;
+
+      margin-bottom:
+        18px;
+
+      border-radius:
+        50px;
+
+      background:
+        #edf8ff;
+
+      color:
+        #087fdb;
+
+      font-size:
+        12px;
+
+      font-weight:
+        700;
+    }
+
+
+    .company-dot {
+
+      width:
+        7px;
+
+      height:
+        7px;
+
+      border-radius:
+        50%;
+
+      background:
+        #0abf7a;
+    }
+
+
+    /* =====================================================
+       SUCCESS
+    ===================================================== */
 
     .success-box {
 
-      display: none;
+      display:
+        none;
 
-      text-align: center;
+      text-align:
+        center;
 
-      padding: 20px 5px;
+      padding:
+        30px 5px;
     }
+
 
     .success-box.show {
 
-      display: block;
+      display:
+        block;
 
-      animation: fadeIn .3s ease;
+      animation:
+        fadeIn .3s ease;
     }
+
 
     .success-icon {
 
-      width: 65px;
+      width:
+        72px;
 
-      height: 65px;
+      height:
+        72px;
 
-      margin: 0 auto 15px;
+      margin:
+        0 auto 17px;
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
-      display: flex;
+      display:
+        flex;
 
-      align-items: center;
+      align-items:
+        center;
 
-      justify-content: center;
+      justify-content:
+        center;
 
-      font-size: 30px;
+      font-size:
+        32px;
 
-      background: #dff8ec;
+      background:
+        #dff8ec;
 
-      color: #0a9b65;
+      color:
+        #0a9b65;
     }
+
 
     .success-box h2 {
 
-      margin: 0 0 8px;
+      margin:
+        0 0 9px;
 
-      font-size: 23px;
+      font-size:
+        25px;
     }
+
 
     .success-box p {
 
-      margin: 0;
+      margin:
+        0;
 
-      color: #64748b;
+      color:
+        #64748b;
 
-      font-size: 14px;
+      font-size:
+        15px;
 
-      line-height: 1.6;
+      line-height:
+        1.6;
     }
+
+
+    /* =====================================================
+       MESSAGE
+    ===================================================== */
 
     .message {
 
-      display: none;
+      display:
+        none;
 
-      margin-top: 15px;
+      margin-top:
+        17px;
 
-      padding: 12px 14px;
+      padding:
+        13px 15px;
 
-      border-radius: 11px;
+      border-radius:
+        11px;
 
-      font-size: 13px;
+      font-size:
+        14px;
 
-      line-height: 1.5;
+      line-height:
+        1.5;
     }
+
 
     .message.show {
 
-      display: block;
+      display:
+        block;
     }
+
 
     .message.error {
 
-      background: #fff0f0;
+      background:
+        #fff0f0;
 
-      color: #b42318;
+      color:
+        #b42318;
 
-      border: 1px solid #ffd4d1;
+      border:
+        1px solid
+        #ffd4d1;
     }
+
 
     .message.success {
 
-      background: #edfff6;
+      background:
+        #edfff6;
 
-      color: #087f58;
+      color:
+        #087f58;
 
-      border: 1px solid #c7f1dc;
+      border:
+        1px solid
+        #c7f1dc;
     }
+
+
+    /* =====================================================
+       LOADING
+    ===================================================== */
 
     .loading {
 
-      display: none;
+      display:
+        none;
 
-      text-align: center;
+      text-align:
+        center;
 
-      margin-top: 14px;
+      margin-top:
+        15px;
 
-      color: #64748b;
+      color:
+        #64748b;
 
-      font-size: 13px;
+      font-size:
+        13px;
     }
+
 
     .spinner {
 
-      display: inline-block;
+      display:
+        inline-block;
 
-      width: 17px;
+      width:
+        17px;
 
-      height: 17px;
+      height:
+        17px;
 
-      margin-right: 7px;
+      margin-right:
+        7px;
 
-      vertical-align: middle;
+      vertical-align:
+        middle;
 
-      border: 2px solid #d8e5ed;
+      border:
+        2px solid
+        #d8e5ed;
 
-      border-top-color: #087fdb;
+      border-top-color:
+        #087fdb;
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
-      animation: spin .7s linear infinite;
+      animation:
+        spin .7s linear infinite;
     }
+
 
     @keyframes spin {
 
       to {
-        transform: rotate(360deg);
+        transform:
+          rotate(360deg);
       }
     }
+
+
+    /* =====================================================
+       SECURITY BOX
+    ===================================================== */
 
     .security {
 
-      margin-top: 18px;
+      margin-top:
+        24px;
 
-      padding: 13px;
+      padding:
+        16px 17px;
 
-      border-radius: 12px;
+      border-radius:
+        14px;
 
-      background: #f7fafc;
+      background:
+        #f7fafc;
 
-      color: #718096;
+      color:
+        #718096;
 
-      font-size: 11px;
+      font-size:
+        14px;
 
-      line-height: 1.5;
+      line-height:
+        1.6;
 
-      text-align: center;
+      text-align:
+        center;
     }
+
+
+    /* =====================================================
+       FOOTER
+    ===================================================== */
 
     .footer {
 
-      text-align: center;
+      text-align:
+        center;
 
-      margin-top: 18px;
+      margin-top:
+        20px;
 
-      color: #64748b;
+      color:
+        #64748b;
 
-      font-size: 11px;
+      font-size:
+        13px;
     }
 
-    .company-badge {
 
-      display: inline-flex;
-
-      align-items: center;
-
-      gap: 7px;
-
-      padding: 7px 11px;
-
-      margin-bottom: 17px;
-
-      border-radius: 50px;
-
-      background: #edf8ff;
-
-      color: #087fdb;
-
-      font-size: 12px;
-
-      font-weight: 700;
-    }
-
-    .company-dot {
-
-      width: 7px;
-
-      height: 7px;
-
-      border-radius: 50%;
-
-      background: #0abf7a;
-    }
-
-    .claim-card {
-
-      margin-top: 20px;
-
-      padding: 18px;
-
-      border-radius: 17px;
-
-      background: #fbfdff;
-
-      border: 1px solid #e5edf3;
-    }
-
-    .claim-card-title {
-
-      font-size: 15px;
-
-      font-weight: 800;
-
-      margin-bottom: 15px;
-    }
+    /* =====================================================
+       LOADING BUTTON SPINNER
+    ===================================================== */
 
     .loading-spinner {
 
-      display: inline-block;
+      display:
+        inline-block;
 
-      width: 16px;
+      width:
+        17px;
 
-      height: 16px;
+      height:
+        17px;
 
-      border: 2px solid rgba(255,255,255,.35);
+      border:
+        2px solid
+        rgba(255,255,255,.35);
 
-      border-top-color: white;
+      border-top-color:
+        white;
 
-      border-radius: 50%;
+      border-radius:
+        50%;
 
-      animation: spin .7s linear infinite;
+      animation:
+        spin .7s linear infinite;
 
-      vertical-align: middle;
+      vertical-align:
+        middle;
 
-      margin-right: 7px;
+      margin-right:
+        7px;
     }
 
-    @media (max-width: 480px) {
+
+    /* =====================================================
+       MOBILE DESIGN
+    ===================================================== */
+
+    @media (max-width: 600px) {
 
       body {
 
-        padding: 12px;
+        padding:
+          25px
+          12px
+          22px;
 
-        align-items: flex-start;
-
-        padding-top: 25px;
+        align-items:
+          flex-start;
       }
 
-      .card {
 
-        padding: 20px;
+      .container {
 
-        border-radius: 20px;
+        max-width:
+          100%;
       }
+
+
+      .header {
+
+        margin-bottom:
+          24px;
+      }
+
+
+      .logo {
+
+        width:
+          70px;
+
+        height:
+          70px;
+
+        border-radius:
+          21px;
+
+        font-size:
+          40px;
+      }
+
 
       .header h1 {
 
-        font-size: 24px;
+        margin-top:
+          17px;
+
+        font-size:
+          31px;
+
+        line-height:
+          1.15;
       }
+
+
+      .header p {
+
+        font-size:
+          17px;
+
+        line-height:
+          1.55;
+
+        padding:
+          0 8px;
+      }
+
+
+      .card {
+
+        padding:
+          25px
+          22px;
+
+        border-radius:
+          25px;
+
+        box-shadow:
+          0 20px 55px
+          rgba(31,71,98,.13);
+      }
+
+
+      .steps {
+
+        margin-bottom:
+          27px;
+      }
+
+
+      .step {
+
+        width:
+          46px;
+
+        height:
+          46px;
+
+        border-radius:
+          13px;
+
+        font-size:
+          18px;
+      }
+
+
+      .section-title {
+
+        font-size:
+          25px;
+      }
+
+
+      .section-subtitle {
+
+        font-size:
+          15px;
+
+        margin-bottom:
+          25px;
+      }
+
+
+      label {
+
+        font-size:
+          17px;
+      }
+
+
+      input,
+      select {
+
+        height:
+          62px;
+
+        border-radius:
+          15px;
+
+        font-size:
+          17px;
+      }
+
+
+      .btn {
+
+        min-height:
+          62px;
+
+        border-radius:
+          15px;
+
+        font-size:
+          18px;
+      }
+
+
+      .security {
+
+        font-size:
+          13px;
+
+        padding:
+          15px 14px;
+      }
+
+
+      .footer {
+
+        font-size:
+          12px;
+
+        margin-top:
+          18px;
+      }
+
+    }
+
+
+    /* =====================================================
+       VERY SMALL MOBILE
+    ===================================================== */
+
+    @media (max-width: 380px) {
+
+      body {
+
+        padding:
+          20px
+          9px
+          18px;
+      }
+
+
+      .header h1 {
+
+        font-size:
+          27px;
+      }
+
+
+      .header p {
+
+        font-size:
+          15px;
+      }
+
+
+      .card {
+
+        padding:
+          21px
+          17px;
+
+        border-radius:
+          22px;
+      }
+
+
+      .section-title {
+
+        font-size:
+          22px;
+      }
+
+
+      input,
+      select {
+
+        height:
+          58px;
+
+        font-size:
+          16px;
+      }
+
+
+      .btn {
+
+        min-height:
+          58px;
+
+        font-size:
+          17px;
+      }
+
     }
 
   </style>
@@ -727,13 +1289,21 @@
 <div class="container">
 
 
-  <!-- HEADER -->
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
 
   <div class="header">
 
-    <div class="logo">✓</div>
+    <div class="logo">
+      ✓
+    </div>
 
-    <h1>Client Claim Portal</h1>
+
+    <h1>
+      Client Claim Portal
+    </h1>
+
 
     <p>
       Select your company, search your number or
@@ -743,12 +1313,16 @@
   </div>
 
 
-  <!-- MAIN CARD -->
+  <!-- =====================================================
+       MAIN CARD
+  ====================================================== -->
 
   <div class="card">
 
 
-    <!-- STEPS -->
+    <!-- ===================================================
+         STEPS
+    ==================================================== -->
 
     <div class="steps">
 
@@ -759,10 +1333,12 @@
         1
       </div>
 
+
       <div
         id="line1"
         class="line"
       ></div>
+
 
       <div
         id="step2"
@@ -771,10 +1347,12 @@
         2
       </div>
 
+
       <div
         id="line2"
         class="line"
       ></div>
+
 
       <div
         id="step3"
@@ -786,16 +1364,20 @@
     </div>
 
 
-    <!-- STEP 1 -->
+    <!-- ===================================================
+         STEP 1
+    ==================================================== -->
 
     <div
       id="section1"
       class="section active"
     >
 
+
       <div class="section-title">
         Search Your Details
       </div>
+
 
       <div class="section-subtitle">
         Select your company and search your
@@ -803,13 +1385,22 @@
       </div>
 
 
-      <!-- COMPANY -->
+      <!-- =================================================
+           COMPANY
+      ================================================== -->
 
       <div class="field">
 
         <label for="company">
-          Select Company <span style="color:#d93025">*</span>
+
+          Select Company
+
+          <span style="color:#d93025">
+            *
+          </span>
+
         </label>
+
 
         <select id="company">
 
@@ -822,14 +1413,22 @@
       </div>
 
 
-      <!-- SEARCH -->
+      <!-- =================================================
+           SEARCH
+      ================================================== -->
 
       <div class="field">
 
         <label for="search">
+
           Number / Client Code
-          <span style="color:#d93025">*</span>
+
+          <span style="color:#d93025">
+            *
+          </span>
+
         </label>
+
 
         <div class="search-box">
 
@@ -841,6 +1440,7 @@
             maxlength="100"
           >
 
+
           <span class="search-icon">
             🔍
           </span>
@@ -850,17 +1450,25 @@
       </div>
 
 
+      <!-- =================================================
+           SEARCH BUTTON
+      ================================================== -->
+
       <button
         id="searchBtn"
         class="btn"
         type="button"
         onclick="searchClient()"
       >
+
         🔍 &nbsp; Search Details
+
       </button>
 
 
-      <!-- LOADING -->
+      <!-- =================================================
+           LOADING
+      ================================================== -->
 
       <div
         id="loading"
@@ -874,7 +1482,9 @@
       </div>
 
 
-      <!-- RESULT -->
+      <!-- =================================================
+           RESULT
+      ================================================== -->
 
       <div
         id="result"
@@ -885,6 +1495,7 @@
           Matching Client
         </div>
 
+
         <div
           id="matchedValue"
           class="result-value"
@@ -893,7 +1504,9 @@
       </div>
 
 
-      <!-- CLAIM FORM -->
+      <!-- =================================================
+           CLAIM FORM
+      ================================================== -->
 
       <div
         id="claimCard"
@@ -913,6 +1526,7 @@
 
           <span class="company-dot"></span>
 
+
           <span id="companyBadgeText">
             Company
           </span>
@@ -925,9 +1539,15 @@
         <div class="field">
 
           <label for="name">
+
             Your Name
-            <span style="color:#d93025">*</span>
+
+            <span style="color:#d93025">
+              *
+            </span>
+
           </label>
+
 
           <input
             type="text"
@@ -945,9 +1565,15 @@
         <div class="field">
 
           <label for="mobile">
+
             Mobile Number
-            <span style="color:#d93025">*</span>
+
+            <span style="color:#d93025">
+              *
+            </span>
+
           </label>
+
 
           <input
             type="tel"
@@ -961,19 +1587,25 @@
         </div>
 
 
+        <!-- CLAIM BUTTON -->
+
         <button
           id="claimBtn"
           class="btn"
           type="button"
           onclick="submitClaim()"
         >
+
           ✓ &nbsp; Submit Claim
+
         </button>
 
       </div>
 
 
-      <!-- MESSAGE -->
+      <!-- =================================================
+           MESSAGE
+      ================================================== -->
 
       <div
         id="message"
@@ -982,7 +1614,9 @@
       ></div>
 
 
-      <!-- SECURITY -->
+      <!-- =================================================
+           SECURITY
+      ================================================== -->
 
       <div class="security">
 
@@ -998,7 +1632,9 @@
     </div>
 
 
-    <!-- STEP 2 / SUCCESS -->
+    <!-- ===================================================
+         STEP 2 / SUCCESS
+    ==================================================== -->
 
     <div
       id="section2"
@@ -1011,21 +1647,26 @@
           ✓
         </div>
 
+
         <h2>
           Claim Submitted
         </h2>
+
 
         <p>
           Your claim has been submitted
           successfully.
         </p>
 
+
         <button
           class="btn secondary"
           type="button"
           onclick="resetPortal()"
         >
+
           Submit Another Claim
+
         </button>
 
       </div>
@@ -1033,7 +1674,9 @@
     </div>
 
 
-    <!-- STEP 3 -->
+    <!-- ===================================================
+         STEP 3
+    ==================================================== -->
 
     <div
       id="section3"
@@ -1046,9 +1689,11 @@
           ✓
         </div>
 
+
         <h2>
           Thank You
         </h2>
+
 
         <p>
           Your claim information has been
@@ -1063,7 +1708,9 @@
   </div>
 
 
-  <!-- FOOTER -->
+  <!-- =====================================================
+       FOOTER
+  ====================================================== -->
 
   <div class="footer">
 
@@ -1083,7 +1730,7 @@
    GOOGLE APPS SCRIPT WEB APP URL
 
    IMPORTANT:
-   This is your CURRENT deployment URL.
+   CURRENT DEPLOYMENT URL
 ========================================================= */
 
 const API_URL =
@@ -1097,35 +1744,46 @@ const API_URL =
 const companySelect =
   document.getElementById("company");
 
+
 const searchInput =
   document.getElementById("search");
+
 
 const searchBtn =
   document.getElementById("searchBtn");
 
+
 const resultBox =
   document.getElementById("result");
+
 
 const matchedValue =
   document.getElementById("matchedValue");
 
+
 const loading =
   document.getElementById("loading");
+
 
 const message =
   document.getElementById("message");
 
+
 const nameInput =
   document.getElementById("name");
+
 
 const mobileInput =
   document.getElementById("mobile");
 
+
 const claimBtn =
   document.getElementById("claimBtn");
 
+
 const claimCard =
   document.getElementById("claimCard");
+
 
 const companyBadgeText =
   document.getElementById("companyBadgeText");
@@ -1142,9 +1800,6 @@ let currentCompany = "";
 
 /* =========================================================
    JSONP REQUEST
-
-   Google Apps Script cross-origin request ke liye
-   JSONP use kiya gaya hai.
 ========================================================= */
 
 function jsonp(params) {
@@ -1172,14 +1827,22 @@ function jsonp(params) {
         function() {
 
           try {
+
             delete window[callbackName];
+
           } catch (e) {
+
             window[callbackName] =
               undefined;
+
           }
 
+
           if (script.parentNode) {
-            script.parentNode.removeChild(script);
+
+            script.parentNode
+              .removeChild(script);
+
           }
 
         };
@@ -1191,9 +1854,12 @@ function jsonp(params) {
 
             if (finished) return;
 
+
             finished = true;
 
+
             cleanup();
+
 
             reject(
               new Error(
@@ -1211,11 +1877,15 @@ function jsonp(params) {
 
           if (finished) return;
 
+
           finished = true;
+
 
           clearTimeout(timer);
 
+
           cleanup();
+
 
           resolve(data);
 
@@ -1247,11 +1917,15 @@ function jsonp(params) {
 
           if (finished) return;
 
+
           finished = true;
+
 
           clearTimeout(timer);
 
+
           cleanup();
+
 
           reject(
             new Error(
@@ -1281,7 +1955,9 @@ function jsonp(params) {
 
 async function loadCompanies() {
 
-  companySelect.disabled = true;
+  companySelect.disabled =
+    true;
+
 
   companySelect.innerHTML =
     '<option value="">Loading Companies...</option>';
@@ -1291,7 +1967,10 @@ async function loadCompanies() {
 
     const data =
       await jsonp({
-        action: "companies"
+
+        action:
+          "companies"
+
       });
 
 
@@ -1309,30 +1988,45 @@ async function loadCompanies() {
 
 
     /*
-      Extra spaces remove.
+      Spaces remove.
       Duplicate company names remove.
     */
 
     const companies =
       data.companies
-        .map(function(company) {
 
-          return String(
-            company || ""
-          ).trim();
+        .map(
+          function(company) {
 
-        })
-        .filter(function(company) {
+            return String(
+              company || ""
+            ).trim();
 
-          return company !== "";
+          }
+        )
 
-        })
-        .filter(function(company, index, array) {
+        .filter(
+          function(company) {
 
-          return array.indexOf(company)
-            === index;
+            return company !== "";
 
-        });
+          }
+        )
+
+        .filter(
+          function(
+            company,
+            index,
+            array
+          ) {
+
+            return (
+              array.indexOf(company)
+              === index
+            );
+
+          }
+        );
 
 
     companySelect.innerHTML =
@@ -1343,13 +2037,18 @@ async function loadCompanies() {
       function(company) {
 
         const option =
-          document.createElement("option");
+          document.createElement(
+            "option"
+          );
+
 
         option.value =
           company;
 
+
         option.textContent =
           company;
+
 
         companySelect.appendChild(
           option
@@ -1359,16 +2058,21 @@ async function loadCompanies() {
     );
 
 
-    if (companies.length === 0) {
+    if (
+      companies.length === 0
+    ) {
 
       companySelect.innerHTML =
         '<option value="">No companies found</option>';
 
+
       return;
+
     }
 
 
-    companySelect.disabled = false;
+    companySelect.disabled =
+      false;
 
 
   } catch (error) {
@@ -1379,7 +2083,9 @@ async function loadCompanies() {
     );
 
 
-    companySelect.disabled = true;
+    companySelect.disabled =
+      true;
+
 
     companySelect.innerHTML =
       '<option value="">Unable to load companies</option>';
@@ -1406,21 +2112,31 @@ companySelect.addEventListener(
     currentCompany =
       companySelect.value.trim();
 
-    currentMatch = "";
 
-    searchInput.value = "";
+    currentMatch =
+      "";
 
-    matchedValue.textContent = "";
+
+    searchInput.value =
+      "";
+
+
+    matchedValue.textContent =
+      "";
+
 
     resultBox.classList.remove(
       "show"
     );
 
+
     resultBox.style.display =
       "none";
 
+
     claimCard.style.display =
       "none";
+
 
     clearMessage();
 
@@ -1440,6 +2156,7 @@ async function searchClient() {
   const company =
     companySelect.value.trim();
 
+
   const query =
     searchInput.value.trim();
 
@@ -1453,9 +2170,12 @@ async function searchClient() {
       "error"
     );
 
+
     companySelect.focus();
 
+
     return;
+
   }
 
 
@@ -1468,9 +2188,12 @@ async function searchClient() {
       "error"
     );
 
+
     searchInput.focus();
 
+
     return;
+
   }
 
 
@@ -1481,27 +2204,35 @@ async function searchClient() {
       "error"
     );
 
+
     searchInput.focus();
 
+
     return;
+
   }
 
 
-  currentMatch = "";
+  currentMatch =
+    "";
 
 
   resultBox.classList.remove(
     "show"
   );
 
+
   resultBox.style.display =
     "none";
+
 
   claimCard.style.display =
     "none";
 
 
-  searchBtn.disabled = true;
+  searchBtn.disabled =
+    true;
+
 
   loading.style.display =
     "block";
@@ -1512,7 +2243,8 @@ async function searchClient() {
     const data =
       await jsonp({
 
-        action: "search",
+        action:
+          "search",
 
         company:
           company,
@@ -1542,7 +2274,9 @@ async function searchClient() {
           "error"
         );
 
+
         return;
+
       }
 
 
@@ -1552,6 +2286,7 @@ async function searchClient() {
 
       resultBox.style.display =
         "block";
+
 
       resultBox.classList.add(
         "show"
@@ -1566,9 +2301,12 @@ async function searchClient() {
         "block";
 
 
-      nameInput.value = "";
+      nameInput.value =
+        "";
 
-      mobileInput.value = "";
+
+      mobileInput.value =
+        "";
 
 
       setTimeout(
@@ -1607,7 +2345,9 @@ async function searchClient() {
 
   } finally {
 
-    searchBtn.disabled = false;
+    searchBtn.disabled =
+      false;
+
 
     loading.style.display =
       "none";
@@ -1631,6 +2371,7 @@ searchInput.addEventListener(
 
       event.preventDefault();
 
+
       searchClient();
 
     }
@@ -1652,6 +2393,7 @@ nameInput.addEventListener(
     ) {
 
       event.preventDefault();
+
 
       mobileInput.focus();
 
@@ -1675,6 +2417,7 @@ mobileInput.addEventListener(
 
       event.preventDefault();
 
+
       submitClaim();
 
     }
@@ -1695,8 +2438,10 @@ async function submitClaim() {
   const company =
     companySelect.value.trim();
 
+
   const name =
     nameInput.value.trim();
+
 
   const mobile =
     mobileInput.value.trim();
@@ -1711,7 +2456,9 @@ async function submitClaim() {
       "error"
     );
 
+
     return;
+
   }
 
 
@@ -1724,9 +2471,12 @@ async function submitClaim() {
       "error"
     );
 
+
     companySelect.focus();
 
+
     return;
+
   }
 
 
@@ -1739,9 +2489,12 @@ async function submitClaim() {
       "error"
     );
 
+
     nameInput.focus();
 
+
     return;
+
   }
 
 
@@ -1752,9 +2505,12 @@ async function submitClaim() {
       "error"
     );
 
+
     nameInput.focus();
 
+
     return;
+
   }
 
 
@@ -1765,9 +2521,12 @@ async function submitClaim() {
       "error"
     );
 
+
     nameInput.focus();
 
+
     return;
+
   }
 
 
@@ -1780,9 +2539,12 @@ async function submitClaim() {
       "error"
     );
 
+
     mobileInput.focus();
 
+
     return;
+
   }
 
 
@@ -1803,15 +2565,19 @@ async function submitClaim() {
       "error"
     );
 
+
     mobileInput.focus();
 
+
     return;
+
   }
 
 
   /* DISABLE */
 
-  claimBtn.disabled = true;
+  claimBtn.disabled =
+    true;
 
 
   const originalButtonHTML =
@@ -1858,7 +2624,9 @@ async function submitClaim() {
         "error"
       );
 
+
       return;
+
     }
 
 
@@ -1881,39 +2649,57 @@ async function submitClaim() {
 
       document
         .getElementById("section1")
-        .classList.remove("active");
+        .classList.remove(
+          "active"
+        );
 
 
       document
         .getElementById("section2")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       document
         .getElementById("step1")
-        .classList.remove("active");
+        .classList.remove(
+          "active"
+        );
+
 
       document
         .getElementById("step1")
-        .classList.add("done");
+        .classList.add(
+          "done"
+        );
 
 
       document
         .getElementById("line1")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       document
         .getElementById("step2")
-        .classList.add("active");
+        .classList.add(
+          "active"
+        );
 
 
       setTimeout(
         function() {
 
           window.scrollTo({
-            top: 0,
-            behavior: "smooth"
+
+            top:
+              0,
+
+            behavior:
+              "smooth"
+
           });
 
         },
@@ -1922,19 +2708,23 @@ async function submitClaim() {
 
 
       return;
+
     }
 
 
     /* SERVER ERROR */
 
     showMessage(
+
       (
         data &&
         data.message
       )
         ? data.message
         : "Claim submit nahi hua. Please try again.",
+
       "error"
+
     );
 
 
@@ -1954,7 +2744,9 @@ async function submitClaim() {
 
   } finally {
 
-    claimBtn.disabled = false;
+    claimBtn.disabled =
+      false;
+
 
     claimBtn.innerHTML =
       originalButtonHTML;
@@ -1970,24 +2762,37 @@ async function submitClaim() {
 
 function resetPortal() {
 
-  currentMatch = "";
-
-  currentCompany = "";
-
-  companySelect.value = "";
-
-  searchInput.value = "";
-
-  nameInput.value = "";
-
-  mobileInput.value = "";
+  currentMatch =
+    "";
 
 
-  matchedValue.textContent = "";
+  currentCompany =
+    "";
+
+
+  companySelect.value =
+    "";
+
+
+  searchInput.value =
+    "";
+
+
+  nameInput.value =
+    "";
+
+
+  mobileInput.value =
+    "";
+
+
+  matchedValue.textContent =
+    "";
 
 
   resultBox.style.display =
     "none";
+
 
   resultBox.classList.remove(
     "show"
@@ -2007,36 +2812,54 @@ function resetPortal() {
 
   document
     .getElementById("section2")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById("section1")
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById("step1")
-    .classList.remove("done");
+    .classList.remove(
+      "done"
+    );
+
 
   document
     .getElementById("step1")
-    .classList.add("active");
+    .classList.add(
+      "active"
+    );
 
 
   document
     .getElementById("line1")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   document
     .getElementById("step2")
-    .classList.remove("active");
+    .classList.remove(
+      "active"
+    );
 
 
   window.scrollTo({
-    top: 0,
-    behavior: "smooth"
+
+    top:
+      0,
+
+    behavior:
+      "smooth"
+
   });
 
 }
@@ -2054,6 +2877,7 @@ function showMessage(
   message.textContent =
     text;
 
+
   message.className =
     "message show " +
     type;
@@ -2069,6 +2893,7 @@ function clearMessage() {
 
   message.textContent =
     "";
+
 
   message.className =
     "message";
