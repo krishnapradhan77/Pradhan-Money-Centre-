@@ -1,4265 +1,2097 @@
 <!DOCTYPE html>
-
 <html lang="en">
-
-
 
 <head>
 
+  <meta charset="UTF-8">
 
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-<meta charset="UTF-8">
+  <title>Client Claim Portal</title>
 
+  <style>
 
+    * {
+      box-sizing: border-box;
+    }
 
-<meta
+    body {
 
-  name="viewport"
+      margin: 0;
 
-  content="width=device-width, initial-scale=1.0"
+      min-height: 100vh;
 
->
+      font-family:
+        Inter,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
 
+      background:
+        linear-gradient(
+          135deg,
+          #eaf6ff 0%,
+          #f5fffb 50%,
+          #e9fff4 100%
+        );
 
+      color: #172033;
 
-<title>Client Claim Portal</title>
+      display: flex;
 
+      justify-content: center;
 
+      align-items: center;
 
-<style>
+      padding: 20px;
+    }
 
+    .container {
 
+      width: 100%;
 
-* {
+      max-width: 520px;
+    }
 
-  box-sizing: border-box;
+    .header {
 
-}
+      text-align: center;
 
+      margin-bottom: 20px;
+    }
 
+    .logo {
 
-body {
+      width: 58px;
 
+      height: 58px;
 
+      margin: auto;
 
-  margin: 0;
+      border-radius: 18px;
 
+      display: flex;
 
+      align-items: center;
 
-  min-height: 100vh;
+      justify-content: center;
 
+      font-size: 28px;
 
+      font-weight: 800;
 
-  font-family:
+      color: white;
 
-    Inter,
+      background:
+        linear-gradient(
+          135deg,
+          #087fdb,
+          #0abf7a
+        );
 
-    -apple-system,
+      box-shadow:
+        0 12px 30px
+        rgba(0, 130, 190, 0.22);
+    }
 
-    BlinkMacSystemFont,
+    .header h1 {
 
-    "Segoe UI",
+      margin:
+        14px 0 7px;
 
-    sans-serif;
+      font-size: 28px;
 
+      font-weight: 800;
+    }
 
+    .header p {
 
-  background:
+      margin: 0;
 
-    linear-gradient(
+      color: #64748b;
 
-      135deg,
+      font-size: 14px;
 
-      #eaf6ff 0%,
+      line-height: 1.6;
+    }
 
-      #f5fffb 50%,
+    .card {
 
-      #e9fff4 100%
+      background: rgba(255,255,255,0.96);
 
-    );
+      border: 1px solid
+        rgba(255,255,255,0.8);
 
+      border-radius: 24px;
 
+      padding: 26px;
 
-  color: #172033;
+      box-shadow:
+        0 20px 60px
+        rgba(31, 71, 98, 0.13);
+    }
 
+    .steps {
 
+      display: flex;
 
-  display: flex;
+      align-items: center;
 
+      margin-bottom: 25px;
+    }
 
+    .step {
 
-  justify-content: center;
+      width: 34px;
 
+      height: 34px;
 
+      border-radius: 50%;
 
-  align-items: center;
+      display: flex;
 
+      align-items: center;
 
+      justify-content: center;
 
-  padding: 20px;
+      font-size: 13px;
 
+      font-weight: 700;
 
+      background: #e8eef5;
 
-}
+      color: #64748b;
 
+      flex-shrink: 0;
+    }
 
+    .step.active {
 
+      background:
+        linear-gradient(
+          135deg,
+          #087fdb,
+          #0abf7a
+        );
 
+      color: white;
 
-.container {
+      box-shadow:
+        0 7px 18px
+        rgba(0, 130, 190, 0.25);
+    }
 
+    .step.done {
 
+      background: #0abf7a;
 
-  width: 100%;
+      color: white;
+    }
 
+    .line {
 
+      height: 3px;
 
-  max-width: 520px;
+      flex: 1;
 
+      margin: 0 8px;
 
+      background: #e5ebf1;
 
-}
+      border-radius: 5px;
+    }
 
+    .line.active {
 
+      background: #0abf7a;
+    }
 
+    .section {
 
+      display: none;
+    }
 
-.header {
+    .section.active {
 
+      display: block;
 
+      animation:
+        fadeIn .3s ease;
+    }
 
-  text-align: center;
+    @keyframes fadeIn {
 
+      from {
 
+        opacity: 0;
 
-  margin-bottom: 20px;
+        transform: translateY(8px);
+      }
 
+      to {
 
+        opacity: 1;
 
-}
+        transform: translateY(0);
+      }
+    }
 
+    .section-title {
 
+      margin-bottom: 5px;
 
+      font-size: 20px;
 
+      font-weight: 750;
+    }
 
-.logo {
+    .section-subtitle {
 
+      margin-bottom: 20px;
 
+      color: #718096;
 
-  width: 58px;
+      font-size: 13px;
 
+      line-height: 1.5;
+    }
 
+    label {
 
-  height: 58px;
+      display: block;
 
+      margin-bottom: 8px;
 
+      font-size: 13px;
 
-  margin: auto;
+      font-weight: 700;
 
+      color: #334155;
+    }
 
+    input,
+    select {
 
-  border-radius: 18px;
+      width: 100%;
 
+      height: 52px;
 
+      padding: 0 15px;
 
-  display: flex;
+      border: 1px solid #dbe4ec;
 
+      border-radius: 13px;
 
+      background: #fbfdff;
 
-  align-items: center;
+      color: #172033;
 
+      font-size: 15px;
 
+      outline: none;
 
-  justify-content: center;
+      transition: .2s;
+    }
 
+    input:focus,
+    select:focus {
 
+      border-color: #1596df;
 
-  font-size: 28px;
+      background: white;
 
+      box-shadow:
+        0 0 0 4px
+        rgba(21,150,223,.09);
+    }
 
+    .field {
 
-  font-weight: 800;
+      margin-bottom: 17px;
+    }
 
+    .btn {
 
+      width: 100%;
 
-  color: white;
+      height: 52px;
 
+      border: none;
 
+      border-radius: 13px;
 
-  background:
+      cursor: pointer;
 
-    linear-gradient(
+      font-size: 15px;
 
-      135deg,
+      font-weight: 750;
 
-      #087fdb,
+      color: white;
 
-      #0abf7a
+      background:
+        linear-gradient(
+          135deg,
+          #087fdb,
+          #08ad78
+        );
 
-    );
+      box-shadow:
+        0 10px 22px
+        rgba(0, 130, 190, .20);
 
+      transition: .2s;
+    }
 
+    .btn:hover {
 
-  box-shadow:
+      transform: translateY(-1px);
 
-    0 12px 30px
+      box-shadow:
+        0 13px 26px
+        rgba(0, 130, 190, .25);
+    }
 
-    rgba(0, 130, 190, 0.22);
+    .btn:disabled {
 
+      opacity: .6;
 
+      cursor: not-allowed;
 
-}
+      transform: none;
+    }
 
+    .btn.secondary {
 
+      margin-top: 10px;
 
+      color: #334155;
 
+      background: #eef4f8;
 
-.header h1 {
+      box-shadow: none;
+    }
 
+    .search-box {
 
+      position: relative;
+    }
 
-  margin:
+    .search-box input {
 
-    14px 0 7px;
+      padding-right: 55px;
+    }
 
+    .search-icon {
 
+      position: absolute;
 
-  font-size: 28px;
+      right: 17px;
 
+      top: 50%;
 
+      transform: translateY(-50%);
 
-  font-weight: 800;
+      color: #7b8b9c;
 
+      font-size: 20px;
 
+      pointer-events: none;
+    }
 
-}
+    .result {
 
+      display: none;
 
+      margin-top: 20px;
 
+      padding: 17px;
 
+      border-radius: 15px;
 
-.header p {
+      background:
+        linear-gradient(
+          135deg,
+          #effbf6,
+          #f4fbff
+        );
 
+      border: 1px solid #cdeee0;
+    }
 
+    .result.show {
 
-  margin: 0;
+      display: block;
 
+      animation: fadeIn .3s ease;
+    }
 
+    .result-label {
 
-  color: #64748b;
+      color: #64748b;
 
+      font-size: 12px;
 
+      margin-bottom: 5px;
+    }
 
-  font-size: 14px;
+    .result-value {
 
+      font-size: 18px;
 
+      font-weight: 800;
 
-  line-height: 1.6;
+      word-break: break-word;
 
+      color: #087f66;
+    }
 
+    .success-box {
 
-}
+      display: none;
 
+      text-align: center;
 
+      padding: 20px 5px;
+    }
 
+    .success-box.show {
 
+      display: block;
 
-.card {
+      animation: fadeIn .3s ease;
+    }
 
+    .success-icon {
 
+      width: 65px;
 
-  background: rgba(255,255,255,0.96);
+      height: 65px;
 
+      margin: 0 auto 15px;
 
+      border-radius: 50%;
 
-  border: 1px solid
+      display: flex;
 
-    rgba(255,255,255,0.8);
+      align-items: center;
 
+      justify-content: center;
 
+      font-size: 30px;
 
-  border-radius: 24px;
+      background: #dff8ec;
 
+      color: #0a9b65;
+    }
 
+    .success-box h2 {
 
-  padding: 26px;
+      margin: 0 0 8px;
 
+      font-size: 23px;
+    }
 
+    .success-box p {
 
-  box-shadow:
+      margin: 0;
 
-    0 20px 60px
+      color: #64748b;
 
-    rgba(31, 71, 98, 0.13);
+      font-size: 14px;
 
+      line-height: 1.6;
+    }
 
+    .message {
 
-}
+      display: none;
 
+      margin-top: 15px;
 
+      padding: 12px 14px;
 
+      border-radius: 11px;
 
+      font-size: 13px;
 
-.steps {
+      line-height: 1.5;
+    }
 
+    .message.show {
 
+      display: block;
+    }
 
-  display: flex;
+    .message.error {
 
+      background: #fff0f0;
 
+      color: #b42318;
 
-  align-items: center;
+      border: 1px solid #ffd4d1;
+    }
 
+    .message.success {
 
+      background: #edfff6;
 
-  margin-bottom: 25px;
+      color: #087f58;
 
+      border: 1px solid #c7f1dc;
+    }
 
+    .loading {
 
-}
+      display: none;
 
+      text-align: center;
 
+      margin-top: 14px;
 
+      color: #64748b;
 
+      font-size: 13px;
+    }
 
-.step {
+    .spinner {
 
+      display: inline-block;
 
+      width: 17px;
 
-  width: 34px;
+      height: 17px;
 
+      margin-right: 7px;
 
+      vertical-align: middle;
 
-  height: 34px;
+      border: 2px solid #d8e5ed;
 
+      border-top-color: #087fdb;
 
+      border-radius: 50%;
 
-  border-radius: 50%;
+      animation: spin .7s linear infinite;
+    }
 
+    @keyframes spin {
 
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-  display: flex;
+    .security {
 
+      margin-top: 18px;
 
+      padding: 13px;
 
-  align-items: center;
+      border-radius: 12px;
 
+      background: #f7fafc;
 
+      color: #718096;
 
-  justify-content: center;
+      font-size: 11px;
 
+      line-height: 1.5;
 
+      text-align: center;
+    }
 
-  font-size: 13px;
+    .footer {
 
+      text-align: center;
 
+      margin-top: 18px;
 
-  font-weight: 700;
+      color: #64748b;
 
+      font-size: 11px;
+    }
 
+    .company-badge {
 
-  background: #e8eef5;
+      display: inline-flex;
 
+      align-items: center;
 
+      gap: 7px;
 
-  color: #64748b;
+      padding: 7px 11px;
 
+      margin-bottom: 17px;
 
+      border-radius: 50px;
 
-  flex-shrink: 0;
+      background: #edf8ff;
 
+      color: #087fdb;
 
+      font-size: 12px;
 
-}
+      font-weight: 700;
+    }
 
+    .company-dot {
 
+      width: 7px;
 
+      height: 7px;
 
+      border-radius: 50%;
 
-.step.active {
+      background: #0abf7a;
+    }
 
+    .claim-card {
 
+      margin-top: 20px;
 
-  background:
+      padding: 18px;
 
-    linear-gradient(
+      border-radius: 17px;
 
-      135deg,
+      background: #fbfdff;
 
-      #087fdb,
+      border: 1px solid #e5edf3;
+    }
 
-      #0abf7a
+    .claim-card-title {
 
-    );
+      font-size: 15px;
 
+      font-weight: 800;
 
+      margin-bottom: 15px;
+    }
 
-  color: white;
+    .loading-spinner {
 
+      display: inline-block;
 
+      width: 16px;
 
-  box-shadow:
+      height: 16px;
 
-    0 7px 18px
+      border: 2px solid rgba(255,255,255,.35);
 
-    rgba(0, 130, 190, 0.25);
+      border-top-color: white;
 
+      border-radius: 50%;
 
+      animation: spin .7s linear infinite;
 
-}
+      vertical-align: middle;
 
+      margin-right: 7px;
+    }
 
+    @media (max-width: 480px) {
 
+      body {
 
+        padding: 12px;
 
-.step.done {
+        align-items: flex-start;
 
+        padding-top: 25px;
+      }
 
+      .card {
 
-  background: #0abf7a;
+        padding: 20px;
 
+        border-radius: 20px;
+      }
 
+      .header h1 {
 
-  color: white;
+        font-size: 24px;
+      }
+    }
 
-
-
-}
-
-
-
-
-
-.line {
-
-
-
-  height: 3px;
-
-
-
-  flex: 1;
-
-
-
-  margin: 0 8px;
-
-
-
-  background: #e5ebf1;
-
-
-
-  border-radius: 5px;
-
-
-
-}
-
-
-
-
-
-.line.active {
-
-
-
-  background: #0abf7a;
-
-
-
-}
-
-
-
-
-
-.section {
-
-
-
-  display: none;
-
-
-
-}
-
-
-
-
-
-.section.active {
-
-
-
-  display: block;
-
-
-
-  animation:
-
-    fadeIn .3s ease;
-
-
-
-}
-
-
-
-
-
-@keyframes fadeIn {
-
-
-
-  from {
-
-
-
-    opacity: 0;
-
-
-
-    transform: translateY(8px);
-
-
-
-  }
-
-
-
-  to {
-
-
-
-    opacity: 1;
-
-
-
-    transform: translateY(0);
-
-
-
-  }
-
-
-
-}
-
-
-
-
-
-.section-title {
-
-
-
-  margin-bottom: 5px;
-
-
-
-  font-size: 20px;
-
-
-
-  font-weight: 750;
-
-
-
-}
-
-
-
-
-
-.section-subtitle {
-
-
-
-  margin-bottom: 20px;
-
-
-
-  color: #718096;
-
-
-
-  font-size: 13px;
-
-
-
-  line-height: 1.5;
-
-
-
-}
-
-
-
-
-
-label {
-
-
-
-  display: block;
-
-
-
-  margin-bottom: 8px;
-
-
-
-  font-size: 13px;
-
-
-
-  font-weight: 700;
-
-
-
-  color: #334155;
-
-
-
-}
-
-
-
-
-
-input,
-
-select {
-
-
-
-  width: 100%;
-
-
-
-  height: 52px;
-
-
-
-  padding: 0 15px;
-
-
-
-  border: 1px solid #dbe4ec;
-
-
-
-  border-radius: 13px;
-
-
-
-  background: #fbfdff;
-
-
-
-  color: #172033;
-
-
-
-  font-size: 15px;
-
-
-
-  outline: none;
-
-
-
-  transition: .2s;
-
-
-
-}
-
-
-
-
-
-input:focus,
-
-select:focus {
-
-
-
-  border-color: #1596df;
-
-
-
-  background: white;
-
-
-
-  box-shadow:
-
-    0 0 0 4px
-
-    rgba(21,150,223,.09);
-
-
-
-}
-
-
-
-
-
-.field {
-
-
-
-  margin-bottom: 17px;
-
-
-
-}
-
-
-
-
-
-.btn {
-
-
-
-  width: 100%;
-
-
-
-  height: 52px;
-
-
-
-  border: none;
-
-
-
-  border-radius: 13px;
-
-
-
-  cursor: pointer;
-
-
-
-  font-size: 15px;
-
-
-
-  font-weight: 750;
-
-
-
-  color: white;
-
-
-
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #087fdb,
-
-      #08ad78
-
-    );
-
-
-
-  box-shadow:
-
-    0 10px 22px
-
-    rgba(0, 130, 190, .20);
-
-
-
-  transition: .2s;
-
-
-
-}
-
-
-
-
-
-.btn:hover {
-
-
-
-  transform: translateY(-1px);
-
-
-
-  box-shadow:
-
-    0 13px 26px
-
-    rgba(0, 130, 190, .25);
-
-
-
-}
-
-
-
-
-
-.btn:disabled {
-
-
-
-  opacity: .6;
-
-
-
-  cursor: not-allowed;
-
-
-
-  transform: none;
-
-
-
-}
-
-
-
-
-
-.btn.secondary {
-
-
-
-  margin-top: 10px;
-
-
-
-  color: #334155;
-
-
-
-  background: #eef4f8;
-
-
-
-  box-shadow: none;
-
-
-
-}
-
-
-
-
-
-.search-box {
-
-
-
-  position: relative;
-
-
-
-}
-
-
-
-
-
-.search-box input {
-
-
-
-  padding-right: 55px;
-
-
-
-}
-
-
-
-
-
-.search-icon {
-
-
-
-  position: absolute;
-
-
-
-  right: 17px;
-
-
-
-  top: 50%;
-
-
-
-  transform: translateY(-50%);
-
-
-
-  color: #7b8b9c;
-
-
-
-  font-size: 20px;
-
-
-
-}
-
-
-
-
-
-.result {
-
-
-
-  display: none;
-
-
-
-  margin-top: 20px;
-
-
-
-  padding: 17px;
-
-
-
-  border-radius: 15px;
-
-
-
-  background:
-
-    linear-gradient(
-
-      135deg,
-
-      #effbf6,
-
-      #f4fbff
-
-    );
-
-
-
-  border: 1px solid #cdeee0;
-
-
-
-}
-
-
-
-
-
-.result.show {
-
-
-
-  display: block;
-
-
-
-  animation: fadeIn .3s ease;
-
-
-
-}
-
-
-
-
-
-.result-label {
-
-
-
-  color: #64748b;
-
-
-
-  font-size: 12px;
-
-
-
-  margin-bottom: 5px;
-
-
-
-}
-
-
-
-
-
-.result-value {
-
-
-
-  font-size: 18px;
-
-
-
-  font-weight: 800;
-
-
-
-  word-break: break-word;
-
-
-
-  color: #087f66;
-
-
-
-}
-
-
-
-
-
-.success-box {
-
-
-
-  display: none;
-
-
-
-  text-align: center;
-
-
-
-  padding: 20px 5px;
-
-
-
-}
-
-
-
-
-
-.success-icon {
-
-
-
-  width: 65px;
-
-
-
-  height: 65px;
-
-
-
-  margin: 0 auto 15px;
-
-
-
-  border-radius: 50%;
-
-
-
-  display: flex;
-
-
-
-  align-items: center;
-
-
-
-  justify-content: center;
-
-
-
-  font-size: 30px;
-
-
-
-  background: #dff8ec;
-
-
-
-  color: #0a9b65;
-
-
-
-}
-
-
-
-
-
-.success-box h2 {
-
-
-
-  margin: 0 0 8px;
-
-
-
-  font-size: 23px;
-
-
-
-}
-
-
-
-
-
-.success-box p {
-
-
-
-  margin: 0;
-
-
-
-  color: #64748b;
-
-
-
-  font-size: 14px;
-
-
-
-  line-height: 1.6;
-
-
-
-}
-
-
-
-
-
-.message {
-
-
-
-  display: none;
-
-
-
-  margin-top: 15px;
-
-
-
-  padding: 12px 14px;
-
-
-
-  border-radius: 11px;
-
-
-
-  font-size: 13px;
-
-
-
-  line-height: 1.5;
-
-
-
-}
-
-
-
-
-
-.message.show {
-
-
-
-  display: block;
-
-
-
-}
-
-
-
-
-
-.message.error {
-
-
-
-  background: #fff0f0;
-
-
-
-  color: #b42318;
-
-
-
-  border: 1px solid #ffd4d1;
-
-
-
-}
-
-
-
-
-
-.message.success {
-
-
-
-  background: #edfff6;
-
-
-
-  color: #087f58;
-
-
-
-  border: 1px solid #c7f1dc;
-
-
-
-}
-
-
-
-
-
-.loading {
-
-
-
-  display: none;
-
-
-
-  text-align: center;
-
-
-
-  margin-top: 14px;
-
-
-
-  color: #64748b;
-
-
-
-  font-size: 13px;
-
-
-
-}
-
-
-
-
-
-.spinner {
-
-
-
-  display: inline-block;
-
-
-
-  width: 17px;
-
-
-
-  height: 17px;
-
-
-
-  margin-right: 7px;
-
-
-
-  vertical-align: middle;
-
-
-
-  border: 2px solid #d8e5ed;
-
-
-
-  border-top-color: #087fdb;
-
-
-
-  border-radius: 50%;
-
-
-
-  animation: spin .7s linear infinite;
-
-
-
-}
-
-
-
-
-
-@keyframes spin {
-
-
-
-  to {
-
-    transform: rotate(360deg);
-
-  }
-
-
-
-}
-
-
-
-
-
-.security {
-
-
-
-  margin-top: 18px;
-
-
-
-  padding: 13px;
-
-
-
-  border-radius: 12px;
-
-
-
-  background: #f7fafc;
-
-
-
-  color: #718096;
-
-
-
-  font-size: 11px;
-
-
-
-  line-height: 1.5;
-
-
-
-  text-align: center;
-
-
-
-}
-
-
-
-
-
-.footer {
-
-
-
-  text-align: center;
-
-
-
-  margin-top: 18px;
-
-
-
-  color: #94a3b8;
-
-
-
-  font-size: 11px;
-
-
-
-}
-
-
-
-
-
-.company-badge {
-
-
-
-  display: inline-flex;
-
-
-
-  align-items: center;
-
-
-
-  gap: 7px;
-
-
-
-  padding: 7px 11px;
-
-
-
-  margin-bottom: 17px;
-
-
-
-  border-radius: 50px;
-
-
-
-  background: #edf8ff;
-
-
-
-  color: #087fdb;
-
-
-
-  font-size: 12px;
-
-
-
-  font-weight: 700;
-
-
-
-}
-
-
-
-
-
-.company-dot {
-
-
-
-  width: 7px;
-
-
-
-  height: 7px;
-
-
-
-  border-radius: 50%;
-
-
-
-  background: #0abf7a;
-
-
-
-}
-
-
-
-
-
-.claim-card {
-
-
-
-  margin-top: 20px;
-
-
-
-  padding: 18px;
-
-
-
-  border-radius: 17px;
-
-
-
-  background: #fbfdff;
-
-
-
-  border: 1px solid #e5edf3;
-
-
-
-}
-
-
-
-
-
-.claim-card-title {
-
-
-
-  font-size: 15px;
-
-
-
-  font-weight: 800;
-
-
-
-  margin-bottom: 15px;
-
-
-
-}
-
-
-
-
-
-@media (max-width: 480px) {
-
-
-
-  body {
-
-
-
-    padding: 12px;
-
-
-
-    align-items: flex-start;
-
-
-
-    padding-top: 25px;
-
-
-
-  }
-
-
-
-  .card {
-
-
-
-    padding: 20px;
-
-
-
-    border-radius: 20px;
-
-
-
-  }
-
-
-
-  .header h1 {
-
-
-
-    font-size: 24px;
-
-
-
-  }
-
-
-
-}
-
-
-
-</style>
-
-
+  </style>
 
 </head>
-
-
-
 
 
 <body>
 
 
-
 <div class="container">
-
-
-
 
 
   <!-- HEADER -->
 
-
-
   <div class="header">
-
-
 
     <div class="logo">✓</div>
 
-
-
     <h1>Client Claim Portal</h1>
 
-
-
     <p>
-
       Select your company, search your number or
-
       client code, and submit your claim securely.
-
     </p>
 
-
-
   </div>
-
-
-
 
 
   <!-- MAIN CARD -->
 
-
-
   <div class="card">
-
-
-
 
 
     <!-- STEPS -->
 
-
-
     <div class="steps">
 
-
-
       <div
-
         id="step1"
-
         class="step active"
-
       >
-
         1
-
       </div>
 
-
-
       <div
-
         id="line1"
-
         class="line"
-
       ></div>
 
-
-
       <div
-
         id="step2"
-
         class="step"
-
       >
-
         2
-
       </div>
 
-
-
       <div
-
         id="line2"
-
         class="line"
-
       ></div>
 
-
-
       <div
-
         id="step3"
-
         class="step"
-
       >
-
         3
-
       </div>
-
-
 
     </div>
 
 
-
-
-
-    <!-- =================================================
-
-         STEP 1
-
-         ================================================= -->
-
-
+    <!-- STEP 1 -->
 
     <div
-
       id="section1"
-
       class="section active"
-
     >
 
-
-
       <div class="section-title">
-
-        Select Company
-
+        Search Your Details
       </div>
-
-
 
       <div class="section-subtitle">
-
-        First select the company associated with
-
-        your client number or code.
-
+        Select your company and search your
+        number or client code.
       </div>
 
 
-
-
+      <!-- COMPANY -->
 
       <div class="field">
 
-
-
         <label for="company">
-
-          Company
-
+          Select Company <span style="color:#d93025">*</span>
         </label>
-
-
 
         <select id="company">
 
-
-
           <option value="">
-
-            Loading companies...
-
+            Loading Companies...
           </option>
-
-
 
         </select>
 
-
-
       </div>
 
 
-
-
-
-      <button
-
-        id="continueBtn"
-
-        class="btn"
-
-        disabled
-
-        onclick="goToSearch()"
-
-      >
-
-        Continue →
-
-      </button>
-
-
-
-
-
-      <div
-
-        id="companyLoading"
-
-        class="loading"
-
-      >
-
-
-
-        <span class="spinner"></span>
-
-
-
-        Loading companies...
-
-
-
-      </div>
-
-
-
-    </div>
-
-
-
-
-
-    <!-- =================================================
-
-         STEP 2
-
-         ================================================= -->
-
-
-
-    <div
-
-      id="section2"
-
-      class="section"
-
-    >
-
-
-
-      <div
-
-        id="companyBadge"
-
-        class="company-badge"
-
-      >
-
-
-
-        <span class="company-dot"></span>
-
-
-
-        <span id="selectedCompanyText"></span>
-
-
-
-      </div>
-
-
-
-
-
-      <div class="section-title">
-
-        Search Client Code
-
-      </div>
-
-
-
-      <div class="section-subtitle">
-
-        Enter your number or client code exactly
-
-        as registered with the selected company.
-
-      </div>
-
-
-
-
+      <!-- SEARCH -->
 
       <div class="field">
 
-
-
         <label for="search">
-
           Number / Client Code
-
+          <span style="color:#d93025">*</span>
         </label>
-
-
 
         <div class="search-box">
 
-
-
           <input
-
-            id="search"
-
             type="text"
-
+            id="search"
+            placeholder="Enter Number or Client Code"
             autocomplete="off"
-
-            placeholder="Enter number or client code"
-
+            maxlength="100"
           >
 
-
-
           <span class="search-icon">
-
             🔍
-
           </span>
 
-
-
         </div>
-
-
 
       </div>
 
 
-
-
-
       <button
-
         id="searchBtn"
-
         class="btn"
-
+        type="button"
         onclick="searchClient()"
-
       >
-
-        Search Client Code
-
+        🔍 &nbsp; Search Details
       </button>
 
 
-
-
+      <!-- LOADING -->
 
       <div
-
-        id="searchLoading"
-
+        id="loading"
         class="loading"
-
       >
-
-
 
         <span class="spinner"></span>
 
-
-
         Searching...
 
-
-
       </div>
 
 
-
-
+      <!-- RESULT -->
 
       <div
-
         id="result"
-
         class="result"
-
       >
-
-
 
         <div class="result-label">
-
-          Client Code Found
-
+          Matching Client
         </div>
 
-
-
         <div
-
-          id="resultValue"
-
+          id="matchedValue"
           class="result-value"
-
         ></div>
 
-
-
       </div>
 
 
-
-
+      <!-- CLAIM FORM -->
 
       <div
-
-        id="searchMessage"
-
-        class="message"
-
-      ></div>
-
-
-
-
-
-      <button
-
-        class="btn secondary"
-
-        onclick="backToCompany()"
-
+        id="claimCard"
+        class="claim-card"
+        style="display:none;"
       >
-
-        ← Change Company
-
-      </button>
-
-
-
-    </div>
-
-
-
-
-
-    <!-- =================================================
-
-         STEP 3
-
-         ================================================= -->
-
-
-
-    <div
-
-      id="section3"
-
-      class="section"
-
-    >
-
-
-
-      <div
-
-        id="claimCompanyBadge"
-
-        class="company-badge"
-
-      >
-
-
-
-        <span class="company-dot"></span>
-
-
-
-        <span id="claimCompanyText"></span>
-
-
-
-      </div>
-
-
-
-
-
-      <div class="section-title">
-
-        Claim Client Code
-
-      </div>
-
-
-
-      <div class="section-subtitle">
-
-        Your client code has been found. Enter your
-
-        details below to submit the claim.
-
-      </div>
-
-
-
-
-
-      <div class="result show">
-
-
-
-        <div class="result-label">
-
-          Client Code
-
-        </div>
-
-
-
-        <div
-
-          id="claimCode"
-
-          class="result-value"
-
-        ></div>
-
-
-
-      </div>
-
-
-
-
-
-      <div class="claim-card">
-
-
 
         <div class="claim-card-title">
+          Submit Your Claim
+        </div>
 
-          Claim Details
+
+        <div
+          id="companyBadge"
+          class="company-badge"
+        >
+
+          <span class="company-dot"></span>
+
+          <span id="companyBadgeText">
+            Company
+          </span>
 
         </div>
 
 
-
-
+        <!-- NAME -->
 
         <div class="field">
-
-
 
           <label for="name">
-
-            Full Name
-
+            Your Name
+            <span style="color:#d93025">*</span>
           </label>
 
-
-
           <input
-
-            id="name"
-
             type="text"
-
+            id="name"
+            placeholder="Enter your name"
             maxlength="100"
-
             autocomplete="name"
-
-            placeholder="Enter your full name"
-
           >
-
-
 
         </div>
 
 
-
-
+        <!-- MOBILE -->
 
         <div class="field">
 
-
-
           <label for="mobile">
-
             Mobile Number
-
+            <span style="color:#d93025">*</span>
           </label>
 
-
-
           <input
-
-            id="mobile"
-
             type="tel"
-
-            maxlength="15"
-
-            inputmode="numeric"
-
-            autocomplete="tel"
-
+            id="mobile"
             placeholder="Enter mobile number"
-
+            maxlength="15"
+            inputmode="numeric"
+            autocomplete="tel"
           >
 
-
-
         </div>
-
-
-
 
 
         <button
-
           id="claimBtn"
-
           class="btn"
-
+          type="button"
           onclick="submitClaim()"
-
         >
-
-          Submit Claim
-
+          ✓ &nbsp; Submit Claim
         </button>
-
-
-
-
-
-        <div
-
-          id="claimLoading"
-
-          class="loading"
-
-        >
-
-
-
-          <span class="spinner"></span>
-
-
-
-          Submitting claim...
-
-
-
-        </div>
-
-
-
-
-
-        <div
-
-          id="claimMessage"
-
-          class="message"
-
-        ></div>
-
-
 
       </div>
 
 
+      <!-- MESSAGE -->
+
+      <div
+        id="message"
+        class="message"
+        aria-live="polite"
+      ></div>
 
 
-
-      <button
-
-        class="btn secondary"
-
-        onclick="backToSearch()"
-
-      >
-
-        ← Search Again
-
-      </button>
-
-
-
-
+      <!-- SECURITY -->
 
       <div class="security">
 
+        🔒 &nbsp;
 
-
-        🔒 Your information is submitted securely
-
-        and processed through the claim portal.
-
-
+        Please enter correct details.
+        Your claim information will be
+        processed through the connected
+        claim system.
 
       </div>
-
-
 
     </div>
 
 
-
-
-
-    <!-- =================================================
-
-         SUCCESS
-
-         ================================================= -->
-
-
+    <!-- STEP 2 / SUCCESS -->
 
     <div
-
-      id="successBox"
-
-      class="success-box"
-
+      id="section2"
+      class="section"
     >
 
+      <div class="success-box show">
 
+        <div class="success-icon">
+          ✓
+        </div>
 
-      <div class="success-icon">
+        <h2>
+          Claim Submitted
+        </h2>
 
-        ✓
+        <p>
+          Your claim has been submitted
+          successfully.
+        </p>
+
+        <button
+          class="btn secondary"
+          type="button"
+          onclick="resetPortal()"
+        >
+          Submit Another Claim
+        </button>
 
       </div>
-
-
-
-      <h2>
-
-        Claim Submitted Successfully
-
-      </h2>
-
-
-
-      <p>
-
-        Your claim for the client code has been
-
-        submitted successfully.
-
-      </p>
-
-
-
-      <button
-
-        class="btn"
-
-        style="margin-top:20px"
-
-        onclick="startAgain()"
-
-      >
-
-        Submit Another Claim
-
-      </button>
-
-
 
     </div>
 
 
+    <!-- STEP 3 -->
 
+    <div
+      id="section3"
+      class="section"
+    >
+
+      <div class="success-box show">
+
+        <div class="success-icon">
+          ✓
+        </div>
+
+        <h2>
+          Thank You
+        </h2>
+
+        <p>
+          Your claim information has been
+          processed successfully.
+        </p>
+
+      </div>
+
+    </div>
 
 
   </div>
 
 
-
-
+  <!-- FOOTER -->
 
   <div class="footer">
 
-
-
-    Secure Client Claim Portal
-
-
+    © 2026 Client Claim Portal.
+    All rights reserved.
 
   </div>
-
-
-
 
 
 </div>
 
 
-
-
-
 <script>
 
 
-
-
-
 /* =========================================================
+   GOOGLE APPS SCRIPT WEB APP URL
 
-   API URL
-
-   ========================================================= */
-
-
+   IMPORTANT:
+   This is your CURRENT deployment URL.
+========================================================= */
 
 const API_URL =
-
-  "https://script.google.com/macros/s/AKfycbz_4UyPHcnfoINTv29vDCwQzBioTUah2QgnSd-j5IaHrREBkzNHUsJCpOGBGhSFpck/exec";
-
-
-
+  "https://script.google.com/macros/s/AKfycbzK-AINATdkLBsCwNrBW6r-ryvdKYgWjvgomFepwv_MIOPzPg2F9YdldWYEesLX-f-T/exec";
 
 
 /* =========================================================
+   DOM ELEMENTS
+========================================================= */
 
-   STATE
+const companySelect =
+  document.getElementById("company");
 
-   ========================================================= */
+const searchInput =
+  document.getElementById("search");
+
+const searchBtn =
+  document.getElementById("searchBtn");
+
+const resultBox =
+  document.getElementById("result");
+
+const matchedValue =
+  document.getElementById("matchedValue");
+
+const loading =
+  document.getElementById("loading");
+
+const message =
+  document.getElementById("message");
+
+const nameInput =
+  document.getElementById("name");
+
+const mobileInput =
+  document.getElementById("mobile");
+
+const claimBtn =
+  document.getElementById("claimBtn");
+
+const claimCard =
+  document.getElementById("claimCard");
+
+const companyBadgeText =
+  document.getElementById("companyBadgeText");
 
 
+/* =========================================================
+   CURRENT MATCH
+========================================================= */
 
 let currentMatch = "";
-
-
 
 let currentCompany = "";
 
 
-
-
-
 /* =========================================================
+   JSONP REQUEST
 
-   JSONP
-
-   ========================================================= */
-
-
+   Google Apps Script cross-origin request ke liye
+   JSONP use kiya gaya hai.
+========================================================= */
 
 function jsonp(params) {
 
-
-
-  return new Promise(function(resolve, reject) {
-
-
-
-    const callbackName =
-
-      "jsonp_" +
-
-      Date.now() +
-
-      "_" +
-
-      Math.floor(Math.random() * 100000);
-
-
-
-
-
-    const script =
-
-      document.createElement("script");
-
-
-
-
-
-    const url =
-
-      new URL(API_URL);
-
-
-
-
-
-    Object.keys(params).forEach(function(key) {
-
-
-
-      url.searchParams.set(
-
-        key,
-
-        params[key]
-
-      );
-
-
-
-    });
-
-
-
-
-
-    url.searchParams.set(
-
-      "callback",
-
-      callbackName
-
-    );
-
-
-
-
-
-    let finished = false;
-
-
-
-
-
-    const cleanup = function() {
-
-
-
-      try {
-
-
-
-        delete window[callbackName];
-
-
-
-      } catch (e) {
-
-
-
-        window[callbackName] = undefined;
-
-
-
-      }
-
-
-
-      if (script.parentNode) {
-
-
-
-        script.parentNode.removeChild(script);
-
-
-
-      }
-
-
-
-    };
-
-
-
-
-
-    window[callbackName] =
-
-      function(data) {
-
-
-
-        if (finished) return;
-
-
-
-        finished = true;
-
-
-
-        cleanup();
-
-
-
-        resolve(data);
-
-
-
-      };
-
-
-
-
-
-    script.onerror =
-
-      function() {
-
-
-
-        if (finished) return;
-
-
-
-        finished = true;
-
-
-
-        cleanup();
-
-
-
-        reject(
-
-          new Error("Network error")
-
+  return new Promise(
+    function(resolve, reject) {
+
+      const callbackName =
+        "jsonp_" +
+        Date.now() +
+        "_" +
+        Math.floor(
+          Math.random() * 100000
         );
 
 
-
-      };
-
-
+      const script =
+        document.createElement("script");
 
 
-
-    document.body.appendChild(script);
-
+      let finished = false;
 
 
+      const cleanup =
+        function() {
+
+          try {
+            delete window[callbackName];
+          } catch (e) {
+            window[callbackName] =
+              undefined;
+          }
+
+          if (script.parentNode) {
+            script.parentNode.removeChild(script);
+          }
+
+        };
 
 
-    setTimeout(function() {
+      const timer =
+        setTimeout(
+          function() {
+
+            if (finished) return;
+
+            finished = true;
+
+            cleanup();
+
+            reject(
+              new Error(
+                "Request timeout"
+              )
+            );
+
+          },
+          15000
+        );
 
 
+      window[callbackName] =
+        function(data) {
 
-      if (finished) return;
+          if (finished) return;
 
+          finished = true;
 
+          clearTimeout(timer);
 
-      finished = true;
+          cleanup();
 
+          resolve(data);
 
-
-      cleanup();
-
-
-
-      reject(
-
-        new Error("Request timeout")
-
-      );
+        };
 
 
+      const query =
+        new URLSearchParams({
 
-    }, 20000);
+          ...params,
+
+          callback:
+            callbackName
+
+        });
 
 
+      script.src =
+        API_URL +
+        "?" +
+        query.toString();
 
-  });
+
+      script.async = true;
 
 
+      script.onerror =
+        function() {
+
+          if (finished) return;
+
+          finished = true;
+
+          clearTimeout(timer);
+
+          cleanup();
+
+          reject(
+            new Error(
+              "Network error"
+            )
+          );
+
+        };
+
+
+      document
+        .head
+        .appendChild(script);
+
+    }
+  );
 
 }
 
 
-
-
-
 /* =========================================================
-
-   ELEMENTS
-
-   ========================================================= */
-
-
-
-const company =
-
-  document.getElementById("company");
-
-
-
-const continueBtn =
-
-  document.getElementById("continueBtn");
-
-
-
-const searchInput =
-
-  document.getElementById("search");
-
-
-
-const nameInput =
-
-  document.getElementById("name");
-
-
-
-const mobileInput =
-
-  document.getElementById("mobile");
-
-
-
-
-
-/* =========================================================
-
    LOAD COMPANIES
 
-   ========================================================= */
+   Google Sheet ke saare tab automatically
+   dropdown mein load honge.
+========================================================= */
+
+async function loadCompanies() {
+
+  companySelect.disabled = true;
+
+  companySelect.innerHTML =
+    '<option value="">Loading Companies...</option>';
 
 
+  try {
 
-function loadCompanies() {
-
-
-
-  const loading =
-
-    document.getElementById("companyLoading");
-
-
-
-
-
-  loading.style.display = "block";
-
-
-
-
-
-  jsonp({
-
-    action: "companies"
-
-  })
-
-
-
-  .then(function(data) {
-
-
-
-    company.innerHTML =
-
-      '<option value="">Select a company</option>';
-
-
-
+    const data =
+      await jsonp({
+        action: "companies"
+      });
 
 
     if (
-
       !data ||
-
-      !data.success ||
-
+      data.success !== true ||
       !Array.isArray(data.companies)
-
     ) {
 
-
-
-      company.innerHTML =
-
-        '<option value="">Unable to load companies</option>';
-
-
-
-      return;
-
-
+      throw new Error(
+        "Invalid companies response"
+      );
 
     }
 
 
+    /*
+      Extra spaces remove.
+      Duplicate company names remove.
+    */
+
+    const companies =
+      data.companies
+        .map(function(company) {
+
+          return String(
+            company || ""
+          ).trim();
+
+        })
+        .filter(function(company) {
+
+          return company !== "";
+
+        })
+        .filter(function(company, index, array) {
+
+          return array.indexOf(company)
+            === index;
+
+        });
 
 
-
-    data.companies.forEach(function(name) {
-
-
-
-      const option =
-
-        document.createElement("option");
+    companySelect.innerHTML =
+      '<option value="">Select Company</option>';
 
 
+    companies.forEach(
+      function(company) {
 
-      option.value = name;
+        const option =
+          document.createElement("option");
 
+        option.value =
+          company;
 
+        option.textContent =
+          company;
 
-      option.textContent = name;
+        companySelect.appendChild(
+          option
+        );
 
-
-
-      company.appendChild(option);
-
-
-
-    });
-
-
-
-  })
-
-
-
-  .catch(function(error) {
+      }
+    );
 
 
+    if (companies.length === 0) {
 
-    console.error(error);
+      companySelect.innerHTML =
+        '<option value="">No companies found</option>';
+
+      return;
+    }
 
 
+    companySelect.disabled = false;
 
-    company.innerHTML =
 
+  } catch (error) {
+
+    console.error(
+      "Company loading error:",
+      error
+    );
+
+
+    companySelect.disabled = true;
+
+    companySelect.innerHTML =
       '<option value="">Unable to load companies</option>';
 
 
-
-  })
-
-
-
-  .finally(function() {
-
-
-
-    loading.style.display = "none";
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   COMPANY CHANGE
-
-   ========================================================= */
-
-
-
-company.addEventListener(
-
-  "change",
-
-  function() {
-
-
-
-    continueBtn.disabled =
-
-      !company.value;
-
-
+    showMessage(
+      "Company list load nahi ho paayi. Please refresh the page.",
+      "error"
+    );
 
   }
 
-);
-
-
-
-
-
-/* =========================================================
-
-   STEP 1 → STEP 2
-
-   ========================================================= */
-
-
-
-function goToSearch() {
-
-
-
-  if (!company.value) return;
-
-
-
-
-
-  currentCompany =
-
-    company.value;
-
-
-
-
-
-  document.getElementById(
-
-    "selectedCompanyText"
-
-  ).textContent =
-
-    currentCompany;
-
-
-
-
-
-  showSection(2);
-
-
-
 }
 
 
+/* =========================================================
+   COMPANY CHANGE
+========================================================= */
 
+companySelect.addEventListener(
+  "change",
+  function() {
+
+    currentCompany =
+      companySelect.value.trim();
+
+    currentMatch = "";
+
+    searchInput.value = "";
+
+    matchedValue.textContent = "";
+
+    resultBox.classList.remove(
+      "show"
+    );
+
+    resultBox.style.display =
+      "none";
+
+    claimCard.style.display =
+      "none";
+
+    clearMessage();
+
+  }
+);
 
 
 /* =========================================================
-
    SEARCH CLIENT
+========================================================= */
 
-   ========================================================= */
+async function searchClient() {
+
+  clearMessage();
 
 
-
-function searchClient() {
-
-
+  const company =
+    companySelect.value.trim();
 
   const query =
-
     searchInput.value.trim();
 
 
+  /* COMPANY */
 
-
-
-  hideMessage("searchMessage");
-
-
-
-
-
-  document.getElementById(
-
-    "result"
-
-  ).classList.remove("show");
-
-
-
-
-
-  if (!currentCompany) {
-
-
+  if (!company) {
 
     showMessage(
-
-      "searchMessage",
-
-      "Please select a company first.",
-
+      "Company Select करें।",
       "error"
-
     );
 
-
+    companySelect.focus();
 
     return;
-
-
-
   }
 
 
-
-
+  /* QUERY */
 
   if (!query) {
 
-
-
     showMessage(
-
-      "searchMessage",
-
-      "Please enter a number or client code.",
-
+      "Number / Client Code डालें।",
       "error"
-
     );
-
-
 
     searchInput.focus();
 
-
-
     return;
-
-
-
   }
 
 
+  if (query.length > 100) {
+
+    showMessage(
+      "Search value बहुत लंबी है।",
+      "error"
+    );
+
+    searchInput.focus();
+
+    return;
+  }
 
 
-
-  setSearchLoading(true);
-
+  currentMatch = "";
 
 
+  resultBox.classList.remove(
+    "show"
+  );
+
+  resultBox.style.display =
+    "none";
+
+  claimCard.style.display =
+    "none";
 
 
-  jsonp({
+  searchBtn.disabled = true;
+
+  loading.style.display =
+    "block";
 
 
+  try {
 
-    action: "search",
+    const data =
+      await jsonp({
 
+        action: "search",
 
+        company:
+          company,
 
-    company: currentCompany,
+        query:
+          query
 
-
-
-    query: query
-
-
-
-  })
-
-
-
-  .then(function(data) {
-
+      });
 
 
     if (
-
       data &&
-
-      data.success &&
-
-      data.found
-
+      data.success === true &&
+      data.found === true
     ) {
-
-
 
       currentMatch =
-
-        data.value;
-
-
-
+        String(
+          data.value || ""
+        ).trim();
 
 
-      document.getElementById(
+      if (!currentMatch) {
 
-        "resultValue"
+        showMessage(
+          "Matching data खाली है।",
+          "error"
+        );
 
-      ).textContent =
-
-        data.value;
-
-
-
-
-
-      document.getElementById(
-
-        "result"
-
-      ).classList.add("show");
+        return;
+      }
 
 
+      matchedValue.textContent =
+        currentMatch;
 
 
+      resultBox.style.display =
+        "block";
 
-      setTimeout(function() {
-
-
-
-        goToClaim();
-
-
-
-      }, 450);
+      resultBox.classList.add(
+        "show"
+      );
 
 
+      companyBadgeText.textContent =
+        company;
 
+
+      claimCard.style.display =
+        "block";
+
+
+      nameInput.value = "";
+
+      mobileInput.value = "";
+
+
+      setTimeout(
+        function() {
+
+          nameInput.focus();
+
+        },
+        100
+      );
 
 
     } else {
 
-
-
-      currentMatch = "";
-
-
-
-
-
       showMessage(
-
-        "searchMessage",
-
-        "No matching client code found. Please check your entry and try again.",
-
+        "No Result Found",
         "error"
-
       );
-
-
 
     }
 
 
+  } catch (error) {
 
-  })
-
-
-
-  .catch(function(error) {
-
-
-
-    console.error(error);
-
-
-
-    showMessage(
-
-      "searchMessage",
-
-      "Unable to connect to the server. Please try again.",
-
-      "error"
-
+    console.error(
+      "Search error:",
+      error
     );
 
 
-
-  })
-
-
-
-  .finally(function() {
-
-
-
-    setSearchLoading(false);
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   STEP 2 → STEP 3
-
-   ========================================================= */
-
-
-
-function goToClaim() {
-
-
-
-  if (!currentMatch) return;
-
-
-
-
-
-  document.getElementById(
-
-    "claimCompanyText"
-
-  ).textContent =
-
-    currentCompany;
-
-
-
-
-
-  document.getElementById(
-
-    "claimCode"
-
-  ).textContent =
-
-    currentMatch;
-
-
-
-
-
-  showSection(3);
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   SUBMIT CLAIM
-
-   ========================================================= */
-
-
-
-function submitClaim() {
-
-
-
-  const name =
-
-    nameInput.value.trim();
-
-
-
-
-
-  const mobile =
-
-    mobileInput.value
-
-      .replace(/[^\d]/g, "");
-
-
-
-
-
-  hideMessage("claimMessage");
-
-
-
-
-
-  if (!currentCompany || !currentMatch) {
-
-
-
     showMessage(
-
-      "claimMessage",
-
-      "Please search and select a valid client code first.",
-
+      "Network problem. Please try again.",
       "error"
-
     );
 
 
+  } finally {
 
-    return;
+    searchBtn.disabled = false;
 
-
+    loading.style.display =
+      "none";
 
   }
 
-
-
-
-
-  if (!name) {
-
-
-
-    showMessage(
-
-      "claimMessage",
-
-      "Please enter your full name.",
-
-      "error"
-
-    );
-
-
-
-    nameInput.focus();
-
-
-
-    return;
-
-
-
-  }
-
-
-
-
-
-  if (mobile.length < 7 ||
-
-      mobile.length > 15) {
-
-
-
-    showMessage(
-
-      "claimMessage",
-
-      "Please enter a valid mobile number.",
-
-      "error"
-
-    );
-
-
-
-    mobileInput.focus();
-
-
-
-    return;
-
-
-
-  }
-
-
-
-
-
-  setClaimLoading(true);
-
-
-
-
-
-  jsonp({
-
-
-
-    action: "claim",
-
-
-
-    company: currentCompany,
-
-
-
-    query: currentMatch,
-
-
-
-    name: name,
-
-
-
-    mobile: mobile
-
-
-
-  })
-
-
-
-  .then(function(data) {
-
-
-
-    if (
-
-      data &&
-
-      data.success &&
-
-      data.claimed
-
-    ) {
-
-
-
-      showSuccess();
-
-
-
-      return;
-
-
-
-    }
-
-
-
-
-
-    if (
-
-      data &&
-
-      data.alreadyClaimed
-
-    ) {
-
-
-
-      showMessage(
-
-        "claimMessage",
-
-        "Already Claimed — this mobile number has already claimed this client code.",
-
-        "error"
-
-      );
-
-
-
-      return;
-
-
-
-    }
-
-
-
-
-
-    if (
-
-      data &&
-
-      data.limitReached
-
-    ) {
-
-
-
-      showMessage(
-
-        "claimMessage",
-
-        "This client code has reached the maximum claim limit.",
-
-        "error"
-
-      );
-
-
-
-      return;
-
-
-
-    }
-
-
-
-
-
-    showMessage(
-
-      "claimMessage",
-
-      data && data.message
-
-        ? data.message
-
-        : "Claim could not be submitted.",
-
-      "error"
-
-    );
-
-
-
-  })
-
-
-
-  .catch(function(error) {
-
-
-
-    console.error(error);
-
-
-
-    showMessage(
-
-      "claimMessage",
-
-      "Unable to connect to the server. Please try again.",
-
-      "error"
-
-    );
-
-
-
-  })
-
-
-
-  .finally(function() {
-
-
-
-    setClaimLoading(false);
-
-
-
-  });
-
-
-
 }
-
-
-
 
 
 /* =========================================================
-
-   BACK TO COMPANY
-
-   ========================================================= */
-
-
-
-function backToCompany() {
-
-
-
-  currentMatch = "";
-
-
-
-  currentCompany = "";
-
-
-
-  searchInput.value = "";
-
-
-
-  document.getElementById(
-
-    "result"
-
-  ).classList.remove("show");
-
-
-
-  company.value = "";
-
-
-
-  continueBtn.disabled = true;
-
-
-
-  hideMessage("searchMessage");
-
-
-
-  showSection(1);
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   BACK TO SEARCH
-
-   ========================================================= */
-
-
-
-function backToSearch() {
-
-
-
-  currentMatch = "";
-
-
-
-  nameInput.value = "";
-
-
-
-  mobileInput.value = "";
-
-
-
-  hideMessage("claimMessage");
-
-
-
-  showSection(2);
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   START AGAIN
-
-   ========================================================= */
-
-
-
-function startAgain() {
-
-
-
-  currentMatch = "";
-
-
-
-  currentCompany = "";
-
-
-
-  company.value = "";
-
-
-
-  searchInput.value = "";
-
-
-
-  nameInput.value = "";
-
-
-
-  mobileInput.value = "";
-
-
-
-  continueBtn.disabled = true;
-
-
-
-  hideMessage("searchMessage");
-
-
-
-  hideMessage("claimMessage");
-
-
-
-
-
-  document.getElementById(
-
-    "successBox"
-
-  ).style.display = "none";
-
-
-
-
-
-  document.getElementById(
-
-    "section1"
-
-  ).classList.add("active");
-
-
-
-
-
-  updateSteps(1);
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   SHOW SECTION
-
-   ========================================================= */
-
-
-
-function showSection(number) {
-
-
-
-  document
-
-    .querySelectorAll(".section")
-
-    .forEach(function(section) {
-
-
-
-      section.classList.remove("active");
-
-
-
-    });
-
-
-
-
-
-  document.getElementById(
-
-    "section" + number
-
-  ).classList.add("active");
-
-
-
-
-
-  document.getElementById(
-
-    "successBox"
-
-  ).style.display = "none";
-
-
-
-
-
-  updateSteps(number);
-
-
-
-
-
-  window.scrollTo({
-
-
-
-    top: 0,
-
-
-
-    behavior: "smooth"
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   UPDATE STEPS
-
-   ========================================================= */
-
-
-
-function updateSteps(active) {
-
-
-
-  const steps = [
-
-
-
-    document.getElementById("step1"),
-
-
-
-    document.getElementById("step2"),
-
-
-
-    document.getElementById("step3")
-
-
-
-  ];
-
-
-
-
-
-  const lines = [
-
-
-
-    document.getElementById("line1"),
-
-
-
-    document.getElementById("line2")
-
-
-
-  ];
-
-
-
-
-
-  steps.forEach(function(step, index) {
-
-
-
-    step.classList.remove(
-
-      "active",
-
-      "done"
-
-    );
-
-
-
-
-
-    const stepNumber =
-
-      index + 1;
-
-
-
-
-
-    if (stepNumber < active) {
-
-
-
-      step.classList.add("done");
-
-
-
-      step.textContent = "✓";
-
-
-
-    } else if (
-
-      stepNumber === active
-
-    ) {
-
-
-
-      step.classList.add("active");
-
-
-
-      step.textContent =
-
-        stepNumber;
-
-
-
-    } else {
-
-
-
-      step.textContent =
-
-        stepNumber;
-
-
-
-    }
-
-
-
-  });
-
-
-
-
-
-  lines.forEach(function(line, index) {
-
-
-
-    line.classList.toggle(
-
-      "active",
-
-      index + 1 < active
-
-    );
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   SUCCESS
-
-   ========================================================= */
-
-
-
-function showSuccess() {
-
-
-
-  document
-
-    .querySelectorAll(".section")
-
-    .forEach(function(section) {
-
-
-
-      section.classList.remove("active");
-
-
-
-    });
-
-
-
-
-
-  document.getElementById(
-
-    "successBox"
-
-  ).style.display = "block";
-
-
-
-
-
-  updateSteps(4);
-
-
-
-
-
-  window.scrollTo({
-
-
-
-    top: 0,
-
-
-
-    behavior: "smooth"
-
-
-
-  });
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   SEARCH LOADING
-
-   ========================================================= */
-
-
-
-function setSearchLoading(isLoading) {
-
-
-
-  document.getElementById(
-
-    "searchLoading"
-
-  ).style.display =
-
-    isLoading ? "block" : "none";
-
-
-
-
-
-  document.getElementById(
-
-    "searchBtn"
-
-  ).disabled =
-
-    isLoading;
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   CLAIM LOADING
-
-   ========================================================= */
-
-
-
-function setClaimLoading(isLoading) {
-
-
-
-  document.getElementById(
-
-    "claimLoading"
-
-  ).style.display =
-
-    isLoading ? "block" : "none";
-
-
-
-
-
-  document.getElementById(
-
-    "claimBtn"
-
-  ).disabled =
-
-    isLoading;
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   MESSAGE
-
-   ========================================================= */
-
-
-
-function showMessage(
-
-  elementId,
-
-  text,
-
-  type
-
-) {
-
-
-
-  const element =
-
-    document.getElementById(elementId);
-
-
-
-
-
-  element.textContent = text;
-
-
-
-  element.className =
-
-    "message show " + type;
-
-
-
-}
-
-
-
-
-
-function hideMessage(elementId) {
-
-
-
-  const element =
-
-    document.getElementById(elementId);
-
-
-
-  element.className =
-
-    "message";
-
-
-
-  element.textContent = "";
-
-
-
-}
-
-
-
-
-
-/* =========================================================
-
-   ENTER KEY
-
-   ========================================================= */
-
-
+   SEARCH ENTER KEY
+========================================================= */
 
 searchInput.addEventListener(
-
   "keydown",
-
   function(event) {
 
+    if (
+      event.key === "Enter"
+    ) {
 
-
-    if (event.key === "Enter") {
-
-
+      event.preventDefault();
 
       searchClient();
 
-
-
     }
 
-
-
   }
-
 );
-
-
-
-
-
-mobileInput.addEventListener(
-
-  "input",
-
-  function() {
-
-
-
-    this.value =
-
-      this.value.replace(/[^\d]/g, "");
-
-
-
-  }
-
-);
-
-
-
 
 
 /* =========================================================
+   NAME ENTER KEY
+========================================================= */
 
-   LOAD
+nameInput.addEventListener(
+  "keydown",
+  function(event) {
 
-   ========================================================= */
+    if (
+      event.key === "Enter"
+    ) {
+
+      event.preventDefault();
+
+      mobileInput.focus();
+
+    }
+
+  }
+);
 
 
+/* =========================================================
+   MOBILE ENTER KEY
+========================================================= */
 
-loadCompanies();
+mobileInput.addEventListener(
+  "keydown",
+  function(event) {
+
+    if (
+      event.key === "Enter"
+    ) {
+
+      event.preventDefault();
+
+      submitClaim();
+
+    }
+
+  }
+);
 
 
+/* =========================================================
+   SUBMIT CLAIM
+========================================================= */
+
+async function submitClaim() {
+
+  clearMessage();
+
+
+  const company =
+    companySelect.value.trim();
+
+  const name =
+    nameInput.value.trim();
+
+  const mobile =
+    mobileInput.value.trim();
+
+
+  /* CURRENT MATCH */
+
+  if (!currentMatch) {
+
+    showMessage(
+      "पहले अपना Number / Client Code Search करें।",
+      "error"
+    );
+
+    return;
+  }
+
+
+  /* COMPANY */
+
+  if (!company) {
+
+    showMessage(
+      "Company Select करें।",
+      "error"
+    );
+
+    companySelect.focus();
+
+    return;
+  }
+
+
+  /* NAME */
+
+  if (!name) {
+
+    showMessage(
+      "अपना Name डालें।",
+      "error"
+    );
+
+    nameInput.focus();
+
+    return;
+  }
+
+
+  if (name.length < 2) {
+
+    showMessage(
+      "कृपया सही Name डालें।",
+      "error"
+    );
+
+    nameInput.focus();
+
+    return;
+  }
+
+
+  if (name.length > 100) {
+
+    showMessage(
+      "Name बहुत लंबा है।",
+      "error"
+    );
+
+    nameInput.focus();
+
+    return;
+  }
+
+
+  /* MOBILE */
+
+  if (!mobile) {
+
+    showMessage(
+      "अपना Mobile Number डालें।",
+      "error"
+    );
+
+    mobileInput.focus();
+
+    return;
+  }
+
+
+  const cleanedMobile =
+    mobile.replace(
+      /[^\d]/g,
+      ""
+    );
+
+
+  if (
+    cleanedMobile.length < 7 ||
+    cleanedMobile.length > 15
+  ) {
+
+    showMessage(
+      "कृपया सही Mobile Number डालें।",
+      "error"
+    );
+
+    mobileInput.focus();
+
+    return;
+  }
+
+
+  /* DISABLE */
+
+  claimBtn.disabled = true;
+
+
+  const originalButtonHTML =
+    claimBtn.innerHTML;
+
+
+  claimBtn.innerHTML =
+    '<span class="loading-spinner"></span>' +
+    'Submitting...';
+
+
+  try {
+
+    const data =
+      await jsonp({
+
+        action:
+          "claim",
+
+        company:
+          company,
+
+        query:
+          currentMatch,
+
+        name:
+          name,
+
+        mobile:
+          cleanedMobile
+
+      });
+
+
+    /* ALREADY CLAIMED */
+
+    if (
+      data &&
+      data.alreadyClaimed === true
+    ) {
+
+      showMessage(
+        "Already Claimed",
+        "error"
+      );
+
+      return;
+    }
+
+
+    /* SUCCESS */
+
+    if (
+      data &&
+      data.success === true
+    ) {
+
+      showMessage(
+        "Claim Submitted Successfully",
+        "success"
+      );
+
+
+      /*
+        Success step open karo.
+      */
+
+      document
+        .getElementById("section1")
+        .classList.remove("active");
+
+
+      document
+        .getElementById("section2")
+        .classList.add("active");
+
+
+      document
+        .getElementById("step1")
+        .classList.remove("active");
+
+      document
+        .getElementById("step1")
+        .classList.add("done");
+
+
+      document
+        .getElementById("line1")
+        .classList.add("active");
+
+
+      document
+        .getElementById("step2")
+        .classList.add("active");
+
+
+      setTimeout(
+        function() {
+
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+          });
+
+        },
+        100
+      );
+
+
+      return;
+    }
+
+
+    /* SERVER ERROR */
+
+    showMessage(
+      (
+        data &&
+        data.message
+      )
+        ? data.message
+        : "Claim submit nahi hua. Please try again.",
+      "error"
+    );
+
+
+  } catch (error) {
+
+    console.error(
+      "Claim error:",
+      error
+    );
+
+
+    showMessage(
+      "Network problem. Please try again.",
+      "error"
+    );
+
+
+  } finally {
+
+    claimBtn.disabled = false;
+
+    claimBtn.innerHTML =
+      originalButtonHTML;
+
+  }
+
+}
+
+
+/* =========================================================
+   RESET PORTAL
+========================================================= */
+
+function resetPortal() {
+
+  currentMatch = "";
+
+  currentCompany = "";
+
+  companySelect.value = "";
+
+  searchInput.value = "";
+
+  nameInput.value = "";
+
+  mobileInput.value = "";
+
+
+  matchedValue.textContent = "";
+
+
+  resultBox.style.display =
+    "none";
+
+  resultBox.classList.remove(
+    "show"
+  );
+
+
+  claimCard.style.display =
+    "none";
+
+
+  clearMessage();
+
+
+  /*
+    Step 2 -> Step 1
+  */
+
+  document
+    .getElementById("section2")
+    .classList.remove("active");
+
+
+  document
+    .getElementById("section1")
+    .classList.add("active");
+
+
+  document
+    .getElementById("step1")
+    .classList.remove("done");
+
+  document
+    .getElementById("step1")
+    .classList.add("active");
+
+
+  document
+    .getElementById("line1")
+    .classList.remove("active");
+
+
+  document
+    .getElementById("step2")
+    .classList.remove("active");
+
+
+  window.scrollTo({
+    top: 0,
+    behavior: "smooth"
+  });
+
+}
+
+
+/* =========================================================
+   SHOW MESSAGE
+========================================================= */
+
+function showMessage(
+  text,
+  type
+) {
+
+  message.textContent =
+    text;
+
+  message.className =
+    "message show " +
+    type;
+
+}
+
+
+/* =========================================================
+   CLEAR MESSAGE
+========================================================= */
+
+function clearMessage() {
+
+  message.textContent =
+    "";
+
+  message.className =
+    "message";
+
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener(
+  "DOMContentLoaded",
+  function() {
+
+    loadCompanies();
+
+  }
+);
 
 </script>
 
 
-
 </body>
-
-
 
 </html>
