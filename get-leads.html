@@ -10,7 +10,16 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <meta
+    name="description"
+    content="Client Claim Portal"
+  >
+
   <title>Client Claim Portal</title>
+
+  <!-- Faster connection to Apps Script -->
+  <link rel="preconnect" href="https://script.google.com">
+  <link rel="dns-prefetch" href="https://script.google.com">
 
   <style>
 
@@ -808,7 +817,8 @@
       <div class="field">
 
         <label for="company">
-          Select Company <span style="color:#d93025">*</span>
+          Select Company
+          <span style="color:#d93025">*</span>
         </label>
 
         <select id="company">
@@ -854,7 +864,6 @@
         id="searchBtn"
         class="btn"
         type="button"
-        onclick="searchClient()"
       >
         🔍 &nbsp; Search Details
       </button>
@@ -965,7 +974,6 @@
           id="claimBtn"
           class="btn"
           type="button"
-          onclick="submitClaim()"
         >
           ✓ &nbsp; Submit Claim
         </button>
@@ -1023,7 +1031,7 @@
         <button
           class="btn secondary"
           type="button"
-          onclick="resetPortal()"
+          id="anotherClaimBtn"
         >
           Submit Another Claim
         </button>
@@ -1078,20 +1086,30 @@
 
 <script>
 
-
 /* =========================================================
    GOOGLE APPS SCRIPT WEB APP URL
-
-   IMPORTANT:
-   This is your CURRENT deployment URL.
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzK-AINATdkLBsCwNrBW6r-ryvdKYgWjvgomFepwv_MIOPzPg2F9YdldWYEesLX-f-T/exec";
+  "https://script.google.com/macros/s/AKfycbxOy1nG0-Zc6JL1SFGRxb_mC5sjOvH_E0tgUjgS6B4Z_5n_FmCF7bdzxvruAM52bFXr/exec";
 
 
 /* =========================================================
-   DOM ELEMENTS
+   LOCAL STORAGE
+========================================================= */
+
+const SAVED_COMPANY_KEY =
+  "clientClaimPortal_selectedCompany";
+
+const SEARCH_CACHE_PREFIX =
+  "clientClaimPortal_search_";
+
+const SEARCH_CACHE_TTL =
+  60 * 1000;
+
+
+/* =========================================================
+   DOM
 ========================================================= */
 
 const companySelect =
@@ -1130,181 +1148,255 @@ const claimCard =
 const companyBadgeText =
   document.getElementById("companyBadgeText");
 
+const anotherClaimBtn =
+  document.getElementById("anotherClaimBtn");
+
 
 /* =========================================================
-   CURRENT MATCH
+   STATE
 ========================================================= */
 
 let currentMatch = "";
 
 let currentCompany = "";
 
+let searchInProgress = false;
 
-/* =========================================================
-   SAVED COMPANY KEY
-
-   Selected company browser ke localStorage mein
-   permanently save rahegi.
-
-   Iska matlab:
-   - Claim ke baad company rahegi
-   - Submit Another Claim ke baad company rahegi
-   - Page refresh ke baad company rahegi
-   - Browser reopen karne ke baad bhi company rahegi
-========================================================= */
-
-const SAVED_COMPANY_KEY =
-  "clientClaimPortal_selectedCompany";
+let claimInProgress = false;
 
 
 /* =========================================================
-   JSONP REQUEST
+   FAST JSONP
 ========================================================= */
 
 function jsonp(params) {
 
-  return new Promise(
-    function(resolve, reject) {
+  return new Promise(function(resolve, reject) {
 
-      const callbackName =
-        "jsonp_" +
-        Date.now() +
-        "_" +
-        Math.floor(
-          Math.random() * 100000
+    const callbackName =
+      "jsonp_" +
+      Date.now() +
+      "_" +
+      Math.floor(Math.random() * 100000);
+
+    const script =
+      document.createElement("script");
+
+    let finished = false;
+
+    const cleanup = function() {
+
+      clearTimeout(timer);
+
+      try {
+        delete window[callbackName];
+      } catch (e) {
+        window[callbackName] = undefined;
+      }
+
+      if (script.parentNode) {
+        script.parentNode.removeChild(script);
+      }
+
+    };
+
+    const finishError = function(error) {
+
+      if (finished) return;
+
+      finished = true;
+
+      cleanup();
+
+      reject(error);
+
+    };
+
+    const timer =
+      setTimeout(function() {
+
+        finishError(
+          new Error("Request timeout")
         );
 
-
-      const script =
-        document.createElement("script");
+      }, 15000);
 
 
-      let finished = false;
+    window[callbackName] =
+      function(data) {
+
+        if (finished) return;
+
+        finished = true;
+
+        cleanup();
+
+        resolve(data);
+
+      };
 
 
-      const cleanup =
-        function() {
+    const query =
+      new URLSearchParams({
 
-          try {
+        ...params,
 
-            delete window[callbackName];
+        callback:
+          callbackName
 
-          } catch (e) {
-
-            window[callbackName] =
-              undefined;
-
-          }
+      });
 
 
-          if (script.parentNode) {
-
-            script.parentNode.removeChild(
-              script
-            );
-
-          }
-
-        };
+    script.src =
+      API_URL +
+      "?" +
+      query.toString();
 
 
-      const timer =
-        setTimeout(
-          function() {
+    script.async = true;
 
-            if (finished) return;
 
-            finished = true;
+    script.onerror =
+      function() {
 
-            cleanup();
-
-            reject(
-              new Error(
-                "Request timeout"
-              )
-            );
-
-          },
-          15000
+        finishError(
+          new Error("Network error")
         );
 
-
-      window[callbackName] =
-        function(data) {
-
-          if (finished) return;
-
-          finished = true;
-
-          clearTimeout(timer);
-
-          cleanup();
-
-          resolve(data);
-
-        };
+      };
 
 
-      const query =
-        new URLSearchParams({
+    document.head.appendChild(script);
 
-          ...params,
+  });
 
-          callback:
-            callbackName
-
-        });
+}
 
 
-      script.src =
-        API_URL +
-        "?" +
-        query.toString();
+/* =========================================================
+   SEARCH CACHE KEY
+========================================================= */
 
+function getSearchCacheKey(
+  company,
+  query
+) {
 
-      script.async = true;
-
-
-      script.onerror =
-        function() {
-
-          if (finished) return;
-
-          finished = true;
-
-          clearTimeout(timer);
-
-          cleanup();
-
-          reject(
-            new Error(
-              "Network error"
-            )
-          );
-
-        };
-
-
-      document
-        .head
-        .appendChild(script);
-
-    }
+  return (
+    SEARCH_CACHE_PREFIX +
+    encodeURIComponent(
+      company.toLowerCase() +
+      "|" +
+      query.toLowerCase()
+    )
   );
 
 }
 
 
 /* =========================================================
+   GET CACHED SEARCH
+========================================================= */
+
+function getCachedSearch(
+  company,
+  query
+) {
+
+  try {
+
+    const key =
+      getSearchCacheKey(
+        company,
+        query
+      );
+
+    const raw =
+      sessionStorage.getItem(key);
+
+    if (!raw) {
+      return null;
+    }
+
+    const item =
+      JSON.parse(raw);
+
+    if (
+      !item ||
+      !item.time ||
+      Date.now() - item.time >
+      SEARCH_CACHE_TTL
+    ) {
+
+      sessionStorage.removeItem(key);
+
+      return null;
+    }
+
+    return item.data || null;
+
+  } catch (error) {
+
+    return null;
+
+  }
+
+}
+
+
+/* =========================================================
+   SAVE SEARCH CACHE
+========================================================= */
+
+function saveSearchCache(
+  company,
+  query,
+  data
+) {
+
+  try {
+
+    const key =
+      getSearchCacheKey(
+        company,
+        query
+      );
+
+    sessionStorage.setItem(
+
+      key,
+
+      JSON.stringify({
+
+        time: Date.now(),
+
+        data: data
+
+      })
+
+    );
+
+  } catch (error) {
+
+    /* Cache failure should never
+       stop the portal. */
+
+  }
+
+}
+
+
+/* =========================================================
    LOAD COMPANIES
-
-   Google Sheet ke saare tabs automatically
-   dropdown mein load honge.
-
-   Saved company automatically restore hogi.
 ========================================================= */
 
 async function loadCompanies() {
+
+  const savedCompany =
+    localStorage.getItem(
+      SAVED_COMPANY_KEY
+    ) || "";
+
 
   companySelect.disabled = true;
 
@@ -1316,7 +1408,9 @@ async function loadCompanies() {
 
     const data =
       await jsonp({
+
         action: "companies"
+
       });
 
 
@@ -1333,13 +1427,9 @@ async function loadCompanies() {
     }
 
 
-    /*
-      Company names clean karo.
-      Blank aur duplicate names remove karo.
-    */
-
     const companies =
       data.companies
+
         .map(function(company) {
 
           return String(
@@ -1347,15 +1437,19 @@ async function loadCompanies() {
           ).trim();
 
         })
+
         .filter(function(company) {
 
           return company !== "";
 
         })
+
         .filter(function(company, index, array) {
 
-          return array.indexOf(company)
-            === index;
+          return (
+            array.indexOf(company)
+            === index
+          );
 
         });
 
@@ -1368,16 +1462,15 @@ async function loadCompanies() {
       function(company) {
 
         const option =
-          document.createElement("option");
-
+          document.createElement(
+            "option"
+          );
 
         option.value =
           company;
 
-
         option.textContent =
           company;
-
 
         companySelect.appendChild(
           option
@@ -1393,85 +1486,33 @@ async function loadCompanies() {
         '<option value="">No companies found</option>';
 
       return;
-    }
-
-
-    companySelect.disabled = false;
-
-
-    /* =====================================================
-       RESTORE SAVED COMPANY
-    ===================================================== */
-
-    let savedCompany = "";
-
-
-    try {
-
-      savedCompany =
-        (
-          localStorage.getItem(
-            SAVED_COMPANY_KEY
-          ) || ""
-        ).trim();
-
-    } catch (storageError) {
-
-      console.warn(
-        "Local storage unavailable:",
-        storageError
-      );
 
     }
 
 
     /*
-      Agar saved company abhi bhi Sheet mein available hai,
-      to automatically select karo.
+      अगर पहले company select की थी
+      और वह अभी भी मौजूद है,
+      तो वही selected रहेगी.
     */
 
     if (
       savedCompany &&
-      companies.includes(savedCompany)
+      companies.indexOf(savedCompany)
+      !== -1
     ) {
 
       companySelect.value =
         savedCompany;
 
-
       currentCompany =
         savedCompany;
 
     }
 
 
-    /*
-      Agar saved company ab Sheet mein nahi hai,
-      to saved value clear karo.
-    */
-
-    else if (savedCompany) {
-
-      try {
-
-        localStorage.removeItem(
-          SAVED_COMPANY_KEY
-        );
-
-      } catch (storageError) {
-
-        console.warn(
-          "Unable to clear saved company:",
-          storageError
-        );
-
-      }
-
-
-      currentCompany =
-        "";
-
-    }
+    companySelect.disabled =
+      false;
 
 
   } catch (error) {
@@ -1484,7 +1525,6 @@ async function loadCompanies() {
 
     companySelect.disabled =
       true;
-
 
     companySelect.innerHTML =
       '<option value="">Unable to load companies</option>';
@@ -1502,14 +1542,6 @@ async function loadCompanies() {
 
 /* =========================================================
    COMPANY CHANGE
-
-   IMPORTANT:
-
-   User manually company change karega tabhi
-   selected company ki preference change hogi.
-
-   Agar same company selected hai aur claim complete
-   hota hai, to company change nahi hogi.
 ========================================================= */
 
 companySelect.addEventListener(
@@ -1520,55 +1552,17 @@ companySelect.addEventListener(
       companySelect.value.trim();
 
 
-    /* SAVE SELECTED COMPANY */
-
-    try {
-
-      if (currentCompany) {
-
-        localStorage.setItem(
-          SAVED_COMPANY_KEY,
-          currentCompany
-        );
-
-      }
-
-      else {
-
-        /*
-          User ne "Select Company" choose kiya.
-          Is case mein saved company remove hogi.
-        */
-
-        localStorage.removeItem(
-          SAVED_COMPANY_KEY
-        );
-
-      }
-
-    } catch (storageError) {
-
-      console.warn(
-        "Unable to save company preference:",
-        storageError
-      );
-
-    }
+    localStorage.setItem(
+      SAVED_COMPANY_KEY,
+      currentCompany
+    );
 
 
-    /*
-      Company change hone par current search
-      result clear karo.
-    */
+    currentMatch = "";
 
-    currentMatch =
-      "";
+    searchInput.value = "";
 
-    searchInput.value =
-      "";
-
-    matchedValue.textContent =
-      "";
+    matchedValue.textContent = "";
 
     resultBox.classList.remove(
       "show"
@@ -1580,6 +1574,10 @@ companySelect.addEventListener(
     claimCard.style.display =
       "none";
 
+    nameInput.value = "";
+
+    mobileInput.value = "";
+
     clearMessage();
 
   }
@@ -1587,10 +1585,15 @@ companySelect.addEventListener(
 
 
 /* =========================================================
-   SEARCH CLIENT
+   SEARCH
 ========================================================= */
 
 async function searchClient() {
+
+  if (searchInProgress) {
+    return;
+  }
+
 
   clearMessage();
 
@@ -1601,8 +1604,6 @@ async function searchClient() {
   const query =
     searchInput.value.trim();
 
-
-  /* COMPANY */
 
   if (!company) {
 
@@ -1616,8 +1617,6 @@ async function searchClient() {
     return;
   }
 
-
-  /* QUERY */
 
   if (!query) {
 
@@ -1645,8 +1644,11 @@ async function searchClient() {
   }
 
 
-  currentMatch =
-    "";
+  currentCompany =
+    company;
+
+
+  currentMatch = "";
 
 
   resultBox.classList.remove(
@@ -1659,6 +1661,34 @@ async function searchClient() {
   claimCard.style.display =
     "none";
 
+
+  /*
+    पहले session cache check.
+    अगर वही search अभी थोड़ी देर पहले
+    किया गया था तो server request की जरूरत नहीं।
+  */
+
+  const cached =
+    getCachedSearch(
+      company,
+      query
+    );
+
+
+  if (cached) {
+
+    handleSearchResult(
+      cached,
+      company
+    );
+
+    return;
+
+  }
+
+
+  searchInProgress =
+    true;
 
   searchBtn.disabled =
     true;
@@ -1684,82 +1714,20 @@ async function searchClient() {
       });
 
 
-    if (
-      data &&
-      data.success === true &&
-      data.found === true
-    ) {
-
-      currentMatch =
-        String(
-          data.value || ""
-        ).trim();
+    saveSearchCache(
+      company,
+      query,
+      data
+    );
 
 
-      if (!currentMatch) {
-
-        showMessage(
-          "Matching data खाली है।",
-          "error"
-        );
-
-        return;
-      }
+    handleSearchResult(
+      data,
+      company
+    );
 
 
-      matchedValue.textContent =
-        currentMatch;
-
-
-      resultBox.style.display =
-        "block";
-
-
-      resultBox.classList.add(
-        "show"
-      );
-
-
-      companyBadgeText.textContent =
-        company;
-
-
-      claimCard.style.display =
-        "block";
-
-
-      nameInput.value =
-        "";
-
-      mobileInput.value =
-        "";
-
-
-      setTimeout(
-        function() {
-
-          nameInput.focus();
-
-        },
-        100
-      );
-
-
-    }
-
-    else {
-
-      showMessage(
-        "No Result Found",
-        "error"
-      );
-
-    }
-
-
-  }
-
-  catch (error) {
+  } catch (error) {
 
     console.error(
       "Search error:",
@@ -1772,9 +1740,11 @@ async function searchClient() {
       "error"
     );
 
-  }
 
-  finally {
+  } finally {
+
+    searchInProgress =
+      false;
 
     searchBtn.disabled =
       false;
@@ -1788,7 +1758,87 @@ async function searchClient() {
 
 
 /* =========================================================
-   SEARCH ENTER KEY
+   HANDLE SEARCH RESULT
+========================================================= */
+
+function handleSearchResult(
+  data,
+  company
+) {
+
+  if (
+    data &&
+    data.success === true &&
+    data.found === true
+  ) {
+
+    currentMatch =
+      String(
+        data.value || ""
+      ).trim();
+
+
+    if (!currentMatch) {
+
+      showMessage(
+        "Matching data खाली है।",
+        "error"
+      );
+
+      return;
+
+    }
+
+
+    matchedValue.textContent =
+      currentMatch;
+
+
+    resultBox.style.display =
+      "block";
+
+    resultBox.classList.add(
+      "show"
+    );
+
+
+    companyBadgeText.textContent =
+      company;
+
+
+    claimCard.style.display =
+      "block";
+
+
+    nameInput.value = "";
+
+    mobileInput.value = "";
+
+
+    setTimeout(
+      function() {
+
+        nameInput.focus();
+
+      },
+      50
+    );
+
+
+  } else {
+
+    showMessage(
+      "No Result Found",
+      "error"
+    );
+
+  }
+
+}
+
+
+/* =========================================================
+   SEARCH ENTER
 ========================================================= */
 
 searchInput.addEventListener(
@@ -1810,7 +1860,7 @@ searchInput.addEventListener(
 
 
 /* =========================================================
-   NAME ENTER KEY
+   NAME ENTER
 ========================================================= */
 
 nameInput.addEventListener(
@@ -1832,7 +1882,25 @@ nameInput.addEventListener(
 
 
 /* =========================================================
-   MOBILE ENTER KEY
+   MOBILE CLEANING
+========================================================= */
+
+mobileInput.addEventListener(
+  "input",
+  function() {
+
+    mobileInput.value =
+      mobileInput.value.replace(
+        /[^\d+\-\s]/g,
+        ""
+      );
+
+  }
+);
+
+
+/* =========================================================
+   MOBILE ENTER
 ========================================================= */
 
 mobileInput.addEventListener(
@@ -1859,6 +1927,11 @@ mobileInput.addEventListener(
 
 async function submitClaim() {
 
+  if (claimInProgress) {
+    return;
+  }
+
+
   clearMessage();
 
 
@@ -1872,8 +1945,6 @@ async function submitClaim() {
     mobileInput.value.trim();
 
 
-  /* CURRENT MATCH */
-
   if (!currentMatch) {
 
     showMessage(
@@ -1884,8 +1955,6 @@ async function submitClaim() {
     return;
   }
 
-
-  /* COMPANY */
 
   if (!company) {
 
@@ -1899,8 +1968,6 @@ async function submitClaim() {
     return;
   }
 
-
-  /* NAME */
 
   if (!name) {
 
@@ -1941,8 +2008,6 @@ async function submitClaim() {
   }
 
 
-  /* MOBILE */
-
   if (!mobile) {
 
     showMessage(
@@ -1979,7 +2044,8 @@ async function submitClaim() {
   }
 
 
-  /* DISABLE */
+  claimInProgress =
+    true;
 
   claimBtn.disabled =
     true;
@@ -2017,8 +2083,6 @@ async function submitClaim() {
       });
 
 
-    /* ALREADY CLAIMED */
-
     if (
       data &&
       data.alreadyClaimed === true
@@ -2030,15 +2094,33 @@ async function submitClaim() {
       );
 
       return;
+
     }
 
-
-    /* SUCCESS */
 
     if (
       data &&
       data.success === true
     ) {
+
+      /*
+        Successful claim ke baad
+        current result cache ko hata do,
+        taaki same query stale result
+        ke रूप में use na ho.
+      */
+
+      try {
+
+        sessionStorage.removeItem(
+          getSearchCacheKey(
+            company,
+            currentMatch
+          )
+        );
+
+      } catch (e) {}
+
 
       showMessage(
         "Claim Submitted Successfully",
@@ -2046,99 +2128,58 @@ async function submitClaim() {
       );
 
 
-      /*
-        IMPORTANT:
-
-        Company ko kahin bhi reset nahi kiya ja raha.
-
-        Current selected company DOM mein selected rahegi.
-        Aur localStorage mein bhi saved rahegi.
-      */
-
-
       document
         .getElementById("section1")
-        .classList.remove(
-          "active"
-        );
+        .classList.remove("active");
 
 
       document
         .getElementById("section2")
-        .classList.add(
-          "active"
-        );
+        .classList.add("active");
 
 
       document
         .getElementById("step1")
-        .classList.remove(
-          "active"
-        );
-
+        .classList.remove("active");
 
       document
         .getElementById("step1")
-        .classList.add(
-          "done"
-        );
+        .classList.add("done");
 
 
       document
         .getElementById("line1")
-        .classList.add(
-          "active"
-        );
+        .classList.add("active");
 
 
       document
         .getElementById("step2")
-        .classList.add(
-          "active"
-        );
+        .classList.add("active");
 
 
-      setTimeout(
-        function() {
-
-          window.scrollTo({
-
-            top: 0,
-
-            behavior: "smooth"
-
-          });
-
-        },
-        100
-      );
+      window.scrollTo({
+        top: 0,
+        behavior: "smooth"
+      });
 
 
       return;
+
     }
 
 
-    /* SERVER ERROR */
-
     showMessage(
-
       (
         data &&
         data.message
       )
-
         ? data.message
-
         : "Claim submit nahi hua. Please try again.",
-
       "error"
-
     );
 
 
-  }
-
-  catch (error) {
+  } catch (error) {
 
     console.error(
       "Claim error:",
@@ -2151,9 +2192,11 @@ async function submitClaim() {
       "error"
     );
 
-  }
 
-  finally {
+  } finally {
+
+    claimInProgress =
+      false;
 
     claimBtn.disabled =
       false;
@@ -2168,87 +2211,56 @@ async function submitClaim() {
 
 /* =========================================================
    RESET PORTAL
-
-   IMPORTANT:
-
-   YAHAN COMPANY KO RESET NAHI KIYA JA RAHA.
-
-   Submit Another Claim dabane ke baad:
-
-   - Company same rahegi
-   - Search box clear hoga
-   - Name clear hoga
-   - Mobile clear hoga
-   - New claim ke liye page ready hoga
 ========================================================= */
 
 function resetPortal() {
 
-  currentMatch =
-    "";
-
-
   /*
     IMPORTANT:
-
-    Current company ko dobara read karo.
-
-    Isse selected company wahi rahegi.
+    Company clear नहीं होगी.
+    User ने जो company select की है
+    वही selected रहेगी.
   */
 
-  currentCompany =
-    companySelect.value.trim();
+  currentMatch = "";
 
 
-  /*
-    Safety:
+  const savedCompany =
+    localStorage.getItem(
+      SAVED_COMPANY_KEY
+    ) || currentCompany;
 
-    Agar kisi reason se DOM value blank hai,
-    to localStorage se saved company restore karo.
-  */
 
-  if (!currentCompany) {
+  if (
+    savedCompany &&
+    companySelect.querySelector(
+      'option[value="' +
+      CSS.escape(savedCompany) +
+      '"]'
+    )
+  ) {
 
-    try {
+    companySelect.value =
+      savedCompany;
 
-      currentCompany =
-        (
-          localStorage.getItem(
-            SAVED_COMPANY_KEY
-          ) || ""
-        ).trim();
-
-    } catch (storageError) {
-
-      console.warn(
-        "Unable to read saved company:",
-        storageError
-      );
-
-    }
+    currentCompany =
+      savedCompany;
 
   }
 
 
-  /* CLEAR SEARCH / CLAIM FIELDS */
+  searchInput.value = "";
 
-  searchInput.value =
-    "";
+  nameInput.value = "";
 
-  nameInput.value =
-    "";
-
-  mobileInput.value =
-    "";
+  mobileInput.value = "";
 
 
-  matchedValue.textContent =
-    "";
+  matchedValue.textContent = "";
 
 
   resultBox.style.display =
     "none";
-
 
   resultBox.classList.remove(
     "show"
@@ -2262,102 +2274,62 @@ function resetPortal() {
   clearMessage();
 
 
-  /*
-    STEP 2 -> STEP 1
-  */
-
   document
     .getElementById("section2")
-    .classList.remove(
-      "active"
-    );
+    .classList.remove("active");
 
 
   document
     .getElementById("section1")
-    .classList.add(
-      "active"
-    );
+    .classList.add("active");
 
 
   document
     .getElementById("step1")
-    .classList.remove(
-      "done"
-    );
+    .classList.remove("done");
 
 
   document
     .getElementById("step1")
-    .classList.add(
-      "active"
-    );
+    .classList.add("active");
 
 
   document
     .getElementById("line1")
-    .classList.remove(
-      "active"
-    );
+    .classList.remove("active");
 
 
   document
     .getElementById("step2")
-    .classList.remove(
-      "active"
-    );
+    .classList.remove("active");
 
-
-  /*
-    ========================================================
-    MOST IMPORTANT PART
-
-    Company ko same rakho.
-    ========================================================
-  */
-
-  if (currentCompany) {
-
-    companySelect.value =
-      currentCompany;
-
-
-    /*
-      Ensure localStorage mein bhi company saved rahe.
-    */
-
-    try {
-
-      localStorage.setItem(
-        SAVED_COMPANY_KEY,
-        currentCompany
-      );
-
-    } catch (storageError) {
-
-      console.warn(
-        "Unable to save company:",
-        storageError
-      );
-
-    }
-
-  }
-
-
-  /*
-    Page top par le jao.
-  */
 
   window.scrollTo({
-
     top: 0,
-
     behavior: "smooth"
-
   });
 
+
+  setTimeout(
+    function() {
+
+      searchInput.focus();
+
+    },
+    250
+  );
+
 }
+
+
+/* =========================================================
+   ANOTHER CLAIM
+========================================================= */
+
+anotherClaimBtn.addEventListener(
+  "click",
+  resetPortal
+);
 
 
 /* =========================================================
@@ -2395,18 +2367,10 @@ function clearMessage() {
 
 
 /* =========================================================
-   INITIAL LOAD
+   START
 ========================================================= */
 
-document.addEventListener(
-  "DOMContentLoaded",
-  function() {
-
-    loadCompanies();
-
-  }
-);
-
+loadCompanies();
 
 </script>
 
