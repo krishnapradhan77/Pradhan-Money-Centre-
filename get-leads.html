@@ -1,4 +1,3 @@
-```
 <!DOCTYPE html>
 <html lang="en">
 
@@ -449,8 +448,7 @@
 
       color: #087f66;
     }
-
-    .success-box {
+.success-box {
 
       display: none;
 
@@ -899,8 +897,7 @@
       font-size: 13px;
       font-weight: 600;
     }
-
-    .payout-divider {
+.payout-divider {
       height: 1px;
       margin: 20px 0;
       background: #dbe9e5;
@@ -1348,7 +1345,7 @@
       <div class="registration-help">
         Please enter your name, mobile number and email address.
         All three details are required to continue.
-      </div>
+ </div>
 
       <div class="field">
         <label for="registrationName">
@@ -1626,7 +1623,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbwaYi7ChXptjXH3T6UdSynNLHo8_f6g81n_1CoPutjuDvzAdIY6qARJCrbdMq0EEZSb/exec";
+  "https://script.google.com/macros/s/AKfycbyOURvme1r_jPAdnRRL3wmRXtnjXUdNlq-iJTihdTWmeqMNAFdZskkrgBbNhO8objYN/exec";
 
 
 /* =========================================================
@@ -2246,7 +2243,7 @@ async function searchClient() {
         );
 
         return;
-      }
+}
 
 
       matchedValue.textContent =
@@ -2694,9 +2691,7 @@ function resetPortal() {
 
   currentCompany =
     companySelect.value.trim();
-
-
-  if (!currentCompany) {
+ if (!currentCompany) {
 
     try {
 
@@ -3144,8 +3139,7 @@ payoutOverlay.addEventListener(
     if (event.target === payoutOverlay) {
       closePayoutModal();
     }
-
-  }
+ }
 );
 
 
