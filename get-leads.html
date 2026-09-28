@@ -1,34 +1,19 @@
-<!doctype html>
+```
+<!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Client Claim Portal — Full HTML Code</title>
-<style>
-body{margin:0;background:#111827;color:#e5e7eb;font-family:Consolas,Monaco,monospace}
-.top{position:sticky;top:0;background:#0b1220;padding:14px 18px;font-family:Arial,sans-serif;z-index:2}
-button{padding:10px 16px;border:0;border-radius:7px;background:#2563eb;color:#fff;font-size:15px;cursor:pointer}
-#msg{margin-left:12px;color:#86efac}
-pre{margin:0;padding:20px;white-space:pre-wrap;word-break:break-word;line-height:1.45;font-size:13px}
-</style>
-</head>
-<body>
-<div class="top"><button onclick="copyAll()">📋 Copy Full HTML Code</button><span id="msg"></span></div>
-<pre id="code">&lt;!DOCTYPE html&gt;
-&lt;html lang=&quot;en&quot;&gt;
 
-&lt;head&gt;
+  <meta charset="UTF-8">
 
-  &lt;meta charset=&quot;UTF-8&quot;&gt;
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-  &lt;meta
-    name=&quot;viewport&quot;
-    content=&quot;width=device-width, initial-scale=1.0&quot;
-  &gt;
+  <title>Client Claim Portal</title>
 
-  &lt;title&gt;Client Claim Portal&lt;/title&gt;
-
-  &lt;style&gt;
+  <style>
 
     * {
       box-sizing: border-box;
@@ -44,7 +29,7 @@ pre{margin:0;padding:20px;white-space:pre-wrap;word-break:break-word;line-height
         Inter,
         -apple-system,
         BlinkMacSystemFont,
-        &quot;Segoe UI&quot;,
+        "Segoe UI",
         sans-serif;
 
       background:
@@ -991,643 +976,643 @@ pre{margin:0;padding:20px;white-space:pre-wrap;word-break:break-word;line-height
 
     }
 
-  &lt;/style&gt;
+  </style>
 
-&lt;/head&gt;
-
-
-&lt;body&gt;
+</head>
 
 
-&lt;div class=&quot;container&quot;&gt;
+<body>
 
 
-  &lt;!-- HEADER --&gt;
+<div class="container">
 
-  &lt;div class=&quot;header&quot;&gt;
 
-    &lt;div class=&quot;logo&quot;&gt;✓&lt;/div&gt;
+  <!-- HEADER -->
 
-    &lt;h1&gt;Client Claim Portal&lt;/h1&gt;
+  <div class="header">
 
-    &lt;p&gt;
+    <div class="logo">✓</div>
+
+    <h1>Client Claim Portal</h1>
+
+    <p>
       Select your company, search your number or
       client code, and submit your claim securely.
-    &lt;/p&gt;
+    </p>
 
-  &lt;/div&gt;
-
-
-  &lt;!-- MAIN CARD --&gt;
-
-  &lt;div class=&quot;card&quot;&gt;
+  </div>
 
 
-    &lt;!-- STEPS --&gt;
+  <!-- MAIN CARD -->
 
-    &lt;div class=&quot;steps&quot;&gt;
+  <div class="card">
 
-      &lt;div
-        id=&quot;step1&quot;
-        class=&quot;step active&quot;
-      &gt;
+
+    <!-- STEPS -->
+
+    <div class="steps">
+
+      <div
+        id="step1"
+        class="step active"
+      >
         1
-      &lt;/div&gt;
+      </div>
 
-      &lt;div
-        id=&quot;line1&quot;
-        class=&quot;line&quot;
-      &gt;&lt;/div&gt;
+      <div
+        id="line1"
+        class="line"
+      ></div>
 
-      &lt;div
-        id=&quot;step2&quot;
-        class=&quot;step&quot;
-      &gt;
+      <div
+        id="step2"
+        class="step"
+      >
         2
-      &lt;/div&gt;
+      </div>
 
-      &lt;div
-        id=&quot;line2&quot;
-        class=&quot;line&quot;
-      &gt;&lt;/div&gt;
+      <div
+        id="line2"
+        class="line"
+      ></div>
 
-      &lt;div
-        id=&quot;step3&quot;
-        class=&quot;step&quot;
-      &gt;
+      <div
+        id="step3"
+        class="step"
+      >
         3
-      &lt;/div&gt;
+      </div>
 
-    &lt;/div&gt;
+    </div>
 
 
-    &lt;!-- STEP 1 --&gt;
+    <!-- STEP 1 -->
 
-    &lt;div
-      id=&quot;section1&quot;
-      class=&quot;section active&quot;
-    &gt;
+    <div
+      id="section1"
+      class="section active"
+    >
 
-      &lt;div class=&quot;section-title&quot;&gt;
+      <div class="section-title">
         Search Your Details
-      &lt;/div&gt;
+      </div>
 
-      &lt;div class=&quot;section-subtitle&quot;&gt;
+      <div class="section-subtitle">
         Select your company and search your
         number or client code.
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;!-- COMPANY --&gt;
+      <!-- COMPANY -->
 
-      &lt;div class=&quot;field&quot;&gt;
+      <div class="field">
 
-        &lt;label for=&quot;company&quot;&gt;
-          Select Company &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
+        <label for="company">
+          Select Company <span style="color:#d93025">*</span>
+        </label>
 
-        &lt;select id=&quot;company&quot;&gt;
+        <select id="company">
 
-          &lt;option value=&quot;&quot;&gt;
+          <option value="">
             Loading Companies...
-          &lt;/option&gt;
+          </option>
 
-        &lt;/select&gt;
+        </select>
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;!-- SEARCH --&gt;
+      <!-- SEARCH -->
 
-      &lt;div class=&quot;field&quot;&gt;
+      <div class="field">
 
-        &lt;label for=&quot;search&quot;&gt;
+        <label for="search">
           Number / Client Code
-          &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
+          <span style="color:#d93025">*</span>
+        </label>
 
-        &lt;div class=&quot;search-box&quot;&gt;
+        <div class="search-box">
 
-          &lt;input
-            type=&quot;text&quot;
-            id=&quot;search&quot;
-            placeholder=&quot;Enter Number or Client Code&quot;
-            autocomplete=&quot;off&quot;
-            maxlength=&quot;100&quot;
-          &gt;
+          <input
+            type="text"
+            id="search"
+            placeholder="Enter Number or Client Code"
+            autocomplete="off"
+            maxlength="100"
+          >
 
-          &lt;span class=&quot;search-icon&quot;&gt;
+          <span class="search-icon">
             🔍
-          &lt;/span&gt;
+          </span>
 
-        &lt;/div&gt;
+        </div>
 
-      &lt;/div&gt;
-
-
-      &lt;button
-        id=&quot;searchBtn&quot;
-        class=&quot;btn&quot;
-        type=&quot;button&quot;
-        onclick=&quot;searchClient()&quot;
-      &gt;
-        🔍 &amp;nbsp; Search Details
-      &lt;/button&gt;
+      </div>
 
 
-      &lt;!-- LOADING --&gt;
+      <button
+        id="searchBtn"
+        class="btn"
+        type="button"
+        onclick="searchClient()"
+      >
+        🔍 &nbsp; Search Details
+      </button>
 
-      &lt;div
-        id=&quot;loading&quot;
-        class=&quot;loading&quot;
-      &gt;
 
-        &lt;span class=&quot;spinner&quot;&gt;&lt;/span&gt;
+      <!-- LOADING -->
+
+      <div
+        id="loading"
+        class="loading"
+      >
+
+        <span class="spinner"></span>
 
         Searching...
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;!-- RESULT --&gt;
+      <!-- RESULT -->
 
-      &lt;div
-        id=&quot;result&quot;
-        class=&quot;result&quot;
-      &gt;
+      <div
+        id="result"
+        class="result"
+      >
 
-        &lt;div class=&quot;result-label&quot;&gt;
+        <div class="result-label">
           Matching Client
-        &lt;/div&gt;
+        </div>
 
-        &lt;div
-          id=&quot;matchedValue&quot;
-          class=&quot;result-value&quot;
-        &gt;&lt;/div&gt;
+        <div
+          id="matchedValue"
+          class="result-value"
+        ></div>
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;!-- CLAIM FORM --&gt;
+      <!-- CLAIM FORM -->
 
-      &lt;div
-        id=&quot;claimCard&quot;
-        class=&quot;claim-card&quot;
-        style=&quot;display:none;&quot;
-      &gt;
+      <div
+        id="claimCard"
+        class="claim-card"
+        style="display:none;"
+      >
 
-        &lt;div class=&quot;claim-card-title&quot;&gt;
+        <div class="claim-card-title">
           Submit Your Claim
-        &lt;/div&gt;
+        </div>
 
 
-        &lt;div
-          id=&quot;companyBadge&quot;
-          class=&quot;company-badge&quot;
-        &gt;
+        <div
+          id="companyBadge"
+          class="company-badge"
+        >
 
-          &lt;span class=&quot;company-dot&quot;&gt;&lt;/span&gt;
+          <span class="company-dot"></span>
 
-          &lt;span id=&quot;companyBadgeText&quot;&gt;
+          <span id="companyBadgeText">
             Company
-          &lt;/span&gt;
+          </span>
 
-        &lt;/div&gt;
+        </div>
 
 
-        &lt;!-- NAME --&gt;
+        <!-- NAME -->
 
-        &lt;div class=&quot;field&quot;&gt;
+        <div class="field">
 
-          &lt;label for=&quot;name&quot;&gt;
+          <label for="name">
             Your Name
-            &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
+            <span style="color:#d93025">*</span>
+          </label>
 
-          &lt;input
-            type=&quot;text&quot;
-            id=&quot;name&quot;
-            placeholder=&quot;Enter your name&quot;
-            maxlength=&quot;100&quot;
-            autocomplete=&quot;name&quot;
-          &gt;
+          <input
+            type="text"
+            id="name"
+            placeholder="Enter your name"
+            maxlength="100"
+            autocomplete="name"
+          >
 
-        &lt;/div&gt;
+        </div>
 
 
-        &lt;!-- MOBILE --&gt;
+        <!-- MOBILE -->
 
-        &lt;div class=&quot;field&quot;&gt;
+        <div class="field">
 
-          &lt;label for=&quot;mobile&quot;&gt;
+          <label for="mobile">
             Mobile Number
-            &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
+            <span style="color:#d93025">*</span>
+          </label>
 
-          &lt;input
-            type=&quot;tel&quot;
-            id=&quot;mobile&quot;
-            placeholder=&quot;Enter mobile number&quot;
-            maxlength=&quot;15&quot;
-            inputmode=&quot;numeric&quot;
-            autocomplete=&quot;tel&quot;
-          &gt;
+          <input
+            type="tel"
+            id="mobile"
+            placeholder="Enter mobile number"
+            maxlength="15"
+            inputmode="numeric"
+            autocomplete="tel"
+          >
 
-        &lt;/div&gt;
-
-
-        &lt;button
-          id=&quot;claimBtn&quot;
-          class=&quot;btn&quot;
-          type=&quot;button&quot;
-          onclick=&quot;submitClaim()&quot;
-        &gt;
-          ✓ &amp;nbsp; Submit Claim
-        &lt;/button&gt;
-
-      &lt;/div&gt;
+        </div>
 
 
-      &lt;!-- MESSAGE --&gt;
+        <button
+          id="claimBtn"
+          class="btn"
+          type="button"
+          onclick="submitClaim()"
+        >
+          ✓ &nbsp; Submit Claim
+        </button>
 
-      &lt;div
-        id=&quot;message&quot;
-        class=&quot;message&quot;
-        aria-live=&quot;polite&quot;
-      &gt;&lt;/div&gt;
+      </div>
 
 
-      &lt;!-- SECURITY --&gt;
+      <!-- MESSAGE -->
 
-      &lt;div class=&quot;security&quot;&gt;
+      <div
+        id="message"
+        class="message"
+        aria-live="polite"
+      ></div>
 
-        🔒 &amp;nbsp;
+
+      <!-- SECURITY -->
+
+      <div class="security">
+
+        🔒 &nbsp;
 
         Please enter correct details.
         Your claim information will be
         processed through the connected
         claim system.
 
-      &lt;/div&gt;
+      </div>
 
-    &lt;/div&gt;
+    </div>
 
 
-    &lt;!-- STEP 2 / SUCCESS --&gt;
+    <!-- STEP 2 / SUCCESS -->
 
-    &lt;div
-      id=&quot;section2&quot;
-      class=&quot;section&quot;
-    &gt;
+    <div
+      id="section2"
+      class="section"
+    >
 
-      &lt;div class=&quot;success-box show&quot;&gt;
+      <div class="success-box show">
 
-        &lt;div class=&quot;success-icon&quot;&gt;
+        <div class="success-icon">
           ✓
-        &lt;/div&gt;
+        </div>
 
-        &lt;h2&gt;
+        <h2>
           Claim Submitted
-        &lt;/h2&gt;
+        </h2>
 
-        &lt;p&gt;
+        <p>
           Your claim has been submitted
           successfully.
-        &lt;/p&gt;
+        </p>
 
-        &lt;button
-          class=&quot;btn secondary&quot;
-          type=&quot;button&quot;
-          onclick=&quot;resetPortal()&quot;
-        &gt;
+        <button
+          class="btn secondary"
+          type="button"
+          onclick="resetPortal()"
+        >
           Submit Another Claim
-        &lt;/button&gt;
+        </button>
 
-      &lt;/div&gt;
+      </div>
 
-    &lt;/div&gt;
+    </div>
 
 
-    &lt;!-- STEP 3 --&gt;
+    <!-- STEP 3 -->
 
-    &lt;div
-      id=&quot;section3&quot;
-      class=&quot;section&quot;
-    &gt;
+    <div
+      id="section3"
+      class="section"
+    >
 
-      &lt;div class=&quot;success-box show&quot;&gt;
+      <div class="success-box show">
 
-        &lt;div class=&quot;success-icon&quot;&gt;
+        <div class="success-icon">
           ✓
-        &lt;/div&gt;
+        </div>
 
-        &lt;h2&gt;
+        <h2>
           Thank You
-        &lt;/h2&gt;
+        </h2>
 
-        &lt;p&gt;
+        <p>
           Your claim information has been
           processed successfully.
-        &lt;/p&gt;
+        </p>
 
-      &lt;/div&gt;
+      </div>
 
-    &lt;/div&gt;
-
-
-  &lt;/div&gt;
+    </div>
 
 
+  </div>
 
-  &lt;!-- =====================================================
+
+
+  <!-- =====================================================
        CUSTOMER REGISTRATION - NEW
-  ====================================================== --&gt;
+  ====================================================== -->
 
-  &lt;div
-    id=&quot;registrationOverlay&quot;
-    class=&quot;registration-overlay&quot;
-    aria-hidden=&quot;true&quot;
-  &gt;
+  <div
+    id="registrationOverlay"
+    class="registration-overlay"
+    aria-hidden="true"
+  >
 
-    &lt;div
-      class=&quot;registration-modal&quot;
-      role=&quot;dialog&quot;
-      aria-modal=&quot;true&quot;
-      aria-labelledby=&quot;registrationTitle&quot;
-    &gt;
+    <div
+      class="registration-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registrationTitle"
+    >
 
-      &lt;div class=&quot;registration-icon&quot;&gt;✓&lt;/div&gt;
+      <div class="registration-icon">✓</div>
 
-      &lt;h2 id=&quot;registrationTitle&quot;&gt;Create Your Account&lt;/h2&gt;
+      <h2 id="registrationTitle">Create Your Account</h2>
 
-      &lt;div class=&quot;registration-help&quot;&gt;
+      <div class="registration-help">
         Please enter your name, mobile number and email address.
         All three details are required to continue.
-      &lt;/div&gt;
+      </div>
 
-      &lt;div class=&quot;field&quot;&gt;
-        &lt;label for=&quot;registrationName&quot;&gt;
-          Name &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;input
-          type=&quot;text&quot;
-          id=&quot;registrationName&quot;
-          placeholder=&quot;Enter your name&quot;
-          maxlength=&quot;100&quot;
-          autocomplete=&quot;name&quot;
-        &gt;
-      &lt;/div&gt;
+      <div class="field">
+        <label for="registrationName">
+          Name <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="text"
+          id="registrationName"
+          placeholder="Enter your name"
+          maxlength="100"
+          autocomplete="name"
+        >
+      </div>
 
-      &lt;div class=&quot;field&quot;&gt;
-        &lt;label for=&quot;registrationMobile&quot;&gt;
-          Mobile Number &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;input
-          type=&quot;tel&quot;
-          id=&quot;registrationMobile&quot;
-          placeholder=&quot;Enter mobile number&quot;
-          maxlength=&quot;15&quot;
-          inputmode=&quot;numeric&quot;
-          autocomplete=&quot;tel&quot;
-        &gt;
-      &lt;/div&gt;
+      <div class="field">
+        <label for="registrationMobile">
+          Mobile Number <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="tel"
+          id="registrationMobile"
+          placeholder="Enter mobile number"
+          maxlength="15"
+          inputmode="numeric"
+          autocomplete="tel"
+        >
+      </div>
 
-      &lt;div class=&quot;field&quot;&gt;
-        &lt;label for=&quot;registrationEmail&quot;&gt;
-          Email ID &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-        &lt;/label&gt;
-        &lt;input
-          type=&quot;email&quot;
-          id=&quot;registrationEmail&quot;
-          placeholder=&quot;Enter your email address&quot;
-          maxlength=&quot;320&quot;
-          autocomplete=&quot;email&quot;
-        &gt;
-      &lt;/div&gt;
+      <div class="field">
+        <label for="registrationEmail">
+          Email ID <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="email"
+          id="registrationEmail"
+          placeholder="Enter your email address"
+          maxlength="320"
+          autocomplete="email"
+        >
+      </div>
 
-      &lt;button
-        id=&quot;registrationBtn&quot;
-        class=&quot;btn&quot;
-        type=&quot;button&quot;
-        onclick=&quot;registerCustomer()&quot;
-      &gt;
+      <button
+        id="registrationBtn"
+        class="btn"
+        type="button"
+        onclick="registerCustomer()"
+      >
         Create Account
-      &lt;/button&gt;
+      </button>
 
-      &lt;div
-        id=&quot;registrationMessage&quot;
-        class=&quot;message registration-message&quot;
-        aria-live=&quot;polite&quot;
-      &gt;&lt;/div&gt;
+      <div
+        id="registrationMessage"
+        class="message registration-message"
+        aria-live="polite"
+      ></div>
 
-    &lt;/div&gt;
-  &lt;/div&gt;
+    </div>
+  </div>
 
-  &lt;!-- =====================================================
+  <!-- =====================================================
        GET PAYOUT - ADDITION ONLY
-  ====================================================== --&gt;
+  ====================================================== -->
 
-  &lt;button
-    id=&quot;getPayoutBtn&quot;
-    class=&quot;payout-corner-btn&quot;
-    type=&quot;button&quot;
-    onclick=&quot;openPayoutModal()&quot;
-  &gt;
+  <button
+    id="getPayoutBtn"
+    class="payout-corner-btn"
+    type="button"
+    onclick="openPayoutModal()"
+  >
     💰 Get Payout
-  &lt;/button&gt;
+  </button>
 
 
-  &lt;div
-    id=&quot;payoutOverlay&quot;
-    class=&quot;payout-overlay&quot;
-    aria-hidden=&quot;true&quot;
-  &gt;
+  <div
+    id="payoutOverlay"
+    class="payout-overlay"
+    aria-hidden="true"
+  >
 
-    &lt;div
-      class=&quot;payout-modal&quot;
-      role=&quot;dialog&quot;
-      aria-modal=&quot;true&quot;
-      aria-labelledby=&quot;payoutTitle&quot;
-    &gt;
+    <div
+      class="payout-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="payoutTitle"
+    >
 
-      &lt;div class=&quot;payout-modal-head&quot;&gt;
+      <div class="payout-modal-head">
 
-        &lt;h2 id=&quot;payoutTitle&quot;&gt;
+        <h2 id="payoutTitle">
           Get Payout
-        &lt;/h2&gt;
+        </h2>
 
-        &lt;button
-          class=&quot;payout-close&quot;
-          type=&quot;button&quot;
-          onclick=&quot;closePayoutModal()&quot;
-          aria-label=&quot;Close&quot;
-        &gt;
+        <button
+          class="payout-close"
+          type="button"
+          onclick="closePayoutModal()"
+          aria-label="Close"
+        >
           ×
-        &lt;/button&gt;
+        </button>
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;div id=&quot;payoutEmailStep&quot;&gt;
+      <div id="payoutEmailStep">
 
-        &lt;div class=&quot;payout-help&quot;&gt;
+        <div class="payout-help">
           Enter your registered email address.
           We will send a verification OTP.
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class=&quot;field&quot;&gt;
+        <div class="field">
 
-          &lt;label for=&quot;payoutEmail&quot;&gt;
+          <label for="payoutEmail">
             Registered Email
-            &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
+            <span style="color:#d93025">*</span>
+          </label>
 
-          &lt;input
-            type=&quot;email&quot;
-            id=&quot;payoutEmail&quot;
-            placeholder=&quot;Enter your registered email&quot;
-            autocomplete=&quot;email&quot;
-            maxlength=&quot;320&quot;
-          &gt;
+          <input
+            type="email"
+            id="payoutEmail"
+            placeholder="Enter your registered email"
+            autocomplete="email"
+            maxlength="320"
+          >
 
-        &lt;/div&gt;
+        </div>
 
-        &lt;button
-          id=&quot;payoutSendOtpBtn&quot;
-          class=&quot;btn&quot;
-          type=&quot;button&quot;
-          onclick=&quot;sendPayoutOtp()&quot;
-        &gt;
-          ✉ &amp;nbsp; Get OTP
-        &lt;/button&gt;
+        <button
+          id="payoutSendOtpBtn"
+          class="btn"
+          type="button"
+          onclick="sendPayoutOtp()"
+        >
+          ✉ &nbsp; Get OTP
+        </button>
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;div
-        id=&quot;payoutOtpStep&quot;
-        style=&quot;display:none;&quot;
-      &gt;
+      <div
+        id="payoutOtpStep"
+        style="display:none;"
+      >
 
-        &lt;div class=&quot;payout-help&quot;&gt;
+        <div class="payout-help">
           OTP आपके registered email पर भेजा गया है।
-        &lt;/div&gt;
+        </div>
 
-        &lt;div class=&quot;field&quot;&gt;
+        <div class="field">
 
-          &lt;label for=&quot;payoutOtp&quot;&gt;
+          <label for="payoutOtp">
             Enter OTP
-            &lt;span style=&quot;color:#d93025&quot;&gt;*&lt;/span&gt;
-          &lt;/label&gt;
+            <span style="color:#d93025">*</span>
+          </label>
 
-          &lt;input
-            type=&quot;text&quot;
-            id=&quot;payoutOtp&quot;
-            placeholder=&quot;Enter 6-digit OTP&quot;
-            inputmode=&quot;numeric&quot;
-            maxlength=&quot;6&quot;
-            autocomplete=&quot;one-time-code&quot;
-          &gt;
+          <input
+            type="text"
+            id="payoutOtp"
+            placeholder="Enter 6-digit OTP"
+            inputmode="numeric"
+            maxlength="6"
+            autocomplete="one-time-code"
+          >
 
-        &lt;/div&gt;
+        </div>
 
-        &lt;button
-          id=&quot;payoutVerifyBtn&quot;
-          class=&quot;btn&quot;
-          type=&quot;button&quot;
-          onclick=&quot;verifyPayoutOtp()&quot;
-        &gt;
-          ✓ &amp;nbsp; Verify OTP
-        &lt;/button&gt;
+        <button
+          id="payoutVerifyBtn"
+          class="btn"
+          type="button"
+          onclick="verifyPayoutOtp()"
+        >
+          ✓ &nbsp; Verify OTP
+        </button>
 
-        &lt;button
-          id=&quot;payoutResendBtn&quot;
-          class=&quot;btn secondary&quot;
-          type=&quot;button&quot;
-          onclick=&quot;sendPayoutOtp(true)&quot;
-        &gt;
+        <button
+          id="payoutResendBtn"
+          class="btn secondary"
+          type="button"
+          onclick="sendPayoutOtp(true)"
+        >
           Resend OTP
-        &lt;/button&gt;
+        </button>
 
-      &lt;/div&gt;
+      </div>
 
 
-      &lt;div
-        id=&quot;payoutResult&quot;
-        style=&quot;display:none;&quot;
-      &gt;
+      <div
+        id="payoutResult"
+        style="display:none;"
+      >
 
-        &lt;div class=&quot;payout-profile&quot;&gt;
+        <div class="payout-profile">
 
-          &lt;div
-            id=&quot;payoutAvatar&quot;
-            class=&quot;payout-avatar&quot;
-          &gt;&lt;/div&gt;
+          <div
+            id="payoutAvatar"
+            class="payout-avatar"
+          ></div>
 
-          &lt;h3
-            id=&quot;payoutName&quot;
-            class=&quot;payout-profile-name&quot;
-          &gt;&lt;/h3&gt;
+          <h3
+            id="payoutName"
+            class="payout-profile-name"
+          ></h3>
 
-          &lt;div
-            id=&quot;payoutMobile&quot;
-            class=&quot;payout-profile-mobile&quot;
-          &gt;&lt;/div&gt;
+          <div
+            id="payoutMobile"
+            class="payout-profile-mobile"
+          ></div>
 
-          &lt;div class=&quot;payout-divider&quot;&gt;&lt;/div&gt;
+          <div class="payout-divider"></div>
 
-          &lt;div class=&quot;payout-label&quot;&gt;
+          <div class="payout-label">
             Your Payout
-          &lt;/div&gt;
+          </div>
 
-          &lt;div
-            id=&quot;payoutAmount&quot;
-            class=&quot;payout-amount&quot;
-          &gt;&lt;/div&gt;
+          <div
+            id="payoutAmount"
+            class="payout-amount"
+          ></div>
 
-          &lt;div
-            id=&quot;payoutEmailSmall&quot;
-            class=&quot;payout-email-small&quot;
-          &gt;&lt;/div&gt;
+          <div
+            id="payoutEmailSmall"
+            class="payout-email-small"
+          ></div>
 
-        &lt;/div&gt;
+        </div>
 
-        &lt;button
-          class=&quot;btn secondary&quot;
-          type=&quot;button&quot;
-          onclick=&quot;resetPayoutFlow()&quot;
-        &gt;
+        <button
+          class="btn secondary"
+          type="button"
+          onclick="resetPayoutFlow()"
+        >
           Check Another Email
-        &lt;/button&gt;
+        </button>
 
-      &lt;/div&gt;
-
-
-      &lt;div
-        id=&quot;payoutMessage&quot;
-        class=&quot;message&quot;
-        aria-live=&quot;polite&quot;
-      &gt;&lt;/div&gt;
-
-    &lt;/div&gt;
-
-  &lt;/div&gt;
+      </div>
 
 
-  &lt;!-- FOOTER --&gt;
+      <div
+        id="payoutMessage"
+        class="message"
+        aria-live="polite"
+      ></div>
 
-  &lt;div class=&quot;footer&quot;&gt;
+    </div>
+
+  </div>
+
+
+  <!-- FOOTER -->
+
+  <div class="footer">
 
     © 2026 Client Claim Portal.
     All rights reserved.
 
-  &lt;/div&gt;
+  </div>
 
 
-&lt;/div&gt;
+</div>
 
 
-&lt;script&gt;
+<script>
 
 
 /* =========================================================
@@ -1641,7 +1626,7 @@ pre{margin:0;padding:20px;white-space:pre-wrap;word-break:break-word;line-height
 ========================================================= */
 
 const API_URL =
-  &quot;https://script.google.com/macros/s/AKfycbwaYi7ChXptjXH3T6UdSynNLHo8_f6g81n_1CoPutjuDvzAdIY6qARJCrbdMq0EEZSb/exec&quot;;
+  "https://script.google.com/macros/s/AKfycbwaYi7ChXptjXH3T6UdSynNLHo8_f6g81n_1CoPutjuDvzAdIY6qARJCrbdMq0EEZSb/exec";
 
 
 /* =========================================================
@@ -1649,49 +1634,49 @@ const API_URL =
 ========================================================= */
 
 const companySelect =
-  document.getElementById(&quot;company&quot;);
+  document.getElementById("company");
 
 const searchInput =
-  document.getElementById(&quot;search&quot;);
+  document.getElementById("search");
 
 const searchBtn =
-  document.getElementById(&quot;searchBtn&quot;);
+  document.getElementById("searchBtn");
 
 const resultBox =
-  document.getElementById(&quot;result&quot;);
+  document.getElementById("result");
 
 const matchedValue =
-  document.getElementById(&quot;matchedValue&quot;);
+  document.getElementById("matchedValue");
 
 const loading =
-  document.getElementById(&quot;loading&quot;);
+  document.getElementById("loading");
 
 const message =
-  document.getElementById(&quot;message&quot;);
+  document.getElementById("message");
 
 const nameInput =
-  document.getElementById(&quot;name&quot;);
+  document.getElementById("name");
 
 const mobileInput =
-  document.getElementById(&quot;mobile&quot;);
+  document.getElementById("mobile");
 
 const claimBtn =
-  document.getElementById(&quot;claimBtn&quot;);
+  document.getElementById("claimBtn");
 
 const claimCard =
-  document.getElementById(&quot;claimCard&quot;);
+  document.getElementById("claimCard");
 
 const companyBadgeText =
-  document.getElementById(&quot;companyBadgeText&quot;);
+  document.getElementById("companyBadgeText");
 
 
 /* =========================================================
    CURRENT MATCH
 ========================================================= */
 
-let currentMatch = &quot;&quot;;
+let currentMatch = "";
 
-let currentCompany = &quot;&quot;;
+let currentCompany = "";
 
 
 /* =========================================================
@@ -1708,7 +1693,7 @@ let currentCompany = &quot;&quot;;
 ========================================================= */
 
 const SAVED_COMPANY_KEY =
-  &quot;clientClaimPortal_selectedCompany&quot;;
+  "clientClaimPortal_selectedCompany";
 
 
 /* =========================================================
@@ -1721,16 +1706,16 @@ function jsonp(params) {
     function(resolve, reject) {
 
       const callbackName =
-        &quot;jsonp_&quot; +
+        "jsonp_" +
         Date.now() +
-        &quot;_&quot; +
+        "_" +
         Math.floor(
           Math.random() * 100000
         );
 
 
       const script =
-        document.createElement(&quot;script&quot;);
+        document.createElement("script");
 
 
       let finished = false;
@@ -1774,7 +1759,7 @@ function jsonp(params) {
 
             reject(
               new Error(
-                &quot;Request timeout&quot;
+                "Request timeout"
               )
             );
 
@@ -1812,7 +1797,7 @@ function jsonp(params) {
 
       script.src =
         API_URL +
-        &quot;?&quot; +
+        "?" +
         query.toString();
 
 
@@ -1832,7 +1817,7 @@ function jsonp(params) {
 
           reject(
             new Error(
-              &quot;Network error&quot;
+              "Network error"
             )
           );
 
@@ -1863,25 +1848,25 @@ async function loadCompanies() {
   companySelect.disabled = true;
 
   companySelect.innerHTML =
-    &#x27;&lt;option value=&quot;&quot;&gt;Loading Companies...&lt;/option&gt;&#x27;;
+    '<option value="">Loading Companies...</option>';
 
 
   let data = null;
 
   let lastError = null;
 
-  for (let attempt = 1; attempt &lt;= 3; attempt++) {
+  for (let attempt = 1; attempt <= 3; attempt++) {
 
     try {
 
       data =
         await jsonp({
-          action: &quot;companies&quot;
+          action: "companies"
         });
 
       if (
-        data &amp;&amp;
-        data.success === true &amp;&amp;
+        data &&
+        data.success === true &&
         Array.isArray(data.companies)
       ) {
 
@@ -1891,7 +1876,7 @@ async function loadCompanies() {
 
       lastError =
         new Error(
-          &quot;Invalid companies response&quot;
+          "Invalid companies response"
         );
 
     } catch (error) {
@@ -1900,7 +1885,7 @@ async function loadCompanies() {
 
     }
 
-    if (attempt &lt; 3) {
+    if (attempt < 3) {
 
       await new Promise(function(resolve) {
 
@@ -1926,7 +1911,7 @@ async function loadCompanies() {
       throw (
         lastError ||
         new Error(
-          &quot;Invalid companies response&quot;
+          "Invalid companies response"
         )
       );
 
@@ -1938,13 +1923,13 @@ async function loadCompanies() {
         .map(function(company) {
 
           return String(
-            company || &quot;&quot;
+            company || ""
           ).trim();
 
         })
         .filter(function(company) {
 
-          return company !== &quot;&quot;;
+          return company !== "";
 
         })
         .filter(function(company, index, array) {
@@ -1956,14 +1941,14 @@ async function loadCompanies() {
 
 
     companySelect.innerHTML =
-      &#x27;&lt;option value=&quot;&quot;&gt;Select Company&lt;/option&gt;&#x27;;
+      '<option value="">Select Company</option>';
 
 
     companies.forEach(
       function(company) {
 
         const option =
-          document.createElement(&quot;option&quot;);
+          document.createElement("option");
 
 
         option.value =
@@ -1985,7 +1970,7 @@ async function loadCompanies() {
     if (companies.length === 0) {
 
       companySelect.innerHTML =
-        &#x27;&lt;option value=&quot;&quot;&gt;No companies found&lt;/option&gt;&#x27;;
+        '<option value="">No companies found</option>';
 
       return;
     }
@@ -1994,7 +1979,7 @@ async function loadCompanies() {
     companySelect.disabled = false;
 
 
-    let savedCompany = &quot;&quot;;
+    let savedCompany = "";
 
 
     try {
@@ -2003,13 +1988,13 @@ async function loadCompanies() {
         (
           localStorage.getItem(
             SAVED_COMPANY_KEY
-          ) || &quot;&quot;
+          ) || ""
         ).trim();
 
     } catch (storageError) {
 
       console.warn(
-        &quot;Local storage unavailable:&quot;,
+        "Local storage unavailable:",
         storageError
       );
 
@@ -2017,7 +2002,7 @@ async function loadCompanies() {
 
 
     if (
-      savedCompany &amp;&amp;
+      savedCompany &&
       companies.includes(savedCompany)
     ) {
 
@@ -2042,7 +2027,7 @@ async function loadCompanies() {
       } catch (storageError) {
 
         console.warn(
-          &quot;Unable to clear saved company:&quot;,
+          "Unable to clear saved company:",
           storageError
         );
 
@@ -2050,7 +2035,7 @@ async function loadCompanies() {
 
 
       currentCompany =
-        &quot;&quot;;
+        "";
 
     }
 
@@ -2058,7 +2043,7 @@ async function loadCompanies() {
   } catch (error) {
 
     console.error(
-      &quot;Company loading error:&quot;,
+      "Company loading error:",
       error
     );
 
@@ -2068,12 +2053,12 @@ async function loadCompanies() {
 
 
     companySelect.innerHTML =
-      &#x27;&lt;option value=&quot;&quot;&gt;Unable to load companies&lt;/option&gt;&#x27;;
+      '<option value="">Unable to load companies</option>';
 
 
     showMessage(
-      &quot;Company list load nahi ho paayi. Please refresh the page.&quot;,
-      &quot;error&quot;
+      "Company list load nahi ho paayi. Please refresh the page.",
+      "error"
     );
 
   }
@@ -2086,7 +2071,7 @@ async function loadCompanies() {
 ========================================================= */
 
 companySelect.addEventListener(
-  &quot;change&quot;,
+  "change",
   function() {
 
     currentCompany =
@@ -2115,7 +2100,7 @@ companySelect.addEventListener(
     } catch (storageError) {
 
       console.warn(
-        &quot;Unable to save company preference:&quot;,
+        "Unable to save company preference:",
         storageError
       );
 
@@ -2123,23 +2108,23 @@ companySelect.addEventListener(
 
 
     currentMatch =
-      &quot;&quot;;
+      "";
 
     searchInput.value =
-      &quot;&quot;;
+      "";
 
     matchedValue.textContent =
-      &quot;&quot;;
+      "";
 
     resultBox.classList.remove(
-      &quot;show&quot;
+      "show"
     );
 
     resultBox.style.display =
-      &quot;none&quot;;
+      "none";
 
     claimCard.style.display =
-      &quot;none&quot;;
+      "none";
 
     clearMessage();
 
@@ -2166,8 +2151,8 @@ async function searchClient() {
   if (!company) {
 
     showMessage(
-      &quot;Company Select करें।&quot;,
-      &quot;error&quot;
+      "Company Select करें।",
+      "error"
     );
 
     companySelect.focus();
@@ -2179,8 +2164,8 @@ async function searchClient() {
   if (!query) {
 
     showMessage(
-      &quot;Number / Client Code डालें।&quot;,
-      &quot;error&quot;
+      "Number / Client Code डालें।",
+      "error"
     );
 
     searchInput.focus();
@@ -2189,11 +2174,11 @@ async function searchClient() {
   }
 
 
-  if (query.length &gt; 100) {
+  if (query.length > 100) {
 
     showMessage(
-      &quot;Search value बहुत लंबी है।&quot;,
-      &quot;error&quot;
+      "Search value बहुत लंबी है।",
+      "error"
     );
 
     searchInput.focus();
@@ -2203,25 +2188,25 @@ async function searchClient() {
 
 
   currentMatch =
-    &quot;&quot;;
+    "";
 
 
   resultBox.classList.remove(
-    &quot;show&quot;
+    "show"
   );
 
   resultBox.style.display =
-    &quot;none&quot;;
+    "none";
 
   claimCard.style.display =
-    &quot;none&quot;;
+    "none";
 
 
   searchBtn.disabled =
     true;
 
   loading.style.display =
-    &quot;block&quot;;
+    "block";
 
 
   try {
@@ -2230,7 +2215,7 @@ async function searchClient() {
       await jsonp({
 
         action:
-          &quot;search&quot;,
+          "search",
 
         company:
           company,
@@ -2242,22 +2227,22 @@ async function searchClient() {
 
 
     if (
-      data &amp;&amp;
-      data.success === true &amp;&amp;
+      data &&
+      data.success === true &&
       data.found === true
     ) {
 
       currentMatch =
         String(
-          data.value || &quot;&quot;
+          data.value || ""
         ).trim();
 
 
       if (!currentMatch) {
 
         showMessage(
-          &quot;Matching data खाली है।&quot;,
-          &quot;error&quot;
+          "Matching data खाली है।",
+          "error"
         );
 
         return;
@@ -2269,11 +2254,11 @@ async function searchClient() {
 
 
       resultBox.style.display =
-        &quot;block&quot;;
+        "block";
 
 
       resultBox.classList.add(
-        &quot;show&quot;
+        "show"
       );
 
 
@@ -2282,14 +2267,14 @@ async function searchClient() {
 
 
       claimCard.style.display =
-        &quot;block&quot;;
+        "block";
 
 
       nameInput.value =
-        &quot;&quot;;
+        "";
 
       mobileInput.value =
-        &quot;&quot;;
+        "";
 
 
       setTimeout(
@@ -2307,8 +2292,8 @@ async function searchClient() {
     else {
 
       showMessage(
-        &quot;No Result Found&quot;,
-        &quot;error&quot;
+        "No Result Found",
+        "error"
       );
 
     }
@@ -2319,14 +2304,14 @@ async function searchClient() {
   catch (error) {
 
     console.error(
-      &quot;Search error:&quot;,
+      "Search error:",
       error
     );
 
 
     showMessage(
-      &quot;Network problem. Please try again.&quot;,
-      &quot;error&quot;
+      "Network problem. Please try again.",
+      "error"
     );
 
   }
@@ -2337,7 +2322,7 @@ async function searchClient() {
       false;
 
     loading.style.display =
-      &quot;none&quot;;
+      "none";
 
   }
 
@@ -2349,11 +2334,11 @@ async function searchClient() {
 ========================================================= */
 
 searchInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
     if (
-      event.key === &quot;Enter&quot;
+      event.key === "Enter"
     ) {
 
       event.preventDefault();
@@ -2371,11 +2356,11 @@ searchInput.addEventListener(
 ========================================================= */
 
 nameInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
     if (
-      event.key === &quot;Enter&quot;
+      event.key === "Enter"
     ) {
 
       event.preventDefault();
@@ -2393,11 +2378,11 @@ nameInput.addEventListener(
 ========================================================= */
 
 mobileInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
     if (
-      event.key === &quot;Enter&quot;
+      event.key === "Enter"
     ) {
 
       event.preventDefault();
@@ -2432,8 +2417,8 @@ async function submitClaim() {
   if (!currentMatch) {
 
     showMessage(
-      &quot;पहले अपना Number / Client Code Search करें।&quot;,
-      &quot;error&quot;
+      "पहले अपना Number / Client Code Search करें।",
+      "error"
     );
 
     return;
@@ -2443,8 +2428,8 @@ async function submitClaim() {
   if (!company) {
 
     showMessage(
-      &quot;Company Select करें।&quot;,
-      &quot;error&quot;
+      "Company Select करें।",
+      "error"
     );
 
     companySelect.focus();
@@ -2456,8 +2441,8 @@ async function submitClaim() {
   if (!name) {
 
     showMessage(
-      &quot;अपना Name डालें।&quot;,
-      &quot;error&quot;
+      "अपना Name डालें।",
+      "error"
     );
 
     nameInput.focus();
@@ -2466,11 +2451,11 @@ async function submitClaim() {
   }
 
 
-  if (name.length &lt; 2) {
+  if (name.length < 2) {
 
     showMessage(
-      &quot;कृपया सही Name डालें।&quot;,
-      &quot;error&quot;
+      "कृपया सही Name डालें।",
+      "error"
     );
 
     nameInput.focus();
@@ -2479,11 +2464,11 @@ async function submitClaim() {
   }
 
 
-  if (name.length &gt; 100) {
+  if (name.length > 100) {
 
     showMessage(
-      &quot;Name बहुत लंबा है।&quot;,
-      &quot;error&quot;
+      "Name बहुत लंबा है।",
+      "error"
     );
 
     nameInput.focus();
@@ -2495,8 +2480,8 @@ async function submitClaim() {
   if (!mobile) {
 
     showMessage(
-      &quot;अपना Mobile Number डालें।&quot;,
-      &quot;error&quot;
+      "अपना Mobile Number डालें।",
+      "error"
     );
 
     mobileInput.focus();
@@ -2508,18 +2493,18 @@ async function submitClaim() {
   const cleanedMobile =
     mobile.replace(
       /[^\d]/g,
-      &quot;&quot;
+      ""
     );
 
 
   if (
-    cleanedMobile.length &lt; 7 ||
-    cleanedMobile.length &gt; 15
+    cleanedMobile.length < 7 ||
+    cleanedMobile.length > 15
   ) {
 
     showMessage(
-      &quot;कृपया सही Mobile Number डालें।&quot;,
-      &quot;error&quot;
+      "कृपया सही Mobile Number डालें।",
+      "error"
     );
 
     mobileInput.focus();
@@ -2537,8 +2522,8 @@ async function submitClaim() {
 
 
   claimBtn.innerHTML =
-    &#x27;&lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;&#x27; +
-    &#x27;Submitting...&#x27;;
+    '<span class="loading-spinner"></span>' +
+    'Submitting...';
 
 
   try {
@@ -2547,7 +2532,7 @@ async function submitClaim() {
       await jsonp({
 
         action:
-          &quot;claim&quot;,
+          "claim",
 
         company:
           company,
@@ -2565,13 +2550,13 @@ async function submitClaim() {
 
 
     if (
-      data &amp;&amp;
+      data &&
       data.alreadyClaimed === true
     ) {
 
       showMessage(
-        &quot;Already Claimed&quot;,
-        &quot;error&quot;
+        "Already Claimed",
+        "error"
       );
 
       return;
@@ -2579,55 +2564,55 @@ async function submitClaim() {
 
 
     if (
-      data &amp;&amp;
+      data &&
       data.success === true
     ) {
 
       showMessage(
-        &quot;Claim Submitted Successfully&quot;,
-        &quot;success&quot;
+        "Claim Submitted Successfully",
+        "success"
       );
 
 
       document
-        .getElementById(&quot;section1&quot;)
+        .getElementById("section1")
         .classList.remove(
-          &quot;active&quot;
+          "active"
         );
 
 
       document
-        .getElementById(&quot;section2&quot;)
+        .getElementById("section2")
         .classList.add(
-          &quot;active&quot;
+          "active"
         );
 
 
       document
-        .getElementById(&quot;step1&quot;)
+        .getElementById("step1")
         .classList.remove(
-          &quot;active&quot;
+          "active"
         );
 
 
       document
-        .getElementById(&quot;step1&quot;)
+        .getElementById("step1")
         .classList.add(
-          &quot;done&quot;
+          "done"
         );
 
 
       document
-        .getElementById(&quot;line1&quot;)
+        .getElementById("line1")
         .classList.add(
-          &quot;active&quot;
+          "active"
         );
 
 
       document
-        .getElementById(&quot;step2&quot;)
+        .getElementById("step2")
         .classList.add(
-          &quot;active&quot;
+          "active"
         );
 
 
@@ -2638,7 +2623,7 @@ async function submitClaim() {
 
             top: 0,
 
-            behavior: &quot;smooth&quot;
+            behavior: "smooth"
 
           });
 
@@ -2654,15 +2639,15 @@ async function submitClaim() {
     showMessage(
 
       (
-        data &amp;&amp;
+        data &&
         data.message
       )
 
         ? data.message
 
-        : &quot;Claim submit nahi hua. Please try again.&quot;,
+        : "Claim submit nahi hua. Please try again.",
 
-      &quot;error&quot;
+      "error"
 
     );
 
@@ -2672,14 +2657,14 @@ async function submitClaim() {
   catch (error) {
 
     console.error(
-      &quot;Claim error:&quot;,
+      "Claim error:",
       error
     );
 
 
     showMessage(
-      &quot;Network problem. Please try again.&quot;,
-      &quot;error&quot;
+      "Network problem. Please try again.",
+      "error"
     );
 
   }
@@ -2704,7 +2689,7 @@ async function submitClaim() {
 function resetPortal() {
 
   currentMatch =
-    &quot;&quot;;
+    "";
 
 
   currentCompany =
@@ -2719,13 +2704,13 @@ function resetPortal() {
         (
           localStorage.getItem(
             SAVED_COMPANY_KEY
-          ) || &quot;&quot;
+          ) || ""
         ).trim();
 
     } catch (storageError) {
 
       console.warn(
-        &quot;Unable to read saved company:&quot;,
+        "Unable to read saved company:",
         storageError
       );
 
@@ -2735,74 +2720,74 @@ function resetPortal() {
 
 
   searchInput.value =
-    &quot;&quot;;
+    "";
 
   nameInput.value =
-    &quot;&quot;;
+    "";
 
   mobileInput.value =
-    &quot;&quot;;
+    "";
 
 
   matchedValue.textContent =
-    &quot;&quot;;
+    "";
 
 
   resultBox.style.display =
-    &quot;none&quot;;
+    "none";
 
 
   resultBox.classList.remove(
-    &quot;show&quot;
+    "show"
   );
 
 
   claimCard.style.display =
-    &quot;none&quot;;
+    "none";
 
 
   clearMessage();
 
 
   document
-    .getElementById(&quot;section2&quot;)
+    .getElementById("section2")
     .classList.remove(
-      &quot;active&quot;
+      "active"
     );
 
 
   document
-    .getElementById(&quot;section1&quot;)
+    .getElementById("section1")
     .classList.add(
-      &quot;active&quot;
+      "active"
     );
 
 
   document
-    .getElementById(&quot;step1&quot;)
+    .getElementById("step1")
     .classList.remove(
-      &quot;done&quot;
+      "done"
     );
 
 
   document
-    .getElementById(&quot;step1&quot;)
+    .getElementById("step1")
     .classList.add(
-      &quot;active&quot;
+      "active"
     );
 
 
   document
-    .getElementById(&quot;line1&quot;)
+    .getElementById("line1")
     .classList.remove(
-      &quot;active&quot;
+      "active"
     );
 
 
   document
-    .getElementById(&quot;step2&quot;)
+    .getElementById("step2")
     .classList.remove(
-      &quot;active&quot;
+      "active"
     );
 
 
@@ -2822,7 +2807,7 @@ function resetPortal() {
     } catch (storageError) {
 
       console.warn(
-        &quot;Unable to save company:&quot;,
+        "Unable to save company:",
         storageError
       );
 
@@ -2835,7 +2820,7 @@ function resetPortal() {
 
     top: 0,
 
-    behavior: &quot;smooth&quot;
+    behavior: "smooth"
 
   });
 
@@ -2855,7 +2840,7 @@ function showMessage(
     text;
 
   message.className =
-    &quot;message show &quot; +
+    "message show " +
     type;
 
 }
@@ -2868,10 +2853,10 @@ function showMessage(
 function clearMessage() {
 
   message.textContent =
-    &quot;&quot;;
+    "";
 
   message.className =
-    &quot;message&quot;;
+    "message";
 
 }
 
@@ -2882,31 +2867,31 @@ function clearMessage() {
 ========================================================= */
 
 const REGISTRATION_KEY =
-  &quot;clientClaimPortal_customerRegistered&quot;;
+  "clientClaimPortal_customerRegistered";
 
 const registrationOverlay =
-  document.getElementById(&quot;registrationOverlay&quot;);
+  document.getElementById("registrationOverlay");
 
 const registrationNameInput =
-  document.getElementById(&quot;registrationName&quot;);
+  document.getElementById("registrationName");
 
 const registrationMobileInput =
-  document.getElementById(&quot;registrationMobile&quot;);
+  document.getElementById("registrationMobile");
 
 const registrationEmailInput =
-  document.getElementById(&quot;registrationEmail&quot;);
+  document.getElementById("registrationEmail");
 
 const registrationBtn =
-  document.getElementById(&quot;registrationBtn&quot;);
+  document.getElementById("registrationBtn");
 
 const registrationMessage =
-  document.getElementById(&quot;registrationMessage&quot;);
+  document.getElementById("registrationMessage");
 
 
 function isCustomerRegistered() {
 
   try {
-    return localStorage.getItem(REGISTRATION_KEY) === &quot;1&quot;;
+    return localStorage.getItem(REGISTRATION_KEY) === "1";
   } catch (error) {
     return false;
   }
@@ -2919,8 +2904,8 @@ function showRegistrationModal() {
     return;
   }
 
-  registrationOverlay.classList.add(&quot;show&quot;);
-  registrationOverlay.setAttribute(&quot;aria-hidden&quot;, &quot;false&quot;);
+  registrationOverlay.classList.add("show");
+  registrationOverlay.setAttribute("aria-hidden", "false");
 
   setTimeout(function() {
     registrationNameInput.focus();
@@ -2930,8 +2915,8 @@ function showRegistrationModal() {
 
 function hideRegistrationModal() {
 
-  registrationOverlay.classList.remove(&quot;show&quot;);
-  registrationOverlay.setAttribute(&quot;aria-hidden&quot;, &quot;true&quot;);
+  registrationOverlay.classList.remove("show");
+  registrationOverlay.setAttribute("aria-hidden", "true");
 }
 
 
@@ -2939,15 +2924,15 @@ function showRegistrationMessage(text, type) {
 
   registrationMessage.textContent = text;
   registrationMessage.className =
-    &quot;message registration-message show &quot; + type;
+    "message registration-message show " + type;
 }
 
 
 function clearRegistrationMessage() {
 
-  registrationMessage.textContent = &quot;&quot;;
+  registrationMessage.textContent = "";
   registrationMessage.className =
-    &quot;message registration-message&quot;;
+    "message registration-message";
 }
 
 
@@ -2965,33 +2950,33 @@ async function registerCustomer() {
     registrationEmailInput.value.trim().toLowerCase();
 
   if (!name) {
-    showRegistrationMessage(&quot;Name डालें।&quot;, &quot;error&quot;);
+    showRegistrationMessage("Name डालें।", "error");
     registrationNameInput.focus();
     return;
   }
 
   if (!mobile) {
-    showRegistrationMessage(&quot;Mobile number डालें।&quot;, &quot;error&quot;);
+    showRegistrationMessage("Mobile number डालें।", "error");
     registrationMobileInput.focus();
     return;
   }
 
   if (!email) {
-    showRegistrationMessage(&quot;Email ID डालें।&quot;, &quot;error&quot;);
+    showRegistrationMessage("Email ID डालें।", "error");
     registrationEmailInput.focus();
     return;
   }
 
   if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showRegistrationMessage(&quot;कृपया सही email address डालें।&quot;, &quot;error&quot;);
+    showRegistrationMessage("कृपया सही email address डालें।", "error");
     registrationEmailInput.focus();
     return;
   }
 
-  const cleanMobile = mobile.replace(/[^\d]/g, &quot;&quot;);
+  const cleanMobile = mobile.replace(/[^\d]/g, "");
 
-  if (cleanMobile.length &lt; 7 || cleanMobile.length &gt; 15) {
-    showRegistrationMessage(&quot;कृपया सही mobile number डालें।&quot;, &quot;error&quot;);
+  if (cleanMobile.length < 7 || cleanMobile.length > 15) {
+    showRegistrationMessage("कृपया सही mobile number डालें।", "error");
     registrationMobileInput.focus();
     return;
   }
@@ -3002,32 +2987,32 @@ async function registerCustomer() {
     registrationBtn.innerHTML;
 
   registrationBtn.innerHTML =
-    &#x27;&lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;Creating Account...&#x27;;
+    '<span class="loading-spinner"></span>Creating Account...';
 
   try {
 
     const data = await jsonp({
-      action: &quot;registerCustomer&quot;,
+      action: "registerCustomer",
       name: name,
       mobile: cleanMobile,
       email: email
     });
 
-    if (data &amp;&amp; data.success === true) {
+    if (data && data.success === true) {
 
       try {
-        localStorage.setItem(REGISTRATION_KEY, &quot;1&quot;);
+        localStorage.setItem(REGISTRATION_KEY, "1");
         localStorage.setItem(
-          &quot;clientClaimPortal_customerEmail&quot;,
+          "clientClaimPortal_customerEmail",
           email
         );
       } catch (storageError) {
-        console.warn(&quot;Unable to save registration state:&quot;, storageError);
+        console.warn("Unable to save registration state:", storageError);
       }
 
       showRegistrationMessage(
-        data.message || &quot;Account created successfully.&quot;,
-        &quot;success&quot;
+        data.message || "Account created successfully.",
+        "success"
       );
 
       setTimeout(function() {
@@ -3038,19 +3023,19 @@ async function registerCustomer() {
     }
 
     showRegistrationMessage(
-      data &amp;&amp; data.message
+      data && data.message
         ? data.message
-        : &quot;Account could not be created.&quot;,
-      &quot;error&quot;
+        : "Account could not be created.",
+      "error"
     );
 
   } catch (error) {
 
-    console.error(&quot;Registration error:&quot;, error);
+    console.error("Registration error:", error);
 
     showRegistrationMessage(
-      &quot;Network problem. Please try again.&quot;,
-      &quot;error&quot;
+      "Network problem. Please try again.",
+      "error"
     );
 
   } finally {
@@ -3063,9 +3048,9 @@ async function registerCustomer() {
 
 
 registrationEmailInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
-    if (event.key === &quot;Enter&quot;) {
+    if (event.key === "Enter") {
       event.preventDefault();
       registerCustomer();
     }
@@ -3077,58 +3062,58 @@ registrationEmailInput.addEventListener(
 ========================================================= */
 
 const payoutOverlay =
-  document.getElementById(&quot;payoutOverlay&quot;);
+  document.getElementById("payoutOverlay");
 
 const payoutEmailInput =
-  document.getElementById(&quot;payoutEmail&quot;);
+  document.getElementById("payoutEmail");
 
 const payoutOtpInput =
-  document.getElementById(&quot;payoutOtp&quot;);
+  document.getElementById("payoutOtp");
 
 const payoutEmailStep =
-  document.getElementById(&quot;payoutEmailStep&quot;);
+  document.getElementById("payoutEmailStep");
 
 const payoutOtpStep =
-  document.getElementById(&quot;payoutOtpStep&quot;);
+  document.getElementById("payoutOtpStep");
 
 const payoutResult =
-  document.getElementById(&quot;payoutResult&quot;);
+  document.getElementById("payoutResult");
 
 const payoutMessage =
-  document.getElementById(&quot;payoutMessage&quot;);
+  document.getElementById("payoutMessage");
 
 const payoutSendOtpBtn =
-  document.getElementById(&quot;payoutSendOtpBtn&quot;);
+  document.getElementById("payoutSendOtpBtn");
 
 const payoutVerifyBtn =
-  document.getElementById(&quot;payoutVerifyBtn&quot;);
+  document.getElementById("payoutVerifyBtn");
 
 const payoutResendBtn =
-  document.getElementById(&quot;payoutResendBtn&quot;);
+  document.getElementById("payoutResendBtn");
 
 const payoutAvatar =
-  document.getElementById(&quot;payoutAvatar&quot;);
+  document.getElementById("payoutAvatar");
 
 const payoutName =
-  document.getElementById(&quot;payoutName&quot;);
+  document.getElementById("payoutName");
 
 const payoutMobile =
-  document.getElementById(&quot;payoutMobile&quot;);
+  document.getElementById("payoutMobile");
 
 const payoutAmount =
-  document.getElementById(&quot;payoutAmount&quot;);
+  document.getElementById("payoutAmount");
 
 const payoutEmailSmall =
-  document.getElementById(&quot;payoutEmailSmall&quot;);
+  document.getElementById("payoutEmailSmall");
 
 
 function openPayoutModal() {
 
-  payoutOverlay.classList.add(&quot;show&quot;);
+  payoutOverlay.classList.add("show");
 
   payoutOverlay.setAttribute(
-    &quot;aria-hidden&quot;,
-    &quot;false&quot;
+    "aria-hidden",
+    "false"
   );
 
   resetPayoutFlow();
@@ -3142,18 +3127,18 @@ function openPayoutModal() {
 
 function closePayoutModal() {
 
-  payoutOverlay.classList.remove(&quot;show&quot;);
+  payoutOverlay.classList.remove("show");
 
   payoutOverlay.setAttribute(
-    &quot;aria-hidden&quot;,
-    &quot;true&quot;
+    "aria-hidden",
+    "true"
   );
 
 }
 
 
 payoutOverlay.addEventListener(
-  &quot;click&quot;,
+  "click",
   function(event) {
 
     if (event.target === payoutOverlay) {
@@ -3165,12 +3150,12 @@ payoutOverlay.addEventListener(
 
 
 document.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
     if (
-      event.key === &quot;Escape&quot; &amp;&amp;
-      payoutOverlay.classList.contains(&quot;show&quot;)
+      event.key === "Escape" &&
+      payoutOverlay.classList.contains("show")
     ) {
       closePayoutModal();
     }
@@ -3180,10 +3165,10 @@ document.addEventListener(
 
 
 payoutEmailInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
-    if (event.key === &quot;Enter&quot;) {
+    if (event.key === "Enter") {
 
       event.preventDefault();
 
@@ -3196,10 +3181,10 @@ payoutEmailInput.addEventListener(
 
 
 payoutOtpInput.addEventListener(
-  &quot;keydown&quot;,
+  "keydown",
   function(event) {
 
-    if (event.key === &quot;Enter&quot;) {
+    if (event.key === "Enter") {
 
       event.preventDefault();
 
@@ -3213,9 +3198,9 @@ payoutOtpInput.addEventListener(
 
 function clearPayoutMessage() {
 
-  payoutMessage.textContent = &quot;&quot;;
+  payoutMessage.textContent = "";
 
-  payoutMessage.className = &quot;message&quot;;
+  payoutMessage.className = "message";
 
 }
 
@@ -3229,7 +3214,7 @@ function showPayoutMessage(
     text;
 
   payoutMessage.className =
-    &quot;message show &quot; + type;
+    "message show " + type;
 
 }
 
@@ -3246,8 +3231,8 @@ async function sendPayoutOtp(isResend) {
   if (!email) {
 
     showPayoutMessage(
-      &quot;Registered email डालें।&quot;,
-      &quot;error&quot;
+      "Registered email डालें।",
+      "error"
     );
 
     payoutEmailInput.focus();
@@ -3263,8 +3248,8 @@ async function sendPayoutOtp(isResend) {
   ) {
 
     showPayoutMessage(
-      &quot;कृपया सही email address डालें।&quot;,
-      &quot;error&quot;
+      "कृपया सही email address डालें।",
+      "error"
     );
 
     payoutEmailInput.focus();
@@ -3280,35 +3265,35 @@ async function sendPayoutOtp(isResend) {
     payoutSendOtpBtn.innerHTML;
 
   payoutSendOtpBtn.innerHTML =
-    &#x27;&lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;Sending...&#x27;;
+    '<span class="loading-spinner"></span>Sending...';
 
   try {
 
     const data =
       await jsonp({
-        action: &quot;payoutSendOtp&quot;,
+        action: "payoutSendOtp",
         email: email
       });
 
     if (
-      data &amp;&amp;
+      data &&
       data.success === true
     ) {
 
       payoutEmailStep.style.display =
-        &quot;none&quot;;
+        "none";
 
       payoutOtpStep.style.display =
-        &quot;block&quot;;
+        "block";
 
       payoutResult.style.display =
-        &quot;none&quot;;
+        "none";
 
-      payoutOtpInput.value = &quot;&quot;;
+      payoutOtpInput.value = "";
 
       showPayoutMessage(
-        &quot;OTP आपके email पर भेज दिया गया है।&quot;,
-        &quot;success&quot;
+        "OTP आपके email पर भेज दिया गया है।",
+        "success"
       );
 
       setTimeout(function() {
@@ -3320,22 +3305,22 @@ async function sendPayoutOtp(isResend) {
     }
 
     showPayoutMessage(
-      data &amp;&amp; data.message
+      data && data.message
         ? data.message
-        : &quot;OTP भेजा नहीं जा सका।&quot;,
-      &quot;error&quot;
+        : "OTP भेजा नहीं जा सका।",
+      "error"
     );
 
   } catch (error) {
 
     console.error(
-      &quot;Payout OTP error:&quot;,
+      "Payout OTP error:",
       error
     );
 
     showPayoutMessage(
-      &quot;Network problem. Please try again.&quot;,
-      &quot;error&quot;
+      "Network problem. Please try again.",
+      "error"
     );
 
   } finally {
@@ -3370,8 +3355,8 @@ async function verifyPayoutOtp() {
   if (!/^\d{6}$/.test(otp)) {
 
     showPayoutMessage(
-      &quot;6-digit OTP डालें।&quot;,
-      &quot;error&quot;
+      "6-digit OTP डालें।",
+      "error"
     );
 
     payoutOtpInput.focus();
@@ -3387,33 +3372,33 @@ async function verifyPayoutOtp() {
     payoutVerifyBtn.innerHTML;
 
   payoutVerifyBtn.innerHTML =
-    &#x27;&lt;span class=&quot;loading-spinner&quot;&gt;&lt;/span&gt;Verifying...&#x27;;
+    '<span class="loading-spinner"></span>Verifying...';
 
   try {
 
     const data =
       await jsonp({
-        action: &quot;payoutVerifyOtp&quot;,
+        action: "payoutVerifyOtp",
         email: email,
         otp: otp
       });
 
     if (
-      data &amp;&amp;
+      data &&
       data.success === true
     ) {
 
       renderPayoutProfile(data);
 
       payoutOtpStep.style.display =
-        &quot;none&quot;;
+        "none";
 
       payoutResult.style.display =
-        &quot;block&quot;;
+        "block";
 
       showPayoutMessage(
-        &quot;Email verified successfully.&quot;,
-        &quot;success&quot;
+        "Email verified successfully.",
+        "success"
       );
 
       return;
@@ -3421,22 +3406,22 @@ async function verifyPayoutOtp() {
     }
 
     showPayoutMessage(
-      data &amp;&amp; data.message
+      data && data.message
         ? data.message
-        : &quot;OTP verification failed.&quot;,
-      &quot;error&quot;
+        : "OTP verification failed.",
+      "error"
     );
 
   } catch (error) {
 
     console.error(
-      &quot;Payout verify error:&quot;,
+      "Payout verify error:",
       error
     );
 
     showPayoutMessage(
-      &quot;Network problem. Please try again.&quot;,
-      &quot;error&quot;
+      "Network problem. Please try again.",
+      "error"
     );
 
   } finally {
@@ -3455,41 +3440,41 @@ async function verifyPayoutOtp() {
 function renderPayoutProfile(data) {
 
   const name =
-    String(data.name || &quot;&quot;).trim();
+    String(data.name || "").trim();
 
   const mobile =
-    String(data.mobile || &quot;&quot;).trim();
+    String(data.mobile || "").trim();
 
   const email =
-    String(data.email || &quot;&quot;).trim();
+    String(data.email || "").trim();
 
   const payout =
-    String(data.payout || &quot;&quot;).trim();
+    String(data.payout || "").trim();
 
   const photo =
-    String(data.photo || &quot;&quot;).trim();
+    String(data.photo || "").trim();
 
   payoutName.textContent =
-    name || &quot;Customer&quot;;
+    name || "Customer";
 
   payoutMobile.textContent =
-    mobile || &quot;&quot;;
+    mobile || "";
 
   payoutAmount.textContent =
-    payout || &quot;—&quot;;
+    payout || "—";
 
   payoutEmailSmall.textContent =
     email;
 
-  payoutAvatar.innerHTML = &quot;&quot;;
+  payoutAvatar.innerHTML = "";
 
   if (photo) {
 
     const img =
-      document.createElement(&quot;img&quot;);
+      document.createElement("img");
 
     img.alt =
-      name || &quot;Profile photo&quot;;
+      name || "Profile photo";
 
     img.src =
       photo;
@@ -3497,7 +3482,7 @@ function renderPayoutProfile(data) {
     img.onload =
       function() {
 
-        payoutAvatar.innerHTML = &quot;&quot;;
+        payoutAvatar.innerHTML = "";
 
         payoutAvatar.appendChild(img);
 
@@ -3522,7 +3507,7 @@ function renderPayoutProfile(data) {
 function renderPayoutInitials(name) {
 
   const words =
-    String(name || &quot;C&quot;)
+    String(name || "C")
       .trim()
       .split(/\s+/)
       .filter(Boolean);
@@ -3535,10 +3520,10 @@ function renderPayoutInitials(name) {
           .charAt(0)
           .toUpperCase();
       })
-      .join(&quot;&quot;);
+      .join("");
 
   if (!initials) {
-    initials = &quot;C&quot;;
+    initials = "C";
   }
 
   payoutAvatar.textContent =
@@ -3550,34 +3535,34 @@ function renderPayoutInitials(name) {
 function resetPayoutFlow() {
 
   payoutEmailStep.style.display =
-    &quot;block&quot;;
+    "block";
 
   payoutOtpStep.style.display =
-    &quot;none&quot;;
+    "none";
 
   payoutResult.style.display =
-    &quot;none&quot;;
+    "none";
 
   payoutEmailInput.value =
-    &quot;&quot;;
+    "";
 
   payoutOtpInput.value =
-    &quot;&quot;;
+    "";
 
   payoutName.textContent =
-    &quot;&quot;;
+    "";
 
   payoutMobile.textContent =
-    &quot;&quot;;
+    "";
 
   payoutAmount.textContent =
-    &quot;&quot;;
+    "";
 
   payoutEmailSmall.textContent =
-    &quot;&quot;;
+    "";
 
   payoutAvatar.innerHTML =
-    &quot;&quot;;
+    "";
 
   clearPayoutMessage();
 
@@ -3589,7 +3574,7 @@ function resetPayoutFlow() {
 ========================================================= */
 
 document.addEventListener(
-  &quot;DOMContentLoaded&quot;,
+  "DOMContentLoaded",
   function() {
 
     loadCompanies();
@@ -3602,25 +3587,9 @@ document.addEventListener(
 );
 
 
-&lt;/script&gt;
-
-
-&lt;/body&gt;
-
-&lt;/html&gt;</pre>
-<script>
-const code = '<!DOCTYPE html>\n<html lang="en">\n\n<head>\n\n  <meta charset="UTF-8">\n\n  <meta\n    name="viewport"\n    content="width=device-width, initial-scale=1.0"\n  >\n\n  <title>Client Claim Portal</title>\n\n  <style>\n\n    * {\n      box-sizing: border-box;\n    }\n\n    body {\n\n      margin: 0;\n\n      min-height: 100vh;\n\n      font-family:\n        Inter,\n        -apple-system,\n        BlinkMacSystemFont,\n        "Segoe UI",\n        sans-serif;\n\n      background:\n        linear-gradient(\n          135deg,\n          #eaf6ff 0%,\n          #f5fffb 50%,\n          #e9fff4 100%\n        );\n\n      color: #172033;\n\n      display: flex;\n\n      justify-content: center;\n\n      align-items: center;\n\n      padding: 20px;\n    }\n\n    .container {\n\n      width: 100%;\n\n      max-width: 520px;\n    }\n\n    .header {\n\n      text-align: center;\n\n      margin-bottom: 20px;\n    }\n\n    .logo {\n\n      width: 58px;\n\n      height: 58px;\n\n      margin: auto;\n\n      border-radius: 18px;\n\n      display: flex;\n\n      align-items: center;\n\n      justify-content: center;\n\n      font-size: 28px;\n\n      font-weight: 800;\n\n      color: white;\n\n      background:\n        linear-gradient(\n          135deg,\n          #087fdb,\n          #0abf7a\n        );\n\n      box-shadow:\n        0 12px 30px\n        rgba(0, 130, 190, 0.22);\n    }\n\n    .header h1 {\n\n      margin:\n        14px 0 7px;\n\n      font-size: 28px;\n\n      font-weight: 800;\n    }\n\n    .header p {\n\n      margin: 0;\n\n      color: #64748b;\n\n      font-size: 14px;\n\n      line-height: 1.6;\n    }\n\n    .card {\n\n      background: rgba(255,255,255,0.96);\n\n      border: 1px solid\n        rgba(255,255,255,0.8);\n\n      border-radius: 24px;\n\n      padding: 26px;\n\n      box-shadow:\n        0 20px 60px\n        rgba(31, 71, 98, 0.13);\n    }\n\n    .steps {\n\n      display: flex;\n\n      align-items: center;\n\n      margin-bottom: 25px;\n    }\n\n    .step {\n\n      width: 34px;\n\n      height: 34px;\n\n      border-radius: 50%;\n\n      display: flex;\n\n      align-items: center;\n\n      justify-content: center;\n\n      font-size: 13px;\n\n      font-weight: 700;\n\n      background: #e8eef5;\n\n      color: #64748b;\n\n      flex-shrink: 0;\n    }\n\n    .step.active {\n\n      background:\n        linear-gradient(\n          135deg,\n          #087fdb,\n          #0abf7a\n        );\n\n      color: white;\n\n      box-shadow:\n        0 7px 18px\n        rgba(0, 130, 190, 0.25);\n    }\n\n    .step.done {\n\n      background: #0abf7a;\n\n      color: white;\n    }\n\n    .line {\n\n      height: 3px;\n\n      flex: 1;\n\n      margin: 0 8px;\n\n      background: #e5ebf1;\n\n      border-radius: 5px;\n    }\n\n    .line.active {\n\n      background: #0abf7a;\n    }\n\n    .section {\n\n      display: none;\n    }\n\n    .section.active {\n\n      display: block;\n\n      animation:\n        fadeIn .3s ease;\n    }\n\n    @keyframes fadeIn {\n\n      from {\n\n        opacity: 0;\n\n        transform: translateY(8px);\n      }\n\n      to {\n\n        opacity: 1;\n\n        transform: translateY(0);\n      }\n    }\n\n    .section-title {\n\n      margin-bottom: 5px;\n\n      font-size: 20px;\n\n      font-weight: 750;\n    }\n\n    .section-subtitle {\n\n      margin-bottom: 20px;\n\n      color: #718096;\n\n      font-size: 13px;\n\n      line-height: 1.5;\n    }\n\n    label {\n\n      display: block;\n\n      margin-bottom: 8px;\n\n      font-size: 13px;\n\n      font-weight: 700;\n\n      color: #334155;\n    }\n\n    input,\n    select {\n\n      width: 100%;\n\n      height: 52px;\n\n      padding: 0 15px;\n\n      border: 1px solid #dbe4ec;\n\n      border-radius: 13px;\n\n      background: #fbfdff;\n\n      color: #172033;\n\n      font-size: 15px;\n\n      outline: none;\n\n      transition: .2s;\n    }\n\n    input:focus,\n    select:focus {\n\n      border-color: #1596df;\n\n      background: white;\n\n      box-shadow:\n        0 0 0 4px\n        rgba(21,150,223,.09);\n    }\n\n    .field {\n\n      margin-bottom: 17px;\n    }\n\n    .btn {\n\n      width: 100%;\n\n      height: 52px;\n\n      border: none;\n\n      border-radius: 13px;\n\n      cursor: pointer;\n\n      font-size: 15px;\n\n      font-weight: 750;\n\n      color: white;\n\n      background:\n        linear-gradient(\n          135deg,\n          #087fdb,\n          #08ad78\n        );\n\n      box-shadow:\n        0 10px 22px\n        rgba(0, 130, 190, .20);\n\n      transition: .2s;\n    }\n\n    .btn:hover {\n\n      transform: translateY(-1px);\n\n      box-shadow:\n        0 13px 26px\n        rgba(0, 130, 190, .25);\n    }\n\n    .btn:disabled {\n\n      opacity: .6;\n\n      cursor: not-allowed;\n\n      transform: none;\n    }\n\n    .btn.secondary {\n\n      margin-top: 10px;\n\n      color: #334155;\n\n      background: #eef4f8;\n\n      box-shadow: none;\n    }\n\n    .search-box {\n\n      position: relative;\n    }\n\n    .search-box input {\n\n      padding-right: 55px;\n    }\n\n    .search-icon {\n\n      position: absolute;\n\n      right: 17px;\n\n      top: 50%;\n\n      transform: translateY(-50%);\n\n      color: #7b8b9c;\n\n      font-size: 20px;\n\n      pointer-events: none;\n    }\n\n    .result {\n\n      display: none;\n\n      margin-top: 20px;\n\n      padding: 17px;\n\n      border-radius: 15px;\n\n      background:\n        linear-gradient(\n          135deg,\n          #effbf6,\n          #f4fbff\n        );\n\n      border: 1px solid #cdeee0;\n    }\n\n    .result.show {\n\n      display: block;\n\n      animation: fadeIn .3s ease;\n    }\n\n    .result-label {\n\n      color: #64748b;\n\n      font-size: 12px;\n\n      margin-bottom: 5px;\n    }\n\n    .result-value {\n\n      font-size: 18px;\n\n      font-weight: 800;\n\n      word-break: break-word;\n\n      color: #087f66;\n    }\n\n    .success-box {\n\n      display: none;\n\n      text-align: center;\n\n      padding: 20px 5px;\n    }\n\n    .success-box.show {\n\n      display: block;\n\n      animation: fadeIn .3s ease;\n    }\n\n    .success-icon {\n\n      width: 65px;\n\n      height: 65px;\n\n      margin: 0 auto 15px;\n\n      border-radius: 50%;\n\n      display: flex;\n\n      align-items: center;\n\n      justify-content: center;\n\n      font-size: 30px;\n\n      background: #dff8ec;\n\n      color: #0a9b65;\n    }\n\n    .success-box h2 {\n\n      margin: 0 0 8px;\n\n      font-size: 23px;\n    }\n\n    .success-box p {\n\n      margin: 0;\n\n      color: #64748b;\n\n      font-size: 14px;\n\n      line-height: 1.6;\n    }\n\n    .message {\n\n      display: none;\n\n      margin-top: 15px;\n\n      padding: 12px 14px;\n\n      border-radius: 11px;\n\n      font-size: 13px;\n\n      line-height: 1.5;\n    }\n\n    .message.show {\n\n      display: block;\n    }\n\n    .message.error {\n\n      background: #fff0f0;\n\n      color: #b42318;\n\n      border: 1px solid #ffd4d1;\n    }\n\n    .message.success {\n\n      background: #edfff6;\n\n      color: #087f58;\n\n      border: 1px solid #c7f1dc;\n    }\n\n    .loading {\n\n      display: none;\n\n      text-align: center;\n\n      margin-top: 14px;\n\n      color: #64748b;\n\n      font-size: 13px;\n    }\n\n    .spinner {\n\n      display: inline-block;\n\n      width: 17px;\n\n      height: 17px;\n\n      margin-right: 7px;\n\n      vertical-align: middle;\n\n      border: 2px solid #d8e5ed;\n\n      border-top-color: #087fdb;\n\n      border-radius: 50%;\n\n      animation: spin .7s linear infinite;\n    }\n\n    @keyframes spin {\n\n      to {\n        transform: rotate(360deg);\n      }\n    }\n\n    .security {\n\n      margin-top: 18px;\n\n      padding: 13px;\n\n      border-radius: 12px;\n\n      background: #f7fafc;\n\n      color: #718096;\n\n      font-size: 11px;\n\n      line-height: 1.5;\n\n      text-align: center;\n    }\n\n    .footer {\n\n      text-align: center;\n\n      margin-top: 18px;\n\n      color: #64748b;\n\n      font-size: 11px;\n    }\n\n    .company-badge {\n\n      display: inline-flex;\n\n      align-items: center;\n\n      gap: 7px;\n\n      padding: 7px 11px;\n\n      margin-bottom: 17px;\n\n      border-radius: 50px;\n\n      background: #edf8ff;\n\n      color: #087fdb;\n\n      font-size: 12px;\n\n      font-weight: 700;\n    }\n\n    .company-dot {\n\n      width: 7px;\n\n      height: 7px;\n\n      border-radius: 50%;\n\n      background: #0abf7a;\n    }\n\n    .claim-card {\n\n      margin-top: 20px;\n\n      padding: 18px;\n\n      border-radius: 17px;\n\n      background: #fbfdff;\n\n      border: 1px solid #e5edf3;\n    }\n\n    .claim-card-title {\n\n      font-size: 15px;\n\n      font-weight: 800;\n\n      margin-bottom: 15px;\n    }\n\n    .loading-spinner {\n\n      display: inline-block;\n\n      width: 16px;\n\n      height: 16px;\n\n      border: 2px solid rgba(255,255,255,.35);\n\n      border-top-color: white;\n\n      border-radius: 50%;\n\n      animation: spin .7s linear infinite;\n\n      vertical-align: middle;\n\n      margin-right: 7px;\n    }\n\n\n    /* =====================================================\n       CUSTOMER REGISTRATION UI - NEW\n    ===================================================== */\n\n    .registration-overlay {\n      position: fixed;\n      inset: 0;\n      z-index: 5000;\n      display: none;\n      align-items: center;\n      justify-content: center;\n      padding: 18px;\n      background: rgba(15, 23, 42, .48);\n      backdrop-filter: blur(6px);\n    }\n\n    .registration-overlay.show {\n      display: flex;\n    }\n\n    .registration-modal {\n      width: 100%;\n      max-width: 430px;\n      max-height: 92vh;\n      overflow-y: auto;\n      padding: 26px;\n      border-radius: 24px;\n      background: white;\n      box-shadow: 0 25px 80px rgba(15, 23, 42, .28);\n      animation: fadeIn .25s ease;\n    }\n\n    .registration-icon {\n      width: 58px;\n      height: 58px;\n      margin: 0 auto 14px;\n      border-radius: 18px;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      color: white;\n      font-size: 26px;\n      font-weight: 800;\n      background: linear-gradient(135deg, #087fdb, #0abf7a);\n      box-shadow: 0 10px 25px rgba(0, 130, 190, .20);\n    }\n\n    .registration-modal h2 {\n      margin: 0;\n      text-align: center;\n      font-size: 23px;\n      font-weight: 800;\n    }\n\n    .registration-help {\n      margin: 8px 0 21px;\n      text-align: center;\n      color: #64748b;\n      font-size: 13px;\n      line-height: 1.55;\n    }\n\n    .registration-message {\n      margin-top: 14px;\n    }\n\n    @media (max-width: 480px) {\n      .registration-modal {\n        padding: 20px;\n        border-radius: 20px;\n      }\n    }\n\n    /* =====================================================\n       PAYOUT UI - ADDITION ONLY\n    ===================================================== */\n\n    .payout-corner-btn {\n      position: fixed;\n      right: 18px;\n      bottom: 18px;\n      z-index: 1000;\n      border: none;\n      border-radius: 50px;\n      padding: 12px 17px;\n      cursor: pointer;\n      color: white;\n      font-size: 13px;\n      font-weight: 800;\n      background: linear-gradient(135deg, #087fdb, #0abf7a);\n      box-shadow: 0 10px 28px rgba(0, 130, 190, .24);\n      transition: .2s;\n    }\n\n    .payout-corner-btn:hover {\n      transform: translateY(-2px);\n    }\n\n    .payout-overlay {\n      position: fixed;\n      inset: 0;\n      z-index: 2000;\n      display: none;\n      align-items: center;\n      justify-content: center;\n      padding: 18px;\n      background: rgba(15, 23, 42, .42);\n      backdrop-filter: blur(5px);\n    }\n\n    .payout-overlay.show {\n      display: flex;\n    }\n\n    .payout-modal {\n      width: 100%;\n      max-width: 430px;\n      max-height: 92vh;\n      overflow-y: auto;\n      padding: 24px;\n      border-radius: 24px;\n      background: white;\n      box-shadow: 0 25px 80px rgba(15, 23, 42, .25);\n      animation: fadeIn .25s ease;\n    }\n\n    .payout-modal-head {\n      display: flex;\n      align-items: center;\n      justify-content: space-between;\n      gap: 12px;\n      margin-bottom: 18px;\n    }\n\n    .payout-modal-head h2 {\n      margin: 0;\n      font-size: 21px;\n      font-weight: 800;\n    }\n\n    .payout-close {\n      width: 36px;\n      height: 36px;\n      border: none;\n      border-radius: 50%;\n      cursor: pointer;\n      background: #eef4f8;\n      color: #475569;\n      font-size: 20px;\n      line-height: 1;\n    }\n\n    .payout-help {\n      margin: -7px 0 18px;\n      color: #64748b;\n      font-size: 13px;\n      line-height: 1.5;\n    }\n\n    .payout-profile {\n      margin-top: 18px;\n      padding: 24px 18px;\n      text-align: center;\n      border-radius: 22px;\n      background: linear-gradient(145deg, #f1faff, #effdf6);\n      border: 1px solid #d9eee6;\n    }\n\n    .payout-avatar {\n      width: 104px;\n      height: 104px;\n      margin: 0 auto 13px;\n      border-radius: 50%;\n      overflow: hidden;\n      display: flex;\n      align-items: center;\n      justify-content: center;\n      background: linear-gradient(135deg, #087fdb, #0abf7a);\n      color: white;\n      font-size: 30px;\n      font-weight: 800;\n      border: 4px solid white;\n      box-shadow: 0 10px 28px rgba(0, 130, 190, .20);\n    }\n\n    .payout-avatar img {\n      width: 100%;\n      height: 100%;\n      object-fit: cover;\n      display: block;\n    }\n\n    .payout-profile-name {\n      margin: 0;\n      font-size: 21px;\n      font-weight: 800;\n      color: #172033;\n    }\n\n    .payout-profile-mobile {\n      margin-top: 5px;\n      color: #64748b;\n      font-size: 13px;\n      font-weight: 600;\n    }\n\n    .payout-divider {\n      height: 1px;\n      margin: 20px 0;\n      background: #dbe9e5;\n    }\n\n    .payout-label {\n      color: #64748b;\n      font-size: 11px;\n      font-weight: 800;\n      letter-spacing: 1.5px;\n      text-transform: uppercase;\n    }\n\n    .payout-amount {\n      margin-top: 5px;\n      color: #087f66;\n      font-size: 30px;\n      font-weight: 900;\n      word-break: break-word;\n    }\n\n    .payout-email-small {\n      margin-top: 10px;\n      color: #718096;\n      font-size: 11px;\n      word-break: break-word;\n    }\n\n    @media (max-width: 480px) {\n      .payout-corner-btn {\n        right: 12px;\n        bottom: 12px;\n        padding: 11px 14px;\n      }\n\n      .payout-modal {\n        padding: 20px;\n        border-radius: 20px;\n      }\n\n      .payout-avatar {\n        width: 94px;\n        height: 94px;\n      }\n\n      .payout-amount {\n        font-size: 27px;\n      }\n    }\n\n    @media (max-width: 480px) {\n\n      body {\n\n        padding: 12px;\n\n        align-items: flex-start;\n\n        padding-top: 25px;\n      }\n\n      .card {\n\n        padding: 20px;\n\n        border-radius: 20px;\n      }\n\n      .header h1 {\n\n        font-size: 24px;\n      }\n\n    }\n\n  </style>\n\n</head>\n\n\n<body>\n\n\n<div class="container">\n\n\n  <!-- HEADER -->\n\n  <div class="header">\n\n    <div class="logo">✓</div>\n\n    <h1>Client Claim Portal</h1>\n\n    <p>\n      Select your company, search your number or\n      client code, and submit your claim securely.\n    </p>\n\n  </div>\n\n\n  <!-- MAIN CARD -->\n\n  <div class="card">\n\n\n    <!-- STEPS -->\n\n    <div class="steps">\n\n      <div\n        id="step1"\n        class="step active"\n      >\n        1\n      </div>\n\n      <div\n        id="line1"\n        class="line"\n      ></div>\n\n      <div\n        id="step2"\n        class="step"\n      >\n        2\n      </div>\n\n      <div\n        id="line2"\n        class="line"\n      ></div>\n\n      <div\n        id="step3"\n        class="step"\n      >\n        3\n      </div>\n\n    </div>\n\n\n    <!-- STEP 1 -->\n\n    <div\n      id="section1"\n      class="section active"\n    >\n\n      <div class="section-title">\n        Search Your Details\n      </div>\n\n      <div class="section-subtitle">\n        Select your company and search your\n        number or client code.\n      </div>\n\n\n      <!-- COMPANY -->\n\n      <div class="field">\n\n        <label for="company">\n          Select Company <span style="color:#d93025">*</span>\n        </label>\n\n        <select id="company">\n\n          <option value="">\n            Loading Companies...\n          </option>\n\n        </select>\n\n      </div>\n\n\n      <!-- SEARCH -->\n\n      <div class="field">\n\n        <label for="search">\n          Number / Client Code\n          <span style="color:#d93025">*</span>\n        </label>\n\n        <div class="search-box">\n\n          <input\n            type="text"\n            id="search"\n            placeholder="Enter Number or Client Code"\n            autocomplete="off"\n            maxlength="100"\n          >\n\n          <span class="search-icon">\n            🔍\n          </span>\n\n        </div>\n\n      </div>\n\n\n      <button\n        id="searchBtn"\n        class="btn"\n        type="button"\n        onclick="searchClient()"\n      >\n        🔍 &nbsp; Search Details\n      </button>\n\n\n      <!-- LOADING -->\n\n      <div\n        id="loading"\n        class="loading"\n      >\n\n        <span class="spinner"></span>\n\n        Searching...\n\n      </div>\n\n\n      <!-- RESULT -->\n\n      <div\n        id="result"\n        class="result"\n      >\n\n        <div class="result-label">\n          Matching Client\n        </div>\n\n        <div\n          id="matchedValue"\n          class="result-value"\n        ></div>\n\n      </div>\n\n\n      <!-- CLAIM FORM -->\n\n      <div\n        id="claimCard"\n        class="claim-card"\n        style="display:none;"\n      >\n\n        <div class="claim-card-title">\n          Submit Your Claim\n        </div>\n\n\n        <div\n          id="companyBadge"\n          class="company-badge"\n        >\n\n          <span class="company-dot"></span>\n\n          <span id="companyBadgeText">\n            Company\n          </span>\n\n        </div>\n\n\n        <!-- NAME -->\n\n        <div class="field">\n\n          <label for="name">\n            Your Name\n            <span style="color:#d93025">*</span>\n          </label>\n\n          <input\n            type="text"\n            id="name"\n            placeholder="Enter your name"\n            maxlength="100"\n            autocomplete="name"\n          >\n\n        </div>\n\n\n        <!-- MOBILE -->\n\n        <div class="field">\n\n          <label for="mobile">\n            Mobile Number\n            <span style="color:#d93025">*</span>\n          </label>\n\n          <input\n            type="tel"\n            id="mobile"\n            placeholder="Enter mobile number"\n            maxlength="15"\n            inputmode="numeric"\n            autocomplete="tel"\n          >\n\n        </div>\n\n\n        <button\n          id="claimBtn"\n          class="btn"\n          type="button"\n          onclick="submitClaim()"\n        >\n          ✓ &nbsp; Submit Claim\n        </button>\n\n      </div>\n\n\n      <!-- MESSAGE -->\n\n      <div\n        id="message"\n        class="message"\n        aria-live="polite"\n      ></div>\n\n\n      <!-- SECURITY -->\n\n      <div class="security">\n\n        🔒 &nbsp;\n\n        Please enter correct details.\n        Your claim information will be\n        processed through the connected\n        claim system.\n\n      </div>\n\n    </div>\n\n\n    <!-- STEP 2 / SUCCESS -->\n\n    <div\n      id="section2"\n      class="section"\n    >\n\n      <div class="success-box show">\n\n        <div class="success-icon">\n          ✓\n        </div>\n\n        <h2>\n          Claim Submitted\n        </h2>\n\n        <p>\n          Your claim has been submitted\n          successfully.\n        </p>\n\n        <button\n          class="btn secondary"\n          type="button"\n          onclick="resetPortal()"\n        >\n          Submit Another Claim\n        </button>\n\n      </div>\n\n    </div>\n\n\n    <!-- STEP 3 -->\n\n    <div\n      id="section3"\n      class="section"\n    >\n\n      <div class="success-box show">\n\n        <div class="success-icon">\n          ✓\n        </div>\n\n        <h2>\n          Thank You\n        </h2>\n\n        <p>\n          Your claim information has been\n          processed successfully.\n        </p>\n\n      </div>\n\n    </div>\n\n\n  </div>\n\n\n\n  <!-- =====================================================\n       CUSTOMER REGISTRATION - NEW\n  ====================================================== -->\n\n  <div\n    id="registrationOverlay"\n    class="registration-overlay"\n    aria-hidden="true"\n  >\n\n    <div\n      class="registration-modal"\n      role="dialog"\n      aria-modal="true"\n      aria-labelledby="registrationTitle"\n    >\n\n      <div class="registration-icon">✓</div>\n\n      <h2 id="registrationTitle">Create Your Account</h2>\n\n      <div class="registration-help">\n        Please enter your name, mobile number and email address.\n        All three details are required to continue.\n      </div>\n\n      <div class="field">\n        <label for="registrationName">\n          Name <span style="color:#d93025">*</span>\n        </label>\n        <input\n          type="text"\n          id="registrationName"\n          placeholder="Enter your name"\n          maxlength="100"\n          autocomplete="name"\n        >\n      </div>\n\n      <div class="field">\n        <label for="registrationMobile">\n          Mobile Number <span style="color:#d93025">*</span>\n        </label>\n        <input\n          type="tel"\n          id="registrationMobile"\n          placeholder="Enter mobile number"\n          maxlength="15"\n          inputmode="numeric"\n          autocomplete="tel"\n        >\n      </div>\n\n      <div class="field">\n        <label for="registrationEmail">\n          Email ID <span style="color:#d93025">*</span>\n        </label>\n        <input\n          type="email"\n          id="registrationEmail"\n          placeholder="Enter your email address"\n          maxlength="320"\n          autocomplete="email"\n        >\n      </div>\n\n      <button\n        id="registrationBtn"\n        class="btn"\n        type="button"\n        onclick="registerCustomer()"\n      >\n        Create Account\n      </button>\n\n      <div\n        id="registrationMessage"\n        class="message registration-message"\n        aria-live="polite"\n      ></div>\n\n    </div>\n  </div>\n\n  <!-- =====================================================\n       GET PAYOUT - ADDITION ONLY\n  ====================================================== -->\n\n  <button\n    id="getPayoutBtn"\n    class="payout-corner-btn"\n    type="button"\n    onclick="openPayoutModal()"\n  >\n    💰 Get Payout\n  </button>\n\n\n  <div\n    id="payoutOverlay"\n    class="payout-overlay"\n    aria-hidden="true"\n  >\n\n    <div\n      class="payout-modal"\n      role="dialog"\n      aria-modal="true"\n      aria-labelledby="payoutTitle"\n    >\n\n      <div class="payout-modal-head">\n\n        <h2 id="payoutTitle">\n          Get Payout\n        </h2>\n\n        <button\n          class="payout-close"\n          type="button"\n          onclick="closePayoutModal()"\n          aria-label="Close"\n        >\n          ×\n        </button>\n\n      </div>\n\n\n      <div id="payoutEmailStep">\n\n        <div class="payout-help">\n          Enter your registered email address.\n          We will send a verification OTP.\n        </div>\n\n        <div class="field">\n\n          <label for="payoutEmail">\n            Registered Email\n            <span style="color:#d93025">*</span>\n          </label>\n\n          <input\n            type="email"\n            id="payoutEmail"\n            placeholder="Enter your registered email"\n            autocomplete="email"\n            maxlength="320"\n          >\n\n        </div>\n\n        <button\n          id="payoutSendOtpBtn"\n          class="btn"\n          type="button"\n          onclick="sendPayoutOtp()"\n        >\n          ✉ &nbsp; Get OTP\n        </button>\n\n      </div>\n\n\n      <div\n        id="payoutOtpStep"\n        style="display:none;"\n      >\n\n        <div class="payout-help">\n          OTP आपके registered email पर भेजा गया है।\n        </div>\n\n        <div class="field">\n\n          <label for="payoutOtp">\n            Enter OTP\n            <span style="color:#d93025">*</span>\n          </label>\n\n          <input\n            type="text"\n            id="payoutOtp"\n            placeholder="Enter 6-digit OTP"\n            inputmode="numeric"\n            maxlength="6"\n            autocomplete="one-time-code"\n          >\n\n        </div>\n\n        <button\n          id="payoutVerifyBtn"\n          class="btn"\n          type="button"\n          onclick="verifyPayoutOtp()"\n        >\n          ✓ &nbsp; Verify OTP\n        </button>\n\n        <button\n          id="payoutResendBtn"\n          class="btn secondary"\n          type="button"\n          onclick="sendPayoutOtp(true)"\n        >\n          Resend OTP\n        </button>\n\n      </div>\n\n\n      <div\n        id="payoutResult"\n        style="display:none;"\n      >\n\n        <div class="payout-profile">\n\n          <div\n            id="payoutAvatar"\n            class="payout-avatar"\n          ></div>\n\n          <h3\n            id="payoutName"\n            class="payout-profile-name"\n          ></h3>\n\n          <div\n            id="payoutMobile"\n            class="payout-profile-mobile"\n          ></div>\n\n          <div class="payout-divider"></div>\n\n          <div class="payout-label">\n            Your Payout\n          </div>\n\n          <div\n            id="payoutAmount"\n            class="payout-amount"\n          ></div>\n\n          <div\n            id="payoutEmailSmall"\n            class="payout-email-small"\n          ></div>\n\n        </div>\n\n        <button\n          class="btn secondary"\n          type="button"\n          onclick="resetPayoutFlow()"\n        >\n          Check Another Email\n        </button>\n\n      </div>\n\n\n      <div\n        id="payoutMessage"\n        class="message"\n        aria-live="polite"\n      ></div>\n\n    </div>\n\n  </div>\n\n\n  <!-- FOOTER -->\n\n  <div class="footer">\n\n    © 2026 Client Claim Portal.\n    All rights reserved.\n\n  </div>\n\n\n</div>\n\n\n<script>\n\n\n/* =========================================================\n   GOOGLE APPS SCRIPT WEB APP URL\n\n   IMPORTANT:\n   This is your CURRENT deployment URL.\n   \n   अगर नया Apps Script deployment URL मिले,\n   तो सिर्फ नीचे वाला URL बदलना है.\n========================================================= */\n\nconst API_URL =\n  "https://script.google.com/macros/s/AKfycbwaYi7ChXptjXH3T6UdSynNLHo8_f6g81n_1CoPutjuDvzAdIY6qARJCrbdMq0EEZSb/exec";\n\n\n/* =========================================================\n   DOM ELEMENTS\n========================================================= */\n\nconst companySelect =\n  document.getElementById("company");\n\nconst searchInput =\n  document.getElementById("search");\n\nconst searchBtn =\n  document.getElementById("searchBtn");\n\nconst resultBox =\n  document.getElementById("result");\n\nconst matchedValue =\n  document.getElementById("matchedValue");\n\nconst loading =\n  document.getElementById("loading");\n\nconst message =\n  document.getElementById("message");\n\nconst nameInput =\n  document.getElementById("name");\n\nconst mobileInput =\n  document.getElementById("mobile");\n\nconst claimBtn =\n  document.getElementById("claimBtn");\n\nconst claimCard =\n  document.getElementById("claimCard");\n\nconst companyBadgeText =\n  document.getElementById("companyBadgeText");\n\n\n/* =========================================================\n   CURRENT MATCH\n========================================================= */\n\nlet currentMatch = "";\n\nlet currentCompany = "";\n\n\n/* =========================================================\n   SAVED COMPANY KEY\n\n   Selected company browser ke localStorage mein\n   permanently save rahegi.\n\n   Iska matlab:\n   - Claim ke baad company rahegi\n   - Submit Another Claim ke baad company rahegi\n   - Page refresh ke baad company rahegi\n   - Browser reopen karne ke baad bhi company rahegi\n========================================================= */\n\nconst SAVED_COMPANY_KEY =\n  "clientClaimPortal_selectedCompany";\n\n\n/* =========================================================\n   JSONP REQUEST\n========================================================= */\n\nfunction jsonp(params) {\n\n  return new Promise(\n    function(resolve, reject) {\n\n      const callbackName =\n        "jsonp_" +\n        Date.now() +\n        "_" +\n        Math.floor(\n          Math.random() * 100000\n        );\n\n\n      const script =\n        document.createElement("script");\n\n\n      let finished = false;\n\n\n      const cleanup =\n        function() {\n\n          try {\n\n            delete window[callbackName];\n\n          } catch (e) {\n\n            window[callbackName] =\n              undefined;\n\n          }\n\n\n          if (script.parentNode) {\n\n            script.parentNode.removeChild(\n              script\n            );\n\n          }\n\n        };\n\n\n      const timer =\n        setTimeout(\n          function() {\n\n            if (finished) return;\n\n            finished = true;\n\n            cleanup();\n\n            reject(\n              new Error(\n                "Request timeout"\n              )\n            );\n\n          },\n          15000\n        );\n\n\n      window[callbackName] =\n        function(data) {\n\n          if (finished) return;\n\n          finished = true;\n\n          clearTimeout(timer);\n\n          cleanup();\n\n          resolve(data);\n\n        };\n\n\n      const query =\n        new URLSearchParams({\n\n          ...params,\n\n          callback:\n            callbackName\n\n        });\n\n\n      script.src =\n        API_URL +\n        "?" +\n        query.toString();\n\n\n      script.async = true;\n\n\n      script.onerror =\n        function() {\n\n          if (finished) return;\n\n          finished = true;\n\n          clearTimeout(timer);\n\n          cleanup();\n\n          reject(\n            new Error(\n              "Network error"\n            )\n          );\n\n        };\n\n\n      document\n        .head\n        .appendChild(script);\n\n    }\n  );\n\n}\n\n\n/* =========================================================\n   LOAD COMPANIES\n\n   Google Sheet ke saare tabs automatically\n   dropdown mein load honge.\n\n   Saved company automatically restore hogi.\n========================================================= */\n\nasync function loadCompanies() {\n\n  companySelect.disabled = true;\n\n  companySelect.innerHTML =\n    \'<option value="">Loading Companies...</option>\';\n\n\n  let data = null;\n\n  let lastError = null;\n\n  for (let attempt = 1; attempt <= 3; attempt++) {\n\n    try {\n\n      data =\n        await jsonp({\n          action: "companies"\n        });\n\n      if (\n        data &&\n        data.success === true &&\n        Array.isArray(data.companies)\n      ) {\n\n        break;\n\n      }\n\n      lastError =\n        new Error(\n          "Invalid companies response"\n        );\n\n    } catch (error) {\n\n      lastError = error;\n\n    }\n\n    if (attempt < 3) {\n\n      await new Promise(function(resolve) {\n\n        setTimeout(\n          resolve,\n          700 * attempt\n        );\n\n      });\n\n    }\n\n  }\n\n  try {\n\n    if (\n      !data ||\n      data.success !== true ||\n      !Array.isArray(data.companies)\n    ) {\n\n      throw (\n        lastError ||\n        new Error(\n          "Invalid companies response"\n        )\n      );\n\n    }\n\n\n    const companies =\n      data.companies\n        .map(function(company) {\n\n          return String(\n            company || ""\n          ).trim();\n\n        })\n        .filter(function(company) {\n\n          return company !== "";\n\n        })\n        .filter(function(company, index, array) {\n\n          return array.indexOf(company)\n            === index;\n\n        });\n\n\n    companySelect.innerHTML =\n      \'<option value="">Select Company</option>\';\n\n\n    companies.forEach(\n      function(company) {\n\n        const option =\n          document.createElement("option");\n\n\n        option.value =\n          company;\n\n\n        option.textContent =\n          company;\n\n\n        companySelect.appendChild(\n          option\n        );\n\n      }\n    );\n\n\n    if (companies.length === 0) {\n\n      companySelect.innerHTML =\n        \'<option value="">No companies found</option>\';\n\n      return;\n    }\n\n\n    companySelect.disabled = false;\n\n\n    let savedCompany = "";\n\n\n    try {\n\n      savedCompany =\n        (\n          localStorage.getItem(\n            SAVED_COMPANY_KEY\n          ) || ""\n        ).trim();\n\n    } catch (storageError) {\n\n      console.warn(\n        "Local storage unavailable:",\n        storageError\n      );\n\n    }\n\n\n    if (\n      savedCompany &&\n      companies.includes(savedCompany)\n    ) {\n\n      companySelect.value =\n        savedCompany;\n\n\n      currentCompany =\n        savedCompany;\n\n    }\n\n\n    else if (savedCompany) {\n\n      try {\n\n        localStorage.removeItem(\n          SAVED_COMPANY_KEY\n        );\n\n      } catch (storageError) {\n\n        console.warn(\n          "Unable to clear saved company:",\n          storageError\n        );\n\n      }\n\n\n      currentCompany =\n        "";\n\n    }\n\n\n  } catch (error) {\n\n    console.error(\n      "Company loading error:",\n      error\n    );\n\n\n    companySelect.disabled =\n      true;\n\n\n    companySelect.innerHTML =\n      \'<option value="">Unable to load companies</option>\';\n\n\n    showMessage(\n      "Company list load nahi ho paayi. Please refresh the page.",\n      "error"\n    );\n\n  }\n\n}\n\n\n/* =========================================================\n   COMPANY CHANGE\n========================================================= */\n\ncompanySelect.addEventListener(\n  "change",\n  function() {\n\n    currentCompany =\n      companySelect.value.trim();\n\n\n    try {\n\n      if (currentCompany) {\n\n        localStorage.setItem(\n          SAVED_COMPANY_KEY,\n          currentCompany\n        );\n\n      }\n\n      else {\n\n        localStorage.removeItem(\n          SAVED_COMPANY_KEY\n        );\n\n      }\n\n    } catch (storageError) {\n\n      console.warn(\n        "Unable to save company preference:",\n        storageError\n      );\n\n    }\n\n\n    currentMatch =\n      "";\n\n    searchInput.value =\n      "";\n\n    matchedValue.textContent =\n      "";\n\n    resultBox.classList.remove(\n      "show"\n    );\n\n    resultBox.style.display =\n      "none";\n\n    claimCard.style.display =\n      "none";\n\n    clearMessage();\n\n  }\n);\n\n\n/* =========================================================\n   SEARCH CLIENT\n========================================================= */\n\nasync function searchClient() {\n\n  clearMessage();\n\n\n  const company =\n    companySelect.value.trim();\n\n  const query =\n    searchInput.value.trim();\n\n\n  if (!company) {\n\n    showMessage(\n      "Company Select करें।",\n      "error"\n    );\n\n    companySelect.focus();\n\n    return;\n  }\n\n\n  if (!query) {\n\n    showMessage(\n      "Number / Client Code डालें।",\n      "error"\n    );\n\n    searchInput.focus();\n\n    return;\n  }\n\n\n  if (query.length > 100) {\n\n    showMessage(\n      "Search value बहुत लंबी है।",\n      "error"\n    );\n\n    searchInput.focus();\n\n    return;\n  }\n\n\n  currentMatch =\n    "";\n\n\n  resultBox.classList.remove(\n    "show"\n  );\n\n  resultBox.style.display =\n    "none";\n\n  claimCard.style.display =\n    "none";\n\n\n  searchBtn.disabled =\n    true;\n\n  loading.style.display =\n    "block";\n\n\n  try {\n\n    const data =\n      await jsonp({\n\n        action:\n          "search",\n\n        company:\n          company,\n\n        query:\n          query\n\n      });\n\n\n    if (\n      data &&\n      data.success === true &&\n      data.found === true\n    ) {\n\n      currentMatch =\n        String(\n          data.value || ""\n        ).trim();\n\n\n      if (!currentMatch) {\n\n        showMessage(\n          "Matching data खाली है।",\n          "error"\n        );\n\n        return;\n      }\n\n\n      matchedValue.textContent =\n        currentMatch;\n\n\n      resultBox.style.display =\n        "block";\n\n\n      resultBox.classList.add(\n        "show"\n      );\n\n\n      companyBadgeText.textContent =\n        company;\n\n\n      claimCard.style.display =\n        "block";\n\n\n      nameInput.value =\n        "";\n\n      mobileInput.value =\n        "";\n\n\n      setTimeout(\n        function() {\n\n          nameInput.focus();\n\n        },\n        100\n      );\n\n\n    }\n\n    else {\n\n      showMessage(\n        "No Result Found",\n        "error"\n      );\n\n    }\n\n\n  }\n\n  catch (error) {\n\n    console.error(\n      "Search error:",\n      error\n    );\n\n\n    showMessage(\n      "Network problem. Please try again.",\n      "error"\n    );\n\n  }\n\n  finally {\n\n    searchBtn.disabled =\n      false;\n\n    loading.style.display =\n      "none";\n\n  }\n\n}\n\n\n/* =========================================================\n   SEARCH ENTER KEY\n========================================================= */\n\nsearchInput.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (\n      event.key === "Enter"\n    ) {\n\n      event.preventDefault();\n\n      searchClient();\n\n    }\n\n  }\n);\n\n\n/* =========================================================\n   NAME ENTER KEY\n========================================================= */\n\nnameInput.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (\n      event.key === "Enter"\n    ) {\n\n      event.preventDefault();\n\n      mobileInput.focus();\n\n    }\n\n  }\n);\n\n\n/* =========================================================\n   MOBILE ENTER KEY\n========================================================= */\n\nmobileInput.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (\n      event.key === "Enter"\n    ) {\n\n      event.preventDefault();\n\n      submitClaim();\n\n    }\n\n  }\n);\n\n\n/* =========================================================\n   SUBMIT CLAIM\n========================================================= */\n\nasync function submitClaim() {\n\n  clearMessage();\n\n\n  const company =\n    companySelect.value.trim();\n\n  const name =\n    nameInput.value.trim();\n\n  const mobile =\n    mobileInput.value.trim();\n\n\n  if (!currentMatch) {\n\n    showMessage(\n      "पहले अपना Number / Client Code Search करें।",\n      "error"\n    );\n\n    return;\n  }\n\n\n  if (!company) {\n\n    showMessage(\n      "Company Select करें।",\n      "error"\n    );\n\n    companySelect.focus();\n\n    return;\n  }\n\n\n  if (!name) {\n\n    showMessage(\n      "अपना Name डालें।",\n      "error"\n    );\n\n    nameInput.focus();\n\n    return;\n  }\n\n\n  if (name.length < 2) {\n\n    showMessage(\n      "कृपया सही Name डालें।",\n      "error"\n    );\n\n    nameInput.focus();\n\n    return;\n  }\n\n\n  if (name.length > 100) {\n\n    showMessage(\n      "Name बहुत लंबा है।",\n      "error"\n    );\n\n    nameInput.focus();\n\n    return;\n  }\n\n\n  if (!mobile) {\n\n    showMessage(\n      "अपना Mobile Number डालें।",\n      "error"\n    );\n\n    mobileInput.focus();\n\n    return;\n  }\n\n\n  const cleanedMobile =\n    mobile.replace(\n      /[^\\d]/g,\n      ""\n    );\n\n\n  if (\n    cleanedMobile.length < 7 ||\n    cleanedMobile.length > 15\n  ) {\n\n    showMessage(\n      "कृपया सही Mobile Number डालें।",\n      "error"\n    );\n\n    mobileInput.focus();\n\n    return;\n  }\n\n\n  claimBtn.disabled =\n    true;\n\n\n  const originalButtonHTML =\n    claimBtn.innerHTML;\n\n\n  claimBtn.innerHTML =\n    \'<span class="loading-spinner"></span>\' +\n    \'Submitting...\';\n\n\n  try {\n\n    const data =\n      await jsonp({\n\n        action:\n          "claim",\n\n        company:\n          company,\n\n        query:\n          currentMatch,\n\n        name:\n          name,\n\n        mobile:\n          cleanedMobile\n\n      });\n\n\n    if (\n      data &&\n      data.alreadyClaimed === true\n    ) {\n\n      showMessage(\n        "Already Claimed",\n        "error"\n      );\n\n      return;\n    }\n\n\n    if (\n      data &&\n      data.success === true\n    ) {\n\n      showMessage(\n        "Claim Submitted Successfully",\n        "success"\n      );\n\n\n      document\n        .getElementById("section1")\n        .classList.remove(\n          "active"\n        );\n\n\n      document\n        .getElementById("section2")\n        .classList.add(\n          "active"\n        );\n\n\n      document\n        .getElementById("step1")\n        .classList.remove(\n          "active"\n        );\n\n\n      document\n        .getElementById("step1")\n        .classList.add(\n          "done"\n        );\n\n\n      document\n        .getElementById("line1")\n        .classList.add(\n          "active"\n        );\n\n\n      document\n        .getElementById("step2")\n        .classList.add(\n          "active"\n        );\n\n\n      setTimeout(\n        function() {\n\n          window.scrollTo({\n\n            top: 0,\n\n            behavior: "smooth"\n\n          });\n\n        },\n        100\n      );\n\n\n      return;\n    }\n\n\n    showMessage(\n\n      (\n        data &&\n        data.message\n      )\n\n        ? data.message\n\n        : "Claim submit nahi hua. Please try again.",\n\n      "error"\n\n    );\n\n\n  }\n\n  catch (error) {\n\n    console.error(\n      "Claim error:",\n      error\n    );\n\n\n    showMessage(\n      "Network problem. Please try again.",\n      "error"\n    );\n\n  }\n\n  finally {\n\n    claimBtn.disabled =\n      false;\n\n    claimBtn.innerHTML =\n      originalButtonHTML;\n\n  }\n\n}\n\n\n/* =========================================================\n   RESET PORTAL\n========================================================= */\n\nfunction resetPortal() {\n\n  currentMatch =\n    "";\n\n\n  currentCompany =\n    companySelect.value.trim();\n\n\n  if (!currentCompany) {\n\n    try {\n\n      currentCompany =\n        (\n          localStorage.getItem(\n            SAVED_COMPANY_KEY\n          ) || ""\n        ).trim();\n\n    } catch (storageError) {\n\n      console.warn(\n        "Unable to read saved company:",\n        storageError\n      );\n\n    }\n\n  }\n\n\n  searchInput.value =\n    "";\n\n  nameInput.value =\n    "";\n\n  mobileInput.value =\n    "";\n\n\n  matchedValue.textContent =\n    "";\n\n\n  resultBox.style.display =\n    "none";\n\n\n  resultBox.classList.remove(\n    "show"\n  );\n\n\n  claimCard.style.display =\n    "none";\n\n\n  clearMessage();\n\n\n  document\n    .getElementById("section2")\n    .classList.remove(\n      "active"\n    );\n\n\n  document\n    .getElementById("section1")\n    .classList.add(\n      "active"\n    );\n\n\n  document\n    .getElementById("step1")\n    .classList.remove(\n      "done"\n    );\n\n\n  document\n    .getElementById("step1")\n    .classList.add(\n      "active"\n    );\n\n\n  document\n    .getElementById("line1")\n    .classList.remove(\n      "active"\n    );\n\n\n  document\n    .getElementById("step2")\n    .classList.remove(\n      "active"\n    );\n\n\n  if (currentCompany) {\n\n    companySelect.value =\n      currentCompany;\n\n\n    try {\n\n      localStorage.setItem(\n        SAVED_COMPANY_KEY,\n        currentCompany\n      );\n\n    } catch (storageError) {\n\n      console.warn(\n        "Unable to save company:",\n        storageError\n      );\n\n    }\n\n  }\n\n\n  window.scrollTo({\n\n    top: 0,\n\n    behavior: "smooth"\n\n  });\n\n}\n\n\n/* =========================================================\n   SHOW MESSAGE\n========================================================= */\n\nfunction showMessage(\n  text,\n  type\n) {\n\n  message.textContent =\n    text;\n\n  message.className =\n    "message show " +\n    type;\n\n}\n\n\n/* =========================================================\n   CLEAR MESSAGE\n========================================================= */\n\nfunction clearMessage() {\n\n  message.textContent =\n    "";\n\n  message.className =\n    "message";\n\n}\n\n\n\n/* =========================================================\n   CUSTOMER REGISTRATION - NEW\n========================================================= */\n\nconst REGISTRATION_KEY =\n  "clientClaimPortal_customerRegistered";\n\nconst registrationOverlay =\n  document.getElementById("registrationOverlay");\n\nconst registrationNameInput =\n  document.getElementById("registrationName");\n\nconst registrationMobileInput =\n  document.getElementById("registrationMobile");\n\nconst registrationEmailInput =\n  document.getElementById("registrationEmail");\n\nconst registrationBtn =\n  document.getElementById("registrationBtn");\n\nconst registrationMessage =\n  document.getElementById("registrationMessage");\n\n\nfunction isCustomerRegistered() {\n\n  try {\n    return localStorage.getItem(REGISTRATION_KEY) === "1";\n  } catch (error) {\n    return false;\n  }\n}\n\n\nfunction showRegistrationModal() {\n\n  if (isCustomerRegistered()) {\n    return;\n  }\n\n  registrationOverlay.classList.add("show");\n  registrationOverlay.setAttribute("aria-hidden", "false");\n\n  setTimeout(function() {\n    registrationNameInput.focus();\n  }, 100);\n}\n\n\nfunction hideRegistrationModal() {\n\n  registrationOverlay.classList.remove("show");\n  registrationOverlay.setAttribute("aria-hidden", "true");\n}\n\n\nfunction showRegistrationMessage(text, type) {\n\n  registrationMessage.textContent = text;\n  registrationMessage.className =\n    "message registration-message show " + type;\n}\n\n\nfunction clearRegistrationMessage() {\n\n  registrationMessage.textContent = "";\n  registrationMessage.className =\n    "message registration-message";\n}\n\n\nasync function registerCustomer() {\n\n  clearRegistrationMessage();\n\n  const name =\n    registrationNameInput.value.trim();\n\n  const mobile =\n    registrationMobileInput.value.trim();\n\n  const email =\n    registrationEmailInput.value.trim().toLowerCase();\n\n  if (!name) {\n    showRegistrationMessage("Name डालें।", "error");\n    registrationNameInput.focus();\n    return;\n  }\n\n  if (!mobile) {\n    showRegistrationMessage("Mobile number डालें।", "error");\n    registrationMobileInput.focus();\n    return;\n  }\n\n  if (!email) {\n    showRegistrationMessage("Email ID डालें।", "error");\n    registrationEmailInput.focus();\n    return;\n  }\n\n  if (!/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(email)) {\n    showRegistrationMessage("कृपया सही email address डालें।", "error");\n    registrationEmailInput.focus();\n    return;\n  }\n\n  const cleanMobile = mobile.replace(/[^\\d]/g, "");\n\n  if (cleanMobile.length < 7 || cleanMobile.length > 15) {\n    showRegistrationMessage("कृपया सही mobile number डालें।", "error");\n    registrationMobileInput.focus();\n    return;\n  }\n\n  registrationBtn.disabled = true;\n\n  const originalText =\n    registrationBtn.innerHTML;\n\n  registrationBtn.innerHTML =\n    \'<span class="loading-spinner"></span>Creating Account...\';\n\n  try {\n\n    const data = await jsonp({\n      action: "registerCustomer",\n      name: name,\n      mobile: cleanMobile,\n      email: email\n    });\n\n    if (data && data.success === true) {\n\n      try {\n        localStorage.setItem(REGISTRATION_KEY, "1");\n        localStorage.setItem(\n          "clientClaimPortal_customerEmail",\n          email\n        );\n      } catch (storageError) {\n        console.warn("Unable to save registration state:", storageError);\n      }\n\n      showRegistrationMessage(\n        data.message || "Account created successfully.",\n        "success"\n      );\n\n      setTimeout(function() {\n        hideRegistrationModal();\n      }, 600);\n\n      return;\n    }\n\n    showRegistrationMessage(\n      data && data.message\n        ? data.message\n        : "Account could not be created.",\n      "error"\n    );\n\n  } catch (error) {\n\n    console.error("Registration error:", error);\n\n    showRegistrationMessage(\n      "Network problem. Please try again.",\n      "error"\n    );\n\n  } finally {\n\n    registrationBtn.disabled = false;\n    registrationBtn.innerHTML = originalText;\n\n  }\n}\n\n\nregistrationEmailInput.addEventListener(\n  "keydown",\n  function(event) {\n    if (event.key === "Enter") {\n      event.preventDefault();\n      registerCustomer();\n    }\n  }\n);\n\n/* =========================================================\n   PAYOUT FLOW - ADDITION ONLY\n========================================================= */\n\nconst payoutOverlay =\n  document.getElementById("payoutOverlay");\n\nconst payoutEmailInput =\n  document.getElementById("payoutEmail");\n\nconst payoutOtpInput =\n  document.getElementById("payoutOtp");\n\nconst payoutEmailStep =\n  document.getElementById("payoutEmailStep");\n\nconst payoutOtpStep =\n  document.getElementById("payoutOtpStep");\n\nconst payoutResult =\n  document.getElementById("payoutResult");\n\nconst payoutMessage =\n  document.getElementById("payoutMessage");\n\nconst payoutSendOtpBtn =\n  document.getElementById("payoutSendOtpBtn");\n\nconst payoutVerifyBtn =\n  document.getElementById("payoutVerifyBtn");\n\nconst payoutResendBtn =\n  document.getElementById("payoutResendBtn");\n\nconst payoutAvatar =\n  document.getElementById("payoutAvatar");\n\nconst payoutName =\n  document.getElementById("payoutName");\n\nconst payoutMobile =\n  document.getElementById("payoutMobile");\n\nconst payoutAmount =\n  document.getElementById("payoutAmount");\n\nconst payoutEmailSmall =\n  document.getElementById("payoutEmailSmall");\n\n\nfunction openPayoutModal() {\n\n  payoutOverlay.classList.add("show");\n\n  payoutOverlay.setAttribute(\n    "aria-hidden",\n    "false"\n  );\n\n  resetPayoutFlow();\n\n  setTimeout(function() {\n    payoutEmailInput.focus();\n  }, 100);\n\n}\n\n\nfunction closePayoutModal() {\n\n  payoutOverlay.classList.remove("show");\n\n  payoutOverlay.setAttribute(\n    "aria-hidden",\n    "true"\n  );\n\n}\n\n\npayoutOverlay.addEventListener(\n  "click",\n  function(event) {\n\n    if (event.target === payoutOverlay) {\n      closePayoutModal();\n    }\n\n  }\n);\n\n\ndocument.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (\n      event.key === "Escape" &&\n      payoutOverlay.classList.contains("show")\n    ) {\n      closePayoutModal();\n    }\n\n  }\n);\n\n\npayoutEmailInput.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (event.key === "Enter") {\n\n      event.preventDefault();\n\n      sendPayoutOtp();\n\n    }\n\n  }\n);\n\n\npayoutOtpInput.addEventListener(\n  "keydown",\n  function(event) {\n\n    if (event.key === "Enter") {\n\n      event.preventDefault();\n\n      verifyPayoutOtp();\n\n    }\n\n  }\n);\n\n\nfunction clearPayoutMessage() {\n\n  payoutMessage.textContent = "";\n\n  payoutMessage.className = "message";\n\n}\n\n\nfunction showPayoutMessage(\n  text,\n  type\n) {\n\n  payoutMessage.textContent =\n    text;\n\n  payoutMessage.className =\n    "message show " + type;\n\n}\n\n\nasync function sendPayoutOtp(isResend) {\n\n  clearPayoutMessage();\n\n  const email =\n    payoutEmailInput.value\n      .trim()\n      .toLowerCase();\n\n  if (!email) {\n\n    showPayoutMessage(\n      "Registered email डालें।",\n      "error"\n    );\n\n    payoutEmailInput.focus();\n\n    return;\n\n  }\n\n  if (\n    !/^[^\\s@]+@[^\\s@]+\\.[^\\s@]+$/.test(\n      email\n    )\n  ) {\n\n    showPayoutMessage(\n      "कृपया सही email address डालें।",\n      "error"\n    );\n\n    payoutEmailInput.focus();\n\n    return;\n\n  }\n\n  payoutSendOtpBtn.disabled = true;\n  payoutResendBtn.disabled = true;\n\n  const originalText =\n    payoutSendOtpBtn.innerHTML;\n\n  payoutSendOtpBtn.innerHTML =\n    \'<span class="loading-spinner"></span>Sending...\';\n\n  try {\n\n    const data =\n      await jsonp({\n        action: "payoutSendOtp",\n        email: email\n      });\n\n    if (\n      data &&\n      data.success === true\n    ) {\n\n      payoutEmailStep.style.display =\n        "none";\n\n      payoutOtpStep.style.display =\n        "block";\n\n      payoutResult.style.display =\n        "none";\n\n      payoutOtpInput.value = "";\n\n      showPayoutMessage(\n        "OTP आपके email पर भेज दिया गया है।",\n        "success"\n      );\n\n      setTimeout(function() {\n        payoutOtpInput.focus();\n      }, 100);\n\n      return;\n\n    }\n\n    showPayoutMessage(\n      data && data.message\n        ? data.message\n        : "OTP भेजा नहीं जा सका।",\n      "error"\n    );\n\n  } catch (error) {\n\n    console.error(\n      "Payout OTP error:",\n      error\n    );\n\n    showPayoutMessage(\n      "Network problem. Please try again.",\n      "error"\n    );\n\n  } finally {\n\n    payoutSendOtpBtn.disabled =\n      false;\n\n    payoutResendBtn.disabled =\n      false;\n\n    payoutSendOtpBtn.innerHTML =\n      originalText;\n\n  }\n\n}\n\n\nasync function verifyPayoutOtp() {\n\n  clearPayoutMessage();\n\n  const email =\n    payoutEmailInput.value\n      .trim()\n      .toLowerCase();\n\n  const otp =\n    payoutOtpInput.value\n      .trim();\n\n  if (!/^\\d{6}$/.test(otp)) {\n\n    showPayoutMessage(\n      "6-digit OTP डालें।",\n      "error"\n    );\n\n    payoutOtpInput.focus();\n\n    return;\n\n  }\n\n  payoutVerifyBtn.disabled =\n    true;\n\n  const originalText =\n    payoutVerifyBtn.innerHTML;\n\n  payoutVerifyBtn.innerHTML =\n    \'<span class="loading-spinner"></span>Verifying...\';\n\n  try {\n\n    const data =\n      await jsonp({\n        action: "payoutVerifyOtp",\n        email: email,\n        otp: otp\n      });\n\n    if (\n      data &&\n      data.success === true\n    ) {\n\n      renderPayoutProfile(data);\n\n      payoutOtpStep.style.display =\n        "none";\n\n      payoutResult.style.display =\n        "block";\n\n      showPayoutMessage(\n        "Email verified successfully.",\n        "success"\n      );\n\n      return;\n\n    }\n\n    showPayoutMessage(\n      data && data.message\n        ? data.message\n        : "OTP verification failed.",\n      "error"\n    );\n\n  } catch (error) {\n\n    console.error(\n      "Payout verify error:",\n      error\n    );\n\n    showPayoutMessage(\n      "Network problem. Please try again.",\n      "error"\n    );\n\n  } finally {\n\n    payoutVerifyBtn.disabled =\n      false;\n\n    payoutVerifyBtn.innerHTML =\n      originalText;\n\n  }\n\n}\n\n\nfunction renderPayoutProfile(data) {\n\n  const name =\n    String(data.name || "").trim();\n\n  const mobile =\n    String(data.mobile || "").trim();\n\n  const email =\n    String(data.email || "").trim();\n\n  const payout =\n    String(data.payout || "").trim();\n\n  const photo =\n    String(data.photo || "").trim();\n\n  payoutName.textContent =\n    name || "Customer";\n\n  payoutMobile.textContent =\n    mobile || "";\n\n  payoutAmount.textContent =\n    payout || "—";\n\n  payoutEmailSmall.textContent =\n    email;\n\n  payoutAvatar.innerHTML = "";\n\n  if (photo) {\n\n    const img =\n      document.createElement("img");\n\n    img.alt =\n      name || "Profile photo";\n\n    img.src =\n      photo;\n\n    img.onload =\n      function() {\n\n        payoutAvatar.innerHTML = "";\n\n        payoutAvatar.appendChild(img);\n\n      };\n\n    img.onerror =\n      function() {\n\n        renderPayoutInitials(name);\n\n      };\n\n  } else {\n\n    renderPayoutInitials(name);\n\n  }\n\n}\n\n\nfunction renderPayoutInitials(name) {\n\n  const words =\n    String(name || "C")\n      .trim()\n      .split(/\\s+/)\n      .filter(Boolean);\n\n  let initials =\n    words\n      .slice(0, 2)\n      .map(function(word) {\n        return word\n          .charAt(0)\n          .toUpperCase();\n      })\n      .join("");\n\n  if (!initials) {\n    initials = "C";\n  }\n\n  payoutAvatar.textContent =\n    initials;\n\n}\n\n\nfunction resetPayoutFlow() {\n\n  payoutEmailStep.style.display =\n    "block";\n\n  payoutOtpStep.style.display =\n    "none";\n\n  payoutResult.style.display =\n    "none";\n\n  payoutEmailInput.value =\n    "";\n\n  payoutOtpInput.value =\n    "";\n\n  payoutName.textContent =\n    "";\n\n  payoutMobile.textContent =\n    "";\n\n  payoutAmount.textContent =\n    "";\n\n  payoutEmailSmall.textContent =\n    "";\n\n  payoutAvatar.innerHTML =\n    "";\n\n  clearPayoutMessage();\n\n}\n\n\n/* =========================================================\n   INITIAL LOAD\n========================================================= */\n\ndocument.addEventListener(\n  "DOMContentLoaded",\n  function() {\n\n    loadCompanies();\n\n    setTimeout(function() {\n      showRegistrationModal();\n    }, 250);\n\n  }\n);\n\n\n</script>\n\n\n</body>\n\n</html>';
-async function copyAll(){
-  try {
-    await navigator.clipboard.writeText(code);
-  } catch(e) {
-    const t=document.createElement('textarea');
-    t.value=code; document.body.appendChild(t); t.select();
-    document.execCommand('copy'); t.remove();
-  }
-  document.getElementById('msg').textContent='Copied — now paste into GitHub!';
-  setTimeout(()=>document.getElementById('msg').textContent='',3000);
-}
 </script>
+
+
 </body>
+
 </html>
