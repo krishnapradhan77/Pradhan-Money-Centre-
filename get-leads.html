@@ -10,6 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="//script.google.com">
+  <link rel="dns-prefetch" href="//script.googleusercontent.com">
+
   <title>Client Claim Portal</title>
 
   <style>
@@ -1147,7 +1152,7 @@
 
         <span class="spinner"></span>
 
-        Searching...
+        Searching securely...
 
       </div>
 
@@ -1653,7 +1658,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxzasVGA-AyUx4LO4e9CR-agYb9L1WH-fGTDXivEOdppn84puY3ahki3ytei1peocVm/exec";
+  "https://script.google.com/macros/s/AKfycbz6AiDYEqOGfnCTMedO8sWK8c907NZxzlGrv0iR9LCad2bhwbAWNPL85hHuXs2EB4j5/exec";
 
 
 /* =========================================================
@@ -1721,6 +1726,40 @@ let currentCompany = "";
 
 const SAVED_COMPANY_KEY =
   "clientClaimPortal_selectedCompany";
+
+// Short browser caches reduce repeated Google Apps Script calls.
+const COMPANY_CACHE_KEY =
+  "clientClaimPortal_companies_cache_v1";
+
+const SEARCH_CACHE_PREFIX =
+  "clientClaimPortal_search_cache_v1_";
+
+const CLIENT_CACHE_SECONDS = 60;
+
+function readSessionCache(key) {
+  try {
+    const raw = sessionStorage.getItem(key);
+    if (!raw) return null;
+    const item = JSON.parse(raw);
+    if (!item || !item.time) return null;
+    if ((Date.now() - item.time) > CLIENT_CACHE_SECONDS * 1000) {
+      sessionStorage.removeItem(key);
+      return null;
+    }
+    return item.data || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function writeSessionCache(key, data) {
+  try {
+    sessionStorage.setItem(key, JSON.stringify({
+      time: Date.now(),
+      data: data
+    }));
+  } catch (e) {}
+}
 
 
 /* =========================================================
@@ -1791,7 +1830,7 @@ function jsonp(params) {
             );
 
           },
-          15000
+          20000
         );
 
 
@@ -1817,7 +1856,10 @@ function jsonp(params) {
           ...params,
 
           callback:
-            callbackName
+            callbackName,
+
+          _ts:
+            Date.now()
 
         });
 
@@ -1878,13 +1920,20 @@ async function loadCompanies() {
     '<option value="">Loading Companies...</option>';
 
 
-  let data = null;
+  let data = readSessionCache(COMPANY_CACHE_KEY);
 
   let lastError = null;
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  if (data && data.success === true && Array.isArray(data.companies)) {
+    // Use cached company list immediately; refresh in background.
+  } else {
+    data = null;
+  }
 
-    try {
+  if (!data) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+
+      try {
 
       data =
         await jsonp({
@@ -1912,19 +1961,20 @@ async function loadCompanies() {
 
     }
 
-    if (attempt < 3) {
+      if (attempt < 3) {
 
-      await new Promise(function(resolve) {
+        await new Promise(function(resolve) {
 
-        setTimeout(
-          resolve,
-          700 * attempt
-        );
+          setTimeout(
+            resolve,
+            700 * attempt
+          );
 
-      });
+        });
+
+      }
 
     }
-
   }
 
   try {
@@ -1944,6 +1994,8 @@ async function loadCompanies() {
 
     }
 
+
+    writeSessionCache(COMPANY_CACHE_KEY, data);
 
     const companies =
       data.companies
@@ -2214,6 +2266,11 @@ async function searchClient() {
   }
 
 
+  const searchCacheKey =
+    SEARCH_CACHE_PREFIX + encodeURIComponent(company + "|" + query);
+
+  const cachedSearch = readSessionCache(searchCacheKey);
+
   currentMatch =
     "";
 
@@ -2238,19 +2295,53 @@ async function searchClient() {
 
   try {
 
-    const data =
-      await jsonp({
+    let data = null;
+    let lastSearchError = null;
 
-        action:
-          "search",
+    for (let attempt = 1; attempt <= 3; attempt++) {
 
-        company:
-          company,
+      try {
 
-        query:
-          query
+        data =
+          await jsonp({
 
-      });
+            action:
+              "search",
+
+            company:
+              company,
+
+            query:
+              query
+
+          });
+
+        break;
+
+      } catch (requestError) {
+
+        lastSearchError = requestError;
+
+        console.warn(
+          "Search request attempt " + attempt + " failed:",
+          requestError
+        );
+
+        if (attempt < 3) {
+
+          await new Promise(function(resolve) {
+            setTimeout(resolve, 800 * attempt);
+          });
+
+        }
+
+      }
+
+    }
+
+    if (!data && lastSearchError) {
+      throw lastSearchError;
+    }
 
 
     if (
@@ -2337,7 +2428,7 @@ async function searchClient() {
 
 
     showMessage(
-      "Network problem. Please try again.",
+      "Connection slow hai. 3 attempts ke baad bhi response nahi mila. Please try again.",
       "error"
     );
 
@@ -2550,7 +2641,7 @@ async function submitClaim() {
 
   claimBtn.innerHTML =
     '<span class="loading-spinner"></span>' +
-    'Submitting...';
+    'Submitting securely...';
 
 
   try {
@@ -3299,7 +3390,7 @@ async function sendPayoutOtp(isResend) {
     payoutSendOtpBtn.innerHTML;
 
   payoutSendOtpBtn.innerHTML =
-    '<span class="loading-spinner"></span>Sending...';
+    '<span class="loading-spinner"></span>Sending OTP...';
 
   try {
 
@@ -3406,7 +3497,7 @@ async function verifyPayoutOtp() {
     payoutVerifyBtn.innerHTML;
 
   payoutVerifyBtn.innerHTML =
-    '<span class="loading-spinner"></span>Verifying...';
+    '<span class="loading-spinner"></span>Verifying OTP...';
 
   try {
 
