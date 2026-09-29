@@ -1658,7 +1658,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbz6AiDYEqOGfnCTMedO8sWK8c907NZxzlGrv0iR9LCad2bhwbAWNPL85hHuXs2EB4j5/exec";
+  "https://script.google.com/macros/s/AKfycbzC00_Sqb5JtVuCmYK--RM1gbLE3z-DKSgk8EKo4QFQ24du2vv1wQ9btc7RJaxHqnME/exec";
 
 
 /* =========================================================
@@ -2295,49 +2295,58 @@ async function searchClient() {
 
   try {
 
-    let data = null;
+    let data = cachedSearch;
     let lastSearchError = null;
 
-    for (let attempt = 1; attempt <= 3; attempt++) {
+    if (!data) {
+      for (let attempt = 1; attempt <= 3; attempt++) {
 
-      try {
+        try {
 
-        data =
-          await jsonp({
+          data =
+            await jsonp({
 
-            action:
-              "search",
+              action:
+                "search",
 
-            company:
-              company,
+              company:
+                company,
 
-            query:
-              query
+              query:
+                query
 
-          });
+            });
 
-        break;
+          if (data && data.success === true) {
+            writeSessionCache(searchCacheKey, data);
+          }
 
-      } catch (requestError) {
+          break;
 
-        lastSearchError = requestError;
+        } catch (requestError) {
 
-        console.warn(
-          "Search request attempt " + attempt + " failed:",
-          requestError
-        );
+          lastSearchError = requestError;
 
-        if (attempt < 3) {
+          console.warn(
+            "Search request attempt " + attempt + " failed:",
+            requestError
+          );
 
-          await new Promise(function(resolve) {
-            setTimeout(resolve, 800 * attempt);
-          });
+          if (attempt < 3) {
+
+            await new Promise(function(resolve) {
+              setTimeout(resolve, 800 * attempt);
+            });
+
+          }
 
         }
 
       }
-
     }
+
+    // A valid cached response is read-only and safe to reuse for 60 seconds.
+
 
     if (!data && lastSearchError) {
       throw lastSearchError;
