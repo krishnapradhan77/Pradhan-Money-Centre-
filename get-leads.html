@@ -952,163 +952,6 @@
       word-break: break-word;
     }
 
-
-    /* =====================================================
-       PAYOUT CLAIM DETAILS - NEW
-    ===================================================== */
-
-    .payout-claims-section {
-      margin-top: 18px;
-      padding: 18px 16px;
-      border-radius: 18px;
-      background: rgba(255,255,255,.72);
-      border: 1px solid #d9eee6;
-      text-align: left;
-    }
-
-    .payout-claims-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 5px;
-    }
-
-    .payout-claims-title {
-      margin: 0;
-      color: #172033;
-      font-size: 15px;
-      font-weight: 800;
-    }
-
-    .payout-claims-total {
-      padding: 5px 9px;
-      border-radius: 50px;
-      background: #edf8ff;
-      color: #087fdb;
-      font-size: 11px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .payout-claims-subtitle {
-      margin: 0 0 12px;
-      color: #718096;
-      font-size: 11px;
-      line-height: 1.5;
-    }
-
-    .payout-claims-summary {
-      margin: 0 0 13px;
-      padding: 10px 11px;
-      border-radius: 11px;
-      font-size: 11px;
-      line-height: 1.45;
-      font-weight: 800;
-      border: 1px solid transparent;
-    }
-
-    .payout-claims-summary.multiple {
-      color: #b42318;
-      background: #fff1f0;
-      border-color: #ffd4d1;
-    }
-
-    .payout-claims-summary.single {
-      color: #087f58;
-      background: #edfff6;
-      border-color: #c7f1dc;
-    }
-
-    .payout-claims-summary.empty {
-      color: #718096;
-      background: #f7fafc;
-      border-color: #e5edf3;
-    }
-
-    .claim-company-block {
-      padding: 13px 0;
-      border-top: 1px solid #e3eee9;
-    }
-
-    .claim-company-block:first-child {
-      border-top: none;
-      padding-top: 2px;
-    }
-
-    .claim-company-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      margin-bottom: 9px;
-    }
-
-    .claim-company-name {
-      color: #172033;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .claim-company-count {
-      color: #64748b;
-      font-size: 11px;
-      font-weight: 700;
-    }
-
-    .claim-code-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      padding: 9px 10px;
-      margin-top: 7px;
-      border-radius: 11px;
-      background: #f7fbfa;
-      border: 1px solid #e3eee9;
-    }
-
-    .claim-code-value {
-      min-width: 0;
-      color: #334155;
-      font-size: 12px;
-      font-weight: 750;
-      word-break: break-word;
-    }
-
-    .claim-status {
-      flex-shrink: 0;
-      padding: 5px 8px;
-      border-radius: 50px;
-      font-size: 10px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-
-    .claim-status.single {
-      background: #e9fbf2;
-      color: #087f58;
-    }
-
-    .claim-status.multiple {
-      background: #fff5d9;
-      color: #9a6700;
-    }
-
-    .claim-empty {
-      padding: 10px 0 2px;
-      color: #718096;
-      font-size: 12px;
-      text-align: center;
-    }
-
-    @media (max-width: 480px) {
-      .claim-code-row {
-        align-items: flex-start;
-        flex-direction: column;
-      }
-    }
-
     @media (max-width: 480px) {
       .payout-corner-btn {
         right: 12px;
@@ -1766,33 +1609,6 @@
 
         </div>
 
-          <div
-            id="payoutClaimsSection"
-            class="payout-claims-section"
-          >
-
-            <div class="payout-claims-head">
-              <h4 class="payout-claims-title">Your Claimed Client Codes</h4>
-              <span
-                id="payoutClaimsTotal"
-                class="payout-claims-total"
-              >0</span>
-            </div>
-
-            <p class="payout-claims-subtitle">
-              Companies, client codes/numbers you claimed, and whether each code is a multiple claim.
-            </p>
-
-            <div
-              id="payoutClaimsSummary"
-              class="payout-claims-summary empty"
-            ></div>
-
-            <div id="payoutClaimsList"></div>
-
-          </div>
-
-
         <button
           class="btn secondary"
           type="button"
@@ -1842,7 +1658,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbxfRhYz5Z3wqOohPCXJPG7t3NdMliv9Wzz6kcR77CIJ49WXOalhorMHoBmA6rnrH2DV/exec";
+  "https://script.google.com/macros/s/AKfycbyMpUaNoLfTFy5SSgj4-zICospxMoJlCDa0FCBaaFYcQheXRnV0Nf8Fl69fHOJNvUZh/exec";
 
 
 /* =========================================================
@@ -3424,15 +3240,6 @@ const payoutAmount =
 const payoutEmailSmall =
   document.getElementById("payoutEmailSmall");
 
-const payoutClaimsTotal =
-  document.getElementById("payoutClaimsTotal");
-
-const payoutClaimsSummary =
-  document.getElementById("payoutClaimsSummary");
-
-const payoutClaimsList =
-  document.getElementById("payoutClaimsList");
-
 
 function openPayoutModal() {
 
@@ -3793,8 +3600,6 @@ function renderPayoutProfile(data) {
   payoutEmailSmall.textContent =
     email;
 
-  renderPayoutClaims(data.claims || []);
-
   payoutAvatar.innerHTML = "";
 
   if (photo) {
@@ -3829,165 +3634,6 @@ function renderPayoutProfile(data) {
     renderPayoutInitials(name);
 
   }
-
-}
-
-
-function renderPayoutClaims(claims) {
-
-  payoutClaimsList.innerHTML = "";
-
-  const safeClaims = Array.isArray(claims)
-    ? claims
-    : [];
-
-  let total = 0;
-  let multipleCount = 0;
-
-  safeClaims.forEach(function(companyGroup) {
-
-    const codes = Array.isArray(companyGroup.codes)
-      ? companyGroup.codes
-      : [];
-
-    total += codes.length;
-
-    codes.forEach(function(item) {
-      if (Number(item.claimCount || 0) > 1) {
-        multipleCount++;
-      }
-    });
-
-  });
-
-  payoutClaimsTotal.textContent =
-    total + (total === 1 ? " Client Code" : " Client Codes");
-
-  if (!safeClaims.length || total === 0) {
-
-    payoutClaimsSummary.textContent =
-      "No claim found for this mobile number.";
-    payoutClaimsSummary.className =
-      "payout-claims-summary empty";
-
-    payoutClaimsList.innerHTML =
-      '<div class="claim-empty">No client code/number claimed yet.</div>';
-
-    return;
-
-  }
-
-  if (multipleCount > 0) {
-
-    payoutClaimsSummary.textContent =
-      "🔴 You are in " + multipleCount +
-      (multipleCount === 1
-        ? " multiple claim."
-        : " multiple claims.");
-
-    payoutClaimsSummary.className =
-      "payout-claims-summary multiple";
-
-  } else {
-
-    payoutClaimsSummary.textContent =
-      "🟢 No multiple claim found in your claimed client codes.";
-
-    payoutClaimsSummary.className =
-      "payout-claims-summary single";
-
-  }
-
-  safeClaims.forEach(function(companyGroup) {
-
-    const codes = Array.isArray(companyGroup.codes)
-      ? companyGroup.codes
-      : [];
-
-    if (!codes.length) {
-      return;
-    }
-
-    const companyBlock =
-      document.createElement("div");
-
-    companyBlock.className =
-      "claim-company-block";
-
-    const companyHead =
-      document.createElement("div");
-
-    companyHead.className =
-      "claim-company-head";
-
-    const companyName =
-      document.createElement("div");
-
-    companyName.className =
-      "claim-company-name";
-
-    companyName.textContent =
-      String(companyGroup.company || "Company");
-
-    const companyCount =
-      document.createElement("div");
-
-    companyCount.className =
-      "claim-company-count";
-
-    companyCount.textContent =
-      codes.length +
-      (codes.length === 1
-        ? " client code"
-        : " client codes");
-
-    companyHead.appendChild(companyName);
-    companyHead.appendChild(companyCount);
-    companyBlock.appendChild(companyHead);
-
-    codes.forEach(function(item) {
-
-      const row =
-        document.createElement("div");
-
-      row.className =
-        "claim-code-row";
-
-      const code =
-        document.createElement("div");
-
-      code.className =
-        "claim-code-value";
-
-      code.textContent =
-        String(item.clientCode || "");
-
-      const status =
-        document.createElement("span");
-
-      const claimCount =
-        Math.max(1, Number(item.claimCount || 1));
-
-      const isMultiple =
-        claimCount > 1;
-
-      status.className =
-        "claim-status " +
-        (isMultiple ? "multiple" : "single");
-
-      status.textContent = isMultiple
-        ? "🔴 Multiple Claim (" + claimCount + " users)"
-        : "🟢 Single Claim (1 user)";
-
-      row.appendChild(code);
-      row.appendChild(status);
-      companyBlock.appendChild(row);
-
-    });
-
-    payoutClaimsList.appendChild(companyBlock);
-
-  });
 
 }
 
@@ -4047,15 +3693,6 @@ function resetPayoutFlow() {
     "";
 
   payoutEmailSmall.textContent =
-    "";
-
-  payoutClaimsTotal.textContent =
-    "0";
-
-  payoutClaimsSummary.textContent =
-    "";
-
-  payoutClaimsList.innerHTML =
     "";
 
   payoutAvatar.innerHTML =
