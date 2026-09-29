@@ -448,7 +448,8 @@
 
       color: #087f66;
     }
-.success-box {
+
+    .success-box {
 
       display: none;
 
@@ -758,6 +759,25 @@
       margin-top: 14px;
     }
 
+    .registration-skip {
+      width: 100%;
+      height: 46px;
+      margin-top: 10px;
+      border: 1px solid #dbe4ec;
+      border-radius: 13px;
+      cursor: pointer;
+      color: #475569;
+      background: #f7fafc;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .registration-skip:hover {
+      background: #eef4f8;
+      border-color: #cbd5e1;
+    }
+
     @media (max-width: 480px) {
       .registration-modal {
         padding: 20px;
@@ -897,7 +917,8 @@
       font-size: 13px;
       font-weight: 600;
     }
-.payout-divider {
+
+    .payout-divider {
       height: 1px;
       margin: 20px 0;
       background: #dbe9e5;
@@ -1345,7 +1366,7 @@
       <div class="registration-help">
         Please enter your name, mobile number and email address.
         All three details are required to continue.
- </div>
+      </div>
 
       <div class="field">
         <label for="registrationName">
@@ -1394,6 +1415,15 @@
         onclick="registerCustomer()"
       >
         Create Account
+      </button>
+
+      <button
+        id="registrationSkipBtn"
+        class="registration-skip"
+        type="button"
+        onclick="skipRegistration()"
+      >
+        Skip for Now
       </button>
 
       <div
@@ -1623,7 +1653,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbzrZ4mUvLijFhZf1Ev3Afv-C0Wh1Cey3ChixDn5SPTl6y77O8F8lmIYwHgpuoumkCrQ/exec";
+  "https://script.google.com/macros/s/AKfycbz2ZB93WNRHiJhEbtr2jURP4aYOUXps42XPzioyE4HWdL-Ci_OVqkpFnIqW23wacfFf/exec";
 
 
 /* =========================================================
@@ -2243,7 +2273,7 @@ async function searchClient() {
         );
 
         return;
-}
+      }
 
 
       matchedValue.textContent =
@@ -2691,7 +2721,9 @@ function resetPortal() {
 
   currentCompany =
     companySelect.value.trim();
- if (!currentCompany) {
+
+
+  if (!currentCompany) {
 
     try {
 
@@ -2912,6 +2944,13 @@ function hideRegistrationModal() {
 
   registrationOverlay.classList.remove("show");
   registrationOverlay.setAttribute("aria-hidden", "true");
+}
+
+
+function skipRegistration() {
+
+  hideRegistrationModal();
+
 }
 
 
@@ -3139,7 +3178,8 @@ payoutOverlay.addEventListener(
     if (event.target === payoutOverlay) {
       closePayoutModal();
     }
- }
+
+  }
 );
 
 
