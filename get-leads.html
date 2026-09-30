@@ -10,6 +10,11 @@
     content="width=device-width, initial-scale=1.0"
   >
 
+  <link rel="preconnect" href="https://script.google.com" crossorigin>
+  <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+  <link rel="dns-prefetch" href="//script.google.com">
+  <link rel="dns-prefetch" href="//script.googleusercontent.com">
+
   <title>Client Claim Portal</title>
 
   <style>
@@ -694,6 +699,98 @@
 
 
     /* =====================================================
+       CUSTOMER REGISTRATION UI - NEW
+    ===================================================== */
+
+    .registration-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(15, 23, 42, .48);
+      backdrop-filter: blur(6px);
+    }
+
+    .registration-overlay.show {
+      display: flex;
+    }
+
+    .registration-modal {
+      width: 100%;
+      max-width: 430px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 26px;
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 25px 80px rgba(15, 23, 42, .28);
+      animation: fadeIn .25s ease;
+    }
+
+    .registration-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #087fdb, #0abf7a);
+      box-shadow: 0 10px 25px rgba(0, 130, 190, .20);
+    }
+
+    .registration-modal h2 {
+      margin: 0;
+      text-align: center;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .registration-help {
+      margin: 8px 0 21px;
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .registration-message {
+      margin-top: 14px;
+    }
+
+    .registration-skip {
+      width: 100%;
+      height: 46px;
+      margin-top: 10px;
+      border: 1px solid #dbe4ec;
+      border-radius: 13px;
+      cursor: pointer;
+      color: #475569;
+      background: #f7fafc;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .registration-skip:hover {
+      background: #eef4f8;
+      border-color: #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      .registration-modal {
+        padding: 20px;
+        border-radius: 20px;
+      }
+    }
+
+    /* =====================================================
        PAYOUT UI - ADDITION ONLY
     ===================================================== */
 
@@ -853,99 +950,6 @@
       color: #718096;
       font-size: 11px;
       word-break: break-word;
-    }
-
-    .claimed-clients-box {
-      margin-top: 18px;
-      padding: 16px;
-      text-align: left;
-      border-radius: 18px;
-      background: #ffffff;
-      border: 1px solid #dbe9e5;
-    }
-
-    .claimed-clients-title {
-      margin: 0 0 5px;
-      font-size: 16px;
-      font-weight: 800;
-      color: #172033;
-    }
-
-    .claimed-clients-summary {
-      margin: 0 0 13px;
-      color: #64748b;
-      font-size: 12px;
-      line-height: 1.5;
-    }
-
-    .claimed-company {
-      margin-top: 14px;
-    }
-
-    .claimed-company:first-child {
-      margin-top: 0;
-    }
-
-    .claimed-company-name {
-      margin-bottom: 7px;
-      color: #087fdb;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
-    .claimed-client-row {
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) auto;
-      gap: 10px;
-      padding: 10px 0;
-      border-top: 1px solid #edf1f3;
-    }
-
-    .claimed-client-code {
-      min-width: 0;
-      color: #172033;
-      font-size: 13px;
-      font-weight: 750;
-      word-break: break-word;
-    }
-
-    .claimed-client-meta {
-      margin-top: 3px;
-      color: #718096;
-      font-size: 11px;
-    }
-
-    .claimed-client-status {
-      align-self: start;
-      padding: 5px 8px;
-      border-radius: 999px;
-      font-size: 10px;
-      font-weight: 800;
-      white-space: nowrap;
-      background: #eef4f8;
-      color: #475569;
-    }
-
-    .claimed-client-status.multiple {
-      background: #fff2cc;
-      color: #8a5a00;
-    }
-
-    .claimed-client-status.single {
-      background: #edfff6;
-      color: #087f58;
-    }
-
-    .claimed-loading {
-      padding: 10px 0;
-      color: #64748b;
-      font-size: 12px;
-    }
-
-    .claimed-empty {
-      padding: 10px 0 2px;
-      color: #64748b;
-      font-size: 12px;
     }
 
     @media (max-width: 480px) {
@@ -1148,7 +1152,7 @@
 
         <span class="spinner"></span>
 
-        Searching...
+        Searching securely...
 
       </div>
 
@@ -1344,6 +1348,99 @@
 
 
   <!-- =====================================================
+       CUSTOMER REGISTRATION - NEW
+  ====================================================== -->
+
+  <div
+    id="registrationOverlay"
+    class="registration-overlay"
+    aria-hidden="true"
+  >
+
+    <div
+      class="registration-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registrationTitle"
+    >
+
+      <div class="registration-icon">✓</div>
+
+      <h2 id="registrationTitle">Create Your Account</h2>
+
+      <div class="registration-help">
+        Please enter your name, mobile number and email address.
+        All three details are required to continue.
+      </div>
+
+      <div class="field">
+        <label for="registrationName">
+          Name <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="text"
+          id="registrationName"
+          placeholder="Enter your name"
+          maxlength="100"
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="field">
+        <label for="registrationMobile">
+          Mobile Number <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="tel"
+          id="registrationMobile"
+          placeholder="Enter mobile number"
+          maxlength="15"
+          inputmode="numeric"
+          autocomplete="tel"
+        >
+      </div>
+
+      <div class="field">
+        <label for="registrationEmail">
+          Email ID <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="email"
+          id="registrationEmail"
+          placeholder="Enter your email address"
+          maxlength="320"
+          autocomplete="email"
+        >
+      </div>
+
+      <button
+        id="registrationBtn"
+        class="btn"
+        type="button"
+        onclick="registerCustomer()"
+      >
+        Create Account
+      </button>
+
+      <button
+        id="registrationSkipBtn"
+        class="registration-skip"
+        type="button"
+        onclick="skipRegistration()"
+      >
+        Skip for Now
+      </button>
+
+      <div
+        id="registrationMessage"
+        class="message registration-message"
+        aria-live="polite"
+      ></div>
+
+    </div>
+  </div>
+
+  <!-- =====================================================
        GET PAYOUT - ADDITION ONLY
   ====================================================== -->
 
@@ -1510,24 +1607,6 @@
             class="payout-email-small"
           ></div>
 
-          <div
-            id="claimedClientsBox"
-            class="claimed-clients-box"
-          >
-            <h3 class="claimed-clients-title">
-              Your Claimed Client Codes
-            </h3>
-            <p
-              id="claimedClientsSummary"
-              class="claimed-clients-summary"
-            >
-              Loading your claimed client codes...
-            </p>
-            <div
-              id="claimedClientsList"
-            ></div>
-          </div>
-
         </div>
 
         <button
@@ -1579,7 +1658,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbyFq07Ava7zOAtau4m3A5zUHvOXz8cG-pA4ViXtbvDq3Zid5iMMZQFfytjmK3XZvwlW/exec";
+  "https://script.google.com/macros/s/AKfycbxZXDYQEY0wa5JibBC1cqM4Ehlgd3SFzIqFYUHLHOnbhmZ6erEtWdhniahhOYJAzfCe/exec";
 
 
 /* =========================================================
@@ -1647,6 +1726,40 @@ let currentCompany = "";
 
 const SAVED_COMPANY_KEY =
   "clientClaimPortal_selectedCompany";
+
+// Short browser caches reduce repeated Google Apps Script calls.
+const COMPANY_CACHE_KEY =
+  "clientClaimPortal_companies_cache_v1";
+
+const SEARCH_CACHE_PREFIX =
+  "clientClaimPortal_search_cache_v1_";
+
+const CLIENT_CACHE_SECONDS = 60;
+
+function readSessionCache(key) {
+  try {
+    const raw = sessionStorage.getItem(key);
+    if (!raw) return null;
+    const item = JSON.parse(raw);
+    if (!item || !item.time) return null;
+    if ((Date.now() - item.time) > CLIENT_CACHE_SECONDS * 1000) {
+      sessionStorage.removeItem(key);
+      return null;
+    }
+    return item.data || null;
+  } catch (e) {
+    return null;
+  }
+}
+
+function writeSessionCache(key, data) {
+  try {
+    sessionStorage.setItem(key, JSON.stringify({
+      time: Date.now(),
+      data: data
+    }));
+  } catch (e) {}
+}
 
 
 /* =========================================================
@@ -1717,7 +1830,7 @@ function jsonp(params) {
             );
 
           },
-          15000
+          20000
         );
 
 
@@ -1743,7 +1856,10 @@ function jsonp(params) {
           ...params,
 
           callback:
-            callbackName
+            callbackName,
+
+          _ts:
+            Date.now()
 
         });
 
@@ -1804,13 +1920,20 @@ async function loadCompanies() {
     '<option value="">Loading Companies...</option>';
 
 
-  let data = null;
+  let data = readSessionCache(COMPANY_CACHE_KEY);
 
   let lastError = null;
 
-  for (let attempt = 1; attempt <= 3; attempt++) {
+  if (data && data.success === true && Array.isArray(data.companies)) {
+    // Use cached company list immediately; refresh in background.
+  } else {
+    data = null;
+  }
 
-    try {
+  if (!data) {
+    for (let attempt = 1; attempt <= 3; attempt++) {
+
+      try {
 
       data =
         await jsonp({
@@ -1838,19 +1961,20 @@ async function loadCompanies() {
 
     }
 
-    if (attempt < 3) {
+      if (attempt < 3) {
 
-      await new Promise(function(resolve) {
+        await new Promise(function(resolve) {
 
-        setTimeout(
-          resolve,
-          700 * attempt
-        );
+          setTimeout(
+            resolve,
+            700 * attempt
+          );
 
-      });
+        });
+
+      }
 
     }
-
   }
 
   try {
@@ -1870,6 +1994,8 @@ async function loadCompanies() {
 
     }
 
+
+    writeSessionCache(COMPANY_CACHE_KEY, data);
 
     const companies =
       data.companies
@@ -2140,6 +2266,11 @@ async function searchClient() {
   }
 
 
+  const searchCacheKey =
+    SEARCH_CACHE_PREFIX + encodeURIComponent(company + "|" + query);
+
+  const cachedSearch = readSessionCache(searchCacheKey);
+
   currentMatch =
     "";
 
@@ -2164,19 +2295,62 @@ async function searchClient() {
 
   try {
 
-    const data =
-      await jsonp({
+    let data = cachedSearch;
+    let lastSearchError = null;
 
-        action:
-          "search",
+    if (!data) {
+      for (let attempt = 1; attempt <= 3; attempt++) {
 
-        company:
-          company,
+        try {
 
-        query:
-          query
+          data =
+            await jsonp({
 
-      });
+              action:
+                "search",
+
+              company:
+                company,
+
+              query:
+                query
+
+            });
+
+          if (data && data.success === true) {
+            writeSessionCache(searchCacheKey, data);
+          }
+
+          break;
+
+        } catch (requestError) {
+
+          lastSearchError = requestError;
+
+          console.warn(
+            "Search request attempt " + attempt + " failed:",
+            requestError
+          );
+
+          if (attempt < 3) {
+
+            await new Promise(function(resolve) {
+              setTimeout(resolve, 800 * attempt);
+            });
+
+          }
+
+        }
+
+      }
+    }
+
+    // A valid cached response is read-only and safe to reuse for 60 seconds.
+
+
+    if (!data && lastSearchError) {
+      throw lastSearchError;
+    }
 
 
     if (
@@ -2263,7 +2437,7 @@ async function searchClient() {
 
 
     showMessage(
-      "Network problem. Please try again.",
+      "Connection slow hai. 3 attempts ke baad bhi response nahi mila. Please try again.",
       "error"
     );
 
@@ -2476,7 +2650,7 @@ async function submitClaim() {
 
   claimBtn.innerHTML =
     '<span class="loading-spinner"></span>' +
-    'Submitting...';
+    'Submitting securely...';
 
 
   try {
@@ -2816,6 +2990,208 @@ function clearMessage() {
 
 
 /* =========================================================
+   CUSTOMER REGISTRATION - NEW
+========================================================= */
+
+const REGISTRATION_KEY =
+  "clientClaimPortal_customerRegistered";
+
+const registrationOverlay =
+  document.getElementById("registrationOverlay");
+
+const registrationNameInput =
+  document.getElementById("registrationName");
+
+const registrationMobileInput =
+  document.getElementById("registrationMobile");
+
+const registrationEmailInput =
+  document.getElementById("registrationEmail");
+
+const registrationBtn =
+  document.getElementById("registrationBtn");
+
+const registrationMessage =
+  document.getElementById("registrationMessage");
+
+
+function isCustomerRegistered() {
+
+  try {
+    return localStorage.getItem(REGISTRATION_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+
+function showRegistrationModal() {
+
+  if (isCustomerRegistered()) {
+    return;
+  }
+
+  registrationOverlay.classList.add("show");
+  registrationOverlay.setAttribute("aria-hidden", "false");
+
+  setTimeout(function() {
+    registrationNameInput.focus();
+  }, 100);
+}
+
+
+function hideRegistrationModal() {
+
+  registrationOverlay.classList.remove("show");
+  registrationOverlay.setAttribute("aria-hidden", "true");
+}
+
+
+function skipRegistration() {
+
+  hideRegistrationModal();
+
+}
+
+
+function showRegistrationMessage(text, type) {
+
+  registrationMessage.textContent = text;
+  registrationMessage.className =
+    "message registration-message show " + type;
+}
+
+
+function clearRegistrationMessage() {
+
+  registrationMessage.textContent = "";
+  registrationMessage.className =
+    "message registration-message";
+}
+
+
+async function registerCustomer() {
+
+  clearRegistrationMessage();
+
+  const name =
+    registrationNameInput.value.trim();
+
+  const mobile =
+    registrationMobileInput.value.trim();
+
+  const email =
+    registrationEmailInput.value.trim().toLowerCase();
+
+  if (!name) {
+    showRegistrationMessage("Name डालें।", "error");
+    registrationNameInput.focus();
+    return;
+  }
+
+  if (!mobile) {
+    showRegistrationMessage("Mobile number डालें।", "error");
+    registrationMobileInput.focus();
+    return;
+  }
+
+  if (!email) {
+    showRegistrationMessage("Email ID डालें।", "error");
+    registrationEmailInput.focus();
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showRegistrationMessage("कृपया सही email address डालें।", "error");
+    registrationEmailInput.focus();
+    return;
+  }
+
+  const cleanMobile = mobile.replace(/[^\d]/g, "");
+
+  if (cleanMobile.length < 7 || cleanMobile.length > 15) {
+    showRegistrationMessage("कृपया सही mobile number डालें।", "error");
+    registrationMobileInput.focus();
+    return;
+  }
+
+  registrationBtn.disabled = true;
+
+  const originalText =
+    registrationBtn.innerHTML;
+
+  registrationBtn.innerHTML =
+    '<span class="loading-spinner"></span>Creating Account...';
+
+  try {
+
+    const data = await jsonp({
+      action: "registerCustomer",
+      name: name,
+      mobile: cleanMobile,
+      email: email
+    });
+
+    if (data && data.success === true) {
+
+      try {
+        localStorage.setItem(REGISTRATION_KEY, "1");
+        localStorage.setItem(
+          "clientClaimPortal_customerEmail",
+          email
+        );
+      } catch (storageError) {
+        console.warn("Unable to save registration state:", storageError);
+      }
+
+      showRegistrationMessage(
+        data.message || "Account created successfully.",
+        "success"
+      );
+
+      setTimeout(function() {
+        hideRegistrationModal();
+      }, 600);
+
+      return;
+    }
+
+    showRegistrationMessage(
+      data && data.message
+        ? data.message
+        : "Account could not be created.",
+      "error"
+    );
+
+  } catch (error) {
+
+    console.error("Registration error:", error);
+
+    showRegistrationMessage(
+      "Network problem. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    registrationBtn.disabled = false;
+    registrationBtn.innerHTML = originalText;
+
+  }
+}
+
+
+registrationEmailInput.addEventListener(
+  "keydown",
+  function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      registerCustomer();
+    }
+  }
+);
+
+/* =========================================================
    PAYOUT FLOW - ADDITION ONLY
 ========================================================= */
 
@@ -2863,15 +3239,6 @@ const payoutAmount =
 
 const payoutEmailSmall =
   document.getElementById("payoutEmailSmall");
-
-const claimedClientsBox =
-  document.getElementById("claimedClientsBox");
-
-const claimedClientsSummary =
-  document.getElementById("claimedClientsSummary");
-
-const claimedClientsList =
-  document.getElementById("claimedClientsList");
 
 
 function openPayoutModal() {
@@ -3032,7 +3399,7 @@ async function sendPayoutOtp(isResend) {
     payoutSendOtpBtn.innerHTML;
 
   payoutSendOtpBtn.innerHTML =
-    '<span class="loading-spinner"></span>Sending...';
+    '<span class="loading-spinner"></span>Sending OTP...';
 
   try {
 
@@ -3139,7 +3506,7 @@ async function verifyPayoutOtp() {
     payoutVerifyBtn.innerHTML;
 
   payoutVerifyBtn.innerHTML =
-    '<span class="loading-spinner"></span>Verifying...';
+    '<span class="loading-spinner"></span>Verifying OTP...';
 
   try {
 
@@ -3156,8 +3523,6 @@ async function verifyPayoutOtp() {
     ) {
 
       renderPayoutProfile(data);
-
-      loadClaimedClients(data.mobile);
 
       payoutOtpStep.style.display =
         "none";
@@ -3200,131 +3565,6 @@ async function verifyPayoutOtp() {
 
     payoutVerifyBtn.innerHTML =
       originalText;
-
-  }
-
-}
-
-
-async function loadClaimedClients(mobile) {
-
-  claimedClientsSummary.textContent =
-    'Loading your claimed client codes...';
-
-  claimedClientsList.innerHTML =
-    '<div class="claimed-loading">Loading...</div>';
-
-  try {
-
-    const data = await jsonp({
-      action: 'getClaimedClients',
-      mobile: String(mobile || '').trim()
-    });
-
-    if (!data || data.success !== true) {
-      throw new Error(
-        data && data.message
-          ? data.message
-          : 'Unable to load claimed clients.'
-      );
-    }
-
-    const items = Array.isArray(data.claimedClients)
-      ? data.claimedClients
-      : [];
-
-    const multipleClaims = Number(
-      data.multipleClaims || 0
-    );
-
-    claimedClientsSummary.textContent =
-      'You are in ' +
-      multipleClaims +
-      ' multiple claim' +
-      (multipleClaims === 1 ? '' : 's') +
-      '.';
-
-    claimedClientsList.innerHTML = '';
-
-    if (items.length === 0) {
-      claimedClientsList.innerHTML =
-        '<div class="claimed-empty">No claimed client codes found.</div>';
-      return;
-    }
-
-    const grouped = {};
-
-    items.forEach(function(item) {
-      const company = String(item.company || 'Other').trim();
-      if (!grouped[company]) {
-        grouped[company] = [];
-      }
-      grouped[company].push(item);
-    });
-
-    Object.keys(grouped).forEach(function(company) {
-
-      const companyBox = document.createElement('div');
-      companyBox.className = 'claimed-company';
-
-      const companyName = document.createElement('div');
-      companyName.className = 'claimed-company-name';
-      companyName.textContent = company;
-      companyBox.appendChild(companyName);
-
-      grouped[company].forEach(function(item) {
-
-        const row = document.createElement('div');
-        row.className = 'claimed-client-row';
-
-        const left = document.createElement('div');
-
-        const code = document.createElement('div');
-        code.className = 'claimed-client-code';
-        code.textContent = String(item.clientCode || '');
-
-        const meta = document.createElement('div');
-        meta.className = 'claimed-client-meta';
-        meta.textContent =
-          String(item.userCount || 0) +
-          ' user' +
-          (Number(item.userCount || 0) === 1 ? '' : 's');
-
-        left.appendChild(code);
-        left.appendChild(meta);
-
-        const status = document.createElement('div');
-        const isMultiple =
-          String(item.status || '').toLowerCase() === 'multiple claim';
-
-        status.className =
-          'claimed-client-status ' +
-          (isMultiple ? 'multiple' : 'single');
-        status.textContent =
-          isMultiple ? 'Multiple Claim' : 'Single Claim';
-
-        row.appendChild(left);
-        row.appendChild(status);
-        companyBox.appendChild(row);
-
-      });
-
-      claimedClientsList.appendChild(companyBox);
-
-    });
-
-  } catch (error) {
-
-    console.error(
-      'Claimed clients error:',
-      error
-    );
-
-    claimedClientsSummary.textContent =
-      'Claimed client codes could not be loaded.';
-
-    claimedClientsList.innerHTML =
-      '<div class="claimed-empty">Please try again.</div>';
 
   }
 
@@ -3455,12 +3695,6 @@ function resetPayoutFlow() {
   payoutEmailSmall.textContent =
     "";
 
-  claimedClientsSummary.textContent =
-    "";
-
-  claimedClientsList.innerHTML =
-    "";
-
   payoutAvatar.innerHTML =
     "";
 
@@ -3478,6 +3712,10 @@ document.addEventListener(
   function() {
 
     loadCompanies();
+
+    setTimeout(function() {
+      showRegistrationModal();
+    }, 250);
 
   }
 );
