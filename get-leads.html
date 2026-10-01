@@ -1009,7 +1009,101 @@
 
     }
 
-  </style>
+  
+    /* =====================================================
+       CUSTOMER REGISTRATION UI - NEW
+    ===================================================== */
+
+    .registration-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 5000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(15, 23, 42, .48);
+      backdrop-filter: blur(6px);
+    }
+
+    .registration-overlay.show {
+      display: flex;
+    }
+
+    .registration-modal {
+      width: 100%;
+      max-width: 430px;
+      max-height: 92vh;
+      overflow-y: auto;
+      padding: 26px;
+      border-radius: 24px;
+      background: white;
+      box-shadow: 0 25px 80px rgba(15, 23, 42, .28);
+      animation: fadeIn .25s ease;
+    }
+
+    .registration-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 14px;
+      border-radius: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 26px;
+      font-weight: 800;
+      background: linear-gradient(135deg, #087fdb, #0abf7a);
+      box-shadow: 0 10px 25px rgba(0, 130, 190, .20);
+    }
+
+    .registration-modal h2 {
+      margin: 0;
+      text-align: center;
+      font-size: 23px;
+      font-weight: 800;
+    }
+
+    .registration-help {
+      margin: 8px 0 21px;
+      text-align: center;
+      color: #64748b;
+      font-size: 13px;
+      line-height: 1.55;
+    }
+
+    .registration-message {
+      margin-top: 14px;
+    }
+
+    .registration-skip {
+      width: 100%;
+      height: 46px;
+      margin-top: 10px;
+      border: 1px solid #dbe4ec;
+      border-radius: 13px;
+      cursor: pointer;
+      color: #475569;
+      background: #f7fafc;
+      font-size: 14px;
+      font-weight: 700;
+      transition: .2s;
+    }
+
+    .registration-skip:hover {
+      background: #eef4f8;
+      border-color: #cbd5e1;
+    }
+
+    @media (max-width: 480px) {
+      .registration-modal {
+        padding: 20px;
+        border-radius: 20px;
+      }
+    }
+
+
+</style>
 
 </head>
 
@@ -1363,6 +1457,100 @@
 
 
   <!-- =====================================================
+       CUSTOMER REGISTRATION - NEW
+  ====================================================== -->
+
+  <div
+    id="registrationOverlay"
+    class="registration-overlay"
+    aria-hidden="true"
+  >
+
+    <div
+      class="registration-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="registrationTitle"
+    >
+
+      <div class="registration-icon">✓</div>
+
+      <h2 id="registrationTitle">Create Your Account</h2>
+
+      <div class="registration-help">
+        Please enter your name, mobile number and email address.
+        All three details are required to continue.
+      </div>
+
+      <div class="field">
+        <label for="registrationName">
+          Name <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="text"
+          id="registrationName"
+          placeholder="Enter your name"
+          maxlength="100"
+          autocomplete="name"
+        >
+      </div>
+
+      <div class="field">
+        <label for="registrationMobile">
+          Mobile Number <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="tel"
+          id="registrationMobile"
+          placeholder="Enter mobile number"
+          maxlength="15"
+          inputmode="numeric"
+          autocomplete="tel"
+        >
+      </div>
+
+      <div class="field">
+        <label for="registrationEmail">
+          Email ID <span style="color:#d93025">*</span>
+        </label>
+        <input
+          type="email"
+          id="registrationEmail"
+          placeholder="Enter your email address"
+          maxlength="320"
+          autocomplete="email"
+        >
+      </div>
+
+      <button
+        id="registrationBtn"
+        class="btn"
+        type="button"
+        onclick="registerCustomer()"
+      >
+        Create Account
+      </button>
+
+      <button
+        id="registrationSkipBtn"
+        class="registration-skip"
+        type="button"
+        onclick="skipRegistration()"
+      >
+        Skip for Now
+      </button>
+
+      <div
+        id="registrationMessage"
+        class="message registration-message"
+        aria-live="polite"
+      ></div>
+
+    </div>
+  </div>
+
+
+  <!-- =====================================================
        GET PAYOUT - ADDITION ONLY
   ====================================================== -->
 
@@ -1598,7 +1786,7 @@
 ========================================================= */
 
 const API_URL =
-  "https://script.google.com/macros/s/AKfycbwEaiVzWHH-SnSW-r678mNk8fr1SrQkPgpn0VdL8ZfjHV6b9WEA0Hh6RcXNBi2om8pY/exec";
+  "https://script.google.com/macros/s/AKfycby8IuWKx2vrNW5KUqhuWII_xxJr5as5rsr8RFQHMDU6lgva2SmQpCgnXeSCvyXj5YuB/exec";
 
 
 /* =========================================================
@@ -3502,6 +3690,210 @@ function resetPayoutFlow() {
 
 
 /* =========================================================
+   CUSTOMER REGISTRATION - NEW
+========================================================= */
+
+const REGISTRATION_KEY =
+  "clientClaimPortal_customerRegistered";
+
+const registrationOverlay =
+  document.getElementById("registrationOverlay");
+
+const registrationNameInput =
+  document.getElementById("registrationName");
+
+const registrationMobileInput =
+  document.getElementById("registrationMobile");
+
+const registrationEmailInput =
+  document.getElementById("registrationEmail");
+
+const registrationBtn =
+  document.getElementById("registrationBtn");
+
+const registrationMessage =
+  document.getElementById("registrationMessage");
+
+
+function isCustomerRegistered() {
+
+  try {
+    return localStorage.getItem(REGISTRATION_KEY) === "1";
+  } catch (error) {
+    return false;
+  }
+}
+
+
+function showRegistrationModal() {
+
+  if (isCustomerRegistered()) {
+    return;
+  }
+
+  registrationOverlay.classList.add("show");
+  registrationOverlay.setAttribute("aria-hidden", "false");
+
+  setTimeout(function() {
+    registrationNameInput.focus();
+  }, 100);
+}
+
+
+function hideRegistrationModal() {
+
+  registrationOverlay.classList.remove("show");
+  registrationOverlay.setAttribute("aria-hidden", "true");
+}
+
+
+function skipRegistration() {
+
+  hideRegistrationModal();
+
+}
+
+
+function showRegistrationMessage(text, type) {
+
+  registrationMessage.textContent = text;
+  registrationMessage.className =
+    "message registration-message show " + type;
+}
+
+
+function clearRegistrationMessage() {
+
+  registrationMessage.textContent = "";
+  registrationMessage.className =
+    "message registration-message";
+}
+
+
+async function registerCustomer() {
+
+  clearRegistrationMessage();
+
+  const name =
+    registrationNameInput.value.trim();
+
+  const mobile =
+    registrationMobileInput.value.trim();
+
+  const email =
+    registrationEmailInput.value.trim().toLowerCase();
+
+  if (!name) {
+    showRegistrationMessage("Name डालें।", "error");
+    registrationNameInput.focus();
+    return;
+  }
+
+  if (!mobile) {
+    showRegistrationMessage("Mobile number डालें।", "error");
+    registrationMobileInput.focus();
+    return;
+  }
+
+  if (!email) {
+    showRegistrationMessage("Email ID डालें।", "error");
+    registrationEmailInput.focus();
+    return;
+  }
+
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showRegistrationMessage("कृपया सही email address डालें।", "error");
+    registrationEmailInput.focus();
+    return;
+  }
+
+  const cleanMobile = mobile.replace(/[^\d]/g, "");
+
+  if (cleanMobile.length < 7 || cleanMobile.length > 15) {
+    showRegistrationMessage("कृपया सही mobile number डालें।", "error");
+    registrationMobileInput.focus();
+    return;
+  }
+
+  registrationBtn.disabled = true;
+
+  const originalText =
+    registrationBtn.innerHTML;
+
+  registrationBtn.innerHTML =
+    '<span class="loading-spinner"></span>Creating Account...';
+
+  try {
+
+    const data = await jsonp({
+      action: "registerCustomer",
+      name: name,
+      mobile: cleanMobile,
+      email: email
+    });
+
+    if (data && data.success === true) {
+
+      try {
+        localStorage.setItem(REGISTRATION_KEY, "1");
+        localStorage.setItem(
+          "clientClaimPortal_customerEmail",
+          email
+        );
+      } catch (storageError) {
+        console.warn("Unable to save registration state:", storageError);
+      }
+
+      showRegistrationMessage(
+        data.message || "Account created successfully.",
+        "success"
+      );
+
+      setTimeout(function() {
+        hideRegistrationModal();
+      }, 600);
+
+      return;
+    }
+
+    showRegistrationMessage(
+      data && data.message
+        ? data.message
+        : "Account could not be created.",
+      "error"
+    );
+
+  } catch (error) {
+
+    console.error("Registration error:", error);
+
+    showRegistrationMessage(
+      "Network problem. Please try again.",
+      "error"
+    );
+
+  } finally {
+
+    registrationBtn.disabled = false;
+    registrationBtn.innerHTML = originalText;
+
+  }
+}
+
+
+registrationEmailInput.addEventListener(
+  "keydown",
+  function(event) {
+    if (event.key === "Enter") {
+      event.preventDefault();
+      registerCustomer();
+    }
+  }
+);
+
+
+
+/* =========================================================
    INITIAL LOAD
 ========================================================= */
 
@@ -3510,6 +3902,10 @@ document.addEventListener(
   function() {
 
     loadCompanies();
+
+    setTimeout(function() {
+      showRegistrationModal();
+    }, 250);
 
   }
 );
