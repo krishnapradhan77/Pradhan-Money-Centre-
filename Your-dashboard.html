@@ -1,544 +1,1438 @@
-<!DOCTYPE html>
+ <!DOCTYPE html>
+
 <html lang="en">
+
 <head>
+
   <meta charset="UTF-8">
+
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="preconnect" href="https://script.google.com" crossorigin>
+
   <link rel="preconnect" href="https://script.googleusercontent.com" crossorigin>
+
   <link rel="dns-prefetch" href="//script.google.com">
+
   <link rel="dns-prefetch" href="//script.googleusercontent.com">
+
   <title>Client Claim Portal</title>
 
+
+
   <style>
+
     * { box-sizing: border-box; }
+
+
+
     body {
-      margin: 0; min-height: 100vh;
+
+      margin: 0;
+
+      min-height: 100vh;
+
       font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+
       background: linear-gradient(135deg, #eaf6ff 0%, #f5fffb 50%, #e9fff4 100%);
-      color: #172033; display: flex; justify-content: center;
-      align-items: center; padding: 20px;
+
+      color: #172033;
+
+      display: flex;
+
+      justify-content: center;
+
+      align-items: center;
+
+      padding: 20px;
+
     }
+
+
+
     .container { width: 100%; max-width: 520px; }
+
     .header { text-align: center; margin-bottom: 20px; }
+
+
+
     .logo {
-      width: 58px; height: 58px; margin: auto; border-radius: 18px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 28px; font-weight: 800; color: white;
-      background: linear-gradient(135deg, #087fdb, #0abf7a);
-      box-shadow: 0 12px 30px rgba(0, 130, 190, 0.22);
-    }
-    .header h1 { margin: 14px 0 7px; font-size: 28px; font-weight: 800; }
-    .header p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
-    .card {
-      background: rgba(255,255,255,0.96);
-      border: 1px solid rgba(255,255,255,0.8);
-      border-radius: 24px; padding: 26px;
-      box-shadow: 0 20px 60px rgba(31, 71, 98, 0.13);
-    }
-    .steps { display: flex; align-items: center; margin-bottom: 25px; }
-    .step {
-      width: 34px; height: 34px; border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700;
-      background: #e8eef5; color: #64748b; flex-shrink: 0;
-    }
-    .step.active {
-      background: linear-gradient(135deg, #087fdb, #0abf7a);
-      color: white; box-shadow: 0 7px 18px rgba(0, 130, 190, 0.25);
-    }
-    .step.done { background: #0abf7a; color: white; }
-    .line {
-      height: 3px; flex: 1; margin: 0 8px;
-      background: #e5ebf1; border-radius: 5px;
-    }
-    .line.active { background: #0abf7a; }
-    .section { display: none; }
-    .section.active { display: block; animation: fadeIn .3s ease; }
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-    .section-title { margin-bottom: 5px; font-size: 20px; font-weight: 750; }
-    .section-subtitle {
-      margin-bottom: 20px; color: #718096;
-      font-size: 13px; line-height: 1.5;
-    }
-    label {
-      display: block; margin-bottom: 8px;
-      font-size: 13px; font-weight: 700; color: #334155;
-    }
-    input, select {
-      width: 100%; height: 52px; padding: 0 15px;
-      border: 1px solid #dbe4ec; border-radius: 13px;
-      background: #fbfdff; color: #172033;
-      font-size: 15px; outline: none; transition: .2s;
-    }
-    input:focus, select:focus {
-      border-color: #1596df; background: white;
-      box-shadow: 0 0 0 4px rgba(21,150,223,.09);
-    }
-    .field { margin-bottom: 17px; }
-    .btn {
-      width: 100%; height: 52px; border: none;
-      border-radius: 13px; cursor: pointer;
-      font-size: 15px; font-weight: 750; color: white;
-      background: linear-gradient(135deg, #087fdb, #08ad78);
-      box-shadow: 0 10px 22px rgba(0, 130, 190, .20);
-      transition: .2s;
-    }
-    .btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 13px 26px rgba(0, 130, 190, .25);
-    }
-    .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
-    .btn.secondary {
-      margin-top: 10px; color: #334155;
-      background: #eef4f8; box-shadow: none;
-    }
-    .search-box { position: relative; }
-    .search-box input { padding-right: 55px; }
-    .search-icon {
-      position: absolute; right: 17px; top: 50%;
-      transform: translateY(-50%);
-      color: #7b8b9c; font-size: 20px; pointer-events: none;
-    }
-    .result {
-      display: none; margin-top: 20px; padding: 17px;
-      border-radius: 15px;
-      background: linear-gradient(135deg, #effbf6, #f4fbff);
-      border: 1px solid #cdeee0;
-    }
-    .result.show { display: block; animation: fadeIn .3s ease; }
-    .result-label { color: #64748b; font-size: 12px; margin-bottom: 5px; }
-    .result-value {
-      font-size: 18px; font-weight: 800;
-      word-break: break-word; color: #087f66;
-    }
-    .success-box { display: none; text-align: center; padding: 20px 5px; }
-    .success-box.show { display: block; animation: fadeIn .3s ease; }
-    .success-icon {
-      width: 65px; height: 65px; margin: 0 auto 15px;
-      border-radius: 50%; display: flex;
-      align-items: center; justify-content: center;
-      font-size: 30px; background: #dff8ec; color: #0a9b65;
-    }
-    .success-box h2 { margin: 0 0 8px; font-size: 23px; }
-    .success-box p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
-    .message {
-      display: none; margin-top: 15px;
-      padding: 12px 14px; border-radius: 11px;
-      font-size: 13px; line-height: 1.5;
-    }
-    .message.show { display: block; }
-    .message.error {
-      background: #fff0f0; color: #b42318;
-      border: 1px solid #ffd4d1;
-    }
-    .message.success {
-      background: #edfff6; color: #087f58;
-      border: 1px solid #c7f1dc;
-    }
-    .loading {
-      display: none; text-align: center;
-      margin-top: 14px; color: #64748b; font-size: 13px;
-    }
-    .spinner {
-      display: inline-block; width: 17px; height: 17px;
-      margin-right: 7px; vertical-align: middle;
-      border: 2px solid #d8e5ed; border-top-color: #087fdb;
-      border-radius: 50%; animation: spin .7s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .security {
-      margin-top: 18px; padding: 13px;
-      border-radius: 12px; background: #f7fafc;
-      color: #718096; font-size: 11px;
-      line-height: 1.5; text-align: center;
-    }
-    .footer {
-      text-align: center; margin-top: 18px;
-      color: #64748b; font-size: 11px;
-    }
-    .company-badge {
-      display: inline-flex; align-items: center;
-      gap: 7px; padding: 7px 11px; margin-bottom: 17px;
-      border-radius: 50px; background: #edf8ff;
-      color: #087fdb; font-size: 12px; font-weight: 700;
-    }
-    .company-dot {
-      width: 7px; height: 7px;
-      border-radius: 50%; background: #0abf7a;
-    }
-    .claim-card {
-      margin-top: 20px; padding: 18px;
-      border-radius: 17px; background: #fbfdff;
-      border: 1px solid #e5edf3;
-    }
-    .claim-card-title { font-size: 15px; font-weight: 800; margin-bottom: 15px; }
-    .loading-spinner {
-      display: inline-block; width: 16px; height: 16px;
-      border: 2px solid rgba(255,255,255,.35);
-      border-top-color: white; border-radius: 50%;
-      animation: spin .7s linear infinite;
-      vertical-align: middle; margin-right: 7px;
-    }
-    .registration-overlay {
-      position: fixed; inset: 0; z-index: 5000;
-      display: none; align-items: center; justify-content: center;
-      padding: 18px; background: rgba(15, 23, 42, .48);
-      backdrop-filter: blur(6px);
-    }
-    .registration-overlay.show { display: flex; }
-    .registration-modal {
-      width: 100%; max-width: 430px; max-height: 92vh;
-      overflow-y: auto; padding: 26px; border-radius: 24px;
-      background: white;
-      box-shadow: 0 25px 80px rgba(15, 23, 42, .28);
-      animation: fadeIn .25s ease;
-    }
-    .registration-icon {
-      width: 58px; height: 58px; margin: 0 auto 14px;
+
+      width: 58px; height: 58px; margin: auto;
+
       border-radius: 18px; display: flex;
+
       align-items: center; justify-content: center;
-      color: white; font-size: 26px; font-weight: 800;
+
+      font-size: 28px; font-weight: 800; color: white;
+
       background: linear-gradient(135deg, #087fdb, #0abf7a);
-      box-shadow: 0 10px 25px rgba(0, 130, 190, .20);
+
+      box-shadow: 0 12px 30px rgba(0, 130, 190, 0.22);
+
     }
-    .registration-modal h2 {
-      margin: 0; text-align: center;
-      font-size: 23px; font-weight: 800;
-    }
-    .registration-help {
-      margin: 8px 0 21px; text-align: center;
-      color: #64748b; font-size: 13px; line-height: 1.55;
-    }
-    .registration-message { margin-top: 14px; }
-    .registration-skip {
-      width: 100%; height: 46px; margin-top: 10px;
-      border: 1px solid #dbe4ec; border-radius: 13px;
-      cursor: pointer; color: #475569; background: #f7fafc;
-      font-size: 14px; font-weight: 700; transition: .2s;
-    }
-    .registration-skip:hover {
-      background: #eef4f8; border-color: #cbd5e1;
-    }
-    @media (max-width: 480px) {
-      .registration-modal { padding: 20px; border-radius: 20px; }
-    }
-    .payout-overlay {
-      position: fixed; inset: 0; z-index: 2000;
-      display: none; align-items: center; justify-content: center;
-      padding: 18px; background: rgba(15, 23, 42, .42);
-      backdrop-filter: blur(5px);
-    }
-    .payout-overlay.show { display: flex; }
-    .payout-modal {
-      width: 100%; max-width: 430px; max-height: 92vh;
-      overflow-y: auto; padding: 24px; border-radius: 24px;
-      background: white;
-      box-shadow: 0 25px 80px rgba(15, 23, 42, .25);
-      animation: fadeIn .25s ease;
-    }
-    .payout-modal-head {
-      display: flex; align-items: center;
-      justify-content: space-between; gap: 12px;
-      margin-bottom: 18px;
-    }
-    .payout-modal-head h2 { margin: 0; font-size: 21px; font-weight: 800; }
-    .payout-close {
-      width: 36px; height: 36px; border: none;
-      border-radius: 50%; cursor: pointer;
-      background: #eef4f8; color: #475569;
-      font-size: 20px; line-height: 1;
-    }
-    .payout-help {
-      margin: -7px 0 18px; color: #64748b;
-      font-size: 13px; line-height: 1.5;
-    }
-    .payout-profile {
-      margin-top: 18px; padding: 24px 18px;
-      text-align: center; border-radius: 22px;
-      background: linear-gradient(145deg, #f1faff, #effdf6);
-      border: 1px solid #d9eee6;
-    }
-    .payout-avatar {
-      width: 104px; height: 104px; margin: 0 auto 13px;
-      border-radius: 50%; overflow: hidden;
-      display: flex; align-items: center; justify-content: center;
-      background: linear-gradient(135deg, #087fdb, #0abf7a);
-      color: white; font-size: 30px; font-weight: 800;
-      border: 4px solid white;
-      box-shadow: 0 10px 28px rgba(0, 130, 190, .20);
-    }
-    .payout-avatar img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .payout-profile-name {
-      margin: 0; font-size: 21px;
-      font-weight: 800; color: #172033;
-    }
-    .payout-profile-mobile {
-      margin-top: 5px; color: #64748b;
-      font-size: 13px; font-weight: 600;
-    }
-    .payout-divider {
-      height: 1px; margin: 20px 0; background: #dbe9e5;
-    }
-    .payout-label {
-      color: #64748b; font-size: 11px; font-weight: 800;
-      letter-spacing: 1.5px; text-transform: uppercase;
-    }
-    .payout-amount {
-      margin-top: 5px; color: #087f66;
-      font-size: 30px; font-weight: 900; word-break: break-word;
-    }
-    .payout-email-small {
-      margin-top: 10px; color: #718096;
-      font-size: 11px; word-break: break-word;
-    }
-    @media (max-width: 480px) {
-      .payout-modal { padding: 20px; border-radius: 20px; }
-      .payout-avatar { width: 94px; height: 94px; }
-      .payout-amount { font-size: 27px; }
-    }
-    @media (max-width: 480px) {
-      body { padding: 12px; align-items: flex-start; padding-top: 25px; }
-      .card { padding: 20px; border-radius: 20px; }
-      .header h1 { font-size: 24px; }
-    }
-    /* DASHBOARD UI */
-    .dashboard-screen {
-      display: none; width: 100%; max-width: 400px;
-      margin: 0 auto; background-color: #f4fcfc;
-      padding: 30px 20px; border-radius: 24px;
+
+
+
+    .header h1 { margin: 14px 0 7px; font-size: 28px; font-weight: 800; }
+
+    .header p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
+
+
+
+    .card {
+
+      background: rgba(255,255,255,0.96);
+
+      border: 1px solid rgba(255,255,255,0.8);
+
+      border-radius: 24px; padding: 26px;
+
       box-shadow: 0 20px 60px rgba(31, 71, 98, 0.13);
+
     }
-    .dashboard-screen.show { display: block; animation: fadeIn 0.4s ease; }
-    .dash-profile-section {
-      display: flex; flex-direction: column;
-      align-items: center; margin-bottom: 30px; margin-top: 10px;
+
+
+
+    .steps { display: flex; align-items: center; margin-bottom: 25px; }
+
+
+
+    .step {
+
+      width: 34px; height: 34px; border-radius: 50%;
+
+      display: flex; align-items: center; justify-content: center;
+
+      font-size: 13px; font-weight: 700;
+
+      background: #e8eef5; color: #64748b; flex-shrink: 0;
+
     }
-    .dash-profile-image-container {
-      position: relative; width: 120px;
-      height: 120px; margin-bottom: 15px;
+
+
+
+    .step.active {
+
+      background: linear-gradient(135deg, #087fdb, #0abf7a);
+
+      color: white; box-shadow: 0 7px 18px rgba(0, 130, 190, 0.25);
+
     }
-    .dash-profile-image-container img {
-      width: 100%; height: 100%; border-radius: 50%;
-      object-fit: cover; border: 4px solid #fff;
-      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+
+
+    .step.done { background: #0abf7a; color: white; }
+
+
+
+    .line {
+
+      height: 3px; flex: 1; margin: 0 8px;
+
+      background: #e5ebf1; border-radius: 5px;
+
     }
-    .dash-camera-icon {
-      position: absolute; bottom: 5px; right: 5px;
-      background: #1d72e8; color: #fff;
-      width: 35px; height: 35px; border-radius: 50%;
-      display: flex; justify-content: center; align-items: center;
-      border: 3px solid #fff; font-size: 14px; cursor: pointer;
+
+
+
+    .line.active { background: #0abf7a; }
+
+    .section { display: none; }
+
+    .section.active { display: block; animation: fadeIn .3s ease; }
+
+
+
+    @keyframes fadeIn {
+
+      from { opacity: 0; transform: translateY(8px); }
+
+      to { opacity: 1; transform: translateY(0); }
+
     }
-    .dash-profile-section h2 {
-      color: #111c44; font-size: 22px;
-      font-weight: 700; margin-bottom: 5px;
+
+
+
+    .section-title { margin-bottom: 5px; font-size: 20px; font-weight: 750; }
+
+
+
+    .section-subtitle {
+
+      margin-bottom: 20px; color: #718096;
+
+      font-size: 13px; line-height: 1.5;
+
     }
-    .dash-profile-section p {
-      color: #555e7b; font-size: 14px; font-weight: 500;
+
+
+
+    label {
+
+      display: block; margin-bottom: 8px;
+
+      font-size: 13px; font-weight: 700; color: #334155;
+
     }
-    .dashboard-cards {
-      display: flex; flex-direction: column; gap: 20px;
-    }
-    .dash-card {
-      display: flex; align-items: center;
-      justify-content: space-between; padding: 20px;
-      border-radius: 20px; cursor: pointer; transition: 0.2s;
-    }
-    .dash-card:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-    .card-claim-dash {
-      background: linear-gradient(135deg, #60a8f8, #34d8b0);
-      color: #fff;
-    }
-    .card-payout-dash { background: #fce8b2; color: #111c44; }
-    .dash-card-left {
-      display: flex; align-items: center; gap: 15px;
-    }
-    .dash-icon-box {
-      width: 50px; height: 50px; border-radius: 15px;
-      display: flex; justify-content: center;
-      align-items: center; font-size: 24px;
-    }
-    .card-claim-dash .dash-icon-box {
-      background: rgba(255,255,255,0.2); color: #fff;
-    }
-    .card-payout-dash .dash-icon-box {
-      background: #f7c752; color: #fff;
-    }
-    .dash-card-text h3 {
-      font-size: 16px; font-weight: 600; margin-bottom: 4px;
-    }
-    .dash-card-text p { font-size: 12px; opacity: 0.9; }
-    .dash-arrow-btn {
-      width: 30px; height: 30px; background: #fff;
-      border-radius: 50%; display: flex;
-      justify-content: center; align-items: center;
-      font-size: 12px;
-    }
-    .card-claim-dash .dash-arrow-btn { color: #1d72e8; }
-    .card-payout-dash .dash-arrow-btn { color: #111c44; }
-    .back-to-dashboard-btn {
-      width: 100%; height: 46px; margin-bottom: 18px;
+
+
+
+    input, select {
+
+      width: 100%; height: 52px; padding: 0 15px;
+
       border: 1px solid #dbe4ec; border-radius: 13px;
+
+      background: #fbfdff; color: #172033;
+
+      font-size: 15px; outline: none; transition: .2s;
+
+    }
+
+
+
+    input:focus, select:focus {
+
+      border-color: #1596df; background: white;
+
+      box-shadow: 0 0 0 4px rgba(21,150,223,.09);
+
+    }
+
+
+
+    .field { margin-bottom: 17px; }
+
+
+
+    .btn {
+
+      width: 100%; height: 52px; border: none;
+
+      border-radius: 13px; cursor: pointer;
+
+      font-size: 15px; font-weight: 750; color: white;
+
+      background: linear-gradient(135deg, #087fdb, #08ad78);
+
+      box-shadow: 0 10px 22px rgba(0, 130, 190, .20);
+
+      transition: .2s;
+
+    }
+
+
+
+    .btn:hover {
+
+      transform: translateY(-1px);
+
+      box-shadow: 0 13px 26px rgba(0, 130, 190, .25);
+
+    }
+
+
+
+    .btn:disabled { opacity: .6; cursor: not-allowed; transform: none; }
+
+
+
+    .btn.secondary {
+
+      margin-top: 10px; color: #334155;
+
+      background: #eef4f8; box-shadow: none;
+
+    }
+
+
+
+    .search-box { position: relative; }
+
+    .search-box input { padding-right: 55px; }
+
+
+
+    .search-icon {
+
+      position: absolute; right: 17px; top: 50%;
+
+      transform: translateY(-50%);
+
+      color: #7b8b9c; font-size: 20px; pointer-events: none;
+
+    }
+
+
+
+    .result {
+
+      display: none; margin-top: 20px; padding: 17px;
+
+      border-radius: 15px;
+
+      background: linear-gradient(135deg, #effbf6, #f4fbff);
+
+      border: 1px solid #cdeee0;
+
+    }
+
+
+
+    .result.show { display: block; animation: fadeIn .3s ease; }
+
+    .result-label { color: #64748b; font-size: 12px; margin-bottom: 5px; }
+
+
+
+    .result-value {
+
+      font-size: 18px; font-weight: 800;
+
+      word-break: break-word; color: #087f66;
+
+    }
+
+
+
+    .success-box { display: none; text-align: center; padding: 20px 5px; }
+
+    .success-box.show { display: block; animation: fadeIn .3s ease; }
+
+
+
+    .success-icon {
+
+      width: 65px; height: 65px; margin: 0 auto 15px;
+
+      border-radius: 50%; display: flex;
+
+      align-items: center; justify-content: center;
+
+      font-size: 30px; background: #dff8ec; color: #0a9b65;
+
+    }
+
+
+
+    .success-box h2 { margin: 0 0 8px; font-size: 23px; }
+
+    .success-box p { margin: 0; color: #64748b; font-size: 14px; line-height: 1.6; }
+
+
+
+    .message {
+
+      display: none; margin-top: 15px;
+
+      padding: 12px 14px; border-radius: 11px;
+
+      font-size: 13px; line-height: 1.5;
+
+    }
+
+
+
+    .message.show { display: block; }
+
+    .message.error {
+
+      background: #fff0f0; color: #b42318;
+
+      border: 1px solid #ffd4d1;
+
+    }
+
+    .message.success {
+
+      background: #edfff6; color: #087f58;
+
+      border: 1px solid #c7f1dc;
+
+    }
+
+
+
+    .loading {
+
+      display: none; text-align: center;
+
+      margin-top: 14px; color: #64748b; font-size: 13px;
+
+    }
+
+
+
+    .spinner {
+
+      display: inline-block; width: 17px; height: 17px;
+
+      margin-right: 7px; vertical-align: middle;
+
+      border: 2px solid #d8e5ed; border-top-color: #087fdb;
+
+      border-radius: 50%; animation: spin .7s linear infinite;
+
+    }
+
+
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+
+
+    .security {
+
+      margin-top: 18px; padding: 13px;
+
+      border-radius: 12px; background: #f7fafc;
+
+      color: #718096; font-size: 11px;
+
+      line-height: 1.5; text-align: center;
+
+    }
+
+
+
+    .footer {
+
+      text-align: center; margin-top: 18px;
+
+      color: #64748b; font-size: 11px;
+
+    }
+
+
+
+    .company-badge {
+
+      display: inline-flex; align-items: center;
+
+      gap: 7px; padding: 7px 11px; margin-bottom: 17px;
+
+      border-radius: 50px; background: #edf8ff;
+
+      color: #087fdb; font-size: 12px; font-weight: 700;
+
+    }
+
+
+
+    .company-dot {
+
+      width: 7px; height: 7px;
+
+      border-radius: 50%; background: #0abf7a;
+
+    }
+
+
+
+    .claim-card {
+
+      margin-top: 20px; padding: 18px;
+
+      border-radius: 17px; background: #fbfdff;
+
+      border: 1px solid #e5edf3;
+
+    }
+
+
+
+    .claim-card-title { font-size: 15px; font-weight: 800; margin-bottom: 15px; }
+
+
+
+    .loading-spinner {
+
+      display: inline-block; width: 16px; height: 16px;
+
+      border: 2px solid rgba(255,255,255,.35);
+
+      border-top-color: white; border-radius: 50%;
+
+      animation: spin .7s linear infinite;
+
+      vertical-align: middle; margin-right: 7px;
+
+    }
+
+
+
+    .registration-overlay {
+
+      position: fixed; inset: 0; z-index: 5000;
+
+      display: none; align-items: center; justify-content: center;
+
+      padding: 18px; background: rgba(15, 23, 42, .48);
+
+      backdrop-filter: blur(6px);
+
+    }
+
+
+
+    .registration-overlay.show { display: flex; }
+
+
+
+    .registration-modal {
+
+      width: 100%; max-width: 430px; max-height: 92vh;
+
+      overflow-y: auto; padding: 26px; border-radius: 24px;
+
+      background: white;
+
+      box-shadow: 0 25px 80px rgba(15, 23, 42, .28);
+
+      animation: fadeIn .25s ease;
+
+    }
+
+
+
+    .registration-icon {
+
+      width: 58px; height: 58px; margin: 0 auto 14px;
+
+      border-radius: 18px; display: flex;
+
+      align-items: center; justify-content: center;
+
+      color: white; font-size: 26px; font-weight: 800;
+
+      background: linear-gradient(135deg, #087fdb, #0abf7a);
+
+      box-shadow: 0 10px 25px rgba(0, 130, 190, .20);
+
+    }
+
+
+
+    .registration-modal h2 {
+
+      margin: 0; text-align: center;
+
+      font-size: 23px; font-weight: 800;
+
+    }
+
+
+
+    .registration-help {
+
+      margin: 8px 0 21px; text-align: center;
+
+      color: #64748b; font-size: 13px; line-height: 1.55;
+
+    }
+
+
+
+    .registration-message { margin-top: 14px; }
+
+
+
+    .registration-skip {
+
+      width: 100%; height: 46px; margin-top: 10px;
+
+      border: 1px solid #dbe4ec; border-radius: 13px;
+
       cursor: pointer; color: #475569; background: #f7fafc;
+
       font-size: 14px; font-weight: 700; transition: .2s;
+
     }
-    .back-to-dashboard-btn:hover {
+
+
+
+    .registration-skip:hover {
+
       background: #eef4f8; border-color: #cbd5e1;
+
     }
+
+
+
+    @media (max-width: 480px) {
+
+      .registration-modal { padding: 20px; border-radius: 20px; }
+
+    }
+
+
+
+    .payout-overlay {
+
+      position: fixed; inset: 0; z-index: 2000;
+
+      display: none; align-items: center; justify-content: center;
+
+      padding: 18px; background: rgba(15, 23, 42, .42);
+
+      backdrop-filter: blur(5px);
+
+    }
+
+
+
+    .payout-overlay.show { display: flex; }
+
+
+
+    .payout-modal {
+
+      width: 100%; max-width: 430px; max-height: 92vh;
+
+      overflow-y: auto; padding: 24px; border-radius: 24px;
+
+      background: white;
+
+      box-shadow: 0 25px 80px rgba(15, 23, 42, .25);
+
+      animation: fadeIn .25s ease;
+
+    }
+
+
+
+    .payout-modal-head {
+
+      display: flex; align-items: center;
+
+      justify-content: space-between; gap: 12px;
+
+      margin-bottom: 18px;
+
+    }
+
+
+
+    .payout-modal-head h2 { margin: 0; font-size: 21px; font-weight: 800; }
+
+
+
+    .payout-close {
+
+      width: 36px; height: 36px; border: none;
+
+      border-radius: 50%; cursor: pointer;
+
+      background: #eef4f8; color: #475569;
+
+      font-size: 20px; line-height: 1;
+
+    }
+
+
+
+    .payout-help {
+
+      margin: -7px 0 18px; color: #64748b;
+
+      font-size: 13px; line-height: 1.5;
+
+    }
+
+
+
+    .payout-profile {
+
+      margin-top: 18px; padding: 24px 18px;
+
+      text-align: center; border-radius: 22px;
+
+      background: linear-gradient(145deg, #f1faff, #effdf6);
+
+      border: 1px solid #d9eee6;
+
+    }
+
+
+
+    .payout-avatar {
+
+      width: 104px; height: 104px; margin: 0 auto 13px;
+
+      border-radius: 50%; overflow: hidden;
+
+      display: flex; align-items: center; justify-content: center;
+
+      background: linear-gradient(135deg, #087fdb, #0abf7a);
+
+      color: white; font-size: 30px; font-weight: 800;
+
+      border: 4px solid white;
+
+      box-shadow: 0 10px 28px rgba(0, 130, 190, .20);
+
+    }
+
+
+
+    .payout-avatar img {
+
+      width: 100%; height: 100%;
+
+      object-fit: cover; display: block;
+
+    }
+
+
+
+    .payout-profile-name {
+
+      margin: 0; font-size: 21px;
+
+      font-weight: 800; color: #172033;
+
+    }
+
+
+
+    .payout-profile-mobile {
+
+      margin-top: 5px; color: #64748b;
+
+      font-size: 13px; font-weight: 600;
+
+    }
+
+
+
+    .payout-divider {
+
+      height: 1px; margin: 20px 0; background: #dbe9e5;
+
+    }
+
+
+
+    .payout-label {
+
+      color: #64748b; font-size: 11px; font-weight: 800;
+
+      letter-spacing: 1.5px; text-transform: uppercase;
+
+    }
+
+
+
+    .payout-amount {
+
+      margin-top: 5px; color: #087f66;
+
+      font-size: 30px; font-weight: 900; word-break: break-word;
+
+    }
+
+
+
+    .payout-email-small {
+
+      margin-top: 10px; color: #718096;
+
+      font-size: 11px; word-break: break-word;
+
+    }
+
+
+
+    @media (max-width: 480px) {
+
+      .payout-modal { padding: 20px; border-radius: 20px; }
+
+      .payout-avatar { width: 94px; height: 94px; }
+
+      .payout-amount { font-size: 27px; }
+
+    }
+
+
+
+    @media (max-width: 480px) {
+
+      body { padding: 12px; align-items: flex-start; padding-top: 25px; }
+
+      .card { padding: 20px; border-radius: 20px; }
+
+      .header h1 { font-size: 24px; }
+
+    }
+
+
+
+    /* DASHBOARD UI (NEW) */
+
+    .dashboard-screen {
+
+      display: none; width: 100%; max-width: 400px;
+
+      margin: 0 auto; background-color: #f4fcfc;
+
+      padding: 30px 20px; border-radius: 24px;
+
+      box-shadow: 0 20px 60px rgba(31, 71, 98, 0.13);
+
+    }
+
+
+
+    .dashboard-screen.show { display: block; animation: fadeIn 0.4s ease; }
+
+
+
+    .dash-profile-section {
+
+      display: flex; flex-direction: column;
+
+      align-items: center; margin-bottom: 30px; margin-top: 10px;
+
+    }
+
+
+
+    .dash-profile-image-container {
+
+      position: relative; width: 120px;
+
+      height: 120px; margin-bottom: 15px;
+
+    }
+
+
+
+    .dash-profile-image-container img {
+
+      width: 100%; height: 100%; border-radius: 50%;
+
+      object-fit: cover; border: 4px solid #fff;
+
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    .dash-camera-icon {
+
+      position: absolute; bottom: 5px; right: 5px;
+
+      background: #1d72e8; color: #fff;
+
+      width: 35px; height: 35px; border-radius: 50%;
+
+      display: flex; justify-content: center; align-items: center;
+
+      border: 3px solid #fff; font-size: 14px; cursor: pointer;
+
+    }
+
+
+
+    .dash-profile-section h2 {
+
+      color: #111c44; font-size: 22px;
+
+      font-weight: 700; margin-bottom: 5px;
+
+    }
+
+
+
+    .dash-profile-section p {
+
+      color: #555e7b; font-size: 14px; font-weight: 500;
+
+    }
+
+
+
+    .dashboard-cards {
+
+      display: flex; flex-direction: column; gap: 20px;
+
+    }
+
+
+
+    .dash-card {
+
+      display: flex; align-items: center;
+
+      justify-content: space-between; padding: 20px;
+
+      border-radius: 20px; cursor: pointer; transition: 0.2s;
+
+    }
+
+
+
+    .dash-card:hover {
+
+      transform: translateY(-2px);
+
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+
+    }
+
+
+
+    .card-claim-dash {
+
+      background: linear-gradient(135deg, #60a8f8, #34d8b0);
+
+      color: #fff;
+
+    }
+
+
+
+    .card-payout-dash { background: #fce8b2; color: #111c44; }
+
+
+
+    .dash-card-left {
+
+      display: flex; align-items: center; gap: 15px;
+
+    }
+
+
+
+    .dash-icon-box {
+
+      width: 50px; height: 50px; border-radius: 15px;
+
+      display: flex; justify-content: center;
+
+      align-items: center; font-size: 24px;
+
+    }
+
+
+
+    .card-claim-dash .dash-icon-box {
+
+      background: rgba(255,255,255,0.2); color: #fff;
+
+    }
+
+
+
+    .card-payout-dash .dash-icon-box {
+
+      background: #f7c752; color: #fff;
+
+    }
+
+
+
+    .dash-card-text h3 {
+
+      font-size: 16px; font-weight: 600; margin-bottom: 4px;
+
+    }
+
+
+
+    .dash-card-text p { font-size: 12px; opacity: 0.9; }
+
+
+
+    .dash-arrow-btn {
+
+      width: 30px; height: 30px; background: #fff;
+
+      border-radius: 50%; display: flex;
+
+      justify-content: center; align-items: center;
+
+      font-size: 12px;
+
+    }
+
+
+
+    .card-claim-dash .dash-arrow-btn { color: #1d72e8; }
+
+    .card-payout-dash .dash-arrow-btn { color: #111c44; }
+
+
+
+    .back-to-dashboard-btn {
+
+      width: 100%; height: 46px; margin-bottom: 18px;
+
+      border: 1px solid #dbe4ec; border-radius: 13px;
+
+      cursor: pointer; color: #475569; background: #f7fafc;
+
+      font-size: 14px; font-weight: 700; transition: .2s;
+
+    }
+
+
+
+    .back-to-dashboard-btn:hover {
+
+      background: #eef4f8; border-color: #cbd5e1;
+
+    }
+
   </style>
+
 </head>
 
 <body>
 
-  <!-- DASHBOARD SCREEN -->
+
+
+  <!-- DASHBOARD SCREEN (NEW) -->
+
   <div id="dashboardScreen" class="dashboard-screen">
+
     <div class="dash-profile-section">
+
       <div class="dash-profile-image-container">
+
         <img
+
           id="dashProfileImage"
+
           src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
+
           alt="Profile"
+
         >
-        <div class="dash-camera-icon" onclick="openPhotoPicker()">📷</div>
-        <input
-          type="file"
-          id="photoInput"
-          accept="image/*"
-          style="display:none;"
-          onchange="handlePhotoSelect(event)"
-        >
+
+        <div class="dash-camera-icon">📷</div>
+
       </div>
+
       <h2 id="dashUserName">Rohit Kumar</h2>
+
       <p>Your Dashboard</p>
+
     </div>
+
+
 
     <div class="dashboard-cards">
+
       <div class="dash-card card-claim-dash" onclick="openClaimPortal()">
+
         <div class="dash-card-left">
+
           <div class="dash-icon-box">📄</div>
+
           <div class="dash-card-text">
+
             <h3>Claim Your Portal</h3>
+
             <p>Search &amp; claim your client</p>
+
           </div>
+
         </div>
+
         <div class="dash-arrow-btn">›</div>
+
       </div>
+
+
 
       <div class="dash-card card-payout-dash" onclick="openPayoutFromDashboard()">
+
         <div class="dash-card-left">
+
           <div class="dash-icon-box">💰</div>
+
           <div class="dash-card-text">
+
             <h3>Get Payout</h3>
+
             <p>View &amp; request payout</p>
+
           </div>
+
         </div>
+
         <div class="dash-arrow-btn">›</div>
+
       </div>
+
     </div>
+
   </div>
 
-  <!-- CLAIM PORTAL -->
+
+
+  <!-- CLAIM PORTAL (Purana Content) -->
+
   <div id="claimPortalContainer" class="container" style="display:none;">
-    <button class="back-to-dashboard-btn" type="button" onclick="goBackToDashboard()">
+
+
+
+    <button
+
+      class="back-to-dashboard-btn"
+
+      type="button"
+
+      onclick="goBackToDashboard()"
+
+    >
+
       ← Back to Dashboard
+
     </button>
 
+
+
     <div class="header">
+
       <div class="logo">✓</div>
+
       <h1>Client Claim Portal</h1>
-      <p>Select your company, search your number or client code, and submit your claim securely.</p>
+
+      <p>
+
+        Select your company, search your number or
+
+        client code, and submit your claim securely.
+
+      </p>
+
     </div>
 
+
+
     <div class="card">
+
+
+
       <div class="steps">
+
         <div id="step1" class="step active">1</div>
+
         <div id="line1" class="line"></div>
+
         <div id="step2" class="step">2</div>
+
         <div id="line2" class="line"></div>
+
         <div id="step3" class="step">3</div>
+
       </div>
 
+
+
       <div id="section1" class="section active">
+
+
+
         <div class="section-title">Search Your Details</div>
-        <div class="section-subtitle">Select your company and search your number or client code.</div>
 
-        <div class="field">
-          <label for="company">Select Company <span style="color:#d93025">*</span></label>
-          <select id="company"><option value="">Loading Companies...</option></select>
+        <div class="section-subtitle">
+
+          Select your company and search your
+
+          number or client code.
+
         </div>
 
+
+
         <div class="field">
-          <label for="search">Number / Client Code <span style="color:#d93025">*</span></label>
+
+          <label for="company">
+
+            Select Company <span style="color:#d93025">*</span>
+
+          </label>
+
+          <select id="company">
+
+            <option value="">Loading Companies...</option>
+
+          </select>
+
+        </div>
+
+
+
+        <div class="field">
+
+          <label for="search">
+
+            Number / Client Code
+
+            <span style="color:#d93025">*</span>
+
+          </label>
+
           <div class="search-box">
-            <input type="text" id="search" placeholder="Enter Number or Client Code" autocomplete="off" maxlength="100">
+
+            <input
+
+              type="text"
+
+              id="search"
+
+              placeholder="Enter Number or Client Code"
+
+              autocomplete="off"
+
+              maxlength="100"
+
+            >
+
             <span class="search-icon">🔍</span>
+
           </div>
+
         </div>
 
-        <button id="searchBtn" class="btn" type="button" onclick="searchClient()">🔍 &nbsp; Search Details</button>
 
-        <div id="loading" class="loading"><span class="spinner"></span>Searching securely...</div>
+
+        <button
+
+          id="searchBtn"
+
+          class="btn"
+
+          type="button"
+
+          onclick="searchClient()"
+
+        >
+
+          🔍 &nbsp; Search Details
+
+        </button>
+
+
+
+        <div id="loading" class="loading">
+
+          <span class="spinner"></span>
+
+          Searching securely...
+
+        </div>
+
+
 
         <div id="result" class="result">
+
           <div class="result-label">Matching Client</div>
+
           <div id="matchedValue" class="result-value"></div>
-          <div id="matchedName" style="margin-top:6px;font-size:15px;font-weight:700;color:#0f766e;"></div>
+
+          <div
+
+            id="matchedName"
+
+            style="margin-top:6px;font-size:15px;font-weight:700;color:#0f766e;"
+
+          ></div>
+
         </div>
+
+
 
         <div id="claimCard" class="claim-card" style="display:none;">
+
+
+
           <div class="claim-card-title">Submit Your Claim</div>
+
+
+
           <div id="companyBadge" class="company-badge">
+
             <span class="company-dot"></span>
+
             <span id="companyBadgeText">Company</span>
+
           </div>
+
+
 
           <div class="field">
-            <label for="name">Your Name <span style="color:#d93025">*</span></label>
-            <input type="text" id="name" placeholder="Enter your name" maxlength="100" autocomplete="name">
+
+            <label for="name">
+
+              Your Name <span style="color:#d93025">*</span>
+
+            </label>
+
+            <input
+
+              type="text"
+
+              id="name"
+
+              placeholder="Enter your name"
+
+              maxlength="100"
+
+              autocomplete="name"
+
+            >
+
           </div>
+
+
 
           <div class="field">
-            <label for="mobile">Mobile Number <span style="color:#d93025">*</span></label>
-            <input type="tel" id="mobile" placeholder="Enter mobile number" maxlength="15" inputmode="numeric" autocomplete="tel">
+
+            <label for="mobile">
+
+              Mobile Number <span style="color:#d93025">*</span>
+
+            </label>
+
+            <input
+
+              type="tel"
+
+              id="mobile"
+
+              placeholder="Enter mobile number"
+
+              maxlength="15"
+
+              inputmode="numeric"
+
+              autocomplete="tel"
+
+            >
+
           </div>
 
-          <button id="claimBtn" class="btn" type="button" onclick="submitClaim()">✓ &nbsp; Submit Claim</button>
+
+
+          <button
+
+            id="claimBtn"
+
+            class="btn"
+
+            type="button"
+
+            onclick="submitClaim()"
+
+          >
+
+            ✓ &nbsp; Submit Claim
+
+          </button>
+
+
+
         </div>
+
+
 
         <div id="message" class="message" aria-live="polite"></div>
 
-        <div class="security">🔒 &nbsp; Please enter correct details. Your claim information will be processed through the connected claim system.</div>
+
+
+        <div class="security">
+
+          🔒 &nbsp;
+
+          Please enter correct details.
+
+          Your claim information will be
+
+          processed through the connected
+
+          claim system.
+
+        </div>
+
+
+
       </div>
+
+
 
       <div id="section2" class="section">
+
         <div class="success-box show">
+
           <div class="success-icon">✓</div>
+
           <h2>Claim Submitted</h2>
+
           <p>Your claim has been submitted successfully.</p>
-          <button class="btn secondary" type="button" onclick="resetPortal()">Submit Another Claim</button>
+
+          <button
+
+            class="btn secondary"
+
+            type="button"
+
+            onclick="resetPortal()"
+
+          >
+
+            Submit Another Claim
+
+          </button>
+
         </div>
+
       </div>
+
+
 
       <div id="section3" class="section">
+
         <div class="success-box show">
+
           <div class="success-icon">✓</div>
+
           <h2>Thank You</h2>
+
           <p>Your claim information has been processed successfully.</p>
+
         </div>
+
       </div>
+
+
+
     </div>
 
-    <div>
-         <!-- REGISTRATION MODAL -->
+
+
+    <div class="footer">
+
+      © 2026 Client Claim Portal. All rights reserved.
+
+    </div>
+
+
+
+  </div>
+
+  
+
+  <!-- ===================================================== -->
+
+  <!-- CUSTOMER REGISTRATION MODAL                            -->
+
+  <!-- ===================================================== -->
 
   <div id="registrationOverlay" class="registration-overlay" aria-hidden="true">
 
@@ -560,9 +1454,25 @@
 
       <div class="field">
 
-        <label for="registrationName">Name <span style="color:#d93025">*</span></label>
+        <label for="registrationName">
 
-        <input type="text" id="registrationName" placeholder="Enter your name" maxlength="100" autocomplete="name">
+          Name <span style="color:#d93025">*</span>
+
+        </label>
+
+        <input
+
+          type="text"
+
+          id="registrationName"
+
+          placeholder="Enter your name"
+
+          maxlength="100"
+
+          autocomplete="name"
+
+        >
 
       </div>
 
@@ -570,9 +1480,27 @@
 
       <div class="field">
 
-        <label for="registrationMobile">Mobile Number <span style="color:#d93025">*</span></label>
+        <label for="registrationMobile">
 
-        <input type="tel" id="registrationMobile" placeholder="Enter mobile number" maxlength="15" inputmode="numeric" autocomplete="tel">
+          Mobile Number <span style="color:#d93025">*</span>
+
+        </label>
+
+        <input
+
+          type="tel"
+
+          id="registrationMobile"
+
+          placeholder="Enter mobile number"
+
+          maxlength="15"
+
+          inputmode="numeric"
+
+          autocomplete="tel"
+
+        >
 
       </div>
 
@@ -580,21 +1508,75 @@
 
       <div class="field">
 
-        <label for="registrationEmail">Email ID <span style="color:#d93025">*</span></label>
+        <label for="registrationEmail">
 
-        <input type="email" id="registrationEmail" placeholder="Enter your email address" maxlength="320" autocomplete="email">
+          Email ID <span style="color:#d93025">*</span>
+
+        </label>
+
+        <input
+
+          type="email"
+
+          id="registrationEmail"
+
+          placeholder="Enter your email address"
+
+          maxlength="320"
+
+          autocomplete="email"
+
+        >
 
       </div>
 
 
 
-      <button id="registrationBtn" class="btn" type="button" onclick="registerCustomer()">Create Account</button>
+      <button
 
-      <button id="registrationSkipBtn" class="registration-skip" type="button" onclick="skipRegistration()">Skip for Now</button>
+        id="registrationBtn"
+
+        class="btn"
+
+        type="button"
+
+        onclick="registerCustomer()"
+
+      >
+
+        Create Account
+
+      </button>
 
 
 
-      <div id="registrationMessage" class="message registration-message" aria-live="polite"></div>
+      <button
+
+        id="registrationSkipBtn"
+
+        class="registration-skip"
+
+        type="button"
+
+        onclick="skipRegistration()"
+
+      >
+
+        Skip for Now
+
+      </button>
+
+
+
+      <div
+
+        id="registrationMessage"
+
+        class="message registration-message"
+
+        aria-live="polite"
+
+      ></div>
 
     </div>
 
@@ -602,7 +1584,11 @@
 
 
 
-  <!-- PAYOUT MODAL -->
+  <!-- ===================================================== -->
+
+  <!-- GET PAYOUT MODAL                                       -->
+
+  <!-- ===================================================== -->
 
   <div id="payoutOverlay" class="payout-overlay" aria-hidden="true">
 
@@ -612,7 +1598,17 @@
 
         <h2 id="payoutTitle">Get Payout</h2>
 
-        <button class="payout-close" type="button" onclick="closePayoutModal()" aria-label="Close">×</button>
+        <button
+
+          class="payout-close"
+
+          type="button"
+
+          onclick="closePayoutModal()"
+
+          aria-label="Close"
+
+        >×</button>
 
       </div>
 
@@ -630,13 +1626,43 @@
 
         <div class="field">
 
-          <label for="payoutEmail">Registered Email <span style="color:#d93025">*</span></label>
+          <label for="payoutEmail">
 
-          <input type="email" id="payoutEmail" placeholder="Enter your registered email" autocomplete="email" maxlength="320">
+            Registered Email <span style="color:#d93025">*</span>
+
+          </label>
+
+          <input
+
+            type="email"
+
+            id="payoutEmail"
+
+            placeholder="Enter your registered email"
+
+            autocomplete="email"
+
+            maxlength="320"
+
+          >
 
         </div>
 
-        <button id="payoutSendOtpBtn" class="btn" type="button" onclick="sendPayoutOtp()">✉ &nbsp; Get OTP</button>
+        <button
+
+          id="payoutSendOtpBtn"
+
+          class="btn"
+
+          type="button"
+
+          onclick="sendPayoutOtp()"
+
+        >
+
+          ✉ &nbsp; Get OTP
+
+        </button>
 
       </div>
 
@@ -644,19 +1670,69 @@
 
       <div id="payoutOtpStep" style="display:none;">
 
-        <div class="payout-help">OTP आपके registered email पर भेजा गया है।</div>
+        <div class="payout-help">
 
-        <div class="field">
-
-          <label for="payoutOtp">Enter OTP <span style="color:#d93025">*</span></label>
-
-          <input type="text" id="payoutOtp" placeholder="Enter 6-digit OTP" inputmode="numeric" maxlength="6" autocomplete="one-time-code">
+          OTP आपके registered email पर भेजा गया है।
 
         </div>
 
-        <button id="payoutVerifyBtn" class="btn" type="button" onclick="verifyPayoutOtp()">✓ &nbsp; Verify OTP</button>
+        <div class="field">
 
-        <button id="payoutResendBtn" class="btn secondary" type="button" onclick="sendPayoutOtp(true)">Resend OTP</button>
+          <label for="payoutOtp">
+
+            Enter OTP <span style="color:#d93025">*</span>
+
+          </label>
+
+          <input
+
+            type="text"
+
+            id="payoutOtp"
+
+            placeholder="Enter 6-digit OTP"
+
+            inputmode="numeric"
+
+            maxlength="6"
+
+            autocomplete="one-time-code"
+
+          >
+
+        </div>
+
+        <button
+
+          id="payoutVerifyBtn"
+
+          class="btn"
+
+          type="button"
+
+          onclick="verifyPayoutOtp()"
+
+        >
+
+          ✓ &nbsp; Verify OTP
+
+        </button>
+
+        <button
+
+          id="payoutResendBtn"
+
+          class="btn secondary"
+
+          type="button"
+
+          onclick="sendPayoutOtp(true)"
+
+        >
+
+          Resend OTP
+
+        </button>
 
       </div>
 
@@ -664,8 +1740,8 @@
 
       <div id="payoutResult" style="display:none;">
 
-        <div class="payout-profile">
 
+        <div class="payout-profile">
           <div id="payoutAvatar" class="payout-avatar"></div>
 
           <h3 id="payoutName" class="payout-profile-name"></h3>
@@ -682,7 +1758,19 @@
 
         </div>
 
-        <button class="btn secondary" type="button" onclick="resetPayoutFlow()">Check Another Email</button>
+        <button
+
+          class="btn secondary"
+
+          type="button"
+
+          onclick="resetPayoutFlow()"
+
+        >
+
+          Check Another Email
+
+        </button>
 
       </div>
 
@@ -694,9 +1782,7 @@
 
   </div>
 
-
-
-  <script>
+    <script>
 
     /* =========================================================
 
@@ -706,7 +1792,7 @@
 
     const API_URL =
 
-      "https://script.google.com/macros/s/AKfycby7IUod4ph6goJ0Vuki8kAe4W5UvTGy05zqCxGPSGNQ1UGkyTOaYFV08HE_x_hMom1U/exec";
+      "https://script.google.com/macros/s/AKfycbxe-Xqs9u7g9uUws2MgVUUgOLJBX6IA6xAQKqzTCzTmTj7syMCJ64zttxxfQH_VrRFN/exec";
 
 
 
@@ -1060,6 +2146,12 @@
 
 
 
+    /* =========================================================
+
+       COMPANY CHANGE
+
+    ========================================================= */
+
     companySelect.addEventListener("change", function() {
 
       currentCompany = companySelect.value.trim();
@@ -1118,11 +2210,39 @@
 
 
 
-      if (!company) { showMessage("Company Select करें।", "error"); companySelect.focus(); return; }
+      if (!company) {
 
-      if (!query) { showMessage("Number / Client Code डालें।", "error"); searchInput.focus(); return; }
+        showMessage("Company Select करें।", "error");
 
-      if (query.length > 100) { showMessage("Search value बहुत लंबी है।", "error"); searchInput.focus(); return; }
+        companySelect.focus();
+
+        return;
+
+      }
+
+
+
+      if (!query) {
+
+        showMessage("Number / Client Code डालें।", "error");
+
+        searchInput.focus();
+
+        return;
+
+      }
+
+
+
+      if (query.length > 100) {
+
+        showMessage("Search value बहुत लंबी है।", "error");
+
+        searchInput.focus();
+
+        return;
+
+      }
 
 
 
@@ -1160,7 +2280,15 @@
 
             try {
 
-              data = await jsonp({ action: "search", company: company, query: query });
+              data = await jsonp({
+
+                action: "search",
+
+                company: company,
+
+                query: query
+
+              });
 
               if (data && data.success === true) {
 
@@ -1198,7 +2326,17 @@
 
           currentMatch = String(data.value || "").trim();
 
-          if (!currentMatch) { showMessage("Matching data खाली है।", "error"); return; }
+
+
+          if (!currentMatch) {
+
+            showMessage("Matching data खाली है।", "error");
+
+            return;
+
+          }
+
+
 
           matchedValue.textContent = currentMatch;
 
@@ -1215,6 +2353,8 @@
           nameInput.value = "";
 
           mobileInput.value = "";
+
+
 
           setTimeout(function() { nameInput.focus(); }, 100);
 
@@ -1244,19 +2384,41 @@
 
     searchInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); searchClient(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        searchClient();
+
+      }
 
     });
+
+
 
     nameInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); mobileInput.focus(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        mobileInput.focus();
+
+      }
 
     });
 
+
+
     mobileInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); submitClaim(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        submitClaim();
+
+      }
 
     });
 
@@ -1282,17 +2444,63 @@
 
 
 
-      if (!currentMatch) { showMessage("पहले अपना Number / Client Code Search करें।", "error"); return; }
+      if (!currentMatch) {
 
-      if (!company) { showMessage("Company Select करें।", "error"); companySelect.focus(); return; }
+        showMessage("पहले अपना Number / Client Code Search करें।", "error");
 
-      if (!name) { showMessage("अपना Name डालें।", "error"); nameInput.focus(); return; }
+        return;
 
-      if (name.length < 2) { showMessage("कृपया सही Name डालें।", "error"); nameInput.focus(); return; }
+      }
 
-      if (name.length > 100) { showMessage("Name बहुत लंबा है।", "error"); nameInput.focus(); return; }
+      if (!company) {
 
-      if (!mobile) { showMessage("अपना Mobile Number डालें।", "error"); mobileInput.focus(); return; }
+        showMessage("Company Select करें।", "error");
+
+        companySelect.focus();
+
+        return;
+
+      }
+
+      if (!name) {
+
+        showMessage("अपना Name डालें।", "error");
+
+        nameInput.focus();
+
+        return;
+
+      }
+
+      if (name.length < 2) {
+
+        showMessage("कृपया सही Name डालें।", "error");
+
+        nameInput.focus();
+
+        return;
+
+      }
+
+      if (name.length > 100) {
+
+        showMessage("Name बहुत लंबा है।", "error");
+
+        nameInput.focus();
+
+        return;
+
+      }
+
+      if (!mobile) {
+
+        showMessage("अपना Mobile Number डालें।", "error");
+
+        mobileInput.focus();
+
+        return;
+
+      }
 
 
 
@@ -1362,7 +2570,11 @@
 
           document.getElementById("step2").classList.add("active");
 
-          setTimeout(function() { window.scrollTo({ top: 0, behavior: "smooth" }); }, 100);
+          setTimeout(function() {
+
+            window.scrollTo({ top: 0, behavior: "smooth" });
+
+          }, 100);
 
           return;
 
@@ -1370,7 +2582,13 @@
 
 
 
-        showMessage((data && data.message) ? data.message : "Claim submit nahi hua. Please try again.", "error");
+        showMessage(
+
+          (data && data.message) ? data.message : "Claim submit nahi hua. Please try again.",
+
+          "error"
+
+        );
 
       } catch (error) {
 
@@ -1406,7 +2624,11 @@
 
       if (!currentCompany) {
 
-        try { currentCompany = (localStorage.getItem(SAVED_COMPANY_KEY) || "").trim(); } catch (e) {}
+        try {
+
+          currentCompany = (localStorage.getItem(SAVED_COMPANY_KEY) || "").trim();
+
+        } catch (e) {}
 
       }
 
@@ -1460,6 +2682,12 @@
 
 
 
+    /* =========================================================
+
+       MESSAGE HELPERS
+
+    ========================================================= */
+
     function showMessage(text, type) {
 
       message.textContent = text;
@@ -1478,7 +2706,7 @@
 
     }
 
-
+      
 
     /* =========================================================
 
@@ -1576,11 +2804,35 @@
 
 
 
-      if (!name) { showRegistrationMessage("Name डालें।", "error"); registrationNameInput.focus(); return; }
+      if (!name) {
 
-      if (!mobile) { showRegistrationMessage("Mobile number डालें।", "error"); registrationMobileInput.focus(); return; }
+        showRegistrationMessage("Name डालें।", "error");
 
-      if (!email) { showRegistrationMessage("Email ID डालें।", "error"); registrationEmailInput.focus(); return; }
+        registrationNameInput.focus();
+
+        return;
+
+      }
+
+      if (!mobile) {
+
+        showRegistrationMessage("Mobile number डालें।", "error");
+
+        registrationMobileInput.focus();
+
+        return;
+
+      }
+
+      if (!email) {
+
+        showRegistrationMessage("Email ID डालें।", "error");
+
+        registrationEmailInput.focus();
+
+        return;
+
+      }
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 
@@ -1696,7 +2948,13 @@
 
     registrationEmailInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); registerCustomer(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        registerCustomer();
+
+      }
 
     });
 
@@ -1704,7 +2962,7 @@
 
     /* =========================================================
 
-       DASHBOARD CONTROL
+       DASHBOARD CONTROL (NEW)
 
     ========================================================= */
 
@@ -1743,10 +3001,6 @@
       claimPortalContainer.style.display = "none";
 
       window.scrollTo({ top: 0, behavior: "smooth" });
-
-
-
-      loadCustomerPhoto();
 
     }
 
@@ -1795,212 +3049,6 @@
     function openPayoutFromDashboard() {
 
       openPayoutModal();
-
-    }
-
-
-
-    /* =========================================================
-
-       PROFILE PHOTO CHANGE (NEW)
-
-    ========================================================= */
-
-    function openPhotoPicker() {
-
-      const input = document.getElementById("photoInput");
-
-      if (input) input.click();
-
-    }
-
-
-
-    function handlePhotoSelect(event) {
-
-      const file = event.target.files && event.target.files[0];
-
-      if (!file) return;
-
-
-
-      if (!file.type.startsWith("image/")) {
-
-        alert("Please select an image file.");
-
-        return;
-
-      }
-
-
-
-      const reader = new FileReader();
-
-
-
-      reader.onload = function(e) {
-
-        const img = new Image();
-
-
-
-        img.onload = function() {
-
-          const MAX_SIZE = 200;
-
-          let width = img.width;
-
-          let height = img.height;
-
-
-
-          if (width > height) {
-
-            if (width > MAX_SIZE) {
-
-              height = Math.round(height * MAX_SIZE / width);
-
-              width = MAX_SIZE;
-
-            }
-
-          } else {
-
-            if (height > MAX_SIZE) {
-
-              width = Math.round(width * MAX_SIZE / height);
-
-              height = MAX_SIZE;
-
-            }
-
-          }
-
-
-
-          const canvas = document.createElement("canvas");
-
-          canvas.width = width;
-
-          canvas.height = height;
-
-          const ctx = canvas.getContext("2d");
-
-          ctx.drawImage(img, 0, 0, width, height);
-
-
-
-          const compressedBase64 = canvas.toDataURL("image/jpeg", 0.7);
-
-
-
-          const dashImg = document.getElementById("dashProfileImage");
-
-          if (dashImg) dashImg.src = compressedBase64;
-
-
-
-          savePhotoToBackend(compressedBase64);
-
-        };
-
-
-
-        img.src = e.target.result;
-
-      };
-
-
-
-      reader.readAsDataURL(file);
-
-    }
-
-
-
-    async function savePhotoToBackend(base64Photo) {
-
-      const email = localStorage.getItem(REGISTRATION_EMAIL_KEY);
-
-
-
-      if (!email) {
-
-        alert("Please register first to save your photo.");
-
-        return;
-
-      }
-
-
-
-      try {
-
-        const data = await jsonp({
-
-          action: "savePhoto",
-
-          email: email,
-
-          photo: base64Photo
-
-        });
-
-
-
-        if (data && data.success === true) {
-
-          console.log("Photo saved successfully.");
-
-        } else {
-
-          console.warn("Photo save failed:", data && data.message);
-
-        }
-
-      } catch (error) {
-
-        console.error("Photo save error:", error);
-
-      }
-
-    }
-
-
-
-    async function loadCustomerPhoto() {
-
-      const email = localStorage.getItem(REGISTRATION_EMAIL_KEY);
-
-      if (!email) return;
-
-
-
-      try {
-
-        const data = await jsonp({
-
-          action: "getPhoto",
-
-          email: email
-
-        });
-
-
-
-        if (data && data.success === true && data.photo) {
-
-          const dashImg = document.getElementById("dashProfileImage");
-
-          if (dashImg) dashImg.src = data.photo;
-
-        }
-
-      } catch (error) {
-
-        console.warn("Photo load error:", error);
-
-      }
 
     }
 
@@ -2090,13 +3138,27 @@
 
     payoutEmailInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); sendPayoutOtp(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        sendPayoutOtp();
+
+      }
 
     });
 
+
+
     payoutOtpInput.addEventListener("keydown", function(event) {
 
-      if (event.key === "Enter") { event.preventDefault(); verifyPayoutOtp(); }
+      if (event.key === "Enter") {
+
+        event.preventDefault();
+
+        verifyPayoutOtp();
+
+      }
 
     });
 
@@ -2130,7 +3192,15 @@
 
 
 
-      if (!email) { showPayoutMessage("Registered email डालें।", "error"); payoutEmailInput.focus(); return; }
+      if (!email) {
+
+        showPayoutMessage("Registered email डालें।", "error");
+
+        payoutEmailInput.focus();
+
+        return;
+
+      }
 
       if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
 
@@ -2180,7 +3250,13 @@
 
 
 
-        showPayoutMessage(data && data.message ? data.message : "OTP भेजा नहीं जा सका।", "error");
+        showPayoutMessage(
+
+          data && data.message ? data.message : "OTP भेजा नहीं जा सका।",
+
+          "error"
+
+        );
 
       } catch (error) {
 
@@ -2234,7 +3310,15 @@
 
       try {
 
-        const data = await jsonp({ action: "payoutVerifyOtp", email: email, otp: otp });
+        const data = await jsonp({
+
+          action: "payoutVerifyOtp",
+
+          email: email,
+
+          otp: otp
+
+        });
 
 
 
@@ -2254,7 +3338,13 @@
 
 
 
-        showPayoutMessage(data && data.message ? data.message : "OTP verification failed.", "error");
+        showPayoutMessage(
+
+          data && data.message ? data.message : "OTP verification failed.",
+
+          "error"
+
+        );
 
       } catch (error) {
 
@@ -2404,4 +3494,7 @@
 
   </script>
 
+</body>
+
 </html>
+
