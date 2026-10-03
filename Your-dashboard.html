@@ -1792,7 +1792,7 @@
 
     const API_URL =
 
-      "https://script.google.com/macros/s/AKfycbxe-Xqs9u7g9uUws2MgVUUgOLJBX6IA6xAQKqzTCzTmTj7syMCJ64zttxxfQH_VrRFN/exec";
+      "https://script.google.com/macros/s/AKfycbz3Y8L5k5EskGW5ljn_mxVgMiA7gyxmXP8aFj0igClL760mn15821vLvwjPXK4jpNi4/exec";
 
 
 
@@ -2973,26 +2973,123 @@
     const dashUserName = document.getElementById("dashUserName");
 
     const dashProfileImage = document.getElementById("dashProfileImage");
-
+const dashProfileInitials = document.getElementById("dashProfileInitials");
 
 
     function showDashboard(name) {
 
-      if (name) {
+     if (name) {
 
-        dashUserName.textContent = name;
+  dashUserName.textContent = name;
 
-      } else {
+} else {
 
-        try {
+  try {
 
-          const savedName = localStorage.getItem(REGISTRATION_NAME_KEY);
+    const savedName =
+      localStorage.getItem(REGISTRATION_NAME_KEY);
 
-          if (savedName) dashUserName.textContent = savedName;
+    if (savedName) {
+      dashUserName.textContent = savedName;
+    }
 
-        } catch (e) {}
+  } catch (e) {}
+
+}
+
+
+/* PROFILE INITIALS */
+
+const profileName =
+  String(dashUserName.textContent || "").trim();
+
+const nameParts =
+  profileName
+    .split(/\s+/)
+    .filter(Boolean);
+
+let initials = "";
+
+if (nameParts.length === 1) {
+
+  initials =
+    nameParts[0]
+      .substring(0, 2)
+      .toUpperCase();
+
+} else if (nameParts.length > 1) {
+
+  initials =
+    (
+      nameParts[0].charAt(0) +
+      nameParts[nameParts.length - 1].charAt(0)
+    ).toUpperCase();
+
+}
+
+if (!initials) {
+  initials = "C";
+}
+
+dashProfileInitials.textContent = initials;
+
+dashProfileInitials.style.display = "flex";
+
+dashProfileImage.style.display = "none";
+
+
+/* CHECK COLUMN A PHOTO */
+
+try {
+
+  const savedEmail =
+    localStorage.getItem(REGISTRATION_EMAIL_KEY);
+
+  if (savedEmail) {
+
+    jsonp({
+      action: "getPhoto",
+      email: savedEmail
+    })
+    .then(function(data) {
+
+      if (
+        data &&
+        data.success === true &&
+        data.photo
+      ) {
+
+        dashProfileImage.src =
+          data.photo;
+
+        dashProfileImage.style.display =
+          "block";
+
+        dashProfileInitials.style.display =
+          "none";
 
       }
+
+    })
+    .catch(function(error) {
+
+      console.warn(
+        "Profile photo load error:",
+        error
+      );
+
+    });
+
+  }
+
+} catch (error) {
+
+  console.warn(
+    "Profile photo error:",
+    error
+  );
+
+}
 
 
 
