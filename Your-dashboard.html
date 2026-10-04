@@ -1635,45 +1635,6 @@
 
 
     }
-
-
-
-
-
-
-
-    .dash-camera-icon {
-
-
-
-      position: absolute; bottom: 5px; right: 5px;
-
-
-
-      background: #1d72e8; color: #fff;
-
-
-
-      width: 35px; height: 35px; border-radius: 50%;
-
-
-
-      display: flex; justify-content: center; align-items: center;
-
-
-
-      border: 3px solid #fff; font-size: 14px; cursor: pointer;
-
-
-
-    }
-
-
-
-
-
-
-
     .dash-profile-section h2 {
 
 
@@ -2014,11 +1975,11 @@
 
 
 
-          src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?ixlib=rb-4.0.3&auto=format&fit=crop&w=200&q=80"
-
-
-
           alt="Profile"
+
+
+
+          style="display:none;"
 
 
 
@@ -2026,7 +1987,6 @@
 
 
 
-        <div class="dash-camera-icon"></div>
 
 
 
@@ -2034,7 +1994,7 @@
 
 
 
-      <h2 id="dashUserName">Rohit Kumar</h2>
+      <h2 id="dashUserName"></h2>
 
 
 
@@ -3586,7 +3546,7 @@
 
 
 
-      "https://script.google.com/macros/s/AKfycbzZKvsFF3DGOr6zzpaThdQy_7wmCGM6cnJ2TxLq7JDrKTTt5zYDko7tiLuVr-i_Ihc/exec";
+      "https://script.google.com/macros/s/AKfycbwxUPfcZXJsFYTHLSq80UWisMr5ZBzPJu9fy1KTZqFfCvi8pKyy09UzcOLlte-xBPAR/exec";
 
 
 
@@ -5954,15 +5914,23 @@
 
 
 
-    function showDashboard(name) {
+    function getProfileInitials(name) {
 
 
 
-      if (name) {
+      const words = String(name || "Customer").trim().split(/\s+/).filter(Boolean);
 
 
 
-        dashUserName.textContent = name;
+      let initials = "";
+
+
+
+      if (words.length === 1) {
+
+
+
+        initials = words[0].substring(0, 2).toUpperCase();
 
 
 
@@ -5970,15 +5938,243 @@
 
 
 
+        initials = (
+
+
+
+          words[0].charAt(0) +
+
+
+
+          words[words.length - 1].charAt(0)
+
+
+
+        ).toUpperCase();
+
+
+
+      }
+
+
+
+      return initials || "C";
+
+
+
+    }
+
+
+
+
+
+
+
+    function renderDashboardInitials(name) {
+
+
+
+      const initials = getProfileInitials(name);
+
+
+
+      const svg =
+
+
+
+        '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">' +
+
+
+
+        '<rect width="160" height="160" rx="80" fill="#087fdb"/>' +
+
+
+
+        '<text x="80" y="98" text-anchor="middle" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="white">' +
+
+
+
+        initials +
+
+
+
+        '</text></svg>';
+
+
+
+      dashProfileImage.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
+
+
+
+      dashProfileImage.alt = name || "Profile";
+
+
+
+      dashProfileImage.style.display = "block";
+
+
+
+    }
+
+
+
+
+
+
+
+    async function loadDashboardPhoto(name) {
+
+
+
+      const profileName = String(name || dashUserName.textContent || "Customer").trim();
+
+
+
+      renderDashboardInitials(profileName);
+
+
+
+      dashProfileImage.dataset.photo = "";
+
+
+
+
+
+
+
+      let email = "";
+
+
+
+      try {
+
+
+
+        email = (localStorage.getItem(REGISTRATION_EMAIL_KEY) || "").trim().toLowerCase();
+
+
+
+      } catch (e) {}
+
+
+
+
+
+
+
+      if (!email) return;
+
+
+
+      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
+
+
+
+
+
+
+
+      try {
+
+
+
+        const data = await jsonp({
+
+
+
+          action: "getPhoto",
+
+
+
+          email: email
+
+
+
+        });
+
+
+
+
+
+
+
+        if (data && data.success === true && data.photo) {
+
+
+
+          const photo = String(data.photo).trim();
+
+
+
+          dashProfileImage.src = photo;
+
+
+
+          dashProfileImage.dataset.photo = photo;
+
+
+
+          dashProfileImage.alt = profileName || "Profile photo";
+
+
+
+          dashProfileImage.style.display = "block";
+
+
+
+        } else {
+
+
+
+          renderDashboardInitials(profileName);
+
+
+
+        }
+
+
+
+      } catch (error) {
+
+
+
+        console.warn("Dashboard photo load error:", error);
+
+
+
+        renderDashboardInitials(profileName);
+
+
+
+      }
+
+
+
+    }
+
+
+
+
+
+
+
+    function showDashboard(name) {
+
+
+
+      let dashboardName = String(name || "").trim();
+
+
+
+      if (!dashboardName) {
+
+
+
         try {
 
 
 
-          const savedName = localStorage.getItem(REGISTRATION_NAME_KEY);
-
-
-
-          if (savedName) dashUserName.textContent = savedName;
+          dashboardName = (localStorage.getItem(REGISTRATION_NAME_KEY) || "").trim();
 
 
 
@@ -5987,6 +6183,18 @@
 
 
       }
+
+
+
+
+
+
+
+      dashUserName.textContent = dashboardName || "Customer";
+
+
+
+      loadDashboardPhoto(dashboardName || "Customer");
 
 
 
@@ -6842,23 +7050,7 @@
 
 
 
-      const words = String(name || "C").trim().split(/\s+/).filter(Boolean);
-
-
-
-      let initials = words.slice(0, 2).map(function(w) {
-
-
-
-        return w.charAt(0).toUpperCase();
-
-
-
-      }).join("");
-
-
-
-      if (!initials) initials = "C";
+      const initials = getProfileInitials(name);
 
 
 
