@@ -1635,6 +1635,13 @@
 
 
     }
+
+
+
+
+
+
+
     .dash-profile-section h2 {
 
 
@@ -1984,9 +1991,6 @@
 
 
         >
-
-
-
 
 
 
@@ -3546,7 +3550,7 @@
 
 
 
-      "https://script.google.com/macros/s/AKfycbwxUPfcZXJsFYTHLSq80UWisMr5ZBzPJu9fy1KTZqFfCvi8pKyy09UzcOLlte-xBPAR/exec";
+      "https://script.google.com/macros/s/AKfycbx7XZhmSzwdayX2piWacALysKidyOERtF-mRWW_S8SKty4ZWMCDQ-aZtO-KaOtsB4bS/exec";
 
 
 
@@ -5916,245 +5920,55 @@
 
     function getProfileInitials(name) {
 
-
-
       const words = String(name || "Customer").trim().split(/\s+/).filter(Boolean);
-
-
-
-      let initials = "";
-
-
-
-      if (words.length === 1) {
-
-
-
-        initials = words[0].substring(0, 2).toUpperCase();
-
-
-
-      } else {
-
-
-
-        initials = (
-
-
-
-          words[0].charAt(0) +
-
-
-
-          words[words.length - 1].charAt(0)
-
-
-
-        ).toUpperCase();
-
-
-
-      }
-
-
-
-      return initials || "C";
-
-
+      if (words.length === 1) return words[0].substring(0, 2).toUpperCase() || "C";
+      return (words[0].charAt(0) + words[words.length - 1].charAt(0)).toUpperCase() || "C";
 
     }
-
-
-
-
 
 
 
     function renderDashboardInitials(name) {
 
-
-
       const initials = getProfileInitials(name);
-
-
-
       const svg =
-
-
-
         '<svg xmlns="http://www.w3.org/2000/svg" width="160" height="160" viewBox="0 0 160 160">' +
-
-
-
         '<rect width="160" height="160" rx="80" fill="#087fdb"/>' +
-
-
-
         '<text x="80" y="98" text-anchor="middle" font-family="Arial,sans-serif" font-size="54" font-weight="700" fill="white">' +
-
-
-
         initials +
-
-
-
         '</text></svg>';
-
-
-
       dashProfileImage.src = "data:image/svg+xml;charset=UTF-8," + encodeURIComponent(svg);
-
-
-
       dashProfileImage.alt = name || "Profile";
-
-
-
       dashProfileImage.style.display = "block";
 
-
-
     }
-
-
-
-
 
 
 
     async function loadDashboardPhoto(name) {
 
-
-
       const profileName = String(name || dashUserName.textContent || "Customer").trim();
-
-
-
       renderDashboardInitials(profileName);
-
-
-
-      dashProfileImage.dataset.photo = "";
-
-
-
-
-
-
-
       let email = "";
-
-
-
       try {
-
-
-
         email = (localStorage.getItem(REGISTRATION_EMAIL_KEY) || "").trim().toLowerCase();
-
-
-
       } catch (e) {}
-
-
-
-
-
-
-
-      if (!email) return;
-
-
-
-      if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
-
-
-
-
-
-
-
+      if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) return;
       try {
-
-
-
-        const data = await jsonp({
-
-
-
-          action: "getPhoto",
-
-
-
-          email: email
-
-
-
-        });
-
-
-
-
-
-
-
+        const data = await jsonp({ action: "getPhoto", email: email });
         if (data && data.success === true && data.photo) {
-
-
-
-          const photo = String(data.photo).trim();
-
-
-
-          dashProfileImage.src = photo;
-
-
-
-          dashProfileImage.dataset.photo = photo;
-
-
-
+          dashProfileImage.src = String(data.photo).trim();
           dashProfileImage.alt = profileName || "Profile photo";
-
-
-
           dashProfileImage.style.display = "block";
-
-
-
         } else {
-
-
-
           renderDashboardInitials(profileName);
-
-
-
         }
-
-
-
       } catch (error) {
-
-
-
         console.warn("Dashboard photo load error:", error);
-
-
-
         renderDashboardInitials(profileName);
-
-
-
       }
 
-
-
     }
-
-
-
-
 
 
 
@@ -6186,19 +6000,11 @@
 
 
 
-
-
-
-
       dashUserName.textContent = dashboardName || "Customer";
 
 
 
       loadDashboardPhoto(dashboardName || "Customer");
-
-
-
-
 
 
 
@@ -7050,11 +6856,7 @@
 
 
 
-      const initials = getProfileInitials(name);
-
-
-
-      payoutAvatar.textContent = initials;
+      payoutAvatar.textContent = getProfileInitials(name);
 
 
 
