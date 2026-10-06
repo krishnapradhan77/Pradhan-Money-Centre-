@@ -1538,113 +1538,166 @@
 
 
 
-    /* DASHBOARD UI — PROFESSIONAL WORK FROM HOME / e-KYC */
+    /* DASHBOARD UI (NEW) */
+
     .dashboard-screen {
-      display:none;
-      position:relative;
-      overflow:hidden;
-      width:100%;
-      max-width:1180px;
-      min-height:650px;
-      margin:0 auto;
-      padding:38px 38px 30px;
-      border-radius:32px;
-      background:
-        radial-gradient(circle at 7% 15%, rgba(40,151,255,.12), transparent 25%),
-        radial-gradient(circle at 94% 82%, rgba(22,190,151,.11), transparent 27%),
-        linear-gradient(135deg,#f7fbff 0%,#ffffff 48%,#f4fcfa 100%);
-      border:1px solid rgba(255,255,255,.96);
-      box-shadow:0 28px 80px rgba(22,55,82,.14);
+      display:none; width:100%; max-width:1180px; min-height:650px;
+      margin:0 auto; position:relative; overflow:hidden;
+      padding:32px; border-radius:30px;
+      background:linear-gradient(135deg,#f8fcff 0%,#ffffff 52%,#f3fcf9 100%);
+      box-shadow:0 22px 65px rgba(31,71,98,.13);
     }
-    .dashboard-screen.show{display:block;animation:fadeIn .4s ease}
+    .dashboard-screen.show { display:block; animation:fadeIn .4s ease; }
 
-    .dashboard-screen::before,
-    .dashboard-screen::after{content:"";position:absolute;pointer-events:none;border-radius:50%}
-    .dashboard-screen::before{width:420px;height:230px;left:-180px;top:-115px;background:rgba(54,166,242,.10);transform:rotate(-18deg)}
-    .dashboard-screen::after{width:430px;height:240px;right:-180px;bottom:-125px;background:rgba(42,203,164,.09);transform:rotate(-18deg)}
-
-    .dashboard-layout{
-      position:relative;z-index:2;
-      display:grid;
-      grid-template-columns:minmax(230px,1fr) 400px minmax(230px,1fr);
-      align-items:center;
-      gap:34px;
-      min-height:580px;
+    /* Decorative professional WFH + e-KYC background */
+    .dashboard-bg-art {
+      position:absolute; inset:0; pointer-events:none; overflow:hidden;
     }
-
-    .dash-side-art{position:relative;height:500px;display:flex;align-items:center;justify-content:center;pointer-events:none}
-    .dash-side-art svg{width:100%;max-width:310px;height:auto;overflow:visible}
-    .dash-side-copy{position:absolute;left:50%;transform:translateX(-50%);bottom:24px;width:260px;text-align:center}
-    .dash-side-copy strong{display:block;color:#173b61;font-size:13px;font-weight:800;letter-spacing:.4px}
-    .dash-side-copy span{display:block;margin-top:5px;color:#70849a;font-size:11px;line-height:1.5}
-
-    .dash-center-panel{
-      position:relative;
-      width:100%;
-      padding:28px 24px 25px;
-      border-radius:28px;
-      background:rgba(255,255,255,.90);
-      border:1px solid rgba(213,229,239,.9);
-      box-shadow:0 22px 55px rgba(30,77,106,.12), inset 0 1px 0 #fff;
-      backdrop-filter:blur(12px);
+    .dashboard-bg-art .dash-orb {
+      position:absolute; border-radius:50%; filter:blur(1px);
     }
-    .dash-security-line{display:flex;align-items:center;justify-content:center;gap:7px;margin-bottom:18px;color:#1688d1;font-size:10px;font-weight:800;letter-spacing:1.1px;text-transform:uppercase}
-    .dash-security-dot{width:7px;height:7px;border-radius:50%;background:#19b889;box-shadow:0 0 0 4px rgba(25,184,137,.10)}
-
-    .dash-profile-section{display:flex;flex-direction:column;align-items:center;margin:0 0 25px;padding:0;background:none;border:0;box-shadow:none}
-    .dash-profile-image-container{position:relative;width:112px;height:112px;margin-bottom:14px}
-    .dash-profile-image-container::before{content:"";position:absolute;inset:-8px;border-radius:50%;background:linear-gradient(135deg,rgba(28,145,229,.16),rgba(24,190,149,.13));filter:blur(1px)}
-    .dash-profile-image-container::after{content:"✓";position:absolute;right:-2px;bottom:2px;width:27px;height:27px;border-radius:50%;display:flex;align-items:center;justify-content:center;background:#18b88a;color:white;border:3px solid white;font-size:12px;font-weight:900;box-shadow:0 5px 14px rgba(24,184,138,.22)}
-    .dash-profile-image-container img{position:relative;width:100%;height:100%;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 10px 25px rgba(22,74,106,.16)}
-    .dash-profile-section h2{margin:0 0 5px;color:#122b49;font-size:22px;font-weight:850;letter-spacing:-.2px}
-    .dash-profile-section p{margin:0;color:#72849a;font-size:12px;font-weight:600}
-
-    .dashboard-cards{display:flex;flex-direction:column;gap:12px}
-    .dash-card{display:flex;align-items:center;justify-content:space-between;min-height:86px;padding:17px 18px;border-radius:18px;cursor:pointer;transition:transform .2s ease,box-shadow .2s ease;border:1px solid transparent}
-    .dash-card:hover{transform:translateY(-2px);box-shadow:0 12px 26px rgba(27,78,105,.13)}
-    .card-claim-dash{background:linear-gradient(135deg,#168fe3,#19c8aa);color:#fff;box-shadow:0 10px 24px rgba(24,160,206,.18)}
-    .card-payout-dash{background:linear-gradient(135deg,#fff3c8,#ffe7a0);color:#16304e;border-color:#f5dfa1}
-    .dash-card-left{display:flex;align-items:center;gap:13px}
-    .dash-icon-box{width:48px;height:48px;border-radius:14px;display:flex;justify-content:center;align-items:center;font-size:22px;flex-shrink:0}
-    .card-claim-dash .dash-icon-box{background:rgba(255,255,255,.18);color:#fff}
-    .card-payout-dash .dash-icon-box{background:#f8c94d;color:#263c55}
-    .dash-card-text h3{margin:0 0 4px;font-size:15px;font-weight:800}
-    .dash-card-text p{margin:0;font-size:11px;opacity:.88}
-    .dash-arrow-btn{width:32px;height:32px;background:#fff;border-radius:50%;display:flex;justify-content:center;align-items:center;font-size:19px;flex-shrink:0;box-shadow:0 4px 12px rgba(0,0,0,.07)}
-    .card-claim-dash .dash-arrow-btn{color:#168fe3}.card-payout-dash .dash-arrow-btn{color:#263c55}
-
-    .dashboard-features{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px;padding-top:15px;border-top:1px solid #e8eff4}
-    .dashboard-feature{display:flex;align-items:center;gap:7px;color:#617990;font-size:9px;font-weight:750;white-space:nowrap}
-    .dashboard-feature-icon{width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;border-radius:7px;background:#f2f8fc;color:#1688d1;font-size:11px}
-    .dashboard-tagline{margin:16px 0 0;text-align:center;color:#1688d1;font-size:11px;font-weight:800;letter-spacing:.3px}
-
-    @media (max-width:900px){
-      .dashboard-screen{max-width:720px;padding:26px 22px}
-      .dashboard-layout{grid-template-columns:1fr;gap:0;min-height:auto}
-      .dash-side-art{display:none}
-      .dash-center-panel{max-width:400px;margin:0 auto}
+    .dashboard-bg-art .orb-left {
+      width:420px; height:420px; left:-210px; top:-155px;
+      background:radial-gradient(circle,rgba(46,158,230,.13),rgba(46,158,230,0) 68%);
     }
-    @media (max-width:480px){
-      .dashboard-screen{width:100%;min-height:auto;padding:12px;border-radius:22px}
-      .dash-center-panel{padding:23px 16px 19px;border-radius:22px}
-      .dash-profile-image-container{width:102px;height:102px}
-      .dash-profile-section h2{font-size:20px}
-      .dash-card{min-height:80px;padding:15px;border-radius:16px}
-      .dash-icon-box{width:43px;height:43px;border-radius:12px}
-      .dash-card-left{gap:10px}.dash-card-text h3{font-size:14px}.dash-card-text p{font-size:10px}
-      .dashboard-feature{font-size:8.5px}
+    .dashboard-bg-art .orb-right {
+      width:470px; height:470px; right:-230px; bottom:-220px;
+      background:radial-gradient(circle,rgba(22,190,151,.12),rgba(22,190,151,0) 68%);
+    }
+    .dashboard-bg-art .dash-wave {
+      position:absolute; width:620px; height:210px; left:-120px; bottom:-125px;
+      border-radius:50%; border:1px solid rgba(69,166,220,.13); transform:rotate(-10deg);
+    }
+    .dashboard-bg-art .dash-wave.right { left:auto; right:-180px; top:-105px; bottom:auto; transform:rotate(12deg); border-color:rgba(32,184,146,.13); }
+
+    .dashboard-bg-illustration {
+      position:absolute; width:290px; height:290px; opacity:.78;
+    }
+    .dashboard-bg-illustration.left { left:28px; bottom:32px; }
+    .dashboard-bg-illustration.right { right:28px; top:25px; }
+    .dashboard-bg-illustration svg { width:100%; height:100%; display:block; }
+
+    .dashboard-main {
+      position:relative; z-index:2; width:400px; max-width:100%;
+      margin:0 auto; padding:27px 20px 23px;
+      border-radius:27px; background:rgba(255,255,255,.91);
+      border:1px solid rgba(215,231,239,.9);
+      box-shadow:0 18px 48px rgba(31,71,98,.12);
+      backdrop-filter:blur(10px);
+    }
+    .dashboard-main::before {
+      content:"SECURE e-KYC"; display:block; text-align:center;
+      margin:-2px 0 18px; color:#1687cf; font-size:9px; font-weight:800;
+      letter-spacing:1.7px;
+    }
+    .dash-profile-section {
+      display:flex; flex-direction:column; align-items:center;
+      margin:0 0 25px;
+    }
+    .dash-profile-image-container {
+      position:relative; width:112px; height:112px; margin-bottom:14px;
+    }
+    .dash-profile-image-container::before {
+      content:""; position:absolute; inset:-7px; border-radius:50%;
+      background:linear-gradient(135deg,rgba(8,127,219,.13),rgba(10,191,122,.12));
+    }
+    .dash-profile-image-container img {
+      position:relative; width:100%; height:100%; border-radius:50%;
+      object-fit:cover; border:4px solid #fff;
+      box-shadow:0 8px 22px rgba(0,0,0,.12);
+    }
+    .dash-profile-section h2 {
+      color:#111c44; font-size:22px; font-weight:700; margin:0 0 5px;
+    }
+    .dash-profile-section p {
+      color:#64748b; font-size:13px; font-weight:500; margin:0;
+    }
+    .dashboard-cards { display:flex; flex-direction:column; gap:13px; }
+    .dash-card {
+      display:flex; align-items:center; justify-content:space-between;
+      padding:18px; border-radius:18px; cursor:pointer; transition:.2s;
+    }
+    .dash-card:hover { transform:translateY(-2px); box-shadow:0 8px 20px rgba(0,0,0,.1); }
+    .card-claim-dash { background:linear-gradient(135deg,#2498e6,#22c9ac); color:#fff; }
+    .card-payout-dash { background:linear-gradient(135deg,#fff1c7,#ffe6a0); color:#111c44; }
+    .dash-card-left { display:flex; align-items:center; gap:14px; }
+    .dash-icon-box {
+      width:48px; height:48px; border-radius:14px; display:flex;
+      justify-content:center; align-items:center; font-size:23px; flex-shrink:0;
+    }
+    .card-claim-dash .dash-icon-box { background:rgba(255,255,255,.2); color:#fff; }
+    .card-payout-dash .dash-icon-box { background:#f7c752; color:#fff; }
+    .dash-card-text h3 { font-size:15px; font-weight:700; margin:0 0 4px; }
+    .dash-card-text p { font-size:11px; opacity:.9; margin:0; }
+    .dash-arrow-btn {
+      width:31px; height:31px; background:#fff; border-radius:50%;
+      display:flex; justify-content:center; align-items:center; font-size:17px;
+    }
+    .card-claim-dash .dash-arrow-btn { color:#1d72e8; }
+    .card-payout-dash .dash-arrow-btn { color:#111c44; }
+    .dashboard-trust {
+      display:grid; grid-template-columns:1fr 1fr; gap:8px;
+      margin-top:15px; padding-top:14px; border-top:1px solid #e7eef3;
+    }
+    .dashboard-trust span {
+      text-align:center; color:#64748b; font-size:9px; font-weight:700;
+    }
+    .dashboard-trust b { color:#1687cf; margin-right:3px; }
+
+    @media (max-width:900px) {
+      .dashboard-screen { max-width:620px; min-height:auto; padding:22px; }
+      .dashboard-bg-illustration { opacity:.22; transform:scale(.85); }
+      .dashboard-bg-illustration.left { left:-55px; bottom:-45px; }
+      .dashboard-bg-illustration.right { right:-55px; top:-45px; }
+    }
+    @media (max-width:480px) {
+      .dashboard-screen { width:100%; min-height:auto; padding:10px; border-radius:22px; }
+      .dashboard-main { padding:23px 15px 19px; border-radius:22px; }
+      .dash-profile-image-container { width:102px; height:102px; }
+      .dashboard-bg-illustration { display:none; }
+      .dash-card { padding:15px; border-radius:16px; }
+      .dash-icon-box { width:43px; height:43px; border-radius:12px; }
     }
 
     .back-to-dashboard-btn {
+
+
+
       width: 100%; height: 46px; margin-bottom: 18px;
+
+
+
       border: 1px solid #dbe4ec; border-radius: 13px;
+
+
+
       cursor: pointer; color: #475569; background: #f7fafc;
+
+
+
       font-size: 14px; font-weight: 700; transition: .2s;
+
+
+
     }
 
+
+
+
+
+
+
     .back-to-dashboard-btn:hover {
+
+
+
       background: #eef4f8; border-color: #cbd5e1;
+
+
+
     }
+
+
 
   </style>
 
@@ -1663,110 +1716,93 @@
 
 
   <!-- DASHBOARD SCREEN (NEW) -->
+
   <div id="dashboardScreen" class="dashboard-screen">
-    <div class="dashboard-layout">
 
-      <!-- Professional WFH / desktop-side illustration -->
-      <div class="dash-side-art" aria-hidden="true">
-        <svg viewBox="0 0 340 470" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="deskG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#dff3ff"/><stop offset="1" stop-color="#f5fffd"/></linearGradient>
-            <linearGradient id="screenG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2c9eea"/><stop offset="1" stop-color="#13c6a4"/></linearGradient>
-          </defs>
-          <ellipse cx="170" cy="395" rx="145" ry="25" fill="#dcebf3" opacity=".55"/>
-          <rect x="43" y="155" width="235" height="145" rx="15" fill="#d5e4ec" transform="rotate(-4 43 155)"/>
-          <rect x="55" y="166" width="211" height="116" rx="8" fill="#183b58" transform="rotate(-4 55 166)"/>
-          <rect x="67" y="177" width="187" height="92" rx="5" fill="url(#screenG)" transform="rotate(-4 67 177)"/>
-          <circle cx="87" cy="195" r="7" fill="#fff" opacity=".8"/>
-          <rect x="103" y="189" width="78" height="9" rx="4.5" fill="#fff" opacity=".7"/>
-          <rect x="84" y="215" width="145" height="32" rx="8" fill="#fff" opacity=".88"/>
-          <circle cx="104" cy="231" r="9" fill="#bfeeff"/>
-          <path d="M99 231l4 4 8-9" fill="none" stroke="#18b88a" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <rect x="29" y="303" width="270" height="13" rx="6.5" fill="#b8cbd6"/>
-          <path d="M69 317h190l-18 22H87z" fill="url(#deskG)"/>
-          <rect x="235" y="236" width="48" height="88" rx="10" fill="#173d5b"/>
-          <rect x="240" y="244" width="38" height="68" rx="7" fill="#eefaff"/>
-          <circle cx="259" cy="262" r="10" fill="#2b9fe8" opacity=".2"/>
-          <path d="M253 263c4-7 10-7 13 0M251 275c7-5 14-5 17 0" fill="none" stroke="#18b88a" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="264" cy="295" r="5" fill="#18b88a"/>
-          <path d="M32 360c18-28 38-33 55-8" fill="none" stroke="#9bd6bb" stroke-width="12" stroke-linecap="round" opacity=".65"/>
-          <path d="M278 356c10-25 24-32 37-10" fill="none" stroke="#9bd6bb" stroke-width="10" stroke-linecap="round" opacity=".55"/>
-          <rect x="95" y="355" width="118" height="11" rx="5.5" fill="#b9cfd9" opacity=".65"/>
+    <div class="dashboard-bg-art" aria-hidden="true">
+      <span class="dash-orb orb-left"></span>
+      <span class="dash-orb orb-right"></span>
+      <span class="dash-wave"></span>
+      <span class="dash-wave right"></span>
+
+      <div class="dashboard-bg-illustration left">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <rect x="35" y="95" width="190" height="112" rx="12" fill="#dbeaf2"/>
+          <rect x="45" y="105" width="170" height="88" rx="7" fill="#17415f"/>
+          <rect x="54" y="114" width="152" height="70" rx="5" fill="#eaf8ff"/>
+          <rect x="72" y="130" width="65" height="8" rx="4" fill="#b8dcec"/>
+          <rect x="72" y="147" width="105" height="6" rx="3" fill="#d4e9f1"/>
+          <circle cx="184" cy="164" r="11" fill="#20b98a"/>
+          <path d="m179 164 4 4 8-9" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round"/>
+          <path d="M18 210h224l-18 20H36z" fill="#c6d7df"/>
+          <rect x="211" y="137" width="43" height="78" rx="10" fill="#173d5a"/>
+          <rect x="216" y="145" width="33" height="61" rx="6" fill="#effbff"/>
+          <circle cx="232" cy="166" r="10" fill="#d9f1ff"/>
+          <circle cx="232" cy="166" r="5" fill="#2996dc"/>
+          <circle cx="241" cy="194" r="5" fill="#20b98a"/>
+          <ellipse cx="130" cy="245" rx="110" ry="13" fill="#dceaf1" opacity=".6"/>
         </svg>
-        <div class="dash-side-copy"><strong>Work From Home</strong><span>Secure client work from laptop, phone or desktop.</span></div>
       </div>
 
-      <!-- Existing functional dashboard panel -->
-      <div class="dash-center-panel">
-        <div class="dash-security-line"><span class="dash-security-dot"></span> Secure e-KYC Client Portal</div>
-
-        <div class="dash-profile-section">
-          <div class="dash-profile-image-container">
-            <img id="dashProfileImage" alt="Profile" style="display:none;">
-          </div>
-          <h2 id="dashUserName"></h2>
-          <p>Your Dashboard</p>
-        </div>
-
-        <div class="dashboard-cards">
-          <div class="dash-card card-claim-dash" onclick="openClaimPortal()">
-            <div class="dash-card-left">
-              <div class="dash-icon-box">📄</div>
-              <div class="dash-card-text"><h3>Claim Your Portal</h3><p>Search &amp; claim your client</p></div>
-            </div>
-            <div class="dash-arrow-btn">›</div>
-          </div>
-
-          <div class="dash-card card-payout-dash" onclick="openPayoutFromDashboard()">
-            <div class="dash-card-left">
-              <div class="dash-icon-box">💰</div>
-              <div class="dash-card-text"><h3>Get Payout</h3><p>View &amp; request payout</p></div>
-            </div>
-            <div class="dash-arrow-btn">›</div>
-          </div>
-        </div>
-
-        <div class="dashboard-features" aria-label="Portal benefits">
-          <div class="dashboard-feature"><span class="dashboard-feature-icon">🛡</span>Safe &amp; Secure</div>
-          <div class="dashboard-feature"><span class="dashboard-feature-icon">⚡</span>Fast Process</div>
-          <div class="dashboard-feature"><span class="dashboard-feature-icon">⌂</span>Work From Home</div>
-          <div class="dashboard-feature"><span class="dashboard-feature-icon">▣</span>Laptop | Phone | Desktop</div>
-        </div>
-        <div class="dashboard-tagline">Secure Identity • Better Tomorrow</div>
-      </div>
-
-      <!-- Professional e-KYC / identity illustration -->
-      <div class="dash-side-art" aria-hidden="true">
-        <svg viewBox="0 0 340 470" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <linearGradient id="phoneG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#1d9bea"/><stop offset="1" stop-color="#17b994"/></linearGradient>
-          </defs>
-          <circle cx="170" cy="230" r="128" fill="none" stroke="#a8ddf4" stroke-width="2" stroke-dasharray="6 8"/>
-          <circle cx="170" cy="230" r="105" fill="#f1fbff"/>
-          <rect x="112" y="87" width="116" height="245" rx="22" fill="#183c5a"/>
-          <rect x="119" y="95" width="102" height="228" rx="17" fill="#f5fcff"/>
-          <rect x="151" y="102" width="38" height="5" rx="2.5" fill="#c9dce7"/>
-          <circle cx="170" cy="177" r="42" fill="#d9f1ff"/>
-          <circle cx="170" cy="166" r="15" fill="#2c91d4"/>
-          <path d="M144 203c8-21 44-21 52 0" fill="#2c91d4"/>
-          <path d="M139 145h62v76h-62z" fill="none" stroke="#1c9be9" stroke-width="3" stroke-linecap="round" stroke-dasharray="9 7"/>
-          <circle cx="213" cy="221" r="16" fill="#18b88a" stroke="#fff" stroke-width="4"/>
-          <path d="m206 221 5 5 10-11" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-          <text x="170" y="258" text-anchor="middle" font-family="Arial,sans-serif" font-size="16" font-weight="800" fill="#1789d3">e-KYC</text>
-          <rect x="142" y="276" width="56" height="6" rx="3" fill="#c8e0eb"/>
-          <rect x="132" y="289" width="76" height="5" rx="2.5" fill="#dbe9ef"/>
-          <path d="M170 32l37 15v27c0 25-16 44-37 54-21-10-37-29-37-54V47z" fill="url(#phoneG)" opacity=".98"/>
-          <path d="m154 70 11 11 22-25" fill="none" stroke="#fff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-          <circle cx="72" cy="190" r="38" fill="#fff" stroke="#d4eaf4" stroke-width="2"/>
-          <path d="M72 168c-14 0-25 11-25 25 0 7 2 13 6 18M72 174c-10 0-18 8-18 18 0 6 1 11 3 16M72 180c-6 0-11 5-11 12 0 8-1 14-4 20M84 191c0-7-5-12-12-12M91 191c0-11-9-20-20-20M91 201c0 11-5 22-12 31" fill="none" stroke="#2199df" stroke-width="3" stroke-linecap="round"/>
-          <rect x="253" y="169" width="55" height="43" rx="12" fill="#fff" stroke="#d4eaf4" stroke-width="2"/>
-          <circle cx="271" cy="184" r="7" fill="#dff4ff" stroke="#2398df" stroke-width="2"/>
-          <path d="M284 181h15M284 190h11M263 196h36" stroke="#9ab6c7" stroke-width="3" stroke-linecap="round"/>
-          <circle cx="274" cy="360" r="8" fill="#18b88a" opacity=".8"/><circle cx="296" cy="345" r="5" fill="#2b9fe8" opacity=".65"/><circle cx="51" cy="335" r="6" fill="#2b9fe8" opacity=".55"/>
+      <div class="dashboard-bg-illustration right">
+        <svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="150" cy="150" r="105" fill="none" stroke="#a8dcef" stroke-width="2" stroke-dasharray="6 8"/>
+          <rect x="105" y="65" width="90" height="175" rx="18" fill="#173d5a"/>
+          <rect x="111" y="72" width="78" height="161" rx="14" fill="#f3fbff"/>
+          <circle cx="150" cy="135" r="31" fill="#d9f1ff"/>
+          <circle cx="150" cy="127" r="11" fill="#2996dc"/>
+          <path d="M130 151c6-17 34-17 40 0" fill="#2996dc"/>
+          <path d="M123 108h54v70h-54z" fill="none" stroke="#2996dc" stroke-width="2" stroke-dasharray="7 5"/>
+          <circle cx="178" cy="173" r="12" fill="#20b98a" stroke="#fff" stroke-width="3"/>
+          <path d="m173 173 4 4 7-8" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round"/>
+          <text x="150" y="202" text-anchor="middle" font-family="Arial,sans-serif" font-size="13" font-weight="800" fill="#1687cf">e-KYC</text>
+          <path d="M150 20l30 12v22c0 19-13 34-30 43-17-9-30-24-30-43V32z" fill="#168fd5"/>
+          <path d="m137 48 9 9 18-20" fill="none" stroke="#fff" stroke-width="5" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="57" cy="143" r="29" fill="#fff" stroke="#d5eaf3"/>
+          <path d="M57 127c-10 0-18 8-18 18 0 6 2 11 5 15M57 133c-7 0-12 5-12 12 0 5 1 9 2 13M57 140c-4 0-7 3-7 8 0 7-1 12-3 17M68 145c0-6-5-11-11-11M74 145c0-10-8-17-17-17" fill="none" stroke="#2797dc" stroke-width="2.5" stroke-linecap="round"/>
         </svg>
-        <div class="dash-side-copy"><strong>Digital Identity Verification</strong><span>Fast, secure and designed for modern e-KYC workflows.</span></div>
+      </div>
+    </div>
+
+    <div class="dashboard-main">
+      <div class="dash-profile-section">
+        <div class="dash-profile-image-container">
+          <img id="dashProfileImage" alt="Profile" style="display:none;">
+        </div>
+        <h2 id="dashUserName"></h2>
+        <p>Your Dashboard</p>
       </div>
 
+      <div class="dashboard-cards">
+        <div class="dash-card card-claim-dash" onclick="openClaimPortal()">
+          <div class="dash-card-left">
+            <div class="dash-icon-box">📄</div>
+            <div class="dash-card-text">
+              <h3>Claim Your Portal</h3>
+              <p>Search &amp; claim your client</p>
+            </div>
+          </div>
+          <div class="dash-arrow-btn">›</div>
+        </div>
+
+        <div class="dash-card card-payout-dash" onclick="openPayoutFromDashboard()">
+          <div class="dash-card-left">
+            <div class="dash-icon-box">💰</div>
+            <div class="dash-card-text">
+              <h3>Get Payout</h3>
+              <p>View &amp; request payout</p>
+            </div>
+          </div>
+          <div class="dash-arrow-btn">›</div>
+        </div>
+      </div>
+
+      <div class="dashboard-trust">
+        <span><b>✓</b> Safe &amp; Secure</span>
+        <span><b>⚡</b> Fast Process</span>
+        <span><b>⌂</b> Work From Home</span>
+        <span><b>▣</b> Laptop | Phone | Desktop</span>
+      </div>
     </div>
   </div>
 
@@ -3207,7 +3243,7 @@
 
 
 
-      "https://script.google.com/macros/s/AKfycbx7XZhmSzwdayX2piWacALysKidyOERtF-mRWW_S8SKty4ZWMCDQ-aZtO-KaOtsB4bS/exec";
+      "https://script.google.com/macros/s/AKfycbzXTVQWQ4EPsRrMnMFMcxvz9A01OfoIRQifxfb5qVwHyTzfhoLyD7g0oID8w2pxaCS4/exec";
 
 
 
