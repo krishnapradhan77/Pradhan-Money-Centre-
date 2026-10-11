@@ -2942,6 +2942,24 @@
 
 
 
+    .payout-claims-section {
+      margin-top: 20px; padding: 18px; border: 1px solid #e1e7ef;
+      border-radius: 18px; background: #ffffff; text-align: left;
+    }
+    .payout-claims-title { margin: 0 0 10px; color: #172b4d; font-size: 17px; font-weight: 800; }
+    .payout-claims-info { margin: 0 0 14px; padding: 10px 12px; border-radius: 10px; background: #eef6ff; color: #315b84; font-size: 12px; line-height: 1.5; }
+    .payout-company-block { margin-top: 14px; border: 1px solid #e6ebf2; border-radius: 12px; overflow: hidden; }
+    .payout-company-name { padding: 10px 12px; background: #f3f6fa; color: #243b53; font-weight: 800; font-size: 13px; }
+    .payout-claims-table-wrap { overflow-x: auto; }
+    .payout-claims-table { width: 100%; border-collapse: collapse; min-width: 410px; font-size: 12px; }
+    .payout-claims-table th, .payout-claims-table td { padding: 9px 8px; border-bottom: 1px solid #edf0f4; text-align: left; vertical-align: top; }
+    .payout-claims-table th { color: #526273; background: #fafbfd; font-weight: 700; }
+    .payout-claim-status { display: inline-block; border-radius: 999px; padding: 4px 7px; white-space: nowrap; font-size: 10px; font-weight: 800; }
+    .payout-claim-status.single { color: #137333; background: #e6f4ea; }
+    .payout-claim-status.multiple { color: #b3261e; background: #fce8e6; }
+    .payout-multiple-warning { margin-top: 10px; padding: 10px 12px; border-radius: 10px; background: #fff4e5; color: #8a4b08; font-size: 12px; font-weight: 700; }
+    .payout-claims-empty { padding: 12px 2px; color: #68778a; font-size: 13px; }
+
     .payout-email-small {
 
 
@@ -6952,13 +6970,13 @@
 
           <div id="payoutEmailSmall" class="payout-email-small"></div>
 
-
-
-
-
-
-
         </div>
+
+        <section id="payoutClaimsSection" class="payout-claims-section" aria-live="polite">
+          <h3 class="payout-claims-title">Your Claimed Client Codes</h3>
+          <div class="payout-claims-info">Your claim details update automatically while this window is open.</div>
+          <div id="payoutClaimsContent" class="payout-claims-content"><div class="payout-claims-empty">Loading your claims…</div></div>
+        </section>
 
 
 
@@ -7102,7 +7120,7 @@
 
 
 
-      "https://script.google.com/macros/s/AKfycbzXTVQWQ4EPsRrMnMFMcxvz9A01OfoIRQifxfb5qVwHyTzfhoLyD7g0oID8w2pxaCS4/exec";
+      "https://script.google.com/macros/s/AKfycbzStM4mwBkx4APyEPtbH8H_z2LO0MctGsE8vfh7MsA4U9tjU2nmMDNMnHWGxWywzalo/exec";
 
 
 
@@ -12387,6 +12405,9 @@
 
 
     const payoutEmailSmall = document.getElementById("payoutEmailSmall");
+    const payoutClaimsContent = document.getElementById("payoutClaimsContent");
+    let payoutSessionToken = "";
+    let payoutClaimsPollTimer = null;
 
 
 
@@ -12466,6 +12487,8 @@
 
 
 
+      stopPayoutClaimsPolling();
+      payoutSessionToken = "";
       payoutOverlay.classList.remove("show");
 
 
@@ -13331,13 +13354,8 @@
 
 
           renderPayoutProfile(data);
-
-
-
-
-
-
-
+          payoutSessionToken = String(data.payoutToken || "");
+          renderPayoutClaims(data.claims || { companies: [], totalClaims: 0 });
           payoutOtpStep.style.display = "none";
 
 
@@ -13355,13 +13373,7 @@
 
 
           showPayoutMessage("Email verified successfully.", "success");
-
-
-
-
-
-
-
+          if (payoutSessionToken) { loadPayoutClaims(); startPayoutClaimsPolling(); }
           return;
 
 
@@ -13489,6 +13501,54 @@
 
 
 
+
+    function stopPayoutClaimsPolling() {
+      if (payoutClaimsPollTimer) { clearInterval(payoutClaimsPollTimer); payoutClaimsPollTimer = null; }
+    }
+
+    function startPayoutClaimsPolling() {
+      stopPayoutClaimsPolling();
+      payoutClaimsPollTimer = setInterval(loadPayoutClaims, 5000);
+    }
+
+    async function loadPayoutClaims() {
+      if (!payoutSessionToken || !payoutOverlay.classList.contains("show")) return;
+      try {
+        const data = await jsonp({ action: "getPayoutClaims", token: payoutSessionToken });
+        if (data && data.success) renderPayoutClaims(data.claims || { companies: [], totalClaims: 0 });
+        else if (data && data.expired) { stopPayoutClaimsPolling(); payoutClaimsContent.textContent = "Verification session expired. Please verify your email again."; }
+      } catch (error) { console.warn("Could not refresh payout claims:", error); }
+    }
+
+    function renderPayoutClaims(summary) {
+      if (!payoutClaimsContent) return;
+      payoutClaimsContent.innerHTML = "";
+      const companies = Array.isArray(summary.companies) ? summary.companies : [];
+      if (!companies.length) {
+        const empty = document.createElement("div"); empty.className = "payout-claims-empty";
+        empty.textContent = "You have not claimed any client codes yet."; payoutClaimsContent.appendChild(empty); return;
+      }
+      companies.forEach(function(company) {
+        const block = document.createElement("div"); block.className = "payout-company-block";
+        const heading = document.createElement("div"); heading.className = "payout-company-name"; heading.textContent = company.company || "Company"; block.appendChild(heading);
+        const wrap = document.createElement("div"); wrap.className = "payout-claims-table-wrap";
+        const table = document.createElement("table"); table.className = "payout-claims-table";
+        const thead = document.createElement("thead"); const headRow = document.createElement("tr");
+        ["Client Code", "Claim Status", "Users"].forEach(function(label) { const th = document.createElement("th"); th.textContent = label; headRow.appendChild(th); });
+        thead.appendChild(headRow); table.appendChild(thead);
+        const tbody = document.createElement("tbody"); let hasMultiple = false;
+        (Array.isArray(company.items) ? company.items : []).forEach(function(item) {
+          const tr = document.createElement("tr"); const code = document.createElement("td"); code.textContent = item.clientCode || "—"; tr.appendChild(code);
+          const statusCell = document.createElement("td"); const pill = document.createElement("span");
+          const multiple = item.claimStatus === "Multiple Claim"; hasMultiple = hasMultiple || multiple;
+          pill.className = "payout-claim-status " + (multiple ? "multiple" : "single"); pill.textContent = item.claimStatus || "Single Claim"; statusCell.appendChild(pill); tr.appendChild(statusCell);
+          const users = document.createElement("td"); users.textContent = String(item.users == null ? 1 : item.users); tr.appendChild(users); tbody.appendChild(tr);
+        });
+        table.appendChild(tbody); wrap.appendChild(table); block.appendChild(wrap);
+        if (hasMultiple) { const warning = document.createElement("div"); warning.className = "payout-multiple-warning"; warning.textContent = "Multiple Claim: this client code has been claimed by more than one user."; block.appendChild(warning); }
+        payoutClaimsContent.appendChild(block);
+      });
+    }
 
     function renderPayoutProfile(data) {
 
@@ -13746,6 +13806,9 @@
 
 
 
+      stopPayoutClaimsPolling();
+      payoutSessionToken = "";
+      if (payoutClaimsContent) payoutClaimsContent.innerHTML = '<div class="payout-claims-empty">Verify your email to view claimed client codes.</div>';
       payoutEmailStep.style.display = "block";
 
 
