@@ -1,89 +1,137 @@
 <!doctype html>
 <html lang="en">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#b80f1c">
-<title>Pizza Hut | Bistupur, Jamshedpur</title>
-<style>
-:root{--red:#b80f1c;--red2:#e21d2b;--ink:#191919;--muted:#6c6c6c;--cream:#fffaf3;--line:#eee5dc;--green:#16834a}
-*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Inter,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif;color:var(--ink);background:#fff}a{color:inherit;text-decoration:none}button,input,select,textarea{font:inherit}.wrap{width:min(1160px,92%);margin:auto}
-.topbar{background:#181818;color:#fff;font-size:12px;padding:9px 0}.topbar .wrap{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap}
-header{position:sticky;top:0;z-index:10;background:#fffdfb;border-bottom:1px solid #f0e8e2;box-shadow:0 5px 22px #28140c0a}.nav{height:76px;display:flex;align-items:center;justify-content:space-between;gap:20px}.brand{display:flex;align-items:center;gap:10px;font-weight:950;letter-spacing:-1px;font-size:22px}.brand-mark{display:grid;place-items:center;width:43px;height:43px;background:var(--red);color:white;border-radius:13px;font-size:22px;box-shadow:0 7px 16px #b80f1c35}.brand small{display:block;font-size:10px;letter-spacing:2px;color:var(--muted);font-weight:800;margin-top:1px}.navlinks{display:flex;gap:25px;font-size:14px;font-weight:750}.navlinks a:hover{color:var(--red)}.nav-actions{display:flex;align-items:center;gap:10px}.pill{border:0;border-radius:999px;padding:12px 17px;font-weight:850;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;transition:.2s}.pill:hover{transform:translateY(-2px)}.primary{background:var(--red);color:#fff;box-shadow:0 8px 18px #b80f1c2c}.outline{background:#fff;border:1px solid var(--line)}.cart-pill{background:#fff0f0;color:var(--red)}.cart-count{background:var(--red);color:white;border-radius:50%;font-size:11px;width:20px;height:20px;display:grid;place-items:center}
-.hero{background:radial-gradient(circle at 80% 25%,#ffddbf 0,transparent 28%),linear-gradient(115deg,#fff8ee,#fff 60%);overflow:hidden;position:relative}.hero-grid{min-height:520px;display:grid;grid-template-columns:1.02fr .98fr;align-items:center;gap:25px;padding:50px 0}.eyebrow{display:inline-flex;gap:8px;align-items:center;background:#fff;border:1px solid #f2d8d0;color:var(--red);border-radius:999px;padding:8px 13px;font-size:12px;font-weight:900;letter-spacing:.4px}.eyebrow span{width:7px;height:7px;background:#23a35a;border-radius:50%}.hero h1{font-size:clamp(42px,5.5vw,70px);line-height:.99;letter-spacing:-3.4px;margin:22px 0 17px;max-width:590px}.hero h1 em{font-style:normal;color:var(--red)}.hero p{color:#666;line-height:1.75;font-size:16px;max-width:490px}.hero-buttons{display:flex;gap:12px;flex-wrap:wrap;margin:26px 0}.trust{display:flex;gap:22px;flex-wrap:wrap;color:#555;font-size:12px;font-weight:800}.trust b{color:#171717}.hero-art{position:relative;min-height:390px;display:grid;place-items:center}.pizza-photo{width:min(100%,490px);aspect-ratio:1/1;border-radius:50%;object-fit:cover;filter:drop-shadow(0 25px 25px #7c3a2430);border:10px solid #fff;box-shadow:0 0 0 1px #f4e1d4}.floating-card{position:absolute;background:#fff;border:1px solid #f1e5dc;border-radius:18px;padding:14px 17px;box-shadow:0 15px 35px #51230f16;font-size:12px;font-weight:800}.floating-card strong{display:block;font-size:17px;margin-top:4px}.float-left{left:-2px;bottom:46px}.float-right{right:0;top:35px}.section{padding:76px 0}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:28px}.kicker{color:var(--red);font-size:11px;font-weight:950;letter-spacing:2px;text-transform:uppercase}.section h2{font-size:clamp(30px,4vw,43px);letter-spacing:-1.7px;line-height:1.1;margin:9px 0}.sub{color:var(--muted);line-height:1.7;margin:0}.category-row{display:flex;gap:9px;flex-wrap:wrap;margin:20px 0 25px}.chip{padding:10px 15px;border-radius:999px;background:#fff;border:1px solid var(--line);cursor:pointer;font-weight:800;font-size:13px}.chip.active,.chip:hover{background:var(--red);color:#fff;border-color:var(--red)}
-.menu-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.food-card{border:1px solid #eee5de;border-radius:22px;overflow:hidden;background:white;transition:.25s;position:relative}.food-card:hover{transform:translateY(-5px);box-shadow:0 20px 40px #37180c12}.food-img{height:205px;width:100%;object-fit:cover;background:#f5eee7;display:block}.food-info{padding:18px}.food-top{display:flex;justify-content:space-between;gap:10px;align-items:start}.food-info h3{font-size:17px;margin:0 0 7px;letter-spacing:-.4px}.food-info p{font-size:12px;line-height:1.55;color:var(--muted);margin:0 0 17px;min-height:38px}.price{font-weight:950;font-size:19px;white-space:nowrap}.food-bottom{display:flex;align-items:center;justify-content:space-between;gap:10px}.veg{font-size:10px;font-weight:850;color:var(--green);display:flex;align-items:center;gap:5px}.veg:before{content:"";width:8px;height:8px;border:1px solid var(--green);background:#1d9c58;border-radius:2px}.add{width:40px;height:40px;border-radius:13px;background:#fff0f0;border:0;color:var(--red);font-size:24px;font-weight:600;cursor:pointer}.add:hover{background:var(--red);color:#fff}.badge{position:absolute;top:13px;left:13px;background:#fff;border-radius:999px;padding:7px 10px;font-size:10px;font-weight:950;box-shadow:0 5px 12px #0001}
-.promo{background:#191919;color:#fff;border-radius:28px;padding:38px;display:grid;grid-template-columns:1.3fr .7fr;align-items:center;gap:20px;overflow:hidden;position:relative}.promo:after{content:"🍕";font-size:180px;position:absolute;right:30px;bottom:-35px;opacity:.15;transform:rotate(-18deg)}.promo h2{font-size:clamp(27px,4vw,42px);letter-spacing:-1.5px;margin:9px 0 12px}.promo p{color:#c8c8c8;max-width:520px;line-height:1.7}.promo .pill{position:relative;z-index:1;justify-self:start}
-.gallery-grid{display:grid;grid-template-columns:1.2fr 1fr 1fr;grid-template-rows:190px 190px;gap:14px}.gallery-grid img{width:100%;height:100%;object-fit:cover;border-radius:20px}.gallery-grid img:first-child{grid-row:span 2}
-.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}.info-card{padding:28px;border:1px solid var(--line);border-radius:22px;background:#fffdfb}.info-card h3{margin:0 0 13px;font-size:20px}.info-line{display:flex;gap:12px;margin:15px 0;color:#5d5d5d;font-size:14px;line-height:1.6}.info-line b{color:#191919}.map-box{border-radius:22px;overflow:hidden;min-height:280px;background:#f5eee7}.map-box iframe{border:0;width:100%;height:100%;min-height:280px}
-footer{background:#181818;color:white;padding:38px 0}.foot{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}.foot p{color:#aaa;font-size:12px;line-height:1.7}.foot a{color:#fff}
-.cart-drawer{position:fixed;z-index:30;right:0;top:0;height:100dvh;width:min(440px,100%);background:#fff;box-shadow:-20px 0 60px #0002;transform:translateX(105%);transition:.28s;display:flex;flex-direction:column}.cart-drawer.open{transform:translateX(0)}.drawer-head{padding:23px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}.drawer-head h2{margin:0;font-size:22px}.close{border:0;background:#f5f5f5;border-radius:50%;width:38px;height:38px;font-size:22px;cursor:pointer}.cart-items{padding:16px 22px;overflow:auto;flex:1}.empty{color:#777;text-align:center;padding:50px 10px;line-height:1.7}.cart-row{display:flex;justify-content:space-between;gap:15px;padding:14px 0;border-bottom:1px solid var(--line)}.cart-row h4{margin:0 0 5px}.cart-row small{color:#777}.qty{display:flex;align-items:center;gap:10px;margin-top:9px}.qty button{border:1px solid var(--line);background:white;border-radius:8px;width:28px;height:28px;cursor:pointer}.drawer-foot{padding:20px 22px;border-top:1px solid var(--line);background:#fff}.total{display:flex;justify-content:space-between;font-size:18px;font-weight:950;margin-bottom:15px}.drawer-foot .pill{width:100%;margin-bottom:9px}.modal-backdrop{position:fixed;inset:0;background:#17171780;z-index:40;display:none;place-items:center;padding:18px}.modal-backdrop.open{display:grid}.modal{width:min(520px,100%);background:#fff;border-radius:24px;padding:25px;max-height:92dvh;overflow:auto}.modal-head{display:flex;justify-content:space-between;align-items:center}.modal h2{margin:0 0 15px}.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}.field{display:flex;flex-direction:column;gap:7px;margin-bottom:13px}.field.full{grid-column:1/-1}.field label{font-size:12px;font-weight:850}.field input,.field select,.field textarea{width:100%;border:1px solid #e5ddd6;border-radius:12px;padding:12px;background:#fff}.field textarea{min-height:75px;resize:vertical}.fineprint{font-size:11px;color:#777;line-height:1.6}.toast{position:fixed;bottom:22px;left:50%;transform:translate(-50%,120px);background:#191919;color:#fff;padding:13px 18px;border-radius:999px;font-size:13px;z-index:60;transition:.25s;box-shadow:0 8px 30px #0002}.toast.show{transform:translate(-50%,0)}
-@media(max-width:800px){.navlinks{display:none}.hero-grid{grid-template-columns:1fr;padding:42px 0 30px}.hero-art{min-height:320px;order:-1}.pizza-photo{max-width:320px}.float-left{left:0;bottom:20px}.float-right{right:0;top:15px}.hero h1{letter-spacing:-2px}.menu-grid{grid-template-columns:repeat(2,1fr)}.promo{grid-template-columns:1fr;padding:28px}.promo:after{right:0;font-size:120px}.gallery-grid{grid-template-columns:1fr 1fr;grid-template-rows:160px 160px 160px}.gallery-grid img:first-child{grid-row:span 2}.gallery-grid img:last-child{grid-column:span 2}.info-grid{grid-template-columns:1fr}.section{padding:55px 0}}
-@media(max-width:520px){.topbar .wrap{justify-content:center}.nav{height:66px}.brand{font-size:18px}.brand-mark{width:37px;height:37px}.nav-actions .outline{display:none}.pill{padding:11px 14px}.hero-art{min-height:280px}.pizza-photo{max-width:270px}.hero h1{font-size:45px}.menu-grid{grid-template-columns:1fr 1fr;gap:10px}.food-img{height:135px}.food-info{padding:12px}.food-info h3{font-size:14px}.food-info p{font-size:11px;min-height:48px}.price{font-size:16px}.food-bottom{align-items:center}.food-card .add{width:34px;height:34px}.section-head{align-items:start;flex-direction:column}.gallery-grid{gap:8px}.gallery-grid img{border-radius:13px}.form-grid{grid-template-columns:1fr}.field.full{grid-column:auto}.promo{border-radius:20px}}
-</style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#11100f">
+  <meta name="description" content="Discover Aurous Restro Lounge in Bistupur, Jamshedpur. Find the location and plan your visit.">
+  <title>Aurous Restro Lounge | Bistupur, Jamshedpur</title>
+  <style>
+    :root{--bg:#11100f;--panel:#1b1916;--gold:#d8b477;--cream:#f7f1e7;--muted:#c3b9aa;--line:rgba(216,180,119,.25)}
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{margin:0;background:var(--bg);color:var(--cream);font-family:Inter,ui-sans-serif,system-ui,-apple-system,"Segoe UI",sans-serif;line-height:1.6}
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(1120px,92%);margin:auto}
+    header{position:absolute;inset:0 0 auto;z-index:2;border-bottom:1px solid rgba(255,255,255,.12)}
+    .nav{display:flex;align-items:center;justify-content:space-between;gap:18px;padding:20px 0}
+    .brand{font-size:1.05rem;letter-spacing:.18em;font-weight:800}
+    .brand span{display:block;font-size:.65rem;color:var(--gold);letter-spacing:.32em;font-weight:600}
+    .navlinks{display:flex;gap:24px;color:#eee5d8;font-size:.9rem}
+    .navlinks a:hover{color:var(--gold)}
+    .hero{min-height:690px;display:flex;align-items:center;position:relative;overflow:hidden;background:radial-gradient(ellipse at 76% 34%,rgba(150,90,39,.34),transparent 36%),linear-gradient(115deg,#11100f 15%,rgba(17,16,15,.88) 53%,rgba(17,16,15,.65)),url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1800&q=85') center/cover}
+    .hero:after{content:"";position:absolute;inset:auto 0 0;height:160px;background:linear-gradient(transparent,var(--bg))}
+    .hero-content{position:relative;z-index:1;padding:130px 0 95px;max-width:720px}
+    .eyebrow{color:var(--gold);letter-spacing:.28em;text-transform:uppercase;font-size:.75rem;font-weight:700}
+    h1{font-family:Georgia,"Times New Roman",serif;font-weight:500;font-size:clamp(3rem,8vw,6.4rem);line-height:.98;letter-spacing:-.04em;margin:20px 0}
+    h1 em{font-weight:400;color:var(--gold)}
+    .hero p{color:#e2d8cb;max-width:540px;font-size:1.08rem}
+    .actions{display:flex;gap:13px;flex-wrap:wrap;margin-top:30px}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:13px 21px;border:1px solid var(--gold);border-radius:3px;font-weight:750;font-size:.9rem;transition:.2s}
+    .btn.primary{background:var(--gold);color:#17120b}
+    .btn:hover{transform:translateY(-2px);filter:brightness(1.08)}
+    .trustline{display:flex;gap:22px;flex-wrap:wrap;margin-top:35px;color:#d3c6b5;font-size:.84rem}
+    .trustline span:before{content:"✦";color:var(--gold);margin-right:8px}
+    section{padding:82px 0}
+    .section-head{max-width:650px;margin-bottom:32px}
+    h2{font:500 clamp(2.1rem,4vw,3.4rem)/1.1 Georgia,"Times New Roman",serif;margin:10px 0 15px}
+    .section-head p,.muted{color:var(--muted)}
+    .intro-grid{display:grid;grid-template-columns:1fr 1fr;gap:42px;align-items:center}
+    .photo{min-height:390px;border:1px solid var(--line);background:url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85') center/cover;border-radius:4px}
+    .intro-copy{padding:10px 0}
+    .rule{width:70px;height:2px;background:var(--gold);margin:24px 0}
+    .feature-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+    .feature{padding:27px;background:var(--panel);border:1px solid var(--line);min-height:180px}
+    .feature .num{color:var(--gold);font-size:.75rem;letter-spacing:.15em}
+    .feature h3{font:500 1.45rem Georgia,serif;margin:13px 0 8px}
+    .feature p{color:var(--muted);font-size:.94rem;margin:0}
+    .visit{background:#191713}
+    .visit-grid{display:grid;grid-template-columns:1fr 1fr;gap:30px;align-items:stretch}
+    .visit-card{padding:32px;background:var(--bg);border:1px solid var(--line)}
+    .visit-card h3{font:500 1.6rem Georgia,serif;margin:0 0 14px}
+    .address{color:var(--muted);margin-bottom:22px}
+    .mapbox{min-height:310px;background:linear-gradient(135deg,#29251e,#151412);display:flex;align-items:center;justify-content:center;text-align:center;padding:28px;border:1px solid var(--line)}
+    .pin{font-size:2.3rem;color:var(--gold)}
+    footer{padding:28px 0;border-top:1px solid var(--line);color:#b7aa99;font-size:.82rem}
+    .footer-row{display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap}
+    @media(max-width:720px){.navlinks{gap:13px;font-size:.8rem}.navlinks a:nth-child(2){display:none}.hero{min-height:650px;background-position:58% center}.intro-grid,.visit-grid{grid-template-columns:1fr}.photo{min-height:280px}.feature-grid{grid-template-columns:1fr}.feature{min-height:0}section{padding:62px 0}.brand{font-size:.9rem}}
+  </style>
 </head>
 <body>
-<div class="topbar"><div class="wrap"><span>🍕 Freshly baked. Made with love.</span><span>📍 P&M Hi-Tech City Centre, Bistupur, Jamshedpur</span></div></div>
-<header><div class="wrap nav">
-<a class="brand" href="#home"><span class="brand-mark">P!</span><span>Pizza Hut<small>BISTUPUR · JAMSHEDPUR</small></span></a>
-<nav class="navlinks"><a href="#menu">Menu</a><a href="#gallery">Food Gallery</a><a href="#about">Our Story</a><a href="#visit">Find Us</a></nav>
-<div class="nav-actions"><a class="pill outline" href="#visit">📍 Location</a><button class="pill cart-pill" onclick="openCart()">🛒 <span id="nav-total">₹0</span> <span class="cart-count" id="cart-count">0</span></button></div>
-</div></header>
+<header>
+  <div class="wrap nav">
+    <a class="brand" href="#home">AUROUS<span>RESTRO LOUNGE</span></a>
+    <nav class="navlinks" aria-label="Main navigation">
+      <a href="#about">About</a><a href="#experience">Experience</a><a href="#visit">Find Us</a>
+    </nav>
+  </div>
+</header>
 <main>
-<section class="hero" id="home"><div class="wrap hero-grid">
-<div><span class="eyebrow"><span></span> YOUR PIZZA MOMENT STARTS HERE</span><h1>Good times.<br><em>Great pizza.</em></h1><p>Bring everyone to the table with delicious pizza favourites, flavour-packed sides and sweet treats. Your next happy meal is just a few taps away.</p>
-<div class="hero-buttons"><a class="pill primary" href="#menu">Explore the Menu <span>→</span></a><button class="pill outline" onclick="openCart()">🛍️ Start an Order</button></div>
-<div class="trust"><span>✓ Made to order</span><span>✓ Family favourites</span><span>✓ Pickup & dine-in</span></div></div>
-<div class="hero-art"><img class="pizza-photo" src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=1000&q=90" alt="Freshly baked pizza"><div class="floating-card float-left">⭐ CUSTOMER FAVOURITE<strong>Pizza night, sorted</strong></div><div class="floating-card float-right">🔥 MADE FRESH<strong>Every single order</strong></div></div>
-</div></section>
-<section class="section" id="menu"><div class="wrap"><div class="section-head"><div><div class="kicker">A little something for everyone</div><h2>Explore the menu</h2><p class="sub">Pick your favourites and add them to your cart.</p></div><button class="pill outline" onclick="openCart()">View Cart 🛒</button></div>
-<div class="category-row" id="categories"><button class="chip active" data-cat="All">All favourites</button><button class="chip" data-cat="Pizza">Pizza</button><button class="chip" data-cat="Sides">Sides</button><button class="chip" data-cat="Dessert">Desserts</button><button class="chip" data-cat="Drinks">Drinks</button></div>
-<div class="menu-grid" id="menu-grid"></div>
-<p class="fineprint" style="margin-top:18px">Menu names, images and prices shown here are sample placeholders for this website concept. Confirm the branch's current menu, availability and prices before publishing.</p>
-</div></section>
-<section class="section" style="background:var(--cream)"><div class="wrap"><div class="promo"><div><div class="kicker" style="color:#ff9ca3">GOOD FOOD. GOOD MOOD.</div><h2>Make tonight a<br>pizza night.</h2><p>Build your order, add your delivery or pickup details, and send it to WhatsApp in one simple step.</p></div><button class="pill primary" onclick="openCart()">Build your order →</button></div></div></section>
-<section class="section" id="gallery"><div class="wrap"><div class="section-head"><div><div class="kicker">Made for the camera (and your appetite)</div><h2>Food gallery</h2><p class="sub">A visual taste of the good stuff.</p></div></div>
-<div class="gallery-grid"><img src="https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=900&q=85" alt="Pizza with fresh toppings" loading="lazy"><img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=85" alt="Cheesy pizza" loading="lazy"><img src="https://images.unsplash.com/photo-1571407970349-bc81e7e96d47?auto=format&fit=crop&w=700&q=85" alt="Pizza on a table" loading="lazy"><img src="https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=85" alt="Fresh pizza" loading="lazy"><img src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=700&q=85" alt="Pizza ready to share" loading="lazy"></div></div></section>
-<section class="section" id="about"><div class="wrap"><div class="section-head"><div><div class="kicker">Your neighbourhood pizza stop</div><h2>Made for sharing.</h2><p class="sub">From a quick bite to a full table, make room for a favourite.</p></div></div><div class="info-grid"><div class="info-card"><h3>🍕 A little more joy in every bite</h3><p class="sub">Gather your people, choose your favourites and enjoy a meal worth slowing down for. Visit us in Bistupur or use the order builder to prepare your WhatsApp order.</p><div class="info-line"><span>✓</span><span><b>Choose your favourites</b><br>Browse menu categories and add items to your cart.</span></div><div class="info-line"><span>✓</span><span><b>Pickup or delivery request</b><br>Tell us how you'd like to receive your order.</span></div><div class="info-line"><span>✓</span><span><b>Send through WhatsApp</b><br>Your order summary is prepared for you to review and send.</span></div></div>
-<div class="map-box" id="visit"><iframe title="Pizza Hut Bistupur map" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=Pizza%20Hut%20P%26M%20Hi-Tech%20City%20Centre%20Bistupur%20Jamshedpur&t=&z=15&ie=UTF8&iwloc=&output=embed"></iframe></div></div>
-<div class="info-grid" style="margin-top:20px"><div class="info-card"><h3>📍 Visit the restaurant</h3><div class="info-line"><span>📌</span><span><b>Pizza Hut — P&M Hi-Tech City Centre</b><br>Bistupur, Jamshedpur, Jharkhand</span></div><div class="info-line"><span>🕒</span><span><b>Hours</b><br>Please check current opening hours on Google Maps before visiting.</span></div><a class="pill primary" target="_blank" rel="noopener" href="https://maps.app.goo.gl/TNayVYsQwKQDaBAG9?g_st=ac">Get Directions ↗</a></div><div class="info-card"><h3>💬 Ready to order?</h3><p class="sub" style="margin-bottom:18px">Add your favourites to the cart and send the order summary using WhatsApp.</p><button class="pill primary" onclick="openCart()">Order on WhatsApp →</button><p class="fineprint" style="margin-top:13px">This demo prepares a WhatsApp message; it does not confirm restaurant acceptance, delivery availability or payment.</p></div></div>
-</div></section>
+  <section class="hero" id="home">
+    <div class="wrap hero-content">
+      <div class="eyebrow">Bistupur · Jamshedpur</div>
+      <h1>A place to<br><em>unwind.</em></h1>
+      <p>Make room for good conversations, relaxed evenings and memorable moments at Aurous Restro Lounge.</p>
+      <div class="actions">
+        <a class="btn primary" href="https://maps.app.goo.gl/4BBioGPsAf3Cgwg7A" target="_blank" rel="noopener">Get Directions ↗</a>
+        <a class="btn" href="#visit">Location & Details</a>
+      </div>
+      <div class="trustline"><span>Restro Lounge</span><span>Central Bistupur</span><span>Jamshedpur, Jharkhand</span></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <div class="wrap intro-grid">
+      <div class="photo" role="img" aria-label="Restaurant interior atmosphere"></div>
+      <div class="intro-copy">
+        <div class="eyebrow">Welcome to Aurous</div>
+        <h2>Good food. Good company. Your kind of evening.</h2>
+        <div class="rule"></div>
+        <p class="muted">Set in the heart of Bistupur, Aurous Restro Lounge is a spot to meet friends, catch up and enjoy a change of pace. Use the directions link to find the venue and plan your visit.</p>
+        <a class="btn" href="https://maps.app.goo.gl/4BBioGPsAf3Cgwg7A" target="_blank" rel="noopener">Open in Google Maps ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">The experience</div>
+        <h2>Make the moment yours.</h2>
+        <p>Whether you're planning a casual meet-up or an evening out, start with the location and discover the venue for yourself.</p>
+      </div>
+      <div class="feature-grid">
+        <article class="feature"><div class="num">01 / MEET</div><h3>Meet & connect</h3><p>A welcoming setting for catching up with friends and spending time together.</p></article>
+        <article class="feature"><div class="num">02 / UNWIND</div><h3>Take a pause</h3><p>Step away from the everyday routine and make time for a relaxed outing.</p></article>
+        <article class="feature"><div class="num">03 / VISIT</div><h3>Find your way</h3><p>Open Google Maps for the venue location and route guidance from your device.</p></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit" id="visit">
+    <div class="wrap">
+      <div class="section-head">
+        <div class="eyebrow">Plan your visit</div>
+        <h2>Find us in Bistupur.</h2>
+        <p>Tap the button to view the location in Google Maps and get directions.</p>
+      </div>
+      <div class="visit-grid">
+        <div class="visit-card">
+          <h3>Aurous Restro Lounge</h3>
+          <div class="address">1st Floor, Aurous Restro Lounge, Shangrilla Tower,<br>Bistupur Main Road, beside Bharat Cycle Store,<br>South Park, Bistupur, Jamshedpur,<br>Jharkhand 831001, India</div>
+          <a class="btn primary" href="https://maps.app.goo.gl/4BBioGPsAf3Cgwg7A" target="_blank" rel="noopener">Get Directions ↗</a>
+          <p class="muted" style="font-size:.85rem;margin-top:20px">Opening hours, menu and contact details have not been added because they weren't provided.</p>
+        </div>
+        <a class="mapbox" href="https://maps.app.goo.gl/4BBioGPsAf3Cgwg7A" target="_blank" rel="noopener" aria-label="Open Aurous Restro Lounge in Google Maps">
+          <div><div class="pin">⌖</div><h3>Open Google Maps</h3><p class="muted">View the venue and get your route</p><span class="btn">View Map ↗</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
 </main>
-<footer><div class="wrap foot"><div class="brand"><span class="brand-mark">P!</span><span>Pizza Hut<small style="color:#bbb">BISTUPUR · JAMSHEDPUR</small></span></div><div><p>Restaurant website concept · Menu and pricing need verification.</p><p>© <span id="year"></span> · Made for pizza lovers.</p></div><a href="#home">Back to top ↑</a></div></footer>
-<div class="cart-drawer" id="cart-drawer" aria-label="Shopping cart"><div class="drawer-head"><h2>Your order <span style="color:var(--red)" id="drawer-count">(0)</span></h2><button class="close" onclick="closeCart()" aria-label="Close cart">×</button></div><div class="cart-items" id="cart-items"></div><div class="drawer-foot"><div class="total"><span>Subtotal</span><span id="cart-subtotal">₹0</span></div><button class="pill primary" onclick="checkout()">Continue to order →</button><button class="pill outline" onclick="closeCart()">Keep browsing</button><p class="fineprint">Taxes, delivery fees and final prices may differ. Your order is not placed until the restaurant confirms it.</p></div></div>
-<div class="modal-backdrop" id="checkout-modal"><div class="modal"><div class="modal-head"><h2>Order details</h2><button class="close" onclick="closeCheckout()">×</button></div><form id="order-form"><div class="form-grid">
-<div class="field"><label for="customer-name">Your name *</label><input id="customer-name" required placeholder="Full name"></div>
-<div class="field"><label for="customer-phone">Mobile number *</label><input id="customer-phone" required inputmode="tel" pattern="[0-9 +()-]{10,16}" placeholder="Phone number"></div>
-<div class="field"><label for="order-type">Order type *</label><select id="order-type"><option>Pickup</option><option>Delivery request</option><option>Dine-in</option></select></div>
-<div class="field"><label for="payment">Payment preference</label><select id="payment"><option>Pay at restaurant</option><option>Cash on delivery (if available)</option><option>Online payment (confirm with restaurant)</option></select></div>
-<div class="field full"><label for="customer-address">Address / delivery details</label><textarea id="customer-address" placeholder="Required for delivery requests"></textarea></div>
-<div class="field full"><label for="customer-notes">Special instructions</label><textarea id="customer-notes" placeholder="Any preferences or notes?"></textarea></div>
-</div><p class="fineprint">When you tap below, WhatsApp opens with your order message. Review it and press Send. This page does not collect or store your details.</p><button class="pill primary" style="width:100%;margin-top:8px" type="submit">💬 Send order on WhatsApp</button></form></div></div>
-<div class="toast" id="toast"></div>
-<script>
-const products=[
-{id:1,name:"Margherita Pizza",cat:"Pizza",price:249,desc:"Classic cheese, tomato sauce and herbs.",img:"https://images.unsplash.com/photo-1579751626657-72bc17010498?auto=format&fit=crop&w=700&q=85",badge:"Classic"},
-{id:2,name:"Farmhouse Pizza",cat:"Pizza",price:399,desc:"A colourful mix of veggie toppings and cheese.",img:"https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=85",badge:"Popular"},
-{id:3,name:"Pepperoni Pizza",cat:"Pizza",price:449,desc:"A savoury, flavour-packed pizza favourite.",img:"https://images.unsplash.com/photo-1565299624946-b28f40a0ae38?auto=format&fit=crop&w=700&q=85",badge:"Fan favourite"},
-{id:4,name:"Cheese Garlic Bread",cat:"Sides",price:149,desc:"Toasty garlic bread with a cheesy finish.",img:"https://images.unsplash.com/photo-1619531040576-f94167406618?auto=format&fit=crop&w=700&q=85",badge:"Sidekick"},
-{id:5,name:"Loaded Potato Bites",cat:"Sides",price:129,desc:"Golden, crispy bites for the table.",img:"https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=700&q=85",badge:"Crunchy"},
-{id:6,name:"Chocolate Brownie",cat:"Dessert",price:119,desc:"A rich chocolate treat to finish your meal.",img:"https://images.unsplash.com/photo-1606313564200-e75d5e30476c?auto=format&fit=crop&w=700&q=85",badge:"Sweet"},
-{id:7,name:"Chilled Soft Drink",cat:"Drinks",price:79,desc:"A refreshing sip with your pizza.",img:"https://images.unsplash.com/photo-1581636625402-29b2a704ef13?auto=format&fit=crop&w=700&q=85",badge:"Refreshing"},
-{id:8,name:"Cheese Lovers Pizza",cat:"Pizza",price:429,desc:"A cheese-forward treat for serious cheese fans.",img:"https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?auto=format&fit=crop&w=700&q=85",badge:"Cheesy"},
-{id:9,name:"Chocolate Lava Cake",cat:"Dessert",price:139,desc:"A warm dessert-inspired chocolate indulgence.",img:"https://images.unsplash.com/photo-1624353365286-3f8d62daad51?auto=format&fit=crop&w=700&q=85",badge:"Treat yourself"}
-];
-let cart={};let activeCat="All";
-const rupees=n=>"₹"+n.toLocaleString("en-IN");
-function renderMenu(){const items=products.filter(p=>activeCat==="All"||p.cat===activeCat);document.getElementById("menu-grid").innerHTML=items.map(p=>`<article class="food-card"><span class="badge">${p.badge}</span><img class="food-img" src="${p.img}" alt="${p.name}" loading="lazy" onerror="this.src='https://images.unsplash.com/photo-1513104890138-7c749659a591?auto=format&fit=crop&w=700&q=80'"><div class="food-info"><div class="food-top"><div><h3>${p.name}</h3><span class="veg">Menu sample</span></div><span class="price">${rupees(p.price)}</span></div><p>${p.desc}</p><div class="food-bottom"><span style="font-size:11px;color:#777">Add to your order</span><button class="add" onclick="addToCart(${p.id})" aria-label="Add ${p.name}">+</button></div></div></article>`).join("")}
-document.querySelectorAll(".chip").forEach(b=>b.addEventListener("click",()=>{document.querySelectorAll(".chip").forEach(x=>x.classList.remove("active"));b.classList.add("active");activeCat=b.dataset.cat;renderMenu()}));
-function addToCart(id){cart[id]=(cart[id]||0)+1;renderCart();toast(products.find(p=>p.id===id).name+" added to cart")}
-function changeQty(id,delta){cart[id]=(cart[id]||0)+delta;if(cart[id]<=0)delete cart[id];renderCart()}
-function cartItems(){return products.filter(p=>cart[p.id])}
-function renderCart(){let count=Object.values(cart).reduce((a,b)=>a+b,0),sum=cartItems().reduce((a,p)=>a+p.price*cart[p.id],0);document.getElementById("cart-count").textContent=count;document.getElementById("drawer-count").textContent="("+count+")";document.getElementById("nav-total").textContent=rupees(sum);document.getElementById("cart-subtotal").textContent=rupees(sum);const box=document.getElementById("cart-items");box.innerHTML=count?cartItems().map(p=>`<div class="cart-row"><div><h4>${p.name}</h4><small>${rupees(p.price)} each</small><div class="qty"><button onclick="changeQty(${p.id},-1)">−</button><b>${cart[p.id]}</b><button onclick="changeQty(${p.id},1)">+</button></div></div><b>${rupees(p.price*cart[p.id])}</b></div>`).join(""):`<div class="empty"><div style="font-size:42px">🛒</div><b>Your cart is waiting for something tasty.</b><br>Add a few favourites from the menu.</div>`}
-function openCart(){document.getElementById("cart-drawer").classList.add("open")}function closeCart(){document.getElementById("cart-drawer").classList.remove("open")}
-function checkout(){if(!cartItems().length){toast("Add an item before continuing");return}document.getElementById("checkout-modal").classList.add("open")}
-function closeCheckout(){document.getElementById("checkout-modal").classList.remove("open")}
-document.getElementById("order-form").addEventListener("submit",e=>{e.preventDefault();if(!cartItems().length){toast("Your cart is empty");closeCheckout();return}const name=document.getElementById("customer-name").value.trim(),phone=document.getElementById("customer-phone").value.trim(),type=document.getElementById("order-type").value,payment=document.getElementById("payment").value,address=document.getElementById("customer-address").value.trim(),notes=document.getElementById("customer-notes").value.trim();if(type==="Delivery request"&&!address){toast("Please add delivery details");document.getElementById("customer-address").focus();return}const lines=cartItems().map(p=>`• ${p.name} x ${cart[p.id]} = ${rupees(p.price*cart[p.id])}`);const total=cartItems().reduce((a,p)=>a+p.price*cart[p.id],0);const msg=`Hello Pizza Hut Bistupur! I'd like to enquire about this order:\\n\\n${lines.join("\\n")}\\n\\nSubtotal (sample prices): ${rupees(total)}\\n\\nName: ${name}\\nMobile: ${phone}\\nOrder type: ${type}\\nPayment preference: ${payment}\\n${address?"Address/details: "+address+"\\n":""}${notes?"Instructions: "+notes+"\\n":""}\\nPlease confirm item availability, final price, fees and order acceptance. Thank you!`;window.open("https://wa.me/?text="+encodeURIComponent(msg),"_blank","noopener");closeCheckout();closeCart();toast("WhatsApp opened — choose the restaurant contact and send")});
-function toast(msg){const el=document.getElementById("toast");el.textContent=msg;el.classList.add("show");clearTimeout(window.toastTimer);window.toastTimer=setTimeout(()=>el.classList.remove("show"),2600)}
-document.getElementById("year").textContent=new Date().getFullYear();renderMenu();renderCart();
-</script>
-</body></html>
+<footer>
+  <div class="wrap footer-row"><span>© <span id="year">2026</span> Aurous Restro Lounge</span><span>Designed for mobile and desktop</span></div>
+</footer>
+<script>document.getElementById('year').textContent = new Date().getFullYear();</script>
+</body>
+</html>
