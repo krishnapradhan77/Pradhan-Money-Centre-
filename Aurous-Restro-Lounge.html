@@ -1,72 +1,537 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#11100f">
-<title>Aurous Restro Lounge | Order Online</title>
-<style>
-:root{--bg:#11100f;--panel:#1c1a17;--gold:#d8b477;--cream:#f7f1e7;--muted:#bdb3a5;--line:#3c3327;--green:#486b4b}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--cream);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}a{color:inherit}button,input,textarea,select{font:inherit}.wrap{width:min(1120px,92%);margin:auto}
-header{position:sticky;top:0;background:#11100fef;border-bottom:1px solid var(--line);z-index:5;backdrop-filter:blur(12px)}.nav{display:flex;align-items:center;justify-content:space-between;padding:16px 0;gap:15px}.logo{font-weight:850;letter-spacing:.13em}.logo small{display:block;font-size:.65rem;letter-spacing:.24em;color:var(--gold)}.nav a{text-decoration:none}
-.hero{padding:62px 0 48px;background:radial-gradient(ellipse at 80% 20%,#62451f66,transparent 45%),linear-gradient(120deg,#171512,#11100f)}.eyebrow{font-size:.72rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);font-weight:750}h1,h2,h3{font-family:Georgia,serif;font-weight:500}h1{font-size:clamp(2.7rem,7vw,5rem);line-height:1.02;margin:14px 0}h1 em{color:var(--gold)}.hero p{color:var(--muted);max-width:620px}.btn{display:inline-flex;border:1px solid var(--gold);padding:11px 16px;border-radius:4px;background:var(--gold);color:#17120b;font-weight:750;text-decoration:none;cursor:pointer;justify-content:center}.btn.secondary{background:transparent;color:var(--cream)}.section{padding:38px 0}.section-title{display:flex;justify-content:space-between;gap:18px;align-items:end;flex-wrap:wrap}.section-title h2{font-size:2.25rem;margin:7px 0}.categories{display:flex;gap:9px;overflow:auto;padding:14px 0 18px}.cat{border:1px solid var(--line);background:var(--panel);color:var(--cream);padding:9px 14px;border-radius:30px;white-space:nowrap;cursor:pointer}.cat.active{background:var(--gold);color:#17120b;border-color:var(--gold)}
-.layout{display:grid;grid-template-columns:minmax(0,1fr) 330px;gap:24px;align-items:start}.menu-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:15px}.item{border:1px solid var(--line);background:var(--panel);border-radius:7px;overflow:hidden}.food-img{height:160px;background:linear-gradient(135deg,#322a20,#191714);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:2rem}.food-img img{width:100%;height:100%;object-fit:cover;display:block}.item-body{padding:14px}.item h3{font-size:1.25rem;margin:0 0 5px}.item p{font-size:.85rem;color:var(--muted);min-height:40px;margin:0 0 12px}.item-foot{display:flex;align-items:center;justify-content:space-between;gap:8px}.price{font-weight:800}.add{background:transparent;border:1px solid var(--gold);color:var(--gold);padding:7px 12px;border-radius:4px;cursor:pointer;font-weight:750}.cart{border:1px solid var(--line);background:var(--panel);padding:18px;border-radius:7px;position:sticky;top:86px}.cart h2{margin:0 0 12px}.cart-empty{color:var(--muted);font-size:.9rem}.cart-row{display:grid;grid-template-columns:1fr auto;gap:8px;padding:11px 0;border-bottom:1px solid var(--line)}.qty{display:flex;align-items:center;gap:9px}.qty button{background:#30291f;color:var(--cream);border:1px solid var(--line);border-radius:4px;width:27px;height:27px;cursor:pointer}.totals{display:grid;gap:7px;margin:16px 0}.total-line{display:flex;justify-content:space-between;color:var(--muted);font-size:.92rem}.total-line.final{font-size:1.05rem;color:var(--cream);font-weight:800;border-top:1px solid var(--line);padding-top:10px}.notice{font-size:.8rem;color:var(--muted);background:#171512;border:1px solid var(--line);padding:10px;border-radius:4px;margin-top:12px}
-form{display:grid;gap:10px;margin-top:14px}label{font-size:.82rem;color:var(--muted)}input,textarea,select{width:100%;padding:11px;border-radius:4px;border:1px solid #4b4031;background:#11100f;color:var(--cream)}textarea{min-height:75px;resize:vertical}.paychoice{display:flex;gap:10px;flex-wrap:wrap}.paychoice label{border:1px solid var(--line);padding:8px;border-radius:4px;display:flex;align-items:center;gap:7px}.paychoice input{width:auto}.status{padding:12px;margin-top:12px;border-radius:4px;display:none}.status.show{display:block}.status.error{background:#451f1b}.status.info{background:#203a28}.footer{border-top:1px solid var(--line);padding:24px 0;color:var(--muted);font-size:.82rem;margin-top:50px}
-@media(max-width:850px){.layout{grid-template-columns:1fr}.cart{position:static}.menu-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}@media(max-width:520px){.menu-grid{grid-template-columns:1fr}.food-img{height:190px}.hero{padding:45px 0 35px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Biryaaniwala | Authentic Handi & Mandi Biryani in Jamshedpur</title>
+  <!-- Google Fonts & Tailwind CSS CDN -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Lucide Icons CDN -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            brand: {
+              gold: '#D4AF37',
+              goldLight: '#F3E5AB',
+              crimson: '#8B0000',
+              crimsonDark: '#5E0000',
+              dark: '#0F0E0E',
+              card: '#181716',
+              border: '#2E2B27'
+            }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            sans: ['Plus Jakarta Sans', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #0F0E0E; color: #EDE8E3; font-family: 'Plus Jakarta Sans', sans-serif; overflow-x: hidden; }
+    .glass-nav { background: rgba(15, 14, 14, 0.88); backdrop-filter: blur(14px); }
+    .gold-gradient-text {
+      background: linear-gradient(135deg, #FFF3B0 0%, #D4AF37 50%, #AA771C 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(212,175,55,0.18) 0%, rgba(139,0,0,0.12) 50%, transparent 70%);
+      filter: blur(60px);
+      z-index: 0;
+    }
+  </style>
 </head>
-<body>
-<header><div class="wrap nav"><a class="logo" href="#">AUROUS<small>RESTRO LOUNGE</small></a><a class="btn secondary" href="https://maps.app.goo.gl/4BBioGPsAf3Cgwg7A" target="_blank" rel="noopener">Find us ↗</a></div></header>
-<main>
-<section class="hero"><div class="wrap"><div class="eyebrow">Bistupur · Jamshedpur</div><h1>Your favourites,<br><em>delivered.</em></h1><p>Explore the menu, add dishes to your cart and request home delivery. Menu items and prices shown here are demo placeholders until the restaurant confirms its official menu.</p><a class="btn" href="#menu">Explore menu ↓</a></div></section>
-<section class="section wrap" id="menu">
-<div class="section-title"><div><div class="eyebrow">Order online</div><h2>Our Menu</h2></div><div style="color:var(--muted);font-size:.85rem">Demo menu · Confirm before launch</div></div>
-<div class="categories" id="categories"></div>
-<div class="layout"><div class="menu-grid" id="menuGrid"></div>
-<aside class="cart"><h2>Your cart <span id="cartCount" style="color:var(--gold);font:700 .9rem system-ui">(0)</span></h2><div id="cartItems" class="cart-empty">Your cart is empty. Add a dish to begin.</div>
-<div class="totals"><div class="total-line"><span>Items subtotal</span><span id="subtotal">₹0</span></div><div class="total-line"><span>Delivery fee</span><span id="deliveryFee">Calculated by restaurant</span></div><div class="total-line final"><span>Total before delivery fee</span><span id="total">₹0</span></div></div>
-<div class="notice">Delivery fee and service area must be confirmed by the restaurant. This starter does not yet submit live orders.</div>
-<form id="checkoutForm">
-<h3 style="margin:10px 0 0;font-size:1.25rem">Delivery details</h3>
-<div><label for="customerName">Full name *</label><input id="customerName" required maxlength="100" autocomplete="name" placeholder="Your name"></div>
-<div><label for="phone">Mobile number *</label><input id="phone" required inputmode="numeric" pattern="[6-9][0-9]{9}" maxlength="10" autocomplete="tel" placeholder="10-digit mobile number"></div>
-<div><label for="address">Full delivery address *</label><textarea id="address" required maxlength="500" autocomplete="street-address" placeholder="House, street, landmark, area"></textarea></div>
-<div><label for="notes">Order notes (optional)</label><input id="notes" maxlength="200" placeholder="Less spicy, no onions, etc."></div>
-<div><label>Payment method *</label><div class="paychoice"><label><input type="radio" name="payment" value="online" checked> Online (Razorpay — not connected)</label><label><input type="radio" name="payment" value="cod"> Cash on Delivery</label></div></div>
-<button class="btn" type="submit">Review order</button>
-</form><div id="status" class="status"></div>
-</aside></div></section>
-</main>
-<footer class="footer"><div class="wrap">© <span id="year"></span> Aurous Restro Lounge · Starter website. Online payments and order submission remain disabled until backend setup and testing are complete.</div></footer>
-<script>
-const CONFIG = {
-  // Set this only after deploying the Supabase Edge Function and completing the setup guide.
-  backendReady: false,
-  createOrderFunctionUrl: "",
-  // Demo menu items. Replace with the restaurant-approved menu, prices and licensed photos.
-  deliveryFee: null
-};
-const menu = [
- {id:"demo-1",name:"Crispy Potatoes (Demo)",category:"Starters",price:199,veg:true,description:"Demo item — replace with the official menu.",image:""},
- {id:"demo-2",name:"Paneer Curry (Demo)",category:"Indian",price:279,veg:true,description:"Demo item — confirm recipe and price.",image:""},
- {id:"demo-3",name:"Chicken Biryani (Demo)",category:"Rice & Biryani",price:299,veg:false,description:"Demo item — confirm availability and price.",image:""},
- {id:"demo-4",name:"Veg Fried Rice (Demo)",category:"Chinese",price:219,veg:true,description:"Demo item — replace with the official menu.",image:""},
- {id:"demo-5",name:"Butter Naan (Demo)",category:"Indian",price:49,veg:true,description:"Demo item — confirm price.",image:""},
- {id:"demo-6",name:"French Fries (Demo)",category:"Starters",price:149,veg:true,description:"Demo item — confirm portion and price.",image:""}
-];
-let activeCategory="All"; const cart=new Map();
-const money=n=>new Intl.NumberFormat("en-IN",{style:"currency",currency:"INR",maximumFractionDigits:0}).format(n);
-function renderCategories(){const cats=["All",...new Set(menu.map(x=>x.category))];document.getElementById("categories").innerHTML=cats.map(c=>`<button class="cat ${c===activeCategory?"active":""}" data-cat="${c}">${c}</button>`).join("");document.querySelectorAll("[data-cat]").forEach(b=>b.onclick=()=>{activeCategory=b.dataset.cat;renderCategories();renderMenu()})}
-function renderMenu(){const list=menu.filter(x=>activeCategory==="All"||x.category===activeCategory);document.getElementById("menuGrid").innerHTML=list.map(x=>`<article class="item"><div class="food-img">${x.image?`<img src="${escapeAttr(x.image)}" alt="${escapeAttr(x.name)}" loading="lazy">`:"✦"}</div><div class="item-body"><h3>${escapeHtml(x.veg?"🟢 ":"🔴 ")}${escapeHtml(x.name)}</h3><p>${escapeHtml(x.description)}</p><div class="item-foot"><span class="price">${money(x.price)}</span><button class="add" data-add="${x.id}">+ Add</button></div></div></article>`).join("");document.querySelectorAll("[data-add]").forEach(b=>b.onclick=()=>add(b.dataset.add))}
-function escapeHtml(s){return String(s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]))}
-function escapeAttr(s){return escapeHtml(s)}
-function add(id){const item=menu.find(x=>x.id===id);if(!item)return;cart.set(id,(cart.get(id)||0)+1);renderCart()}
-function change(id,delta){const n=(cart.get(id)||0)+delta;if(n<=0)cart.delete(id);else cart.set(id,n);renderCart()}
-function renderCart(){let count=0,subtotal=0;for(const [id,q] of cart){const item=menu.find(x=>x.id===id);if(item){count+=q;subtotal+=item.price*q}}document.getElementById("cartCount").textContent=`(${count})`;document.getElementById("subtotal").textContent=money(subtotal);document.getElementById("total").textContent=money(subtotal);document.getElementById("deliveryFee").textContent=CONFIG.deliveryFee==null?"To be confirmed":money(CONFIG.deliveryFee);
-const el=document.getElementById("cartItems");if(!count){el.className="cart-empty";el.textContent="Your cart is empty. Add a dish to begin.";return}el.className="";el.innerHTML=[...cart.entries()].map(([id,q])=>{const x=menu.find(i=>i.id===id);return `<div class="cart-row"><div><strong>${escapeHtml(x.name)}</strong><div style="color:var(--muted);font-size:.84rem">${money(x.price)} each</div></div><div class="qty"><button type="button" data-dec="${id}" aria-label="Decrease">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="Increase">+</button></div></div>`}).join("");document.querySelectorAll("[data-dec]").forEach(b=>b.onclick=()=>change(b.dataset.dec,-1));document.querySelectorAll("[data-inc]").forEach(b=>b.onclick=()=>change(b.dataset.inc,1))}
-document.getElementById("checkoutForm").addEventListener("submit",async e=>{e.preventDefault();const status=document.getElementById("status");status.className="status show";if(!cart.size){status.classList.add("error");status.textContent="Please add at least one dish to your cart.";return}
-if(!CONFIG.backendReady||!CONFIG.createOrderFunctionUrl){status.classList.add("info");status.textContent="Demo only: your cart works, but live order submission and Razorpay are not connected yet. Follow SETUP.md and test before accepting real orders.";return}
-status.classList.add("info");status.textContent="Backend endpoint is configured. Complete the server integration and provider checks before accepting real orders.";
-});
-document.getElementById("year").textContent=new Date().getFullYear();renderCategories();renderMenu();renderCart();
-</script>
-</body></html>
+<body class="antialiased">
+
+  <!-- DEMO NOTICE & EXPIRATION BAR -->
+  <aside aria-label="Demo Status" class="bg-gradient-to-r from-brand-crimson to-brand-crimsonDark text-white px-4 py-2 text-xs md:text-sm font-medium flex justify-between items-center z-50 sticky top-0 border-b border-brand-gold/30">
+    <div class="flex items-center gap-2">
+      <span class="inline-block w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
+      <span><strong>Live Interactive Demo</strong> • Tailored for Biryaaniwala, Bistupur</span>
+    </div>
+    <div id="demoExpiryBadge" class="hidden sm:block text-brand-goldLight text-xs tracking-wider">
+      Expires: <span id="demoTimer">Calculating...</span>
+    </div>
+  </aside>
+
+  <!-- NAVIGATION -->
+  <header class="glass-nav sticky top-[37px] z-40 border-b border-brand-border">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <div class="w-11 h-11 rounded-full bg-gradient-to-br from-brand-gold to-brand-crimson flex items-center justify-center font-serif text-white font-bold text-xl shadow-lg shadow-brand-gold/20">
+          B
+        </div>
+        <div>
+          <span class="text-xl md:text-2xl font-serif font-bold tracking-wide gold-gradient-text">Biryaaniwala</span>
+          <span class="block text-[10px] tracking-widest uppercase text-stone-400">Crystal Square, Bistupur</span>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-8 text-sm font-medium text-stone-300">
+        <a href="#about" class="hover:text-brand-gold transition">Our Story</a>
+        <a href="#menu" class="hover:text-brand-gold transition">Curated Menu</a>
+        <a href="#reservation" class="hover:text-brand-gold transition">Table Booking</a>
+        <a href="#contact" class="hover:text-brand-gold transition">Location & Hours</a>
+      </nav>
+
+      <div class="flex items-center gap-4">
+        <button onclick="toggleCart()" class="relative p-2.5 rounded-full bg-brand-card hover:bg-stone-800 border border-brand-border text-brand-gold transition flex items-center justify-center">
+          <i data-lucide="shopping-bag" class="w-5 h-5"></i>
+          <span id="cartCount" class="absolute -top-1 -right-1 bg-brand-crimson text-white text-[11px] font-bold w-5 h-5 rounded-full flex items-center justify-center">0</span>
+        </button>
+        <a href="tel:09006564777" class="hidden lg:inline-flex items-center gap-2 px-4 py-2 rounded-full border border-brand-gold/40 text-brand-gold hover:bg-brand-gold/10 text-xs font-semibold uppercase tracking-wider transition">
+          <i data-lucide="phone-call" class="w-4 h-4"></i> +91 90065 64777
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- HERO SECTION -->
+  <section class="relative min-h-[85vh] flex items-center justify-center py-20 px-4 overflow-hidden">
+    <div class="hero-glow top-1/4 -left-20"></div>
+    <div class="hero-glow bottom-10 -right-20"></div>
+    <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center relative z-10">
+      <div>
+        <div class="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-brand-gold/10 border border-brand-gold/30 text-brand-gold text-xs font-semibold tracking-wider uppercase mb-6">
+          <i data-lucide="star" class="w-3.5 h-3.5 fill-brand-gold"></i> Jamshedpur's 4.6★ Rated Biryani Destination
+        </div>
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-serif font-bold text-white leading-tight">
+          Where Slow Cooking Meets <span class="gold-gradient-text">Royal Flavors.</span>
+        </h1>
+        <p class="mt-6 text-stone-300 text-base sm:text-lg max-w-xl font-light leading-relaxed">
+          Savor the richness of authentic Hyderabadi Dum, rich Ghee Roast, and signature Mix Mandi platters made with fragrant long-grain Basmati and prime cuts in the heart of Bistupur.
+        </p>
+        <div class="mt-8 flex flex-wrap gap-4 items-center">
+          <a href="#menu" class="px-7 py-3.5 rounded-full bg-gradient-to-r from-brand-gold to-yellow-600 text-stone-950 font-bold hover:brightness-110 shadow-lg shadow-brand-gold/20 transition flex items-center gap-2">
+            Explore Menu & Order <i data-lucide="arrow-right" class="w-4 h-4"></i>
+          </a>
+          <a href="#reservation" class="px-7 py-3.5 rounded-full border border-stone-600 hover:border-brand-gold text-stone-200 hover:text-brand-gold font-semibold transition">
+            Reserve a Table
+          </a>
+        </div>
+        <div class="mt-10 pt-6 border-t border-brand-border grid grid-cols-3 gap-4 text-center sm:text-left">
+          <div>
+            <div class="text-2xl font-serif font-bold text-brand-gold">4.6★</div>
+            <div class="text-xs text-stone-400">780+ Local Reviews</div>
+          </div>
+          <div>
+            <div class="text-2xl font-serif font-bold text-brand-gold">100% Halal</div>
+            <div class="text-xs text-stone-400">Fresh Ingredients</div>
+          </div>
+          <div>
+            <div class="text-2xl font-serif font-bold text-brand-gold">Dine & Del</div>
+            <div class="text-xs text-stone-400">Takeout & Delivery</div>
+          </div>
+        </div>
+      </div>
+      <div class="relative">
+        <div class="relative w-full max-w-md mx-auto aspect-square rounded-3xl overflow-hidden shadow-2xl border-2 border-brand-gold/30 group">
+          <img src="https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=1000&auto=format&fit=crop" alt="Signature Hyderabadi Dum Biryani" class="w-full h-full object-cover group-hover:scale-105 transition duration-700">
+          <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent flex items-end p-6">
+            <div class="bg-black/60 backdrop-blur-md p-4 rounded-xl border border-white/10 w-full">
+              <span class="text-xs text-brand-gold uppercase tracking-widest font-semibold">House Specialty</span>
+              <h3 class="text-lg font-serif font-bold text-white">Royal Mix Mandi Biryani</h3>
+              <p class="text-xs text-stone-300 mt-1">Combination of tender Chicken, succulent Mutton & grilled Prawns.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MENU SECTION -->
+  <section id="menu" class="py-20 px-4 max-w-7xl mx-auto">
+    <div class="text-center max-w-2xl mx-auto mb-12">
+      <span class="text-brand-gold text-xs font-semibold tracking-widest uppercase">Gastronomic Journey</span>
+      <h2 class="text-3xl md:text-4xl font-serif font-bold text-white mt-2">Authentic Culinary Delights</h2>
+      <p class="text-stone-400 text-sm mt-3">Select items below to add to your demo order and experience our direct WhatsApp ordering checkout.</p>
+    </div>
+
+    <!-- Category Filter Tabs -->
+    <div class="flex justify-center gap-2 sm:gap-4 flex-wrap mb-10">
+      <button onclick="filterCategory('all')" class="cat-btn active px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition bg-brand-gold text-stone-950 font-bold" data-cat="all">All Specialties</button>
+      <button onclick="filterCategory('biryani')" class="cat-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition bg-brand-card text-stone-300 border border-brand-border hover:border-brand-gold/50" data-cat="biryani">Biryani & Mandi</button>
+      <button onclick="filterCategory('starters')" class="cat-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition bg-brand-card text-stone-300 border border-brand-border hover:border-brand-gold/50" data-cat="starters">Tandoori & Starters</button>
+      <button onclick="filterCategory('veg')" class="cat-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition bg-brand-card text-stone-300 border border-brand-border hover:border-brand-gold/50" data-cat="veg">Veg & Paneer</button>
+      <button onclick="filterCategory('dessert')" class="cat-btn px-5 py-2 rounded-full text-xs font-semibold uppercase tracking-wider transition bg-brand-card text-stone-300 border border-brand-border hover:border-brand-gold/50" data-cat="dessert">Soups & Desserts</button>
+    </div>
+
+    <!-- Menu Items Grid -->
+    <div id="menuGrid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+  </section>
+
+  <!-- TABLE RESERVATION SECTION -->
+  <section id="reservation" class="py-16 px-4 bg-brand-card border-y border-brand-border relative">
+    <div class="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+      <div>
+        <span class="text-brand-gold text-xs font-semibold tracking-widest uppercase">Effortless Dining</span>
+        <h2 class="text-3xl font-serif font-bold text-white mt-2">Reserve Your Table</h2>
+        <p class="text-stone-400 text-sm mt-3 leading-relaxed">
+          Planning a family dinner or a feast with colleagues in Bistupur? Book ahead to skip the waiting line, especially during peak weekend evenings.
+        </p>
+        <div class="mt-6 space-y-3 text-sm text-stone-300">
+          <div class="flex items-center gap-3">
+            <i data-lucide="clock" class="w-4 h-4 text-brand-gold"></i> Lunch: 12:00 PM - 4:00 PM | Dinner: 7:00 PM - 10:30 PM
+          </div>
+          <div class="flex items-center gap-3">
+            <i data-lucide="users" class="w-4 h-4 text-brand-gold"></i> Group tables and private seating available
+          </div>
+        </div>
+      </div>
+
+      <form onsubmit="handleReservation(event)" class="bg-stone-900/90 p-6 rounded-2xl border border-brand-border space-y-4">
+        <div>
+          <label class="block text-xs font-medium text-stone-400 mb-1">Your Full Name</label>
+          <input type="text" id="resName" required placeholder="Hare Krishna" class="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold" />
+        </div>
+        <div class="grid grid-cols-2 gap-3">
+          <div>
+            <label class="block text-xs font-medium text-stone-400 mb-1">Guests</label>
+            <select id="resGuests" class="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold">
+              <option value="2 Persons">2 Guests</option>
+              <option value="4 Persons">4 Guests</option>
+              <option value="6 Persons">6 Guests</option>
+              <option value="8+ Persons">8+ Family Group</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-xs font-medium text-stone-400 mb-1">Date</label>
+            <input type="date" id="resDate" required class="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold" />
+          </div>
+        </div>
+        <div>
+          <label class="block text-xs font-medium text-stone-400 mb-1">Phone Number</label>
+          <input type="tel" id="resPhone" required placeholder="+91 9876543210" class="w-full bg-stone-950 border border-stone-800 rounded-lg px-3 py-2 text-sm text-white focus:outline-none focus:border-brand-gold" />
+        </div>
+        <button type="submit" class="w-full py-3 bg-brand-gold text-stone-950 font-bold rounded-lg hover:brightness-110 transition text-sm flex items-center justify-center gap-2">
+          <i data-lucide="calendar-check" class="w-4 h-4"></i> Request Reservation via WhatsApp
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- LOCATION & CONTACT SECTION -->
+  <section id="contact" class="py-20 px-4 max-w-7xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div class="p-6 rounded-2xl bg-brand-card border border-brand-border">
+        <div class="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-4">
+          <i data-lucide="map-pin" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-serif font-bold text-white text-lg">Visit Us</h4>
+        <p class="text-stone-400 text-sm mt-2">PO & PS, Crystal Square, Kharkai Link Rd, beside Ram Kishan Mission School, Bistupur, Jamshedpur, Jharkhand 831001</p>
+        <a href="https://maps.app.goo.gl/KChvAzaccvoL1cBp8" target="_blank" rel="noopener noreferrer" class="mt-4 inline-flex items-center gap-2 text-xs font-semibold text-brand-gold hover:underline">
+          Open in Google Maps <i data-lucide="external-link" class="w-3.5 h-3.5"></i>
+        </a>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-brand-card border border-brand-border">
+        <div class="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-4">
+          <i data-lucide="clock" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-serif font-bold text-white text-lg">Operating Hours</h4>
+        <p class="text-stone-400 text-sm mt-2">Open 7 Days a Week</p>
+        <p class="text-brand-gold font-medium text-sm mt-1">12:00 PM – 10:30 PM (Continuous Table & Delivery Service)</p>
+      </div>
+
+      <div class="p-6 rounded-2xl bg-brand-card border border-brand-border">
+        <div class="w-10 h-10 rounded-full bg-brand-gold/10 text-brand-gold flex items-center justify-center mb-4">
+          <i data-lucide="phone" class="w-5 h-5"></i>
+        </div>
+        <h4 class="font-serif font-bold text-white text-lg">Direct Inquiries</h4>
+        <p class="text-stone-400 text-sm mt-2">Call us directly for group bookings or parcel counter pick-ups.</p>
+        <p class="text-white font-bold text-base mt-2">+91 090065 64777</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART SLIDE-OVER DRAWER -->
+  <aside id="cartDrawer" aria-label="Shopping Cart" class="fixed inset-y-0 right-0 w-full max-w-md bg-stone-950 border-l border-brand-border z-50 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col">
+    <div class="p-5 border-b border-brand-border flex items-center justify-between">
+      <div class="flex items-center gap-2">
+        <i data-lucide="shopping-bag" class="w-5 h-5 text-brand-gold"></i>
+        <h3 class="font-serif font-bold text-lg text-white">Your Feast Tray</h3>
+      </div>
+      <button onclick="toggleCart()" class="text-stone-400 hover:text-white p-1">
+        <i data-lucide="x" class="w-5 h-5"></i>
+      </button>
+    </div>
+
+    <!-- Items List -->
+    <div id="cartItemsContainer" class="flex-1 overflow-y-auto p-5 space-y-4"></div>
+
+    <!-- Summary & Checkout -->
+    <div class="p-5 border-t border-brand-border bg-stone-900/60 space-y-3">
+      <div class="flex justify-between text-sm text-stone-300">
+        <span>Estimated Subtotal</span>
+        <span id="cartSubtotal" class="font-bold text-white">₹0</span>
+      </div>
+      <p class="text-[11px] text-stone-500 italic">*Sample demo pricing for presentation purpose.</p>
+      <div class="space-y-2 pt-2">
+        <input type="text" id="custName" placeholder="Your Name" class="w-full bg-stone-950 border border-stone-800 rounded px-3 py-2 text-xs text-white focus:border-brand-gold focus:outline-none" />
+        <input type="text" id="custAddress" placeholder="Delivery Address / Bistupur Area" class="w-full bg-stone-950 border border-stone-800 rounded px-3 py-2 text-xs text-white focus:border-brand-gold focus:outline-none" />
+      </div>
+      <button onclick="submitOrderViaWhatsApp()" class="w-full py-3 bg-emerald-600 hover:bg-emerald-500 text-white font-bold rounded-lg text-sm transition flex items-center justify-center gap-2 shadow-lg shadow-emerald-900/30">
+        <i data-lucide="message-circle" class="w-4 h-4"></i> Send Order via WhatsApp
+      </button>
+    </div>
+  </aside>
+
+  <!-- CART OVERLAY BACKGROUND -->
+  <div id="cartOverlay" onclick="toggleCart()" class="fixed inset-0 bg-black/60 backdrop-blur-sm z-40 hidden"></div>
+
+  <!-- FOOTER -->
+  <footer class="border-t border-brand-border py-10 px-4 text-center text-xs text-stone-500">
+    <p>© 2026 Biryaaniwala, Bistupur. All rights reserved.</p>
+    <p class="mt-2 text-stone-600">Tailored interactive demo preview built for client evaluation.</p>
+  </footer>
+
+  <!-- DEMO DATA & CLIENT-SIDE LOGIC -->
+  <script>
+    // Real verified menu items based on actual reviews
+    const menuItems = [
+      {
+        id: '1',
+        name: 'Royal Mix Mandi Biryani',
+        category: 'biryani',
+        desc: 'Signature platter combining tender chicken, succulent mutton, and spiced prawns over fragrant Mandi rice (Serves 2-3).',
+        price: 680,
+        badge: "Chef's Special",
+        image: 'https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: '2',
+        name: 'Hyderabadi Ghee Roast Biryani',
+        category: 'biryani',
+        desc: 'Rich, aromatic basmati infused with pure desi ghee and tender spiced meat cooked on slow dum.',
+        price: 380,
+        badge: 'Customer Favorite',
+        image: 'https://images.unsplash.com/photo-1589302168068-964664d93dc0?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: '3',
+        name: 'Mughlai 65 Biryani',
+        category: 'biryani',
+        desc: 'Crispy, tangy Chicken 65 tossed in Mughlai spiced rice with mint & fried onions.',
+        price: 360,
+        badge: 'Must Try',
+        image: 'https://images.unsplash.com/photo-1633945274405-b6c8069047b0?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: '4',
+        name: 'Chicken Malai Tikka',
+        category: 'starters',
+        desc: 'Creamy marinated boneless chicken skewers charred to perfection in tandoor.',
+        price: 320,
+        badge: 'Tandoor Starter',
+        image: 'https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: '5',
+        name: 'Special Paneer Birbal',
+        category: 'veg',
+        desc: 'In-house soft artisanal paneer prepared in royal cashew and brown onion gravy.',
+        price: 310,
+        badge: 'Veg Delight',
+        image: 'https://images.unsplash.com/photo-1631452180519-c014fe946bc7?q=80&w=600&auto=format&fit=crop'
+      },
+      {
+        id: '6',
+        name: 'Warm Sizzling Brownie',
+        category: 'dessert',
+        desc: 'Fudgy chocolate brownie served warm, the classic way to finish your meal.',
+        price: 160,
+        badge: 'Dessert',
+        image: 'https://images.unsplash.com/photo-1606313564200-e75d5e30476c?q=80&w=600&auto=format&fit=crop'
+      }
+    ];
+
+    let cart = [];
+
+    // Render Menu
+    function renderMenu(items) {
+      const container = document.getElementById('menuGrid');
+      container.innerHTML = items.map(item => `
+        <div class="bg-brand-card rounded-2xl border border-brand-border overflow-hidden hover:border-brand-gold/40 transition duration-300 flex flex-col justify-between group">
+          <div>
+            <div class="relative h-48 overflow-hidden">
+              <img src="${item.image}" alt="${item.name}" class="w-full h-full object-cover group-hover:scale-105 transition duration-500">
+              <span class="absolute top-3 right-3 bg-brand-crimson text-white text-[10px] font-bold px-2.5 py-1 rounded-full uppercase tracking-wider">${item.badge}</span>
+            </div>
+            <div class="p-5">
+              <div class="flex justify-between items-start gap-2">
+                <h3 class="font-serif font-bold text-white text-lg">${item.name}</h3>
+                <span class="font-bold text-brand-gold text-lg">₹${item.price}</span>
+              </div>
+              <p class="text-stone-400 text-xs mt-2 leading-relaxed">${item.desc}</p>
+            </div>
+          </div>
+          <div class="p-5 pt-0">
+            <button onclick="addToCart('${item.id}')" class="w-full py-2.5 rounded-lg bg-stone-800 hover:bg-brand-gold hover:text-stone-950 text-brand-gold text-xs font-bold uppercase tracking-wider transition flex items-center justify-center gap-2">
+              <i data-lucide="plus" class="w-4 h-4"></i> Add to Feast Tray
+            </button>
+          </div>
+        </div>
+      `).join('');
+      lucide.createIcons();
+    }
+
+    // Filter Menu
+    function filterCategory(cat) {
+      document.querySelectorAll('.cat-btn').forEach(btn => {
+        if(btn.dataset.cat === cat) {
+          btn.classList.add('bg-brand-gold', 'text-stone-950', 'font-bold');
+          btn.classList.remove('bg-brand-card', 'text-stone-300');
+        } else {
+          btn.classList.remove('bg-brand-gold', 'text-stone-950', 'font-bold');
+          btn.classList.add('bg-brand-card', 'text-stone-300');
+        }
+      });
+      if (cat === 'all') renderMenu(menuItems);
+      else renderMenu(menuItems.filter(item => item.category === cat));
+    }
+
+    // Cart Management
+    function addToCart(id) {
+      const item = menuItems.find(m => m.id === id);
+      const existing = cart.find(c => c.id === id);
+      if (existing) existing.qty += 1;
+      else cart.push({ ...item, qty: 1 });
+      updateCartUI();
+      openCart();
+    }
+
+    function changeQty(id, delta) {
+      const existing = cart.find(c => c.id === id);
+      if (!existing) return;
+      existing.qty += delta;
+      if (existing.qty <= 0) cart = cart.filter(c => c.id !== id);
+      updateCartUI();
+    }
+
+    function updateCartUI() {
+      const totalCount = cart.reduce((sum, item) => sum + item.qty, 0);
+      const subtotal = cart.reduce((sum, item) => sum + (item.qty * item.price), 0);
+      document.getElementById('cartCount').innerText = totalCount;
+      document.getElementById('cartSubtotal').innerText = '₹' + subtotal;
+
+      const container = document.getElementById('cartItemsContainer');
+      if (cart.length === 0) {
+        container.innerHTML = `
+          <div class="text-center py-12 text-stone-500">
+            <i data-lucide="utensils" class="w-10 h-10 mx-auto mb-2 stroke-stone-600"></i>
+            <p class="text-sm">Your tray is empty.</p>
+            <p class="text-xs mt-1 text-stone-600">Select signature biryanis from the menu.</p>
+          </div>
+        `;
+      } else {
+        container.innerHTML = cart.map(item => `
+          <div class="flex items-center justify-between p-3 rounded-xl bg-stone-900 border border-brand-border">
+            <div>
+              <div class="text-sm font-semibold text-white">${item.name}</div>
+              <div class="text-xs text-brand-gold font-bold">₹${item.price} each</div>
+            </div>
+            <div class="flex items-center gap-3">
+              <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 rounded bg-stone-800 text-stone-300 flex items-center justify-center hover:bg-stone-700">-</button>
+              <span class="text-sm font-bold text-white">${item.qty}</span>
+              <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 rounded bg-stone-800 text-stone-300 flex items-center justify-center hover:bg-stone-700">+</button>
+            </div>
+          </div>
+        `).join('');
+      }
+      lucide.createIcons();
+    }
+
+    function toggleCart() {
+      const drawer = document.getElementById('cartDrawer');
+      const overlay = document.getElementById('cartOverlay');
+      const isOpen = !drawer.classList.contains('translate-x-full');
+      if (isOpen) {
+        drawer.classList.add('translate-x-full');
+        overlay.classList.add('hidden');
+      } else {
+        drawer.classList.remove('translate-x-full');
+        overlay.classList.remove('hidden');
+      }
+    }
+
+    function openCart() {
+      document.getElementById('cartDrawer').classList.remove('translate-x-full');
+      document.getElementById('cartOverlay').classList.remove('hidden');
+    }
+
+    // WhatsApp Order Dispatch
+    function submitOrderViaWhatsApp() {
+      if (cart.length === 0) {
+        alert('Please add items to your feast tray first.');
+        return;
+      }
+      const name = document.getElementById('custName').value.trim() || 'Guest';
+      const address = document.getElementById('custAddress').value.trim() || 'Pickup / Dine-in Enquiry';
+      const subtotal = cart.reduce((sum, item) => sum + (item.qty * item.price), 0);
+
+      let msg = `*NEW ORDER - BIRYAANIWALA (Bistupur)*%0A`;
+      msg += `----------------------------%0A`;
+      msg += `*Customer:* ${encodeURIComponent(name)}%0A`;
+      msg += `*Address:* ${encodeURIComponent(address)}%0A%0A`;
+      msg += `*ITEMS ORDERED:*%0A`;
+      cart.forEach((i, idx) => {
+        msg += `${idx + 1}. ${encodeURIComponent(i.name)} x ${i.qty} = ₹${i.qty * i.price}%0A`;
+      });
+      msg += `----------------------------%0A`;
+      msg += `*Estimated Total:* ₹${subtotal}%0A%0A`;
+      msg += `_(Sent via Biryaaniwala Interactive Demo Web App)_`;
+
+      // Official verified contact from Google Maps: +91 90065 64777
+      const whatsappURL = `https://wa.me/919006564777?text=${msg}`;
+      window.open(whatsappURL, '_blank');
+    }
+
+    // Reservation via WhatsApp
+    function handleReservation(e) {
+      e.preventDefault();
+      const name = document.getElementById('resName').value;
+      const guests = document.getElementById('resGuests').value;
+      const date = document.getElementById('resDate').value;
+      const phone = document.getElementById('resPhone').value;
+
+      let msg = `*TABLE RESERVATION INQUIRY - BIRYAANIWALA*%0A`;
+      msg += `*Name:* ${encodeURIComponent(name)}%0A`;
+      msg += `*Party Size:* ${encodeURIComponent(guests)}%0A`;
+      msg += `*Preferred Date:* ${encodeURIComponent(date)}%0A`;
+      msg += `*Contact:* ${encodeURIComponent(phone)}%0A%0A`;
+      msg += `Please confirm table availability for our visit.`;
+
+      window.open(`https://wa.me/919006564777?text=${msg}`, '_blank');
+    }
+
+    // 5-Day Expiration Management
+    function initDemoExpiration() {
+      const now = new Date();
+      // Set to 5 days from now
+      const expiry = new Date(now.getTime() + (5 * 24 * 60 * 60 * 1000));
+      document.getElementById('demoTimer').innerText = expiry.toLocaleDateString('en-IN', {
+        month: 'short', day: 'numeric', year: 'numeric'
+      });
+    }
+
+    // Init Page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderMenu(menuItems);
+      updateCartUI();
+      initDemoExpiration();
+      lucide.createIcons();
+    });
+  </script>
+</body>
+</html>
